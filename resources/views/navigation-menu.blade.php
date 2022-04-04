@@ -6,6 +6,11 @@
             'route' => route('dashboard'),
             'active' => request()->routeIs('dashboard')
         ],
+        [
+            'name' => 'Socios',
+            'route' => route('socios.index'),
+            'active' => request()->routeIs('socios.index')
+        ],
     ];
 @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
@@ -107,11 +112,11 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('Administrar Cuenta') }}
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                {{ __('Perfil') }}
                             </x-jet-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -128,7 +133,7 @@
 
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                          @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Cerrar Sesión') }}
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
