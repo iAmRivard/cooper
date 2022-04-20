@@ -3,15 +3,35 @@
 namespace App\Http\Livewire\Socios;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 use App\Models\Crm_socios;
 
 class Socios extends Component
 {
 
-    public $buscarSocio;
+    use WithPagination;
+
+    public $buscarSocio, $socio;
+
+    public $open_edit = false;
+
+    public function mount()
+    {
+        $this->socio = new Crm_socios;
+    }
 
     protected $listeners = ['render' => 'render'];
+
+    protected $rules = [
+        'socio.nombres' => 'required',
+        'socio.apellidos' => 'required',
+        'socio.dui' => 'required|min:9|max:9',
+        'socio.nit' => 'required|min:13|max:13',
+        'socio.direccion' => 'required',
+        'socio.salario' => 'required',
+        'socio.correo' => 'required|email'
+    ];
 
 
     public function render()
@@ -22,11 +42,29 @@ class Socios extends Component
                             ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
                             ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
                             ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
-                            ->get();
+                            ->orderBy('id', 'desc') //Ordenamos de manera descendente
+                            ->paginate(5);
 
         // Recuperamos el Ultimo registro
         $se = Crm_socios::all()->last();
 
         return view('livewire.socios.socios', compact('socios', 'se'));
+    }
+
+    public function editar(Crm_socios $socio)
+    {
+        $this->socio = $socio;
+        $this->open_edit = true;
+    }
+
+    public function actualizar()
+    {
+        $this->validate();
+
+        $this->socio->save();
+
+        $this->reset([
+            'open_edit'
+        ]);
     }
 }

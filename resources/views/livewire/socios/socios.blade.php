@@ -1,5 +1,4 @@
 <div>
-    {{-- Stop trying to control. --}}
 
     <div class="py-12">
 
@@ -19,8 +18,6 @@
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar socio') }}" />
                         <x-jet-input class="block mt-1 w-full" type="text" wire:model="buscarSocio" />
-
-                        {{$buscarSocio}}
                     </div>
                 </div>
 
@@ -36,35 +33,38 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">DUI</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">NIT</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Direción</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Estado</th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Salario</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($socios as $socio)
+                                @foreach ($socios as $item)
                                     <tr>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $socio->nombres}}</td>
+                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->nombres}}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{
-                                            $socio->apellidos}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $socio->dui }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $socio->nit}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $socio->direccion }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $socio->salario }}</td>
+                                            $item->apellidos}}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->dui }}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->nit}}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->direccion }}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">${{ $item->salario }}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            {{-- {{route('admin.productos.edit')}} --}}
-                                            <a href="#" class="">
-                                                <button type="button" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Editart</button>
+                                            <a class="cursor-pointer" wire:click="editar( {{$item}} )">
+                                                <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
                                     </tr>
                                 @endforeach
 
                             </tbody>
+
                         </table>
 
-                    @endif
-                </div>
+                        @endif
+                    </div>
+                    <div class="px-6 py-3 flex justify-items-center justify-around">
+                        {{$socios->links()}}
+                    </div>
 
             </div>
 
@@ -73,6 +73,79 @@
 
 
     </div>
+
+    {{-- Modal --}}
+    <x-jet-dialog-modal wire:model="open_edit">
+
+        <x-slot name='title'>
+            <h2>
+                Editar información de socio
+                <strong>
+                    {{$socio->nombres . " " . $socio->apellidos}}
+                </strong>
+            </h2>
+        </x-slot>
+
+        <x-slot name='content'>
+
+            <div class="mb-4">
+                <x-jet-label value="Nombre del Socio" />
+                <x-jet-input type="text" class="w-full" wire:model="socio.nombres" />
+                <x-jet-input-error for="nombres" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Apellidos del Socio" />
+                <x-jet-input type="text" class="w-full" wire:model="socio.apellidos" />
+                <x-jet-input-error for="apellidos" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="DUI del Socio" />
+                <x-jet-input type="text" class="w-full" wire:model="socio.dui" />
+                <x-jet-input-error for="dui" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="NIT del Socio" />
+                <x-jet-input type="text" class="w-full" wire:model="socio.nit" />
+                <x-jet-input-error for="nit" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Dirección del Socio" />
+                <x-jet-input type="text" class="w-full" wire:model="socio.direccion" />
+                <x-jet-input-error for="direccion" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Salario del Socio" />
+                <x-jet-input type="number" class="w-full" wire:model="socio.salario" />
+                <x-jet-input-error for="salario" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Correo del Socio" />
+                <x-jet-input type="email" class="w-full" wire:model="socio.correo" />
+                <x-jet-input-error for="correo" />
+            </div>
+
+        </x-slot>
+
+        <x-slot name='footer'>
+            <x-jet-secondary-button class="mx-4" wire:click="$set('open_edit', false)">
+                Cancelar
+            </x-jet-secondary-button>
+
+            <x-jet-button wire:click="actualizar" wire:loading.attr="disabled" class="disabled:opacity-25">
+                Actualizar
+            </x-jet-button>
+
+            <span wire:loading wire:target="guardar">Procesando ...</span>
+        </x-slot>
+
+    </x-jet-dialog-modal>
+
 
 
 </div>
