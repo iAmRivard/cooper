@@ -8,8 +8,8 @@
         ],
         [
             'name' => 'Socios',
-            'route' => route('socios.index'),
-            'active' => request()->routeIs('socios.index')
+            'route' => route('socios'),
+            'active' => request()->routeIs('socios')
         ],
     ];
 @endphp

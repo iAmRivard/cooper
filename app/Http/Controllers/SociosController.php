@@ -23,7 +23,7 @@ class SociosController extends Controller
      */
     public function create()
     {
-        //
+        return view('socios.create');
     }
 
     /**
