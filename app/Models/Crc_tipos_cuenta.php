@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Crc_tipos_cuenta extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'estado',
+    ];
 }

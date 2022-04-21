@@ -11,6 +11,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
+use App\Models\Crc_tipos_cuenta;
 
 class CreateSocio extends Component
 {
@@ -34,7 +35,7 @@ class CreateSocio extends Component
 
         $this->validate();
 
-        Crm_socios::create([
+        $new_socio = Crm_socios::create([
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
             'dui' => $this->dui,
@@ -56,12 +57,26 @@ class CreateSocio extends Component
             'remember_token' => Str::random(10),
         ]);
 
-        // Recuperamos el ultimoRegistro
-        // $ultimoSocio = Crm_socios::last();
+        // // Recuperamos el ultimoRegistro
+        // $ultimoSocio = Crm_socios::all()
+        //             ->orderBy('id', 'desc') //Ordenamos de manera descendente
+        //             ->get();
 
-        // Ctr_cuenta::create([
-        //     ''
-        // ]);
+        //Recuperamos la cuenta
+        // $cuenta = Crc_tipos_cuenta::frist();
+
+        $toDay = getDate();
+
+        //Creamos la cuenta inicial (Considerando que el primer registro es la cuenta)
+        Ctr_cuenta::create([
+            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] . $new_socio->id . $new_socio->id),
+            'id_socio' => $new_socio->id,
+            'id_tipo_cuenta' => 1,
+            'saldo_inicial' => 0,
+            'estado' => true,
+            'fecha_creacion' => Carbon::today(),
+            'fecha_actualizacion' => Carbon::today(),
+        ]);
 
         $this->emitTo('socios.socios','render');
 

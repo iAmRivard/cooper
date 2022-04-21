@@ -45,10 +45,8 @@ class Socios extends Component
                             ->orderBy('id', 'desc') //Ordenamos de manera descendente
                             ->paginate(5);
 
-        // Recuperamos el Ultimo registro
-        $se = Crm_socios::all()->last();
 
-        return view('livewire.socios.socios', compact('socios', 'se'));
+        return view('livewire.socios.socios', compact('socios'));
     }
 
     public function editar(Crm_socios $socio)
