@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('dui', 9);
-            $table->string('nit', 14);
+            $table->string('nit', 14)->nullabe();
             $table->text('direccion');
             $table->text('correo');
             $table->decimal('salario');
             $table->boolean('estado');
-            $table->dateTime('fecha_creacion');
-            $table->dateTime('fecha_actualizacion');
+            // $table->dateTime('fecha_creacion');
+            // $table->dateTime('fecha_actualizacion');
             $table->timestamps();
         });
     }

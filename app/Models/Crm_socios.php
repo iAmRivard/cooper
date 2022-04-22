@@ -18,7 +18,13 @@ class Crm_socios extends Model
         'salario',
         'correo',
         'estado',
-        'fecha_creacion',
-        'fecha_actualizacion'
     ];
+
+    public function cuentas()
+    {
+        return $this->hasMany(Ctr_cuenta::class, 'crm_socio_id');
+        // return $this->hasMany('App\Models\ctr_cuenta');
+    }
+
+
 }

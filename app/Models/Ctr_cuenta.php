@@ -11,11 +11,15 @@ class Ctr_cuenta extends Model
 
     protected $fillable = [
         'no_cuenta',
-        'id_socio',
+        'crm_socio_id',
         'id_tipo_cuenta',
         'saldo_inicial',
         'estado',
-        'fecha_creacion',
-        'fecha_actualizacion'
     ];
+
+    public function socio()
+    {
+        // return $this->belongsTo('App\Models\crm_socios', 'crm_socio_id');
+        return $this->belongsTo(Crm_socios::class, 'crm_socio_id');
+    }
 }

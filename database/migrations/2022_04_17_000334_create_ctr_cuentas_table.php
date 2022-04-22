@@ -16,15 +16,18 @@ return new class extends Migration
         Schema::create('ctr_cuentas', function (Blueprint $table) {
             $table->id();
             $table->string('no_cuenta');
-            $table->unsignedBigInteger('id_socio');
+            $table->unsignedBigInteger('crm_socio_id');
             $table->unsignedBigInteger('id_tipo_cuenta');
-            $table->decimal('saldo_inicial');
+            $table->decimal('saldo_actual');
             $table->boolean('estado');
-            $table->dateTime('fecha_creacion');
-            $table->dateTime('fecha_actualizacion');
+            // $table->dateTime('fecha_creacion');
+            // $table->dateTime('fecha_actualizacion');
 
-            $table->foreign('id_socio')->references('id')->on('crm_socios');
-            $table->foreign('id_tipo_cuenta')->references('id')->on('crc_tipos_cuentas');
+            $table->foreign('crm_socio_id')
+                    ->references('id')->on('crm_socios');
+
+            $table->foreign('id_tipo_cuenta')
+                    ->references('id')->on('crc_tipos_cuentas');
 
 
             $table->timestamps();
