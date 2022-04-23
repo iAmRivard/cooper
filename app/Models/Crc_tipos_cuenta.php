@@ -14,4 +14,9 @@ class Crc_tipos_cuenta extends Model
         'descripcion',
         'estado',
     ];
+
+    public function cuentas()
+    {
+        return $this->hasMany(Ctr_cuenta::class, 'crc_topo_cuenta_id');
+    }
 }
