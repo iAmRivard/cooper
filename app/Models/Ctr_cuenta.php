@@ -12,8 +12,8 @@ class Ctr_cuenta extends Model
     protected $fillable = [
         'no_cuenta',
         'crm_socio_id',
-        'id_tipo_cuenta',
-        'saldo_inicial',
+        'crc_topo_cuenta_id',
+        'saldo_actual',
         'estado',
     ];
 

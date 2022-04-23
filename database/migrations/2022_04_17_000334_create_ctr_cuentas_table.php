@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_cuenta');
             $table->unsignedBigInteger('crm_socio_id');
-            $table->unsignedBigInteger('id_tipo_cuenta');
+            $table->unsignedBigInteger('crc_topo_cuenta_id');
             $table->decimal('saldo_actual');
             $table->boolean('estado');
             // $table->dateTime('fecha_creacion');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreign('crm_socio_id')
                     ->references('id')->on('crm_socios');
 
-            $table->foreign('id_tipo_cuenta')
+            $table->foreign('crc_topo_cuenta_id')
                     ->references('id')->on('crc_tipos_cuentas');
 
 

@@ -61,8 +61,8 @@ class CreateSocio extends Component
         Ctr_cuenta::create([
             'no_cuenta' => strval($toDay["year"] . $toDay["mon"] . $new_socio->id . $new_socio->id),
             'crm_socio_id' => $new_socio->id,
-            'id_tipo_cuenta' => 1,
-            'saldo_inicial' => 0,
+            'crc_topo_cuenta_id' => 1,
+            'saldo_actual' => 0,
             'estado' => true,
         ]);
 

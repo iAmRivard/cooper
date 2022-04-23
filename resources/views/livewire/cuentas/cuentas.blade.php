@@ -42,7 +42,7 @@
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{
                                             $item->socio->nombres . " " . $item->socio->apellidos }}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->id_tipo_cuenta }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->saldo_inicial}}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->saldo_actual}}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
                                             {{-- <a class="cursor-pointer" wire:click="editar( {{$item}} )">
                                                 <i class="fas fa-edit"></i>
