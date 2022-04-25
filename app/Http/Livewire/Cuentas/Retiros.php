@@ -2,22 +2,22 @@
 
 namespace App\Http\Livewire\Cuentas;
 
-use Livewire\Component;
-
 use App\Models\Crc_tipos_de_movimiento;
 use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
-class Abonos extends Component
+use Livewire\Component;
+
+class Retiros extends Component
 {
-    public $open_abono = false;
+    public $open_retiro = false;
 
     public $cuenta, $monto, $tipo, $descripcion;
 
     public $rules = [
-        'cuenta.id' => 'required',
         'tipo' => 'required',
-        'monto' => 'required'
+        'monto' =>  'required',
+        'descripcion' => 'required'
     ];
 
     public function mount(Ctr_cuenta $cuenta)
@@ -27,33 +27,30 @@ class Abonos extends Component
 
     public function render()
     {
-        //Crear campo en crc_tipos_movimientos para establecer si ingreso o egreso
-        //¿Creará conflicto con los prestamos?
         $tiposMovimientos = Crc_tipos_de_movimiento::all();
 
-        return view('livewire.cuentas.abonos', compact('tiposMovimientos'));
+        return view('livewire.cuentas.retiros', compact('tiposMovimientos'));
     }
 
-    public function abonar()
+    public function retirar()
     {
-        $abono = Ctr_cuenta_det::create([
+        $retiro = Ctr_cuenta_det::create([
             'id_tipo_movimiento' => $this->tipo,
             'concepto' => $this->descripcion,
-            'monto' => $this->monto
+            'monto' => -$this->monto
         ]);
 
-        $this->cuenta->saldo_actual = $this->cuenta->saldo_actual + $this->monto;
+        $this->cuenta->saldo_actual = $this->cuenta->saldo_actual - $this->monto;
         $this->cuenta->save();
 
         $this->emitTo('cuentas.cuentas','render');
 
         $this->reset([
-            'open_abono',
+            'open_retiro',
             'tipo',
             'monto',
             'descripcion'
         ]);
 
     }
-
 }

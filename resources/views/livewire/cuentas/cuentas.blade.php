@@ -4,15 +4,15 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
 
-                <div class="flex justify-center py-8 px-8">
+                {{-- <div class="flex justify-center py-8 px-8">
                     <button class="w-80 h-24 mx-8 bg-gray-800 border border-transparent rounded-md font-semibold text-xl text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                         Retiros
                     </button>
 
                     @livewire('cuentas.abonos')
-                </div>
+                </div> --}}
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
@@ -32,21 +32,27 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Saldo Actual</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($cuentas as $item)
+                                @foreach ($cuentas as $cuenta)
                                     <tr>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->no_cuenta}}</td>
+                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->no_cuenta}}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{
-                                            $item->socio->nombres . " " . $item->socio->apellidos }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->tipoCuenta->nombre }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->saldo_actual}}</td>
+                                            $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->tipoCuenta->nombre }}</td>
+                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800 text-center">{{ $cuenta->saldo_actual}}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            {{-- <a class="cursor-pointer" wire:click="editar( {{$item}} )">
-                                                <i class="fas fa-edit"></i>
-                                            </a> --}}
+                                            <a class="cursor-pointer">
+                                                @livewire('cuentas.abonos', ['cuenta' => $cuenta], key($cuenta->id))
+                                            </a>
+                                        </td>
+                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                            <a class="cursor-pointer">
+                                                @livewire('cuentas.retiros', ['cuenta' => $cuenta], key($cuenta->id))
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,5 +72,6 @@
         </div>
 
     </div>
+
 
 </div>

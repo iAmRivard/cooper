@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('ctr_cuenta_dets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_tipo_movimiento');
-            $table->text('concepto', 500);
+            $table->text('concepto', 500)->nullable();
             $table->decimal('monto', 14, 6);
-            $table->dateTime('fecha');
+            // $table->dateTime('fecha');
 
             $table->foreign('id_tipo_movimiento')->references('id')->on('crc_tipos_de_movimientos');
 

@@ -11,9 +11,10 @@ class Cuentas extends Component
 
     public  $buscarCuenta;
 
+    protected $listeners = ['render' => 'render'];
+
     public function render()
     {
-
         $cuentas = Ctr_cuenta::where('no_cuenta', 'like', '%' . $this->buscarCuenta . '%')
                             ->get();
 

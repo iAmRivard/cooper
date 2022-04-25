@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(Crm_SociosSeeder::class);
 
         $this->call(Crc_tipos_cuentasSeeder::class);
+
+        $this->call(Crc_topos_de_movimientoSeeder::class);
     }
 }
