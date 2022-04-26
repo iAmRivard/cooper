@@ -20,8 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('crc_topo_cuenta_id');
             $table->decimal('saldo_actual');
             $table->boolean('estado');
-            // $table->dateTime('fecha_creacion');
-            // $table->dateTime('fecha_actualizacion');
 
             $table->foreign('crm_socio_id')
                     ->references('id')->on('crm_socios');
