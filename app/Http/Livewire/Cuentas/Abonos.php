@@ -39,7 +39,8 @@ class Abonos extends Component
         $abono = Ctr_cuenta_det::create([
             'id_tipo_movimiento' => $this->tipo,
             'concepto' => $this->descripcion,
-            'monto' => $this->monto
+            'monto' => $this->monto,
+            'ctr_cuentas_id' => $this->cuenta->id
         ]);
 
         $this->cuenta->saldo_actual = $this->cuenta->saldo_actual + $this->monto;

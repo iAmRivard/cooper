@@ -12,7 +12,8 @@ class Ctr_cuenta_det extends Model
     protected $fillable = [
         'id_tipo_movimiento',
         'concepto',
-        'monto'
+        'monto',
+        'ctr_cuentas_id'
     ];
 
     public function cuenta()

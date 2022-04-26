@@ -31,8 +31,8 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Socio</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Saldo Actual</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
