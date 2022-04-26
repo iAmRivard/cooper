@@ -56,8 +56,8 @@
                                             </a>
                                         </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a class="cursor-pointer"  wire:click="verCuenta">
-                                                Ver cuenta
+                                            <a href="{{ route('ver.cuenta', $cuenta) }}" class="cursor-pointer"  wire:click="verCuenta">
+                                                ver cuenta
                                             </a>
                                         </td>
                                     </tr>

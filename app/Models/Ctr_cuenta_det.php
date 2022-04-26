@@ -20,4 +20,9 @@ class Ctr_cuenta_det extends Model
     {
         return $this->belongsTo(Ctr_cuenta::class, 'ctr_cuentas_id');
     }
+
+    public function tipos()
+    {
+        return $this->hasMany(Crc_tipos_de_movimiento::class, 'id_tipo_movimiento');
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Crc_tipos_de_movimiento extends Model
 {
     use HasFactory;
+
+    public function movimiento()
+    {
+        return $this->belongsTo(Ctr_cuenta_det::class, 'id_tipo_movimiento');
+    }
 }
