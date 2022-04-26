@@ -25,5 +25,4 @@ class Crm_socios extends Model
         return $this->hasMany(Ctr_cuenta::class, 'crm_socio_id');
     }
 
-
 }

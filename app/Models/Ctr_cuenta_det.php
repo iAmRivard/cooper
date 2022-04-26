@@ -14,4 +14,9 @@ class Ctr_cuenta_det extends Model
         'concepto',
         'monto'
     ];
+
+    public function cuenta()
+    {
+        return $this->belongsTo(Ctr_cuenta::class, 'ctr_cuentas_id');
+    }
 }

@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('ctr_cuenta_dets', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_tipo_movimiento');
-            $table->unsignedBigInteger('crm_socio_id');
+            $table->unsignedBigInteger('ctr_cuentas_id');
 
             $table->text('concepto', 500);
             $table->decimal('monto', 14, 6);
 
             $table->foreign('id_tipo_movimiento')->references('id')->on('crc_tipos_de_movimientos');
-            $table->foreign('crm_socio_id')->references('id')->on('crm_socios');
+            $table->foreign('ctr_cuentas_id')->references('id')->on('ctr_cuentas');
 
 
             $table->timestamps();
