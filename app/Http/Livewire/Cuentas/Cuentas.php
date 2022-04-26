@@ -11,6 +11,9 @@ class Cuentas extends Component
 
     public  $buscarCuenta;
 
+    public $ver_cuenta = false;
+    public $table_off = true;
+
     protected $listeners = ['render' => 'render'];
 
     public function render()
@@ -20,4 +23,12 @@ class Cuentas extends Component
 
         return view('livewire.cuentas.cuentas', compact('cuentas'));
     }
+
+    public function verCuenta()
+    {
+        $this->ver_cuenta = true;
+        $this->table_off = false;
+
+    }
+
 }

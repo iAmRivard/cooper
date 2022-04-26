@@ -4,7 +4,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8" wire:model="table_off">
 
                 {{-- <div class="flex justify-center py-8 px-8">
                     <button class="w-80 h-24 mx-8 bg-gray-800 border border-transparent rounded-md font-semibold text-xl text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
@@ -33,6 +33,7 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Saldo Actual</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -54,6 +55,11 @@
                                                 @livewire('cuentas.retiros', ['cuenta' => $cuenta], key($cuenta->id))
                                             </a>
                                         </td>
+                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                            <a class="cursor-pointer"  wire:click="verCuenta">
+                                                Ver cuenta
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -67,6 +73,10 @@
                     </div> --}}
                 </div>
 
+            </div>
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8" wire:loading wire:model="ver_cuenta">
+                <span>Hola putitto</span>
             </div>
 
         </div>

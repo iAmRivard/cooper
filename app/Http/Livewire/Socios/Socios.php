@@ -12,6 +12,8 @@ class Socios extends Component
 
     use WithPagination;
 
+    // protected $paginationTheme ='bootstrap';
+
     public $buscarSocio, $socio;
 
     public $open_edit = false;
@@ -32,6 +34,11 @@ class Socios extends Component
         'socio.salario' => 'required',
         'socio.correo' => 'required|email'
     ];
+
+    public function updatingBuscarSocio()
+    {
+        $this->resetPage();
+    }
 
 
     public function render()
