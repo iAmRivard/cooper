@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('ctr_cuenta_dets', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tipo_movimiento');
+            $table->unsignedBigInteger('tipo_movimiento_id');
             $table->unsignedBigInteger('ctr_cuentas_id');
 
             $table->text('concepto', 500);
             $table->decimal('monto', 14, 6);
 
-            $table->foreign('id_tipo_movimiento')->references('id')->on('crc_tipos_de_movimientos');
+            $table->foreign('tipo_movimiento_id')->references('id')->on('crc_tipos_de_movimientos');
             $table->foreign('ctr_cuentas_id')->references('id')->on('ctr_cuentas');
 
 

@@ -10,7 +10,7 @@ class Ctr_cuenta_det extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_tipo_movimiento',
+        'tipo_movimiento_id',
         'concepto',
         'monto',
         'ctr_cuentas_id'
@@ -21,8 +21,13 @@ class Ctr_cuenta_det extends Model
         return $this->belongsTo(Ctr_cuenta::class, 'ctr_cuentas_id');
     }
 
-    public function tipos()
+    public function tipo()
     {
-        return $this->hasMany(Crc_tipos_de_movimiento::class, 'id_tipo_movimiento');
+        return $this->belongsTo(Crc_tipos_de_movimiento::class, 'tipo_movimiento_id');
     }
+
+    // public function tipos()
+    // {
+    //     return $this->hasMany(Crc_tipos_de_movimiento::class, 'tipo_movimiento_id');
+    // }
 }

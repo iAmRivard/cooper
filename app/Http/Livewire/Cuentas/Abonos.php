@@ -12,6 +12,7 @@ class Abonos extends Component
 {
     public $open_abono = false;
 
+    public $bottones = true;
     public $cuenta, $monto, $tipo, $descripcion;
 
     public $rules = [
@@ -37,7 +38,7 @@ class Abonos extends Component
     public function abonar()
     {
         $abono = Ctr_cuenta_det::create([
-            'id_tipo_movimiento' => $this->tipo,
+            'tipo_movimiento_id' => $this->tipo,
             'concepto' => $this->descripcion,
             'monto' => $this->monto,
             'ctr_cuentas_id' => $this->cuenta->id
@@ -45,6 +46,7 @@ class Abonos extends Component
 
         $this->cuenta->saldo_actual = $this->cuenta->saldo_actual + $this->monto;
         $this->cuenta->save();
+
 
         $this->emitTo('cuentas.cuentas','render');
 
@@ -55,6 +57,7 @@ class Abonos extends Component
             'descripcion'
         ]);
 
+        return redirect()->route('cuenta.abono', compact('abono'));
     }
 
 }

@@ -36,7 +36,7 @@ class Retiros extends Component
     {
         if($monto <= $this->cuenta->saldo_actual) {
             $retiro = Ctr_cuenta_det::create([
-                'id_tipo_movimiento' => $this->tipo,
+                'tipo_movimiento_id' => $this->tipo,
                 'concepto' => $this->descripcion,
                 'monto' => -$this->monto,
                 'ctr_cuentas_id' => $this->cuenta->id

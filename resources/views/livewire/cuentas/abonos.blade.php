@@ -4,10 +4,6 @@
         abonar
     </x-jet-button>
 
-
-    {{-- <i class="fas fa-edit"></i> --}}
-
-
     <x-jet-dialog-modal wire:model="open_abono">
         <x-slot name="title">
             <span>Abono a cuenta de {{$cuenta->socio->nombres . " " . $cuenta->socio->apellidos}}</span>
@@ -35,8 +31,6 @@
                     <option value="{{ $movimiento->id }}" >{{$movimiento->nombre}}</option>
                     @endforeach
                 </select>
-
-                {{$tipo}}
             </div>
 
             <div class="mb-4">
@@ -57,6 +51,7 @@
                 abonar
             </x-jet-button>
             <span wire:loading wire:target="abonar">Procesando ...</span>
+
 
         </x-slot>
     </x-jet-dialog-modal>
