@@ -20,16 +20,16 @@
 </head>
 <body>
 
-    <h1>Comprobante de abono</h1>
+    <h1>{{ $title }}</h1>
     <hr>
 
     <div class="container">
         <div class="content">
-            <h3>Monto: <span>{{ number_format($abono->monto, 2)}}</span></h3>
-            <h3>Cuenta: <span>{{ $abono->cuenta->no_cuenta}}</span></h3>
-            <h3>Tipo: <span>{{ $abono->tipo->nombre }}</span></h3>
-            <h3>Concepto: <span>{{ $abono->concepto }}</span></h3>
-            <h3>Fecha: <span>{{ $abono->created_at->format('d-m-Y')}}</span></h3>
+            <h3>Monto: <span>{{ number_format($retiro->monto, 2)}}</span></h3>
+            <h3>Cuenta: <span>{{ $retiro->cuenta->no_cuenta}}</span></h3>
+            <h3>Tipo: <span>{{ $retiro->tipo->nombre }}</span></h3>
+            <h3>Concepto: <span>{{ $retiro->concepto }}</span></h3>
+            <h3>Fecha: <span>{{ $retiro->created_at->format('d-m-Y')}}</span></h3>
         </div>
     </div>
 

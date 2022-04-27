@@ -22,7 +22,6 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"># Cuenta</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Socio</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Saldo Actual</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
@@ -36,7 +35,6 @@
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{
                                             $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->tipoCuenta->nombre }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800 text-center">{{ $cuenta->saldo_actual}}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
                                             <a class="cursor-pointer">
                                                 @livewire('cuentas.abonos', ['cuenta' => $cuenta], key($cuenta->id))

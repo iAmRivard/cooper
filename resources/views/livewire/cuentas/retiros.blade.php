@@ -48,7 +48,7 @@
                 cancelar
             </x-jet-secondary-button>
             <x-jet-button  wire:click="retirar">
-                abonar
+                retirar
             </x-jet-button>
             <span wire:loading wire:target="retirar">Procesando ...</span>
 

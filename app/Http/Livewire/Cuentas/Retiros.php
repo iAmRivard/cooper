@@ -34,7 +34,8 @@ class Retiros extends Component
 
     public function retirar()
     {
-        if($monto <= $this->cuenta->saldo_actual) {
+        if($this->monto <= $this->cuenta->saldo_actual) {
+
             $retiro = Ctr_cuenta_det::create([
                 'tipo_movimiento_id' => $this->tipo,
                 'concepto' => $this->descripcion,
@@ -53,6 +54,8 @@ class Retiros extends Component
                 'monto',
                 'descripcion'
             ]);
+
+            return redirect()->route('cuenta.retiro', compact('retiro'));
         }
 
         //Se necesita enviar una alerta
