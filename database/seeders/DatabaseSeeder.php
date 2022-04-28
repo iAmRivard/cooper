@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
+use App\Models\Crm_socios;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -25,5 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(Crc_tipos_cuentasSeeder::class);
 
         $this->call(Crc_topos_de_movimientoSeeder::class);
+
+        Crm_socios::factory(1)->create();
     }
 }

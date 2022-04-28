@@ -62,9 +62,9 @@
 
                     @endif
 
-                    <div class="px-6 py-3 flex justify-items-center justify-around">
-                        {{$socios->links()}}
-                    </div>
+                </div>
+                <div class="px-6 py-3 ">
+                    {{$socios->links()}}
                 </div>
 
             </div>
