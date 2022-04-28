@@ -13,10 +13,15 @@ class Cuentas extends Component
 
     protected $listeners = ['render' => 'render'];
 
+    public function updatingBuscarCuenta()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         $cuentas = Ctr_cuenta::where('no_cuenta', 'like', '%' . $this->buscarCuenta . '%')
-                            ->get();
+                            ->paginate(5);
 
         return view('livewire.cuentas.cuentas', compact('cuentas'));
     }

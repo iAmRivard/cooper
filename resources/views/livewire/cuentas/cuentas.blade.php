@@ -9,7 +9,7 @@
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
-                        <x-jet-input class="block mt-1 w-full" type="text" wire:model="buscarCuenta" />
+                        <x-jet-input class="block mt-1 w-full" type="number" wire:model="buscarCuenta" />
                     </div>
                 </div>
 
@@ -58,9 +58,9 @@
                         </table>
 
                     </div>
-                    {{-- <div class="px-6 py-3 flex justify-items-center justify-around">
-                        {{$socios->links()}}
-                    </div> --}}
+                </div>
+                <div class="px-6 py-3 flex justify-items-center justify-around">
+                    {{$cuentas->links()}}
                 </div>
 
             </div>
