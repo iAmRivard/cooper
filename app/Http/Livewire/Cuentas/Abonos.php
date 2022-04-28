@@ -41,6 +41,7 @@ class Abonos extends Component
             'tipo_movimiento_id' => $this->tipo,
             'concepto' => $this->descripcion,
             'monto' => $this->monto,
+            'naturaleza' => 1,
             'ctr_cuentas_id' => $this->cuenta->id
         ]);
 

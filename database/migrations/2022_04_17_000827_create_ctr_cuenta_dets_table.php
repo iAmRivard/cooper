@@ -21,6 +21,13 @@ return new class extends Migration
             $table->text('concepto', 500);
             $table->decimal('monto', 14, 6);
 
+            /**
+             * Naturaleza = tipo : infreso ? egreso
+             * Ingreso = 1
+             * Egreso = 0
+             */
+            $table->boolean('naturaleza');
+
             $table->foreign('tipo_movimiento_id')->references('id')->on('crc_tipos_de_movimientos');
             $table->foreign('ctr_cuentas_id')->references('id')->on('ctr_cuentas');
 

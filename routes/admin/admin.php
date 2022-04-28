@@ -20,6 +20,9 @@ Route::get('/cuentas/ver-cuenta/{cuenta}', VerCuenta::class)->name('ver.cuenta')
 
 //PDF
 Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])->name('cuenta.abono');
+
 Route::get('/cuentas/retiro/{retiro}', [PDFController::class, 'retiro'])->name('cuenta.retiro');
+
+Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])->name('cuenta.cuenta');
 
 

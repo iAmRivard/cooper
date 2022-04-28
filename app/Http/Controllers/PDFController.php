@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Ctr_cuenta_det;
+use App\Models\Ctr_cuenta;
 
 use PDF;
 
@@ -33,5 +34,20 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView('PDF.retiro', $data);
         return $pdf->download('comprobante.pdf');
+    }
+
+    public function cuenta(Ctr_cuenta $cuenta)
+    {
+
+        //TODO de funcionalidad, Enviar parametros de fechas y realizar el reporte en base a los parametros
+        $data = [
+            'title' => 'Reporte de cuenta',
+            'cuenta' => $cuenta,
+        ];
+
+        $pdf = Pdf::loadView('PDF.cuenta', $data);
+        return $pdf->download('reporte.pdf');
+
+        // return $pdf->stream();
     }
 }

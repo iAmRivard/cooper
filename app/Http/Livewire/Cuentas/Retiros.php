@@ -40,6 +40,7 @@ class Retiros extends Component
                 'tipo_movimiento_id' => $this->tipo,
                 'concepto' => $this->descripcion,
                 'monto' => -$this->monto,
+                'naturaleza' => 0,
                 'ctr_cuentas_id' => $this->cuenta->id
             ]);
 

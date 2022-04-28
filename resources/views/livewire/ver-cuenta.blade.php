@@ -1,6 +1,8 @@
 <div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{route('cuenta.cuenta', $cuenta)}}">Imprimir</a>
+
             <h2>{{$cuenta->no_cuenta}}</h2>
             <div class="flex justify-center">
 

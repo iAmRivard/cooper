@@ -13,7 +13,8 @@ class Ctr_cuenta_det extends Model
         'tipo_movimiento_id',
         'concepto',
         'monto',
-        'ctr_cuentas_id'
+        'ctr_cuentas_id',
+        'naturaleza'
     ];
 
     public function cuenta()
