@@ -21,10 +21,12 @@
 
                         <tr>
                             <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $movimiento->concepto }}</td>
-                            <td class="border boder-gray-400 px-4 py-2 text-gray-800">${{ $movimiento->monto }}</td>
+                            <td class="border boder-gray-400 px-4 py-2 text-gray-800">${{ number_format($movimiento->monto,2) }}</td>
                             <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $movimiento->created_at }}</td>
                             <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                Imprimir Comprobante
+                                <a href="{{ route('cuenta.re.impresion', $movimiento->id) }}" class="">
+                                    re Imprimir
+                                </a>
                             </td>
                         </tr>
 

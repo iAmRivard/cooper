@@ -50,4 +50,23 @@ class PDFController extends Controller
 
         // return $pdf->stream();
     }
+
+    public function reImpresion($id)
+    {
+
+        $transaccion = Ctr_cuenta_det::find($id);
+
+        $title = $transaccion->naturaleza == 1 ? 'Reimpresión de abono' : 'Reimpresión de retiro';
+
+        $data = [
+            'title' => $title,
+            'transaccion' => $transaccion,
+        ];
+
+        $pdf = Pdf::loadView('PDF.re-impresion', $data);
+        return $pdf->download('reporte.pdf');
+
+        // return $pdf->stream();
+
+    }
 }

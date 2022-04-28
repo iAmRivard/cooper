@@ -25,4 +25,6 @@ Route::get('/cuentas/retiro/{retiro}', [PDFController::class, 'retiro'])->name('
 
 Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])->name('cuenta.cuenta');
 
+Route::get('/cuentas/re-impresion/{id}', [PDFController::class, 'reImpresion'])->name('cuenta.re.impresion');
+
 
