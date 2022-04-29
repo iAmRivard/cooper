@@ -12,6 +12,8 @@ class Retiros extends Component
 {
     public $open_retiro = false;
 
+    public $error = false;
+
     public $cuenta, $monto, $tipo, $descripcion;
 
     public $rules = [
@@ -49,6 +51,9 @@ class Retiros extends Component
 
             $this->emitTo('cuentas.cuentas','render');
 
+            $this->emit('exito', 'Retiro procesado exitosamente');
+
+
             $this->reset([
                 'open_retiro',
                 'tipo',
@@ -57,10 +62,10 @@ class Retiros extends Component
             ]);
 
             return redirect()->route('cuenta.retiro', compact('retiro'));
+        } else {
+
+            $this->error = true;
         }
-
-        //Se necesita enviar una alerta
-
 
     }
 }

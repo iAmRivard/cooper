@@ -67,6 +67,7 @@ class CreateSocio extends Component
         ]);
 
         $this->emitTo('socios.socios','render');
+        $this->emit('exito', 'Socio creado exitosamente');
 
         $this->reset([
             'open',

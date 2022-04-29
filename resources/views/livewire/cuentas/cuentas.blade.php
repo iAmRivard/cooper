@@ -9,7 +9,7 @@
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
-                        <x-jet-input class="block mt-1 w-full" type="number" wire:model="buscarCuenta" />
+                        <x-jet-input class="block mt-1 w-full" type="text" wire:model="buscar" />
                     </div>
                 </div>
 
@@ -22,8 +22,8 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"># Cuenta</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Socio</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Retiro</th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Abono</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -36,14 +36,12 @@
                                             $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->tipoCuenta->nombre }}</td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a class="cursor-pointer">
-                                                @livewire('cuentas.abonos', ['cuenta' => $cuenta], key($cuenta->id))
-                                            </a>
+                                            @livewire('cuentas.abonos', ['cuenta' => $cuenta], key($cuenta->id))
+
                                         </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a class="cursor-pointer">
-                                                @livewire('cuentas.retiros', ['cuenta' => $cuenta], key($cuenta->id))
-                                            </a>
+                                            @livewire('cuentas.retiros', ['cuenta' => $cuenta], key($cuenta->id))
+
                                         </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
                                             <a href="{{ route('ver.cuenta', $cuenta) }}" class="cursor-pointer">
@@ -68,6 +66,5 @@
         </div>
 
     </div>
-
 
 </div>

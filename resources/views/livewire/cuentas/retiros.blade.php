@@ -1,5 +1,5 @@
 <div>
-    <x-jet-button class=" font-medium text-center" wire:click="$set('open_retiro', true)">
+    <x-jet-button wire:click="$set('open_retiro', true)">
         retirar
     </x-jet-button>
 
@@ -44,6 +44,11 @@
         </x-slot>
 
         <x-slot name="footer">
+
+            @if($error == true)
+                <span class="text-red-600"> Error: Saldo insuficiente</span>
+            @endif
+
             <x-jet-secondary-button class="mx-4" wire:click="$set('open_abono', false)" >
                 cancelar
             </x-jet-secondary-button>

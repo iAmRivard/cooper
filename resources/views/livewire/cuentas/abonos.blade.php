@@ -1,6 +1,6 @@
 <div>
 
-    <x-jet-button class=" font-medium text-center" wire:click="$set('open_abono', true)">
+    <x-jet-button wire:click="$set('open_abono', true)">
         abonar
     </x-jet-button>
 

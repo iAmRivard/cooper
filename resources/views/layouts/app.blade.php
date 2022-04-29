@@ -20,6 +20,10 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        {{-- SweetAlert 2 --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -45,5 +49,13 @@
         @stack('modals')
 
         @livewireScripts
+
+        <script>
+            Livewire.on('exito', function(message){
+                Swal.fire(
+                    message
+                )
+            })
+        </script>
     </body>
 </html>

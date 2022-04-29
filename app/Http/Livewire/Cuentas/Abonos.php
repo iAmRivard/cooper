@@ -50,6 +50,8 @@ class Abonos extends Component
 
 
         $this->emitTo('cuentas.cuentas','render');
+        $this->emit('exito', 'Abono procesado exitosamente');
+
 
         $this->reset([
             'open_abono',
