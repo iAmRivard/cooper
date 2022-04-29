@@ -35,6 +35,14 @@ class CreateSocio extends Component
 
         $this->validate();
 
+        // Creacuón del usuario
+        $user = User::create([
+            'name' => $this->nombres . $this->apellidos,
+            'email' => $this->correo,
+            'password' => bcrypt($this->dui),
+            'remember_token' => Str::random(10),
+        ]);
+
         $new_socio = Crm_socios::create([
             'nombres' => $this->nombres,
             'apellidos' => $this->apellidos,
@@ -44,15 +52,7 @@ class CreateSocio extends Component
             'correo' => $this->correo,
             'salario' => $this->salario,
             'estado' => true,
-        ]);
-
-
-        // Creacuón del usuario
-        User::create([
-            'name' => $this->nombres . $this->apellidos,
-            'email' => $this->correo,
-            'password' => bcrypt($this->dui),
-            'remember_token' => Str::random(10),
+            'user_id' => $user->id,
         ]);
 
         $toDay = getDate();
@@ -67,6 +67,7 @@ class CreateSocio extends Component
         ]);
 
         $this->emitTo('socios.socios','render');
+
         $this->emit('exito', 'Socio creado exitosamente');
 
         $this->reset([

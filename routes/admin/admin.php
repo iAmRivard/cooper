@@ -5,14 +5,16 @@ use Illuminate\Support\Facades\Route;
 //Controladores
 
 use App\Http\Controllers\PDFController;
+Use App\Http\Controllers\SociosController;
 
-use App\Http\Livewire\Socios\Socios;
 use App\Http\Livewire\Cuentas\Cuentas;
+use App\Http\Livewire\Socios\Socios;
 use App\Http\Livewire\VerCuenta;
-use App\Http\Livewire\PDF\Abono;
 
 
 Route::get('/socios', Socios::class)->name('socios');
+
+Route::get('/socio/{socio}', [SociosController::class, 'show'])->name('ver.socio');
 
 Route::get('/cuentas', Cuentas::class)->name('cuentas');
 

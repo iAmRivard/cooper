@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Crm_socios;
+
 class SociosController extends Controller
 {
     /**
@@ -11,9 +13,9 @@ class SociosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Crm_socios $socio)
     {
-        return view('socios.index');
+        return view('socios.index', compact('socio'));
     }
 
     /**
@@ -43,9 +45,9 @@ class SociosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Crm_socios $socio)
     {
-        //
+        return view('socios.index', compact('socio'));
     }
 
     /**

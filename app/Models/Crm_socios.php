@@ -18,11 +18,17 @@ class Crm_socios extends Model
         'salario',
         'correo',
         'estado',
+        'user_id',
     ];
 
     public function cuentas()
     {
         return $this->hasMany(Ctr_cuenta::class, 'crm_socio_id');
+    }
+
+    public function usuario()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
     }
 
 }

@@ -1,58 +1,62 @@
 <x-app-layout>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                <h2 class="text-xl mx-4">Socios / Creación de Socios</h2>
 
-                <div class="flex justify-end">
-                    <a class="px-8" href="{{ route('socios.create') }}">
-                        <button type="button" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">
-                            Crear Socio
-                        </button>
-                    </a>
+                <h2 class="text-2xl px-8">Información de: {{$socio->nombres}} {{$socio->apellidos}}</h2>
+
+                <div class="px-8 py-6">
+                    <p><strong>DUI:</strong> <span>{{$socio->dui}}</span></p>
+                    <p><strong>NIT</strong><span>{{$socio->nit}}</span></p>
+                    <p><strong>Dirección</strong> <span>{{$socio->direccion}}</span></p>
+                    <p><strong>Correo</strong> <span>{{$socio->correo}}</span></p>
+                    <p><strong>Salario</strong> <span>{{number_format($socio->salario, 2)}}</span></p>
                 </div>
 
-                {{-- Probablemente la busqueda y ver productos sea
-                    un componente de Livewire --}}
-                <div class="flex justify-center">
-                    <div class="w-1/2">
-                        <x-jet-label for="name" value="{{ __('Buscar socio') }}" />
-                        <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-                    </div>
+                <div>
+                    @livewire('reset.reset-password', ['user_id' => $socio->user_id])
                 </div>
 
-                <div class="container py-8 flex justify-center">
+                <h3 class="text-xl px-4">Cuentas</h3>
+
+                <div class="flex justify-center py-6">
                     <table class="border-collapse border border-slate-500 ">
                         <thead>
                             <tr>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">Nombre</th>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">Apellido</th>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">DUI</th>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">NIT</th>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">Direción</th>
+                                <th class="border boder-gray-400 px-4 py-2 text-gray-800"># de Cuenta</th>
+                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de cuenta</th>
                                 <th class="border boder-gray-400 px-4 py-2 text-gray-800">Estado</th>
-                                <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
+                                <th class="border boder-gray-400 px-4 py-2 text-gray-800">Saldo Actual</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="border boder-gray-400 px-4 py-2 text-gray-800">adsad </td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800"> adsad</td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800"> adsad</td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800">adsad </td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800"> adsad</td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800"> adsad</td>
-                                <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                    {{-- {{route('admin.productos.edit')}} --}}
-                                    <a href="#" class="">
-                                        <button type="button" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Editart</button>
-                                    </a>
-                                </td>
-                            </tr>
+
+                            @foreach ($socio->cuentas as $cuenta)
+                                <tr>
+                                    <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        {{ $cuenta->no_cuenta}}
+                                    </td>
+                                    <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        {{ $cuenta->tipoCuenta->nombre }}
+                                    </td>
+                                    <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        {{ $cuenta->estado != 0 ? 'Cueta activa' : 'Cuenta Desactivada' }}
+                                    </td>
+                                    <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        {{ $cuenta->saldo_actual }}
+                                    </td>
+
+                                </tr>
+                            @endforeach
+
                         </tbody>
+
                     </table>
                 </div>
+
+
 
             </div>
         </div>

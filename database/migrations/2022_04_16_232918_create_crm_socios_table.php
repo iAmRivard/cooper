@@ -23,8 +23,10 @@ return new class extends Migration
             $table->text('correo');
             $table->decimal('salario');
             $table->boolean('estado');
-            // $table->dateTime('fecha_creacion');
-            // $table->dateTime('fecha_actualizacion');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users');
             $table->timestamps();
         });
     }

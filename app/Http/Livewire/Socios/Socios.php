@@ -18,6 +18,10 @@ class Socios extends Component
 
     public $open_edit = false;
 
+    public $nueva_contrasena = false;
+
+    public $error = false;
+
     public function mount()
     {
         $this->socio = new Crm_socios;
@@ -72,4 +76,11 @@ class Socios extends Component
             'open_edit'
         ]);
     }
+
+    public function actualizar_pass(Crm_socios $socio)
+    {
+        $this->socio = $socio;
+        $this->nueva_contrasena = true;
+    }
+
 }

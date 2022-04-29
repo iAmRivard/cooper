@@ -35,6 +35,7 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Direción</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Salario</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
+                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,6 +53,9 @@
                                             <a class="cursor-pointer" wire:click="editar( {{$item}} )">
                                                 <i class="fas fa-edit"></i>
                                             </a>
+                                        </td>
+                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                            <a href="{{route('ver.socio', $item)}}">Ver socio</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -75,7 +79,7 @@
 
     </div>
 
-    {{-- Modal --}}
+    {{-- Edición socio --}}
     <x-jet-dialog-modal wire:model="open_edit">
 
         <x-slot name='title'>
@@ -146,7 +150,5 @@
         </x-slot>
 
     </x-jet-dialog-modal>
-
-
 
 </div>
