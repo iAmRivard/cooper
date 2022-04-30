@@ -1200,6 +1200,9 @@ select {
 .shrink-0 {
   flex-shrink: 0;
 }
+.table-fixed {
+  table-layout: fixed;
+}
 .border-collapse {
   border-collapse: collapse;
 }
@@ -1624,9 +1627,6 @@ select {
 }
 .leading-4 {
   line-height: 1rem;
-}
-.leading-6 {
-  line-height: 1.5rem;
 }
 .tracking-widest {
   letter-spacing: 0.1em;

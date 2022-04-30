@@ -1,8 +1,12 @@
 <div>
 
-    <x-jet-button wire:click="$set('open_abono', true)">
+    <a wire:click="$set('open_abono', true)">
+        <i class="fa-solid fa-piggy-bank fa-2xl cursor-pointer"></i>
+    </a>
+
+    {{-- <x-jet-button wire:click="$set('open_abono', true)">
         abonar
-    </x-jet-button>
+    </x-jet-button> --}}
 
     <x-jet-dialog-modal wire:model="open_abono">
         <x-slot name="title">

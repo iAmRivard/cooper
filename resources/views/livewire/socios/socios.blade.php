@@ -25,7 +25,7 @@
 
                     @if ($socios->count())
 
-                        <table class="border-collapse border border-slate-500 ">
+                        <table class="table-fixed border-collapse border border-slate-500 ">
                             <thead>
                                 <tr>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Nombre</th>
@@ -55,7 +55,9 @@
                                             </a>
                                         </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a href="{{route('ver.socio', $item)}}">Ver socio</a>
+                                            <a href="{{route('ver.socio', $item)}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                                Ver socio
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -13,16 +13,13 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        <!-- FontAwesome-->
-        <script src="https://kit.fontawesome.com/2115fb84e0.js" crossorigin="anonymous"></script>
+        {{-- LIB externas Fontawesone Free --}}
+        <link rel="stylesheet" href="{{ asset('css/lib.css') }}">
 
         @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-
-        {{-- SweetAlert 2 --}}
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
     <body class="font-sans antialiased">
