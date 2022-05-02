@@ -25,7 +25,6 @@
                     @endforeach
 
                 </select>
-                {{$cuenta_select}}
             </div>
             <div class="mb-4">
                 <x-jet-label>Monto</x-jet-label>

@@ -5,6 +5,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
+                <div class="flex justify-end mx-24">
+                    @livewire('cuentas.create-cuenta')
+                </div>
 
                 <div class="flex justify-center">
                     <div class="w-1/2">

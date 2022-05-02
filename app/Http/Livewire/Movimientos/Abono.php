@@ -64,7 +64,6 @@ class Abono extends Component
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
-
         $this->reset([
             'open',
             'tipo',
