@@ -8,6 +8,8 @@
         abonar
     </x-jet-button> --}}
 
+
+
     <x-jet-dialog-modal wire:model="open_abono">
         <x-slot name="title">
             <span>Abono a cuenta de {{$cuenta->socio->nombres . " " . $cuenta->socio->apellidos}}</span>

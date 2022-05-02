@@ -22,8 +22,6 @@
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800"># Cuenta</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Socio</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Abono</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Retiro</th>
                                     <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
                                 </tr>
                             </thead>
@@ -36,14 +34,7 @@
                                             {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                         </td>
                                         <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->tipoCuenta->nombre }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            @livewire('cuentas.abonos', ['cuenta' => $cuenta], key($cuenta->id))
 
-                                        </td>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            @livewire('cuentas.retiros', ['cuenta' => $cuenta], key($cuenta->id))
-
-                                        </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
                                             <a href="{{ route('ver.cuenta', $cuenta) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                                                 ver cuenta
