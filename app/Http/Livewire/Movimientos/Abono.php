@@ -40,6 +40,7 @@ class Abono extends Component
     public function buscar()
     {
         $this->cuentas = Ctr_cuenta::where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
+                                    // ->orWhere('')
                                     ->get();
     }
 

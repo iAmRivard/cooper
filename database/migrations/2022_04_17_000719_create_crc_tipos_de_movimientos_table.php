@@ -18,6 +18,12 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->boolean('estado');
+
+            /**
+             * 1 = Acreedora
+             * 2 = deudora
+             */
+            $table->boolean('naturaleza');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('ctr_cuentas_id');
 
             $table->text('concepto', 500);
-            $table->decimal('monto', 14, 6);
+            $table->decimal('monto', 14, 2);
 
             /**
              * Naturaleza = tipo : infreso ? egreso

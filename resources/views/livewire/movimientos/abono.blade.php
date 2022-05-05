@@ -12,7 +12,7 @@
 
             <div class="mb-4">
                 <x-jet-label>Buscar Cuetna</x-jet-label>
-                <x-jet-input class="w-auto" type="text" wire:model="buscar_cuenta" wire:keydown.enter="buscar" />
+                <x-jet-input class="w-auto" type="text" wire:model="buscar_cuenta" wire:keydown="buscar" />
                 <i class="fa-solid fa-magnifying-glass cursor-pointer" name="buscar" wire:click="buscar"></i>
             </div>
 
