@@ -20,7 +20,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cuenta->movimientos as $movimiento)
+                        @foreach ($movimientos as $movimiento)
 
                         <tr>
                             <td>{{ $movimiento->concepto }}</td>
@@ -40,6 +40,8 @@
                 </table>
 
             </div>
+
+            {{$movimientos->links()}}
 
 
 

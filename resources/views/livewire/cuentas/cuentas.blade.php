@@ -39,7 +39,7 @@
                                         <td>{{ $cuenta->tipoCuenta->nombre }}</td>
 
                                         <td>
-                                            <a href="{{ route('ver.cuenta', $cuenta) }}" class="a-link">
+                                            <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">
                                                 ver cuenta
                                             </a>
                                         </td>
