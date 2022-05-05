@@ -19,27 +19,27 @@
                 <div class="container py-8 flex justify-center">
                     <div>
 
-                        <table class="border-collapse border border-slate-500 ">
+                        <table class="table">
                             <thead>
                                 <tr>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"># Cuenta</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Socio</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Tipo de Cuenta</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">&nbsp;</th>
+                                    <th># Cuenta</th>
+                                    <th>Socio</th>
+                                    <th>Tipo de Cuenta</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($cuentas as $cuenta)
                                     <tr>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->no_cuenta}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        <td>{{ $cuenta->no_cuenta}}</td>
+                                        <td>
                                             {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                         </td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $cuenta->tipoCuenta->nombre }}</td>
+                                        <td>{{ $cuenta->tipoCuenta->nombre }}</td>
 
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a href="{{ route('ver.cuenta', $cuenta) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                        <td>
+                                            <a href="{{ route('ver.cuenta', $cuenta) }}" class="a-link">
                                                 ver cuenta
                                             </a>
                                         </td>

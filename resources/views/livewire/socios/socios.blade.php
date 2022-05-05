@@ -25,37 +25,36 @@
 
                     @if ($socios->count())
 
-                        <table class="table-fixed border-collapse border border-slate-500 ">
+                        <table class="table table-fixed">
                             <thead>
                                 <tr>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Nombre</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Apellido</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">DUI</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">NIT</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Direción</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800">Salario</th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
-                                    <th class="border boder-gray-400 px-4 py-2 text-gray-800"></th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>DUI</th>
+                                    <th>NIT</th>
+                                    <th>Direción</th>
+                                    <th>Salario</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($socios as $item)
                                     <tr>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->nombres}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{
-                                            $item->apellidos}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->dui }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->nit}}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">{{ $item->direccion }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">${{ $item->salario }}</td>
-                                        <td  class="border boder-gray-400 px-4 py-2 text-gray-800">
+                                        <td>{{ $item->nombres}}</td>
+                                        <td>{{ $item->apellidos}}</td>
+                                        <td>{{ $item->dui }}</td>
+                                        <td>{{ $item->nit}}</td>
+                                        <td>{{ $item->direccion }}</td>
+                                        <td>${{ $item->salario }}</td>
+                                        <td>
                                             <a class="cursor-pointer" wire:click="editar( {{$item}} )">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
                                         <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a href="{{route('ver.socio', $item)}}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                            <a href="{{route('ver.socio', $item)}}" class="a-link">
                                                 Ver socio
                                             </a>
                                         </td>
