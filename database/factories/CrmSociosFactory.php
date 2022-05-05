@@ -25,6 +25,7 @@ class CrmSociosFactory extends Factory
             'correo' => $this->faker->safeEmail(),
             'salario' => $this->faker->randomFloat(2),
             'estado' => 1,
+            'user_id' => $this->faker->numberBetween(0, 100)
         ];
     }
 }

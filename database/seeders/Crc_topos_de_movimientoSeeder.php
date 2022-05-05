@@ -19,15 +19,19 @@ class Crc_topos_de_movimientoSeeder extends Seeder
         Crc_tipos_de_movimiento::create([
             'nombre' => 'Apertura de cuenta',
             'descripcion' => 'Apertura de cuetna',
-            'estado' => true,
             'naturaleza' => 1
         ]);
 
         Crc_tipos_de_movimiento::create([
             'nombre' => 'Abono a cuenta',
             'descripcion' => 'Abono a cuenta de socio',
-            'estado' => true,
             'naturaleza' => 1
+        ]);
+
+        Crc_tipos_de_movimiento::create([
+            'nombre' => 'Retiro de cuenta',
+            'descripcion' => 'Retiro de efectido de cuenta se socio',
+            'naturaleza' => 0
         ]);
     }
 }

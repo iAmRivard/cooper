@@ -29,7 +29,8 @@ class Retiros extends Component
 
     public function render()
     {
-        $tiposMovimiento = Crc_tipos_de_movimiento::all();
+        $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '0')
+                                                    ->get();
 
         return view('livewire.movimientos.retiros', compact('tiposMovimiento'));
     }

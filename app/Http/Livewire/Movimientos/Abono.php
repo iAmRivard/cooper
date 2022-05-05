@@ -31,8 +31,8 @@ class Abono extends Component
 
     public function render()
     {
-        //Hacer referencia en la BD del tipo (ingreso o egreso)
-        $tiposMovimiento = Crc_tipos_de_movimiento::all();
+        $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '1')
+                                                ->get();
 
         return view('livewire.movimientos.abono', compact('tiposMovimiento'));
     }

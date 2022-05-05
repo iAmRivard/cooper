@@ -5,8 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Crm_socios;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
         $this->call(RoleSeeder::class);
 
@@ -26,5 +23,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(Crc_topos_de_movimientoSeeder::class);
 
+        // \App\Models\User::factory(10)->create();
+        // \App\Models\Crm_socios::factory(10)->create();
     }
 }
