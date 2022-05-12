@@ -81,6 +81,8 @@ class CreateSocio extends Component
             'salario'
         ]);
 
+        return redirect()->route('ver.socio', $new_socio);
+
     }
 
     public function render()

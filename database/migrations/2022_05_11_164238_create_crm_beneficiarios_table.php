@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('apellidos');
             $table->string('parentesco');
             $table->date('fecha_nacimiento');
-            $table->double('porcentaje', 3, 2);
+            $table->decimal('porcentaje', 5, 2);
             $table->text('direccion', 500);
             $table->unsignedBigInteger('crm_socio_id');
 
