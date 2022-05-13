@@ -44,13 +44,13 @@
         </x-slot>
         <x-slot name="footer">
 
-            <x-jet-button wire:click="agregar">
-                Agregar
-            </x-jet-button>
-
             @if ($error)
                 <span>Porcentaje invalido</span>
             @endif
+
+            <x-jet-button wire:click="agregar">
+                Agregar
+            </x-jet-button>
 
         </x-slot>
     </x-jet-dialog-modal>

@@ -12,13 +12,14 @@ use App\Models\User;
 use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
 use App\Models\Crc_tipos_cuenta;
+use App\Models\Crm_empresas;
 
 class CreateSocio extends Component
 {
 
     public $open = false;
 
-    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo;
+    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa;
 
     protected $rules = [
         'nombres' => 'required',
@@ -27,8 +28,14 @@ class CreateSocio extends Component
         'nit' => 'required|min:13|max:13',
         'direccion' => 'required',
         'salario' => 'required',
-        'correo' => 'required|email'
+        'correo' => 'required|email',
+        'empresa' => 'required'
     ];
+
+    public function render()
+    {
+        return view('livewire.socios.create-socio');
+    }
 
     public function guardar()
     {
@@ -53,6 +60,12 @@ class CreateSocio extends Component
             'salario' => $this->salario,
             'estado' => true,
             'user_id' => $user->id,
+        ]);
+
+        $empresas = Crm_empresas::create([
+            'nombre' => $this->empresa,
+            'actual' => true,
+            'crm_socio_id' => $new_socio->id,
         ]);
 
         $toDay = getDate();
@@ -85,8 +98,4 @@ class CreateSocio extends Component
 
     }
 
-    public function render()
-    {
-        return view('livewire.socios.create-socio');
-    }
 }

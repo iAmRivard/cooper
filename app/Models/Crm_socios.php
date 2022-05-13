@@ -36,4 +36,9 @@ class Crm_socios extends Model
         return $this->hasMany(Crm_beneficiarios::class, 'crm_socio_id');
     }
 
+    public function empresas()
+    {
+        return $this->hasMany(crm_empresas::class, 'crm_socio_id');
+    }
+
 }

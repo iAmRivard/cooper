@@ -7,7 +7,7 @@
     {{-- Modal --}}
     <x-jet-dialog-modal wire:model="open">
         <x-slot name="title">
-            Crear Nuevo Socio
+            Datos Personales
         </x-slot>
 
         <x-slot name="content">
@@ -53,6 +53,12 @@
                 <x-jet-input-error for="correo" />
             </div>
 
+            <div class="mb-4">
+                <x-jet-label value="Nombre de empresa" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="empresa" />
+                <x-jet-input-error for="empresa" />
+            </div>
+
         </x-slot>
 
         <x-slot name="footer">
@@ -69,4 +75,6 @@
 
         </x-slot>
     </x-jet-dialog-modal>
+
+
 </div>
