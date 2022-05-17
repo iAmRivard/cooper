@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +7,49 @@
     <title>Document</title>
 
     <style>
-        .container{
-            display: flex;
-        }
-
-        .content{
-            justify-content: center;
+        .table thead {
+            border: 1px solid black;
         }
 
     </style>
 
 </head>
 <body>
+
+    <table>
+        <td><img src="{{asset('/logo.svg')}}" alt="logo" height="150px"></td>
+        <td>
+            <h3>Asociación Cooperativa de Ahorro y Credito de Empleados de Algiers Impresores de R.L.</h3>
+        </td>
+    </table>
+
+    <br>
+
+    <div>
+        <strong>Fecha</strong> {{ $abono->created_at->format('d-m-Y')}}
+    </div>
+    <div>
+        <strong>Recibo #</strong> {{ $abono->id }}
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Cuenta</th>
+                <th>Nombres</th>
+                <th>Apelldios</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td>{{ $abono->cuenta->socio->id }}</td>
+                <td>{{ $abono->cuenta->no_cuenta }}</td>
+                <td>{{ $abono->cuenta->socio->nombres }}</td>
+                <td>{{ $abono->cuenta->socio->apellidos }}</td>
+            </tr>
+        </tfoot>
+    </table>
 
     <h1>Comprobante de abono</h1>
     <hr>

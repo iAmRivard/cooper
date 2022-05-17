@@ -57,7 +57,7 @@ class Crear extends Component
                 'crm_socio_id' => $this->socio->id
             ]);
 
-            $this->emitTo('render', 'render');
+            $this->emitTo('beneficiarios.tabla', 'render');
 
             $this->reset([
                 'open',

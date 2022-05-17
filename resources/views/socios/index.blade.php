@@ -21,38 +21,14 @@
                     @livewire('reset.reset-password', ['user_id' => $socio->user_id])
                 </div>
                 <hr>
-
+                {{-- Creación de nuevo beneficiario --}}
                 <div class="flex justify-end px-8 py-6">
                     @livewire('beneficiarios.crear', ['socio' => $socio])
                 </div>
-
+                {{-- Lista de beneficiarios --}}
                 <div class="flex justify-center py-6">
-                    <table class="table table-fixed">
-                        <thead>
-                            <tr>
-                                <th>Nombres</th>
-                                <th>Apellidos</th>
-                                <th>parentesco</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>%</th>
-                                <th>Dirección</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($socio->beneficiarios as $beneficiario)
-                            <tr>
-                                <td>{{ $beneficiario->nombres }}</td>
-                                <td>{{ $beneficiario->apellidos }}</td>
-                                <td>{{ $beneficiario->parentesco }}</td>
-                                <td>{{ $beneficiario->fecha_nacimiento }}</td>
-                                <td>{{ $beneficiario->porcentaje }}</td>
-                                <td>{{ $beneficiario->direccion }}</td>
-                            </tr>
-                            @endforeach
 
-                        </tbody>
-
-                    </table>
+                    @livewire('beneficiarios.tabla', ['socio' => $socio])
 
                 </div>
                 <hr>

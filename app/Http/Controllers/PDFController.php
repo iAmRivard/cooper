@@ -20,7 +20,9 @@ class PDFController extends Controller
         ];
 
         $pdf = Pdf::loadView('PDF.abono', $data);
-        return $pdf->download('comprobante.pdf');
+        return $pdf->stream();
+
+        // return $pdf->download('comprobante.pdf');
     }
 
     public function retiro(Ctr_cuenta_det $retiro)

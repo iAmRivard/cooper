@@ -96,43 +96,43 @@
 
             <div class="mb-4">
                 <x-jet-label value="Nombre del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model="socio.nombres" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="socio.nombres" />
                 <x-jet-input-error for="nombres" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="Apellidos del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model="socio.apellidos" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="socio.apellidos" />
                 <x-jet-input-error for="apellidos" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="DUI del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model="socio.dui" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="socio.dui" />
                 <x-jet-input-error for="dui" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="NIT del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model="socio.nit" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="socio.nit" />
                 <x-jet-input-error for="nit" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="Dirección del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model="socio.direccion" />
+                <x-jet-input type="text" class="w-full" wire:model.defer="socio.direccion" />
                 <x-jet-input-error for="direccion" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="Salario del Socio" />
-                <x-jet-input type="number" class="w-full" wire:model="socio.salario" />
+                <x-jet-input type="number" class="w-full" wire:model.defer="socio.salario" />
                 <x-jet-input-error for="salario" />
             </div>
 
             <div class="mb-4">
                 <x-jet-label value="Correo del Socio" />
-                <x-jet-input type="email" class="w-full" wire:model="socio.correo" />
+                <x-jet-input type="email" class="w-full" wire:model.defer="socio.correo" />
                 <x-jet-input-error for="correo" />
             </div>
 

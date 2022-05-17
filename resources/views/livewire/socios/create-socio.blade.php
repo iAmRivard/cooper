@@ -11,29 +11,42 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="mb-4">
-                <x-jet-label value="Nombre del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="nombres" />
-                <x-jet-input-error for="nombres" />
+
+            <div class="flex mb-4">
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Nombre del Socio" />
+                    <x-jet-input type="text" class="w-full" wire:model.defer="nombres" />
+                    <x-jet-input-error for="nombres" />
+                </div>
+
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Apellidos del Socio" />
+                    <x-jet-input type="text" class="w-full" wire:model.defer="apellidos" />
+                    <x-jet-input-error for="apellidos" />
+                </div>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="Apellidos del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="apellidos" />
-                <x-jet-input-error for="apellidos" />
+            <div class="flex mb-4">
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="DUI del Socio" />
+                    <x-jet-input
+                        x-mask="99999999-9"
+                        placeholder="99999999-9"
+                        type="text"
+                        class="w-full"
+                        wire:model="dui"
+                        />
+                    <x-jet-input-error for="dui" />
+                    {{$dui}}
+                </div>
+
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="NIT del Socio" />
+                    <x-jet-input type="text" class="w-full" wire:model.defer="nit" />
+                    <x-jet-input-error for="nit" />
+                </div>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="DUI del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="dui" />
-                <x-jet-input-error for="dui" />
-            </div>
-
-            <div class="mb-4">
-                <x-jet-label value="NIT del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="nit" />
-                <x-jet-input-error for="nit" />
-            </div>
 
             <div class="mb-4">
                 <x-jet-label value="Dirección del Socio" />
