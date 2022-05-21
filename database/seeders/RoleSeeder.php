@@ -28,5 +28,8 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'cuenta.cuenta'])->syncRoles([$role1]);
         Permission::create(['name' => 'cuenta.re.impresion'])->syncRoles([$role1]);
 
+        // Register
+        Permission::create(['name' => 'register'])->syncRoles([$role1]);
+
     }
 }
