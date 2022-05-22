@@ -37,12 +37,17 @@
                         wire:model="dui"
                         />
                     <x-jet-input-error for="dui" />
-                    {{$dui}}
                 </div>
 
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="NIT del Socio" />
-                    <x-jet-input type="text" class="w-full" wire:model.defer="nit" />
+                    <x-jet-input
+                        x-mask="9999-999999-999-9"
+                        placeholder="9999-999999-999-9"
+                        type="text"
+                        class="w-full"
+                        wire:model.defer="nit"
+                    />
                     <x-jet-input-error for="nit" />
                 </div>
             </div>

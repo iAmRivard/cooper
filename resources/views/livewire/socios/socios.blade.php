@@ -12,12 +12,10 @@
                     @livewire('socios.create-socio')
                 </div>
 
-                {{-- Probablemente la busqueda y ver productos sea
-                    un componente de Livewire --}}
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar socio') }}" />
-                        <x-jet-input class="block mt-1 w-full" type="text" wire:model="buscarSocio" />
+                        <x-jet-input placeholder="Buscar socio por: Nombre o DUI" class="block mt-1 w-full" type="text" wire:model="buscarSocio" />
                     </div>
                 </div>
 
@@ -106,17 +104,20 @@
                 <x-jet-input-error for="apellidos" />
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="DUI del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="socio.dui" />
-                <x-jet-input-error for="dui" />
+            <div class="mb-4 flex">
+                <div class="w-1/2">
+                    <x-jet-label value="DUI del Socio" />
+                    <x-jet-input type="text" class="w-full" disabled wire:model.defer="socio.dui" />
+                    <x-jet-input-error for="dui" />
+                </div>
+
+                <div class="w-1/2">
+                    <x-jet-label value="NIT del Socio" />
+                    <x-jet-input type="text" class="w-full" wire:model.defer="socio.nit" />
+                    <x-jet-input-error for="nit" />
+                </div>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label value="NIT del Socio" />
-                <x-jet-input type="text" class="w-full" wire:model.defer="socio.nit" />
-                <x-jet-input-error for="nit" />
-            </div>
 
             <div class="mb-4">
                 <x-jet-label value="Dirección del Socio" />

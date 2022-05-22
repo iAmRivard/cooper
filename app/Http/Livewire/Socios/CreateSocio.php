@@ -24,8 +24,7 @@ class CreateSocio extends Component
     protected $rules = [
         'nombres' => 'required',
         'apellidos' => 'required',
-        'dui' => 'required|min:9|max:9',
-        'nit' => 'required|min:13|max:13',
+        'dui' => 'required|min:10|max:10',
         'direccion' => 'required',
         'salario' => 'required',
         'correo' => 'required|email',

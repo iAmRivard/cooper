@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('nombres');
             $table->string('apellidos');
-            $table->string('dui', 9);
-            $table->string('nit', 14)->nullabe();
+            $table->string('dui', 10)->unique();
+            $table->string('nit', 17)->unique()->nullabe();
             $table->text('direccion');
-            $table->text('correo');
+            $table->string('correo')->unique();
             $table->decimal('salario');
             $table->boolean('estado');
             $table->unsignedBigInteger('user_id');

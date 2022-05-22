@@ -1,7 +1,7 @@
 <div>
-    <a wire:click="$set('open', true)" title="Retiro de cuentas">
-        <i class="fa-solid fa-hand-holding-dollar fa-10x cursor-pointer"></i>
-    </a>
+    <x-jet-button wire:click="$set('open', true)" class="">
+        Retirar
+    </x-jet-button>
 
     <x-jet-dialog-modal wire:model="open">
         <x-slot name="title">
@@ -15,40 +15,53 @@
 
             <div class="mb-4">
                 <x-jet-label>Buscar Cuetna</x-jet-label>
-                <x-jet-input class="w-auto" type="text" wire:model="buscar_cuenta" wire:keydown.enter="buscar" />
+                <x-jet-input
+                    class="w-1/2"
+                    type="text"
+                    wire:model="buscar_cuenta"
+                    wire:keydown.enter="buscar"
+                    placeholder="Buscar cuenta por Nº de Cuenta"
+                />
                 <i class="fa-solid fa-magnifying-glass cursor-pointer" name="buscar" wire:click="buscar"></i>
             </div>
 
             {{-- Selección de cuenta --}}
             <div class="mb-4">
-                <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md overflow-hidden" size="3" required wire:model="cuenta_select">
+                <select class="w-full select overflow-hidden" size="3" required wire:model="cuenta_select">
 
                     @foreach ($cuentas as $cuenta)
-                        <option value="{{$cuenta->id}}">{{$cuenta->no_cuenta}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}}</option>
+                        <option value="{{$cuenta->id}}">
+                            {{$cuenta->no_cuenta}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}}
+                        </option>
                     @endforeach
 
                 </select>
             </div>
-            <div class="mb-4">
-                <x-jet-label>Monto</x-jet-label>
-                <x-jet-input class="w-full" type="number" wire:model="monto" required />
-            </div>
 
-            <div class="mb-4">
-                <x-jet-label>Tipo</x-jet-label>
-                <select class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md" required wire:model="tipo">
-                    <option></option>
-                    @foreach($tiposMovimiento as $movimiento)
-                        <option value="{{ $movimiento->id }}">{{ $movimiento->nombre }}</option>
-                    @endforeach
-                </select>
+            <div class="mb-4 flex">
+
+                <div class="w-1/2">
+                    <x-jet-label>Monto</x-jet-label>
+                    <x-jet-input class="w-full" type="number" wire:model="monto" required />
+                </div>
+
+                <div class="w-1/2">
+                    <x-jet-label>Tipo</x-jet-label>
+                    <select class="w-full select" required wire:model="tipo">
+                        <option></option>
+                        @foreach($tiposMovimiento as $movimiento)
+                            <option value="{{ $movimiento->id }}">{{ $movimiento->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
             </div>
 
             <div class="mb-4">
                 <x-jet-label>
                     Descripción
                 </x-jet-label>
-                <textarea rows="4" class="w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"  wire:model="descripcion"></textarea>
+                <textarea rows="4" class="w-full textarea"  wire:model="descripcion"></textarea>
             </div>
 
         </x-slot>

@@ -7,12 +7,20 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
                 <div class="flex justify-end mx-24">
                     @livewire('cuentas.create-cuenta')
+                    @livewire('movimientos.abono')
+                    @livewire('movimientos.retiros')
+
                 </div>
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
-                        <x-jet-input class="block mt-1 w-full" type="text" wire:model="buscar" />
+                        <x-jet-input
+                            class="block mt-1 w-full"
+                            type="text"
+                            wire:model="buscar"
+                            placeholder="Buscar socio por Nº de cuenta"
+                        />
                     </div>
                 </div>
 
