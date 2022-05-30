@@ -45,7 +45,7 @@ class CreateCuenta extends Component
         $toDay = getDate();
 
         $nueva_cuenta = Ctr_cuenta::create([
-            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] . $socio_selected->id . $tipo_cuenta_selected->id),
+            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta_selected->id),
             'crm_socio_id' => $this->selec_socio,
             'crc_topo_cuenta_id' => $this->tipo_cuenta,
             'saldo_actual' => 0,

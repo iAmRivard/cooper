@@ -1,4 +1,7 @@
 <div>
+    <x-slot name="header">
+        @livewire('socios.create-socio')
+    </x-slot>
 
     <div class="py-12">
 
@@ -7,10 +10,6 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <h2 class="text-xl mx-4 py-8">Consulta / Creación de Socios</h2>
-
-                <div class="flex justify-end mx-24">
-                    @livewire('socios.create-socio')
-                </div>
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
@@ -51,8 +50,8 @@
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
-                                        <td class="border boder-gray-400 px-4 py-2 text-gray-800">
-                                            <a href="{{route('ver.socio', $item)}}" class="a-link">
+                                        <td>
+                                            <a href="{{route('ver.socio', $item)}}" >
                                                 Ver socio
                                             </a>
                                         </td>

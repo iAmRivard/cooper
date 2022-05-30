@@ -1,8 +1,8 @@
 <div>
     {{-- Botón para abrir el modal --}}
-    <x-jet-button wire:click="$set('open', true)">
+    <x-jet-nav-link class="cursor-pointer" :active="false" wire:click="$set('open', true)">
         Crear Socio
-    </x-jet-button>
+    </x-jet-nav-link>
 
     {{-- Modal --}}
     <x-jet-dialog-modal wire:model="open">

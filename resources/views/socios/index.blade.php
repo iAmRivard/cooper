@@ -7,67 +7,72 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
 
-                <h2 class="text-2xl px-8">Información de: {{$socio->nombres}} {{$socio->apellidos}}</h2>
+                <div class="flex my-2 mx-2">
 
-                <div class="px-8 py-6">
-                    <p><strong>DUI:</strong> <span>{{$socio->dui}}</span></p>
-                    <p><strong>NIT</strong><span>{{$socio->nit}}</span></p>
-                    <p><strong>Dirección</strong> <span>{{$socio->direccion}}</span></p>
-                    <p><strong>Correo</strong> <span>{{$socio->correo}}</span></p>
-                    <p><strong>Salario</strong> <span>${{number_format($socio->salario, 2)}}</span></p>
+                    <div class="w-1/2 border">
+                        <h2 class="flex justify-center">INFORMACIÓN DE SOCIO</h2>
+
+                        <strong>Nombres:</strong> <span>{{ $socio->nombres }}</span>
+                        <br>
+                        <strong>Apellidos:</strong> <span>{{ $socio->apellidos }}</span>
+                        <br>
+                        <strong>DUI:</strong> <span>{{ $socio->dui }}</span>
+                        <br>
+                        <strong>NIT:</strong> <span>{{ $socio->nit }}</span>
+                        <br>
+                        <strong>Correo:</strong> <span>{{ $socio->correo }}</span>
+                        <br>
+                        <strong>Estado:</strong> {{ $socio->estado = 1 ? 'Activo' : 'Inactivo' }}
+                    </div>
+
+                    <div class="w-1/2 border">
+                        <h2 class="flex justify-center">CUENTAS / CREDITOS ACTIVAS </h2>
+
+                        @foreach($socio_cuentas as $socio_cuenta)
+                            <div class="border">
+                                <h3 class="inline">#{{ $socio_cuenta->no_cuenta }}</h3>
+                                <br>
+                                <span class="inline">{{ $socio_cuenta->tipoCuenta->nombre }}</span>
+                                <br>
+                                <span>${{ $socio_cuenta->saldo_actual }}</span>
+                            </div>
+                        @endforeach
+
+                    </div>
+
                 </div>
 
-                <div class="py-2">
-                    @livewire('reset.reset-password', ['user_id' => $socio->user_id])
-                </div>
-                <hr>
-                {{-- Creación de nuevo beneficiario --}}
-                <div class="flex justify-end px-8 py-6">
-                    @livewire('beneficiarios.crear', ['socio' => $socio])
-                </div>
-                {{-- Lista de beneficiarios --}}
-                <div class="flex justify-center py-6">
+                <div class="w-full">
 
-                    @livewire('beneficiarios.tabla', ['socio' => $socio])
-
-                </div>
-                <hr>
-                <h3 class="text-xl px-4">Cuentas</h3>
-
-                <div class="flex justify-center py-6">
                     <table class="table border-collapse border border-slate-500 ">
                         <thead>
                             <tr>
-                                <th># de Cuenta</th>
-                                <th>Tipo de cuenta</th>
-                                <th>Estado</th>
-                                <th>Saldo Actual</th>
+                                <th>Tipo</th>
+                                <th>Concepto</th>
+                                <th>Monto</th>
+                                <th>Referencia</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach ($socio->cuentas as $cuenta)
+                            {{-- @foreach ($socio->cuentas->movimientos as $movimiento)
                                 <tr>
                                     <td>
-                                        {{ $cuenta->no_cuenta}}
-                                    </td>
-                                    <td >
-                                        {{ $cuenta->tipoCuenta->nombre }}
-                                    </td>
-                                    <td>
-                                        {{ $cuenta->estado != 0 ? 'Cueta activa' : 'Cuenta Desactivada' }}
-                                    </td>
-                                    <td>
-                                        {{ $cuenta->saldo_actual }}
+                                        {{ $movimiento->tipo->nombre}}
                                     </td>
 
+
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
 
                         </tbody>
 
                     </table>
+
                 </div>
+
 
             </div>
 

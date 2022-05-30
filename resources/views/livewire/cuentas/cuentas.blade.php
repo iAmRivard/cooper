@@ -1,16 +1,23 @@
 <div>
+    <x-slot name="header">
+
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+
+            @livewire('cuentas.create-cuenta')
+            @livewire('movimientos.abono')
+            @livewire('movimientos.retiros')
+
+        </div>
+        {{-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Socios') }}
+        </h2> --}}
+    </x-slot>
 
     <div class="py-12">
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
-                <div class="flex justify-end mx-24">
-                    @livewire('cuentas.create-cuenta')
-                    @livewire('movimientos.abono')
-                    @livewire('movimientos.retiros')
-
-                </div>
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
@@ -24,40 +31,37 @@
                     </div>
                 </div>
 
+
                 <div class="container py-8 flex justify-center">
-                    <div>
-
-                        <table class="table">
-                            <thead>
+                    <div class="overflow-x-auto w-5/6">
+                        <table class="table table-zebra w-full">
+                          <!-- head -->
+                          <thead>
+                            <tr>
+                                <th># Cuenta</th>
+                                <th>Socio</th>
+                                <th>Tipo de Cuenta</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <th># Cuenta</th>
-                                    <th>Socio</th>
-                                    <th>Tipo de Cuenta</th>
-                                    <th>&nbsp;</th>
+                                    <td>{{ $cuenta->no_cuenta}}</td>
+                                    <td>
+                                        {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
+                                    </td>
+                                    <td>{{ $cuenta->tipoCuenta->nombre }}</td>
+
+                                    <td>
+                                        <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">
+                                            ver cuenta
+                                        </a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($cuentas as $cuenta)
-                                    <tr>
-                                        <td>{{ $cuenta->no_cuenta}}</td>
-                                        <td>
-                                            {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
-                                        </td>
-                                        <td>{{ $cuenta->tipoCuenta->nombre }}</td>
-
-                                        <td>
-                                            <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">
-                                                ver cuenta
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                            </tbody>
-
+                            @endforeach
+                          </tbody>
                         </table>
-
                     </div>
                 </div>
                 <div class="px-6 py-3 flex justify-items-center justify-around">

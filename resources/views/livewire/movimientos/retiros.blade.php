@@ -1,10 +1,13 @@
 <div>
-    <x-jet-button wire:click="$set('open', true)" class="">
+    <x-jet-nav-link class="cursor-pointer" :active="false" wire:click="$set('open', true)">
         Retirar
-    </x-jet-button>
+    </x-jet-nav-link>
 
     <x-jet-dialog-modal wire:model="open">
         <x-slot name="title">
+
+            <h3 wire:target="error">Retiro de cuenta</h3>
+
             @if($error)
                 <span>Error: Saldo insuficiente en la cuenta</span>
             @endif
@@ -27,7 +30,7 @@
 
             {{-- Selección de cuenta --}}
             <div class="mb-4">
-                <select class="w-full select overflow-hidden" size="3" required wire:model="cuenta_select">
+                <select class="select select-bordered w-full overflow-hidden" size="3" required wire:model="cuenta_select">
 
                     @foreach ($cuentas as $cuenta)
                         <option value="{{$cuenta->id}}">
@@ -40,28 +43,44 @@
 
             <div class="mb-4 flex">
 
+                {{-- Monto de Retiro --}}
                 <div class="w-1/2">
                     <x-jet-label>Monto</x-jet-label>
-                    <x-jet-input class="w-full" type="number" wire:model="monto" required />
+                    <input
+                        type="text"
+                        class="input input-bordered w-full"
+                        wire:model="monto"
+                        required
+                        placeholder="$0.00"
+                    />
                 </div>
 
+                {{-- Tipo de retiro --}}
                 <div class="w-1/2">
                     <x-jet-label>Tipo</x-jet-label>
-                    <select class="w-full select" required wire:model="tipo">
+                    <select class="select select-bordered w-full" required wire:model="tipo">
                         <option></option>
                         @foreach($tiposMovimiento as $movimiento)
-                            <option value="{{ $movimiento->id }}">{{ $movimiento->nombre }}</option>
+                            <option value="{{ $movimiento->id }}">
+                                {{ $movimiento->nombre }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
             </div>
 
+            {{-- Descripción del retiro --}}
             <div class="mb-4">
                 <x-jet-label>
                     Descripción
                 </x-jet-label>
-                <textarea rows="4" class="w-full textarea"  wire:model="descripcion"></textarea>
+                <textarea
+                    rows="4"
+                    class="textarea textarea-bordered w-full"
+                    wire:model="descripcion"
+                >
+                </textarea>
             </div>
 
         </x-slot>
