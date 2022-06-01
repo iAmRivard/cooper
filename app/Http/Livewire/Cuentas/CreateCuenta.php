@@ -23,6 +23,10 @@ class CreateCuenta extends Component
         'tipo_cuenta' => 'required'
     ];
 
+    // public function mount()
+    // {
+    //     $this->socios = Crm_socios::all();
+    // }
     public function render()
     {
         $tipos_cuentas = Crc_tipos_cuenta::all();

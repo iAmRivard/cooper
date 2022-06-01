@@ -17,7 +17,7 @@ class SociosController extends Controller
      */
     public function index(Crm_socios $socio)
     {
-        return view('socios.index', compact(['socio' => $socio, 'socio_cuentas' => $socio_cuentas]));
+        // return view('socios.index', compact(['socio' => $socio, 'socio_cuentas' => $socio_cuentas]));
     }
 
     /**
@@ -49,8 +49,11 @@ class SociosController extends Controller
      */
     public function show(Crm_socios $socio)
     {
-        $socio_cuentas = Ctr_cuenta::where('crm_socio_id', '=', $socio->id)
+        $socio_cuentas = [];
+        $socio_cuentas = Ctr_cuenta::where('crm_socio_id', $socio->id)
                                     ->get();
+
+        // dd($socio_cuentas);
 
         return view('socios.index', compact('socio', 'socio_cuentas'));
     }

@@ -3,7 +3,7 @@
         Crear Cuenta
     </x-jet-nav-link>
 
-    <x-jet-dialog-modal wire:model="open">
+    <x-jet-dialog-modal wire:ignore.self wire:model="open">
         <x-slot name="title">
             Creación de Cuenta
         </x-slot>
@@ -11,6 +11,15 @@
         <x-slot name="content">
 
             <div class="mb-4">
+
+                {{-- <x-select
+                    class="form-control"
+                    name="category_id"
+                    id="category_id"
+                    wire:model="buscar_socio"
+                    :options="$this->socios"
+                /> --}}
+
                 <x-jet-label>Buscar Socio</x-jet-label>
                 <x-jet-input
                     class="w-1/2 input input-bordered max-w-xs"

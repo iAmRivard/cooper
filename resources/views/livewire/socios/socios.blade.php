@@ -51,7 +51,7 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="{{route('ver.socio', $item)}}" >
+                                            <a href="{{route('ver.socio', $item)}}" class="font-semibold">
                                                 Ver socio
                                             </a>
                                         </td>
