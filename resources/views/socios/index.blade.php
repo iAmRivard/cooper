@@ -8,7 +8,7 @@
 
                 <div class="flex mx-2 mb-8">
 
-                    <div class="w-1/2 mx-8">
+                    <div class="w-1/2 mx-8 mt-6">
                         <h2 class="flex justify-center text-lg font-bold">INFORMACIÓN DE SOCIO</h2>
 
                         <div class="flex flex-col mt-4 space-y-4">
@@ -82,48 +82,58 @@
 
                         </div>
 
-                        {{-- @foreach($socio_cuentas as $socio_cuenta)
-                            <div class="border">
-                                    <h3 class="inline">#{{ $socio_cuenta->no_cuenta }}</h3>
-                            <br>
-                            <span class="inline">{{ $socio_cuenta->tipoCuenta->nombre }}</span>
-                            <br>
-                            <span>${{ $socio_cuenta->saldo_actual }}</span>
-                            </div>
-                        @endforeach --}}
                     </div>
 
                 </div>
 
 
-                <div class="w-full flex justify-center pb-4">
+                <div class="w-full flex flex-col mt-4 mx-10 space-y-4">
+                    <div class="flex">
+                        <div class="mb-4">
+                            <x-jet-label value="Desde" />
+                            <x-jet-input type="date" />
+                        </div>
+                        <div class="mb-4 mx-2">
+                            <x-jet-label value="hasta" />
+                            <x-jet-input type="date" />
+                        </div>
 
-                    <table class="table table-zebra w-5/6">
-                        <thead>
-                            <tr>
-                                <th>Tipo</th>
-                                <th>Concepto</th>
-                                <th>Monto</th>
-                                <th>Referencia</th>
-                                <th>Fecha</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                        <div class="mb-4 mt-6">
+                            <x-jet-button>Buscar</x-jet-button>
+                        </div>
+                    </div>
 
-                            {{-- @foreach ($socio_cuentas->movimientos as $movimiento)
-                                        <tr>
-                                            <td>
-                                                {{ $movimiento }}
-                            </td>
+                    <div class="flex justify-center ">
+
+                        <table class="table table-zebra w-5/6 mb-8">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Concepto</th>
+                                    <th>Monto</th>
+                                    <th>Referencia</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {{-- @foreach ($socio_cuentas->movimientos as $movimiento)
+                                            <tr>
+                                                <td>
+                                                    {{ $movimiento }}
+                                </td>
 
 
-                            </tr>
-                            @endforeach --}}
+                                </tr>
+                                @endforeach --}}
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+
+                    </div>
+
 
                 </div>
 
