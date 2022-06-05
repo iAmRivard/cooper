@@ -86,57 +86,12 @@
 
                 </div>
 
-
+                {{-- Información de las transacciones de los socios --}}
                 <div class="w-full flex flex-col mt-4 mx-10 space-y-4">
-                    <div class="flex">
-                        <div class="mb-4">
-                            <x-jet-label value="Desde" />
-                            <x-jet-input type="date" />
-                        </div>
-                        <div class="mb-4 mx-2">
-                            <x-jet-label value="hasta" />
-                            <x-jet-input type="date" />
-                        </div>
 
-                        <div class="mb-4 mt-6">
-                            <x-jet-button>Buscar</x-jet-button>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-center ">
-
-                        <table class="table table-zebra w-5/6 mb-8">
-                            <thead>
-                                <tr>
-                                    <th>Tipo</th>
-                                    <th>Concepto</th>
-                                    <th>Monto</th>
-                                    <th>Referencia</th>
-                                    <th>Fecha</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                {{-- @foreach ($socio_cuentas->movimientos as $movimiento)
-                                            <tr>
-                                                <td>
-                                                    {{ $movimiento }}
-                                </td>
-
-
-                                </tr>
-                                @endforeach --}}
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
+                    @livewire('socios.table', ['socio' => $socio])
 
                 </div>
-
 
             </div>
 

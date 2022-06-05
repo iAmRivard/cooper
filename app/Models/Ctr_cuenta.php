@@ -27,7 +27,7 @@ class Ctr_cuenta extends Model
         return $this->belongsTo(Crc_tipos_cuenta::class, 'crc_topo_cuenta_id');
     }
 
-    public function movimientos()
+    public function mv()
     {
         return $this->hasMany(Ctr_cuenta_det::class, 'ctr_cuentas_id');
     }
