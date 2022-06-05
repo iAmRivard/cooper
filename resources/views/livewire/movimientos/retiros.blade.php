@@ -59,7 +59,7 @@
                 <div class="w-1/2">
                     <x-jet-label>Tipo</x-jet-label>
                     <select class="select select-bordered w-full" required wire:model="tipo">
-                        <option></option>
+                        <option>Tipo de retiro</option>
                         @foreach($tiposMovimiento as $movimiento)
                             <option value="{{ $movimiento->id }}">
                                 {{ $movimiento->nombre }}
@@ -79,6 +79,7 @@
                     rows="4"
                     class="textarea textarea-bordered w-full"
                     wire:model="descripcion"
+                    placeholder="Descripción del retiro"
                 >
                 </textarea>
             </div>

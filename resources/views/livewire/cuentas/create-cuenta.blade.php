@@ -12,6 +12,8 @@
 
             <div class="mb-4">
 
+                {{-- Integración --}}
+
                 {{-- <x-select
                     class="form-control"
                     name="category_id"
@@ -46,10 +48,11 @@
                 </select>
             </div>
 
+            {{-- Selección de tipo de cuenta --}}
             <div class="mb-4">
                 <x-jet-label>Selección del tipo de cuenta</x-jet-label>
                 <select class="select select-bordered w-full" wire:model="tipo_cuenta">
-                    <option></option>
+                    <option>Seleccionar tipo de cuenta</option>
                     @foreach($tipos_cuentas as $tipo_cuenta)
                         <option value="{{ $tipo_cuenta->id }}">{{ $tipo_cuenta->nombre }}</option>
                     @endforeach
