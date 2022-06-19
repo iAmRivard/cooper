@@ -25,12 +25,16 @@ Route::get('/', function () {
 })->name('movimientos');
 
 //PDF
-Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])->name('cuenta.abono');
+Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])
+    ->name('cuenta.abono');
 
-Route::get('/cuentas/retiro/{retiro}', [PDFController::class, 'retiro'])->name('cuenta.retiro');
+Route::get('/cuentas/retiro/{retiro}', [PDFController::class, 'retiro'])
+    ->name('cuenta.retiro');
 
-Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])->name('cuenta.cuenta');
+Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])
+    ->name('cuenta.cuenta');
 
-Route::get('/cuentas/re-impresion/{id}', [PDFController::class, 'reImpresion'])->name('cuenta.re.impresion');
+Route::get('/cuentas/re-impresion/{id}', [PDFController::class, 'reImpresion'])
+    ->name('cuenta.re.impresion');
 
 

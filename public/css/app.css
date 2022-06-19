@@ -3341,14 +3341,6 @@ body[dir="rtl"] .checkbox:checked,
   border-radius: 9999px;
   padding: 0px;
 }
-.select-sm {
-  height: 2rem;
-  padding-left: 0.75rem;
-  padding-right: 2rem;
-  font-size: 0.875rem;
-  line-height: 2rem;
-  min-height: 2rem;
-}
 .card-compact .card-body {
   padding: 1rem;
   font-size: 0.875rem;
@@ -3696,6 +3688,9 @@ body[dir="rtl"] .checkbox:checked,
 .flex-wrap {
   flex-wrap: wrap;
 }
+.items-end {
+  align-items: flex-end;
+}
 .items-center {
   align-items: center;
 }
@@ -3891,6 +3886,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .bg-no-repeat {
   background-repeat: no-repeat;
+}
+.fill-current {
+  fill: currentColor;
 }
 .object-cover {
   -o-object-fit: cover;
