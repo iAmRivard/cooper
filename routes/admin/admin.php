@@ -20,9 +20,8 @@ Route::get('/cuentas', Cuentas::class)->name('cuentas');
 
 Route::get('/cuentas/ver-cuenta/{cuenta}', VerCuenta::class)->name('ver.cuenta');
 
-Route::get('/', function () {
-    return view('movimientos.movimientos');
-})->name('movimientos');
+Route::get('/config/edit-cuentas', App\Http\Livewire\Mantenimientos\TiposCuentas::class)
+    ->name('mantenimiento.tipo-cuenta');
 
 //PDF
 Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])
