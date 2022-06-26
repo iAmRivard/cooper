@@ -20,6 +20,7 @@ class Crc_tipos_cuentasSeeder extends Seeder
             'nombre' => 'Cuenta Ejemplo',
             'descripcion' => 'Cuenta Ejemplo, para hacer cruds',
             'estado' => true,
+            'porcentaje' => 3,
         ]);
     }
 }

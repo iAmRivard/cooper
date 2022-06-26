@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->boolean('estado');
+            $table->decimal('porcentaje', 5,2);
             $table->timestamps();
         });
     }

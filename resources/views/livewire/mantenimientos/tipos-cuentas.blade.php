@@ -15,6 +15,7 @@
                         <tr>
                           <th>Nombre</th>
                           <th>Decripción</th>
+                          <th>Porcentaje</th>
                           <th>Estado</th>
                         </tr>
                       </thead>
@@ -23,6 +24,7 @@
                         <tr>
                             <th>{{ $cuenta->nombre }}</th>
                             <td>{{ $cuenta->descripcion }}</td>
+                            <td>%{{ $cuenta->porcentaje }}</td>
                             <td>
                                 <input
                                     type="checkbox"
