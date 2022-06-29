@@ -93,8 +93,15 @@
 
                 </div>
 
-            </div>
+                <h2 class="flex justify-center text-lg font-bold">Beneficiarios del socio</h2>
 
+                <div class="w-full flex flex-colflex justify-center ">
+                
+                    @livewire('beneficiarios.tabla',['socio' => $socio])
+
+                </div> 
+            </div>
+     
         </div>
 
     </div>

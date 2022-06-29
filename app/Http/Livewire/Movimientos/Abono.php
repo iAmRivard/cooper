@@ -71,7 +71,7 @@ class Abono extends Component
             'descripcion'
         ]);
 
-        return redirect()->route('cuenta.abono', compact('abono'));
+        
     }
 
 }
