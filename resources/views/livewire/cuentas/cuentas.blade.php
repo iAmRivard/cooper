@@ -41,17 +41,21 @@
                                 <th># Cuenta</th>
                                 <th>Socio</th>
                                 <th>Tipo de Cuenta</th>
-                                <th>&nbsp;</th>
+                                <th>Saldo Actual</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                           </thead>
                           <tbody>
                             @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td>{{ $cuenta->no_cuenta}}</td>
+                                    <td> <b>{{ $cuenta->no_cuenta}}</b></td>
                                     <td>
                                         {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                     </td>
-                                    <td>{{ $cuenta->tipoCuenta->nombre }}</td>
+                                    <td><b>{{ $cuenta->tipoCuenta->nombre }}</b></td>
+                                    <td>${{ $cuenta->saldo_actual }}</td>
+                                    <td>Activa</td>
 
                                     <td>
                                         <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">

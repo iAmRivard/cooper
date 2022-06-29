@@ -9,7 +9,7 @@
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
-                <h2 class="text-xl mx-4 py-8">Consulta / Creación de Socios</h2>
+                <h2 class="text-xl mx-4 py-8"> <b> Consulta / Creación de Socios</b></h2>
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
@@ -39,9 +39,9 @@
 
                                 @foreach ($socios as $item)
                                     <tr>
-                                        <td>{{ $item->nombres}}</td>
+                                        <td><b> {{ $item->nombres}} </b></td>
                                         <td>{{ $item->apellidos}}</td>
-                                        <td>{{ $item->dui }}</td>
+                                        <td> <b>{{ $item->dui }}</b></td>
                                         <td>{{ $item->nit}}</td>
                                         <td>{{ $item->direccion }}</td>
                                         <td>${{ $item->salario }}</td>

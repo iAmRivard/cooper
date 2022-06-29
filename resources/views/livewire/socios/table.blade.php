@@ -41,6 +41,10 @@
                 Buscar
             </x-jet-button>
         </div>
+        <div class="mb-4 mt-6 ml-2">
+
+            @livewire('beneficiarios.crear',['socio' => $socio])
+        </div>
 
     </div>
 

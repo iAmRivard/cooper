@@ -52,12 +52,12 @@ class Retiros extends Component
             $retiro = Ctr_cuenta_det::create([
                 'tipo_movimiento_id' => $this->tipo,
                 'concepto' => $this->descripcion,
-                'monto' => $this->monto,
+                'monto' => ($this->monto * -1),
                 'naturaleza' => 0,
                 'ctr_cuentas_id' => $this->cuenta_select,
             ]);
 
-            $this->cuenta_retirada->saldo_actual = $this->cuenta_retirada->saldo_actual + $this->monto;
+            $this->cuenta_retirada->saldo_actual = $this->cuenta_retirada->saldo_actual + ($this->monto * -1);
 
             $this->cuenta_retirada->save();
 
@@ -72,7 +72,6 @@ class Retiros extends Component
 
             $this->emit('exito', 'Retiro procesado exitosamente');
 
-            return redirect()->route('cuenta.retiro', compact('retiro'));
         } else
         {
             $this->error = true;
