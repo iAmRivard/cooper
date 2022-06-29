@@ -23,7 +23,7 @@ Route::get('/cuentas/ver-cuenta/{cuenta}', VerCuenta::class)->name('ver.cuenta')
 Route::get('/config/edit-cuentas', App\Http\Livewire\Mantenimientos\TiposCuentas::class)
     ->name('mantenimiento.tipo-cuenta');
 
-Route::get('/creditos', App\Http\Livewire\Creditos\Index::class)->name('creditos');
+//Route::get('/creditos', App\Http\Livewire\Creditos\Index::class)->name('creditos');
 
 //PDF
 Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])
