@@ -16,6 +16,11 @@
             'route' => route('cuentas'),
             'active' => request()->routeIs('cuentas')
         ],
+        [
+            'name' => 'Creditos',
+            'route' => route('creditos'),
+            'active' => request()->routeIs('creditos')
+        ],
         // [
         //     'name' => 'Movimientos',
         //     'route' => route('movimientos'),

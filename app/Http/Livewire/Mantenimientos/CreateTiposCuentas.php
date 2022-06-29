@@ -10,7 +10,7 @@ class CreateTiposCuentas extends Component
 {
     public $open = false;
 
-    public $nombre, $descripcion;
+    public $nombre, $descripcion, $porcentaje;
 
     protected $rules = [
         'nombre' => 'required',
@@ -31,8 +31,16 @@ class CreateTiposCuentas extends Component
         $tipoCUenta->nombre = $this->nombre;
         $tipoCUenta->descripcion = $this->descripcion;
         $tipoCUenta->estado = 1;
+        $tipoCUenta->porcentaje = $this->porcentaje;
         $tipoCUenta->save();
 
         $this->emitTo('mantenimientos.tipos-cuentas', 'render');
+
+        $this->reset([
+            'open',
+            'nombre',
+            'descripcion',
+            'porcentaje'
+        ]);
     }
 }

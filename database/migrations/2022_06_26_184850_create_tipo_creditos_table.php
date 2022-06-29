@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('crc_tipos_cuentas', function (Blueprint $table) {
+        Schema::create('tipo_creditos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('descripcion');
-            $table->boolean('estado');
-            $table->decimal('porcentaje', 5,2);
+            $table->decimal('porcentaje_interes', 5, 2);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crc_tipos_cuentas');
+        Schema::dropIfExists('tipo_creditos');
     }
 };
