@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        @livewire('mantenimientos.create-tipos-cuentas')
+        @livewire('mantenimientos.create-tipos-creditos')
     </x-slot>
 
     <div class="py-12">
