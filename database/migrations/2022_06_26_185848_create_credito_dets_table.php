@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('socio_id');
             $table->unsignedBigInteger('tipo_movimiento_credito_id');
             $table->decimal('monto');
+            $table->text('descripcion');
 
             $table->foreign('credito_id')
                     ->references('id')->on('creditos');

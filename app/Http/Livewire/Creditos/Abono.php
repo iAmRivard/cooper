@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Creditos;
 use Livewire\Component;
 
 use App\Models\TipoMovimientoCredito;
+use App\Models\CreditoDet;
 
 class Abono extends Component
 {
@@ -35,18 +36,18 @@ class Abono extends Component
     {
         $this->validate();
 
-        $abono = Ctr_cuenta_det::create([
-            'tipo_movimiento_id' => $this->tipo,
-            'concepto' => $this->descripcion,
+        $abono = CreditoDet::create([
+            'credito_id' => $this->cuenta_select,
+            'socio_id' => $this->cuenta_select->socio->id,
+            'tipo_movimiento_credito_id' => $this->monto,
             'monto' => $this->monto,
-            'naturaleza' => 1,
-            'ctr_cuentas_id' => $this->cuenta_select
+            'descripcion' => $this->descripcion
         ]);
 
 
-        $this->cuenta_abonada = Ctr_cuenta::find($this->cuenta_select);
+        $this->cuenta_abonada = Credito::find($this->cuenta_select);
 
-        $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual + $this->monto;
+        $this->cuenta_abonada->monto = $this->cuenta_abonada->monto - $this->monto;
 
         $this->cuenta_abonada->save();
 
