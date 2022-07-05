@@ -5,12 +5,14 @@ namespace App\Http\Livewire\Creditos;
 use Livewire\Component;
 
 use App\Models\TipoCredito;
+use App\Models\Crm_socios;
+use App\Models\Credito;
 
 class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje;
 
     public $socios = [];
 
@@ -40,15 +42,16 @@ class CrearCredito extends Component
     {
 
         $socio_selected = Crm_socios::find($this->selec_socio);
-        $tipo_cuenta_selected = Crc_tipos_cuenta::find($this->tipo_cuenta);
+        $tipo_cuenta_selected = TipoCredito::find($this->tipo_cuenta);
         $toDay = getDate();
 
-        $nueva_cuenta = Ctr_cuenta::create([
+        $nuevo_credito = Credito::create([
             'no_cuenta' => strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta_selected->id),
             'crm_socio_id' => $this->selec_socio,
-            'crc_topo_cuenta_id' => $this->tipo_cuenta,
-            'saldo_actual' => 0,
-            'estado' => true,
+            'tipo_credito_id' => $this->tipo_cuenta,
+            'monto' => $this->monto,
+            'saldo_actual' => $this->monto,
+            'porcentaje_interes' => $this->porcentaje,
         ]);
 
 
@@ -57,7 +60,9 @@ class CrearCredito extends Component
         $this->reset([
             'open',
             'selec_socio',
-            'tipo_cuenta'
+            'tipo_cuenta',
+            'monto',
+            'porcentaje'
         ]);
 
     }
