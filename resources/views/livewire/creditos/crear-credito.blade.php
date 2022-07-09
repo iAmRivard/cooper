@@ -41,14 +41,33 @@
 
             {{-- Selección de tipo de cuenta --}}
             <div class="mb-4">
-                <x-jet-label>Selección del tipo de cuenta</x-jet-label>
+                <x-jet-label>Selección del tipo de Credito</x-jet-label>
                 <select class="select select-bordered w-full" wire:model="tipo_cuenta">
-                    <option>Seleccionar tipo de cuenta</option>
+                    <option>Seleccionar tipo de Credito</option>
                     @foreach($tipos_creditos as $tipo_credito)
                         <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
                     @endforeach
 
                 </select>
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label>Selección del monto</x-jet-label>
+                <x-jet-input
+                    type="number"
+                    class="w-full"
+                    wire:model="monto"
+                    placeholder="$0.00"
+                />
+            </div>
+            <div class="mb-4">
+                <x-jet-label>Selección del porcentaje</x-jet-label>
+                <x-jet-input
+                    type="number"
+                    class="w-full"
+                    wire:model="porcentaje"
+                    placeholder="%"
+                />
             </div>
 
         </x-slot>
