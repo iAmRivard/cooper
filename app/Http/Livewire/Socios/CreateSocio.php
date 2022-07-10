@@ -12,7 +12,7 @@ use App\Models\User;
 use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
 use App\Models\Crc_tipos_cuenta;
-use App\Models\Crm_empresas;
+use App\Models\crm_empresas;
 
 class CreateSocio extends Component
 {
@@ -61,7 +61,7 @@ class CreateSocio extends Component
             'user_id' => $user->id,
         ]);
 
-        $empresas = Crm_empresas::create([
+        $empresas = crm_empresas::create([
             'nombre' => $this->empresa,
             'actual' => true,
             'crm_socio_id' => $new_socio->id,
