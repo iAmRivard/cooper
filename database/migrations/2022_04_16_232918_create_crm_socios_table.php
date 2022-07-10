@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('dui', 10)->unique();
-            $table->string('nit', 17)->unique()->nullabe();
+            $table->string('nit', 17)->unique()->nullable();
             $table->text('direccion');
             $table->string('correo')->unique();
             $table->decimal('salario');
