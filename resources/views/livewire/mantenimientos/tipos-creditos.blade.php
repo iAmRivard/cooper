@@ -24,7 +24,7 @@
                         <tr>
                             <th>{{ $cuenta->nombre }}</th>
                             <td>{{ $cuenta->descripcion }}</td>
-                            <td>%{{ $cuenta->porcentaje }}</td>
+                            <td>{{ $cuenta->porcentaje_interes }}%</td>
                             <td>
                                 <input
                                     type="checkbox"
