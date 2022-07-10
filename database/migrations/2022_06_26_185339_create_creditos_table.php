@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('socio_id');
             $table->unsignedBigInteger('tipo_credito_id');
-            $table->decimal('monto', 5, 2);
-            $table->decimal('saldo_actual', 5, 2);
+            $table->decimal('monto', 14, 2);
+            $table->decimal('saldo_actual', 14, 2);
             $table->decimal('porcentaje_interes', 5, 2);
+            $table->boolean('estado');
 
             $table->foreign('socio_id')
                     ->references('id')->on('crm_socios');
