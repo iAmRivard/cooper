@@ -4,51 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <title>Document</title>
 
-    <style>
+    {{-- <style>
         .table thead {
             border: 1px solid black;
         }
 
-    </style>
+    </style> --}}
 
 </head>
 <body>
 
-    <table>
-        <td><img src="{{asset('/logo.svg')}}" alt="logo" height="150px"></td>
-        <td>
-            <h3>Asociación Cooperativa de Ahorro y Credito de Empleados de Algiers Impresores de R.L.</h3>
-        </td>
-    </table>
-
-    <br>
-
-    <div>
-        <strong>Fecha</strong> {{ $abono->created_at->format('d-m-Y')}}
-    </div>
-    <div>
-        <strong>Recibo #</strong> {{ $abono->id }}
+    <div class="d-flex justify-content-around">
+        <div>
+            <img src="http://127.0.0.1:8000/logo.svg" alt="logo" height="150px" class="img-fluid">
+        </div>
+        <div>
+            <h4 class="text-center">Asociación Cooperativa de Ahorro y Credito de Empleados de Algiers Impresores de R.L.</h4>
+        </div>
     </div>
 
-    <table class="table">
+    <div class="d-flex justify-content-around">
+        <span>
+            <strong>Fecha</strong> {{ $abono->created_at->format('d-m-Y')}}
+        </span>
+        <span>
+            <strong>Recibo #</strong> {{ $abono->id }}
+        </span>
+    </div>
+
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Codigo</th>
-                <th>Cuenta</th>
-                <th>Nombres</th>
-                <th>Apelldios</th>
+                <th scope="col">Codigo</th>
+                <th scope="col">Cuenta</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Apelldios</th>
             </tr>
         </thead>
-        <tfoot>
+        <tbody>
             <tr>
-                <td>{{ $abono->cuenta->socio->id }}</td>
+                <td scope="row">{{ $abono->cuenta->socio->id }}</td>
                 <td>{{ $abono->cuenta->no_cuenta }}</td>
                 <td>{{ $abono->cuenta->socio->nombres }}</td>
                 <td>{{ $abono->cuenta->socio->apellidos }}</td>
             </tr>
-        </tfoot>
+        </tbody>
     </table>
 
     <h1>Comprobante de abono</h1>
@@ -65,6 +69,8 @@
     </div>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 
 </body>
 </html>

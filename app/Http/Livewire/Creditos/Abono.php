@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use App\Models\TipoMovimientoCredito;
 use App\Models\CreditoDet;
+use App\Models\Credito;
 
 class Abono extends Component
 {
@@ -30,6 +31,11 @@ class Abono extends Component
                                                 ->get();
 
         return view('livewire.creditos.abono', compact('tiposMovimiento'));
+    }
+    public function buscar()
+    {
+        $this->cuentas = Credito::where('id', 'like', '%' . $this->buscar_cuenta . '%')
+                                    ->get();
     }
 
     public function abonar()
