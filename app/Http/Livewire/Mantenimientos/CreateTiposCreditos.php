@@ -31,7 +31,7 @@ class CreateTiposCreditos extends Component
         $tipoCUenta->nombre = $this->nombre;
         $tipoCUenta->descripcion = $this->descripcion;
         $tipoCUenta->estado = 1;
-        $tipoCUenta->porcentaje = $this->porcentaje;
+        $tipoCUenta->porcentaje_interes = $this->porcentaje;
         $tipoCUenta->save();
 
         $this->emitTo('mantenimientos.tipos-creditos', 'render');

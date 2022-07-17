@@ -52,6 +52,7 @@ class CreateCuenta extends Component
             'estado' => true,
         ]);
 
+        $this->emitTo('cuentas.cuentas','render');
 
         $this->emit('exito', 'La cuenta fue creado con exito');
 

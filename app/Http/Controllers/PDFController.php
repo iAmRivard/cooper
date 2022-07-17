@@ -19,8 +19,12 @@ class PDFController extends Controller
             'abono' => $abono,
         ];
 
-        $pdf = Pdf::loadView('PDF.abono', $data);
-        return $pdf->stream();
+        return PDF::setOptions([
+                'isHtml5ParserEnabled' => true,
+                'isRemoteEnabled' => true
+            ])->loadView('PDF.abono', $data)->stream();
+
+        // return $pdf->stream();
 
         // return $pdf->download('comprobante.pdf');
     }

@@ -49,7 +49,7 @@
                     <input
                         type="text"
                         class="input input-bordered w-full"
-                        wire:model="monto"
+                        wire:model.defer="monto"
                         required
                         placeholder="$0.00"
                     />
@@ -58,7 +58,7 @@
                 {{-- Tipo de retiro --}}
                 <div class="w-1/2">
                     <x-jet-label>Tipo</x-jet-label>
-                    <select class="select select-bordered w-full" required wire:model="tipo">
+                    <select class="select select-bordered w-full" required wire:model.defer="tipo">
                         <option>Tipo de retiro</option>
                         @foreach($tiposMovimiento as $movimiento)
                             <option value="{{ $movimiento->id }}">
@@ -78,7 +78,7 @@
                 <textarea
                     rows="4"
                     class="textarea textarea-bordered w-full"
-                    wire:model="descripcion"
+                    wire:model.defer="descripcion"
                     placeholder="Descripción del retiro"
                 >
                 </textarea>

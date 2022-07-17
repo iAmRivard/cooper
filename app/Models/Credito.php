@@ -14,12 +14,13 @@ class Credito extends Model
         'tipo_credito_id',
         'monto',
         'saldo_actual',
-        'porcentaje_interes'
+        'porcentaje_interes',
+        'estado'
     ];
 
     public function socio()
     {
-        return $this->belongsTo(Crm_socios::class, 'crm_socio_id');
+        return $this->belongsTo(Crm_socios::class, 'socio_id');
     }
 
     public function tipoCredito()

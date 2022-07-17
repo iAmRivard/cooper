@@ -41,19 +41,16 @@ class CrearCredito extends Component
     public function crear()
     {
 
-        $socio_selected = Crm_socios::find($this->selec_socio);
-        $tipo_cuenta_selected = TipoCredito::find($this->tipo_cuenta);
-        $toDay = getDate();
-
         $nuevo_credito = Credito::create([
-            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta_selected->id),
-            'crm_socio_id' => $this->selec_socio,
+            'socio_id' => $this->selec_socio,
             'tipo_credito_id' => $this->tipo_cuenta,
             'monto' => $this->monto,
             'saldo_actual' => $this->monto,
             'porcentaje_interes' => $this->porcentaje,
+            'estado' => 1
         ]);
 
+        $this->emitTo('creditos.index','render');
 
         $this->emit('exito', 'La cuenta fue creado con exito');
 
