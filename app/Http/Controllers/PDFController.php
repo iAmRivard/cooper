@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
@@ -73,6 +76,44 @@ class PDFController extends Controller
         return $pdf->download('reporte.pdf');
 
         // return $pdf->stream();
+
+    }
+
+    public function quincena($socio_id)
+    {
+        $data = [
+            'creditos' => [],
+            'abonos' => [],
+        ];
+        // dd($data);
+
+        $usuario = DB::table('crm_socios')
+                    ->find($socio_id);
+
+        $movimientos_credito = DB::table('creditos')
+                                ->join('credito_dets', 'creditos.id', '=', 'credito_dets.credito_id')
+                                ->where('creditos.socio_id','=', $socio_id)
+                                ->where('credito_dets.created_at', '>=', now()->subDays(15))
+                                ->get();
+
+        if($movimientos_credito){
+            $data["creditos"] = $movimientos_credito;
+        }
+
+        $movimientos_cuenta = DB::table('ctr_cuentas')
+                            ->join('ctr_cuenta_dets', 'ctr_cuentas.id', '=', 'ctr_cuenta_dets.tipo_movimiento_id')
+                            ->where('crm_socio_id.socio_id', '=', $socio_id)
+                            ->where('ctr_cuenta_dets.created_at', '>=', now()->subDays(15))
+                            ->get();
+
+        if($movimientos_cuenta){
+            $data["abonos"] = $movimientos_cuenta;
+        }
+
+        dd($data);
+
+        $pdf = Pdf::loadView('PDF.re-impresion', $data);
+        return $pdf->download('reporte.pdf');
 
     }
 }

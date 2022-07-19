@@ -64,6 +64,9 @@ class Abono extends Component
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
+        $socioId = $this->cuenta_abonada->crm_socio_id;
+        // dd($socioId);
+
         $this->reset([
             'open',
             'tipo',
@@ -71,7 +74,7 @@ class Abono extends Component
             'descripcion'
         ]);
 
-        return redirect()->route('cuenta.abono', compact('abono'));
+        return redirect()->route('reporte.quincenal', compact('socioId'));
 
     }
 

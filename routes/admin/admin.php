@@ -43,4 +43,6 @@ Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])
 Route::get('/cuentas/re-impresion/{id}', [PDFController::class, 'reImpresion'])
     ->name('cuenta.re.impresion');
 
+Route::get('/cuentas/reporte-quincena/{socioId}', [PDFController::class, 'quincena'])
+    ->name('reporte.quincenal');
 
