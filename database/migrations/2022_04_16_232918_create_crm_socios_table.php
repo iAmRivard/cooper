@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('correo')->unique();
             $table->decimal('salario');
             $table->boolean('estado');
-            $table->unsignedBigInteger('user_id');
+            $table->bigInteger('user_id')->unsigned();
 
             $table->foreign('user_id')
                     ->references('id')->on('users');
