@@ -65,7 +65,5 @@ class Abono extends Component
             'monto',
             'descripcion'
         ]);
-
-        return redirect()->route('cuenta.abono', compact('abono'));
     }
 }

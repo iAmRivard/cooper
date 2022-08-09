@@ -13,21 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('crm_socios', function (Blueprint $table) {
+        Schema::create('crc_periodos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('dui', 10)->unique();
-            $table->string('nit', 17)->unique()->nullable();
-            $table->text('direccion');
-            $table->string('correo')->unique();
-            $table->decimal('salario');
+            $table->integer('valor');
+            $table->string('descripcion');
             $table->boolean('estado');
-            $table->decimal('aportacion');
-            $table->bigInteger('user_id')->unsigned();
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('user_id')
                     ->references('id')->on('users');
+
             $table->timestamps();
         });
     }
@@ -39,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crm_socios');
+        Schema::dropIfExists('crc_periodos');
     }
 };

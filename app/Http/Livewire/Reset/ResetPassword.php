@@ -51,6 +51,5 @@ class ResetPassword extends Component
             $this->error = true;
         }
 
-
     }
 }

@@ -18,6 +18,7 @@ class Crm_socios extends Model
         'salario',
         'correo',
         'estado',
+        'aportacion',
         'user_id',
     ];
 

@@ -73,9 +73,6 @@ class Abono extends Component
             'monto',
             'descripcion'
         ]);
-
-        return redirect()->route('reporte.quincenal', compact('socioId'));
-
     }
 
 }

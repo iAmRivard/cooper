@@ -13,18 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('crm_socios', function (Blueprint $table) {
+        Schema::create('crt_plan_pagos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->string('dui', 10)->unique();
-            $table->string('nit', 17)->unique()->nullable();
-            $table->text('direccion');
-            $table->string('correo')->unique();
-            $table->decimal('salario');
+            $table->unsignedBigInteger('credito_id');
+            $table->unsignedBigInteger('user_id');
+            $table->decimal('monto');
+            $table->decimal('cuota_fija');
+            $table->decimal('interes_acumulado');
+            $table->boolean('refinanciamiento')->nullable();
+            $table->boolean('vigente');
             $table->boolean('estado');
-            $table->decimal('aportacion');
-            $table->bigInteger('user_id')->unsigned();
+
+            $table->foreign('credito_id')
+                    ->references('id')->on('creditos');
 
             $table->foreign('user_id')
                     ->references('id')->on('users');
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('crm_socios');
+        Schema::dropIfExists('crt_plan_pagos');
     }
 };

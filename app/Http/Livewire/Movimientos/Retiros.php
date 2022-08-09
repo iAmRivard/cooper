@@ -69,16 +69,12 @@ class Retiros extends Component
                 'cuentas'
             ]);
 
-
             $this->emit('exito', 'Retiro procesado exitosamente');
 
         } else
         {
             $this->error = true;
         }
-
-
-
 
     }
 }
