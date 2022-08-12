@@ -19,7 +19,7 @@ class CreateSocio extends Component
 
     public $open = false;
 
-    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa;
+    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion;
 
     protected $rules = [
         'nombres' => 'required',
@@ -58,6 +58,7 @@ class CreateSocio extends Component
             'correo' => $this->correo,
             'salario' => $this->salario,
             'estado' => true,
+            'aportacion' => $this->aportacion,
             'user_id' => $user->id,
         ]);
 

@@ -79,16 +79,32 @@
                 <x-jet-input-error for="direccion" />
             </div>
 
-            {{-- Salario del socio --}}
-            <div class="mb-4">
-                <x-jet-label value="Salario del Socio" />
-                <x-jet-input
-                    type="number"
-                    class="w-full"
-                    wire:model.defer="salario"
-                    placeholder="400"
-                />
-                <x-jet-input-error for="salario" />
+            <div class="flex mb-4">
+                {{-- Salario del socio --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Salario del Socio" />
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model.defer="salario"
+                        placeholder="$400.00"
+                    />
+                    <x-jet-input-error for="salario" />
+                </div>
+
+
+                {{-- Aportación del socio --}}
+
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Aportacion" />
+                    <x-jet-input
+                        placeholder="$10.00"
+                        type="number"
+                        class="w-full"
+                        wire:model.defer="aportacion"
+                    />
+                    <x-jet-input-error for="aportacion" />
+                </div>
             </div>
 
             {{-- Correo electronico --}}
