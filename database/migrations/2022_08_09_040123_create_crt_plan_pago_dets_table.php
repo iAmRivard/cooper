@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('plan_pago_id');
             $table->unsignedBigInteger('credito_id');
             $table->unsignedBigInteger('socio_id');
+            $table->unsignedBigInteger('user_id');
             $table->decimal('cuota');
             $table->decimal('interes');
             $table->decimal('interes_acumulado');
@@ -33,6 +34,9 @@ return new class extends Migration
 
             $table->foreign('socio_id')
                     ->references('id')->on('crm_socios');
+
+            $table->foreign('user_id')
+                    ->references('id')->on('users');
 
             $table->timestamps();
         });
