@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TipoMovimientoCredito extends Model
 {
     use HasFactory;
+
+    protected $fillable =[
+        'nombre',
+        'naturaleza'
+    ];
 }
