@@ -23,9 +23,9 @@
                             <td>{{ $tipo->nombre }}</td>
                             <td>
                                 @if ($tipo->naturaleza == 1)
-                                    egreso
+                                    EGRESO
                                 @else
-                                    ingreso
+                                    INGRESO
                                 @endif
                             </td>
                         </tr>

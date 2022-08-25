@@ -28,7 +28,7 @@
 
                     @foreach ($cuentas as $cuenta)
                         <option value="{{$cuenta->id}}">
-                            {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}}
+                            {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCredito->nombre }}
                         </option>
                     @endforeach
 
