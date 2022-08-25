@@ -4,15 +4,19 @@ namespace App\Http\Livewire\Creditos;
 
 use Livewire\Component;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\TipoCredito;
 use App\Models\Crm_socios;
+use App\Models\CrtPlanPago;
 use App\Models\Credito;
+use App\Models\CrcPeriodo;
 
 class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo;
 
     public $socios = [];
 
@@ -47,6 +51,30 @@ class CrearCredito extends Component
             'monto' => $this->monto,
             'saldo_actual' => $this->monto,
             'porcentaje_interes' => $this->porcentaje,
+            'estado' => 1
+        ]);
+
+        $periodo = new CrcPeriodo();
+        $periodo->valor = $this->periodo;
+        if($this->periodo > 1) {
+            $periodo->descripcion = $this->periodo. " Meses";
+        } else {
+            $periodo->descripcion = $this->periodo. " Mese";
+        }
+        $periodo->estado = 1;
+        $periodo->user_id = Auth::id();
+        $periodo->save();
+
+        $plan_pago = CrtPlanPago::create([
+            'credito_id' => $nuevo_credito->id,
+            'user_id' => Auth::id(),
+            'pediodo_id' => $periodo->id,
+            'socio_id' => $this->selec_socio,
+            'monto' => $this->monto,
+            'cuota_fija' => $this->cuotaFija,
+            'interes_acumulado' => 0,
+            'refinanciamiento' => 0,
+            'vigente' => 1,
             'estado' => 1
         ]);
 

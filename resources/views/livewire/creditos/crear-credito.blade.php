@@ -51,23 +51,54 @@
                 </select>
             </div>
 
-            <div class="mb-4">
-                <x-jet-label>Selección del monto</x-jet-label>
-                <x-jet-input
-                    type="number"
-                    class="w-full"
-                    wire:model="monto"
-                    placeholder="$0.00"
-                />
+            <div class="flex mb-4">
+                {{-- Nombre del socio --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Selección del monto</x-jet-label>
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model="monto"
+                        placeholder="$0.00"
+                    />
+                </div>
+
+                {{-- Apellidos del socio --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Cuota Fija" />
+                    <x-jet-input
+                        type="number "
+                        class="w-full"
+                        wire:model.defer="cuotaFija"
+                        placeholder="$0.00"
+                    />
+                </div>
+            </div>
+            <div class="flex mb-4">
+                {{-- Porcentaje --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Selección del porcentaje</x-jet-label>
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model="porcentaje"
+                        placeholder="%"
+                    />
+                </div>
+
+                {{-- Apellidos del socio --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="periodo" />
+                    <x-jet-input
+                        type="number "
+                        class="w-full"
+                        wire:model.defer="periodo"
+                        placeholder="Cantidad de meses"
+                    />
+                </div>
             </div>
             <div class="mb-4">
-                <x-jet-label>Selección del porcentaje</x-jet-label>
-                <x-jet-input
-                    type="number"
-                    class="w-full"
-                    wire:model="porcentaje"
-                    placeholder="%"
-                />
+
             </div>
 
         </x-slot>

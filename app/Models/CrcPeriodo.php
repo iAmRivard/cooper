@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class CrcPeriodo extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'valor',
+        'descripcion',
+        'estado',
+        'user_id'
+    ];
 }
