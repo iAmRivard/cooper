@@ -21,7 +21,13 @@
                         @foreach ($tipos as $tipo)
                         <tr>
                             <td>{{ $tipo->nombre }}</td>
-                            <td>{{ $tipo->natulareza }}</td>
+                            <td>
+                                @if ($tipo->naturaleza == 1)
+                                    egreso
+                                @else
+                                    ingreso
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                       </tbody>
