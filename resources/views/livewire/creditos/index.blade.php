@@ -53,7 +53,7 @@
                                     <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
 
                                     <td>
-                                        <a href="{{ route('ver.cuenta', $credito->id) }}" class="a-link">
+                                        <a href="{{ route('ver.credito', $credito->id) }}" class="a-link">
                                             ver cuenta
                                         </a>
                                     </td>

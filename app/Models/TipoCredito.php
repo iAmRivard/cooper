@@ -15,4 +15,9 @@ class TipoCredito extends Model
         'descripcion',
         'estado'
     ];
+
+    public function movimiento()
+    {
+        return $this->belongsTo(CreditoDet::class, 'tipo_movimiento_credito_id');
+    }
 }

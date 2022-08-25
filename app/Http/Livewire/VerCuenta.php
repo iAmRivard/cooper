@@ -25,6 +25,7 @@ class VerCuenta extends Component
         $movimientos = Ctr_cuenta_det::where('ctr_cuentas_id', '=', $this->cuenta->id)
                                     ->orderBy('id', 'desc')
                                     ->paginate(10);
+
         return view('livewire.ver-cuenta', compact('movimientos'));
     }
 }

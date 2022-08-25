@@ -26,6 +26,9 @@ Route::get('/config/edit-cuentas', App\Http\Livewire\Mantenimientos\TiposCuentas
 // Ruta para creditos
 Route::get('/creditos', App\Http\Livewire\Creditos\Index::class)->name('creditos');
 
+//Ruta para ver el credito
+Route::get('/creditos/ver-credito/{credito}', App\Http\Livewire\VerCredito::class)->name('ver.credito');
+
 // Mantenimiento general de creditos
 Route::get('/config/edit-creditos', App\Http\Livewire\Mantenimientos\TiposCreditos::class)
     ->name('mantenimiento.tipo-credito');

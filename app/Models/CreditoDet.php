@@ -21,4 +21,10 @@ class CreditoDet extends Model
     {
         return $this->belongsTo(Crm_socios::class, 'socio_id');
     }
+
+    public function tipo()
+    {
+        return $this->belongsTo(TipoCredito::class, 'tipo_movimiento_credito_id');
+    }
+
 }

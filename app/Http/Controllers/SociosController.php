@@ -8,6 +8,8 @@ use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
+use App\Models\Credito;
+
 class SociosController extends Controller
 {
     /**
@@ -50,12 +52,17 @@ class SociosController extends Controller
     public function show(Crm_socios $socio)
     {
         $socio_cuentas = [];
+        $socio_creditos = [];
+
         $socio_cuentas = Ctr_cuenta::where('crm_socio_id', $socio->id)
                                     ->get();
 
-        // dd($socio_cuentas);
+        $socio_creditos = Credito::where('socio_id', $socio->id)
+                                ->get();
 
-        return view('socios.index', compact('socio', 'socio_cuentas'));
+        // dd($socio_creditos);
+
+        return view('socios.index', compact('socio', 'socio_cuentas', 'socio_creditos'));
     }
 
     /**

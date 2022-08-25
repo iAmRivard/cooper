@@ -71,12 +71,28 @@
 
                             {{-- Creditos --}}
                             <div
-                                class="card w-96 bg-base-100 shadow-xl"
+                                class="card w-96 bg-base-100 "
                                 :class="open ? 'hidden' : '' "
                             >
-                                <div class="card-body">
-                                    <h2 class="card-title">Creditos</h2>
-                                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                                <div class="carousel">
+                                    @foreach ($socio_creditos as $credito)
+                                    <div id="credito-{{ $credito->id }}" class="carousel-item w-full">
+
+                                        <div class="card w-full bg-base-100">
+                                            <div class="card-body shadow-xl">
+                                                <h2 class="card-title">#{{$credito->id}}</h2>
+                                                <p>{{$credito->tipoCredito->nombre}}</p>
+                                                <p><strong>Saldo Actual:</strong> {{ $credito->saldo_actual }}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="flex justify-center w-full py-2 gap-2">
+                                    @foreach ($socio_creditos as $credito)
+                                    <a href="#credito-{{ $credito->id }}" class="btn btn-xs">o</a>
+                                    @endforeach
                                 </div>
                             </div>
 
@@ -96,12 +112,12 @@
                 <h2 class="flex justify-center text-lg font-bold">Beneficiarios del socio</h2>
 
                 <div class="w-full flex flex-colflex justify-center ">
-                
+
                     @livewire('beneficiarios.tabla',['socio' => $socio])
 
-                </div> 
+                </div>
             </div>
-     
+
         </div>
 
     </div>
