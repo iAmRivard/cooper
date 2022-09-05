@@ -22,9 +22,9 @@ class Retiros extends Component
 
     protected $rules = [
         'cuenta_select' => 'required',
-        'monto' => 'required',
-        'descripcion' => 'required',
-        'tipo' => 'required',
+        'monto'         => 'required',
+        'descripcion'   => 'required',
+        'tipo'          => 'required',
     ];
 
     public function render()
@@ -50,11 +50,12 @@ class Retiros extends Component
         if($this->monto <= $this->cuenta_retirada->saldo_actual)
         {
             $retiro = Ctr_cuenta_det::create([
-                'tipo_movimiento_id' => $this->tipo,
-                'concepto' => $this->descripcion,
-                'monto' => ($this->monto * -1),
-                'naturaleza' => 0,
-                'ctr_cuentas_id' => $this->cuenta_select,
+                'tipo_movimiento_id'    => $this->tipo,
+                'concepto'              => $this->descripcion,
+                'monto'                 => ($this->monto * -1),
+                'naturaleza'            => 0,
+                'ctr_cuentas_id'        => $this->cuenta_select,
+                'saldo_fecha'           => $this->cuenta_retirada->saldo_actual + ($this->monto * -1)
             ]);
 
             $this->cuenta_retirada->saldo_actual = $this->cuenta_retirada->saldo_actual + ($this->monto * -1);
@@ -70,6 +71,8 @@ class Retiros extends Component
             ]);
 
             $this->emit('exito', 'Retiro procesado exitosamente');
+
+            $this->emitTo('cuentas.cuentas','render');
 
         } else
         {

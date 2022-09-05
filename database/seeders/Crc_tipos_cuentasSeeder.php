@@ -17,10 +17,11 @@ class Crc_tipos_cuentasSeeder extends Seeder
     public function run()
     {
         Crc_tipos_cuenta::create([
-            'nombre' => 'Cuenta Ejemplo',
-            'descripcion' => 'Cuenta Ejemplo, para hacer cruds',
-            'estado' => true,
-            'porcentaje' => 3,
+            'nombre'        => 'Cuenta Ejemplo',
+            'descripcion'   => 'Cuenta Ejemplo, para hacer cruds',
+            'estado'        => true,
+            'porcentaje'    => 3,
+            'plazo'         => 0,
         ]);
     }
 }

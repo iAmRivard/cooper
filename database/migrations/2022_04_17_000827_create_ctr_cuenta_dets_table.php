@@ -17,10 +17,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('tipo_movimiento_id');
             $table->unsignedBigInteger('ctr_cuentas_id');
-
             $table->text('concepto', 500);
             $table->decimal('monto', 14, 2);
-
+            $table->decimal('saldo_fecha', 14, 2);
             /**
              * Naturaleza = tipo : infreso ? egreso
              * Ingreso = 1

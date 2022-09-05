@@ -11,9 +11,16 @@ class TiposCuentas extends Component
 {
     use WithPagination;
 
-    public $cuenta_id;
+    public $cuenta_id, $open_modal = false, $editTipo, $nombre, $descripcion, $porcentaje, $plazo;
 
     protected $listeners = ['render' => 'render'];
+
+    protected $rules = [
+        'nombre'        =>  'required',
+        'descripcion'   =>  'required',
+        'porcentaje'    =>  'required',
+        'plazo'         =>  'required'
+    ];
 
     public function render()
     {
@@ -35,6 +42,41 @@ class TiposCuentas extends Component
         }
 
         $this->emitTo('mantenimientos.tipos-cuentas', 'render');
+    }
+
+    public function openModal($cuentaId)
+    {
+        $this->open_modal = true;
+
+        $this->editTipo = Crc_tipos_cuenta::where('id', $cuentaId)->first();
+
+        $this->nombre       = $this->editTipo->nombre;
+        $this->descripcion  = $this->editTipo->descripcion;
+        $this->porcentaje   = $this->editTipo->porcentaje;
+        $this->plazo        = $this->editTipo->plazo;
+    }
+
+    public function updateTipo()
+    {
+        $this->validate();
+
+        $this->editTipo->nombre = $this->nombre;
+        $this->editTipo->descripcion = $this->descripcion;
+        $this->editTipo->porcentaje = $this->porcentaje;
+        $this->editTipo->plazo = $this->plazo;
+
+        $this->editTipo->save();
+
+        $this->emitTo('mantenimientos.tipos-cuentas','render');
+
+        $this->reset([
+            'nombre',
+            'descripcion',
+            'porcentaje',
+            'plazo',
+            'open_modal',
+        ]);
+
     }
 
 }

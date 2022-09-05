@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('descripcion');
             $table->boolean('estado');
             $table->decimal('porcentaje', 5,2);
+            /**
+             * Campo plazo
+             * 1 = si tiene plazo
+             * 0 = no tiene plazo la cuenta
+             */
+            $table->boolean('plazo');
             $table->timestamps();
         });
     }

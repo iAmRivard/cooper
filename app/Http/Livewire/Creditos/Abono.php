@@ -45,11 +45,11 @@ class Abono extends Component
         $cuenta_abonada = Credito::where('id', $this->cuenta_select)->first();
 
         $abono = CreditoDet::create([
-            'credito_id' => $this->cuenta_select,
-            'socio_id' => $cuenta_abonada->socio->id,
-            'tipo_movimiento_credito_id' => $this->tipo,
-            'monto' => $this->monto,
-            'descripcion' => $this->descripcion
+            'credito_id'                    => $this->cuenta_select,
+            'socio_id'                      => $cuenta_abonada->socio->id,
+            'tipo_movimiento_credito_id'    => $this->tipo,
+            'monto'                         => $this->monto,
+            'descripcion'                   => $this->descripcion
         ]);
 
 

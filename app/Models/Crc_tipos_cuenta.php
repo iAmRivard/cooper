@@ -13,6 +13,7 @@ class Crc_tipos_cuenta extends Model
         'nombre',
         'descripcion',
         'estado',
+        'plazo'
     ];
 
     public function cuentas()

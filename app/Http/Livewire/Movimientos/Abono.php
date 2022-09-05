@@ -24,9 +24,9 @@ class Abono extends Component
 
     protected $rules = [
         'cuenta_select' => 'required',
-        'monto' => 'required',
-        'descripcion' => 'required',
-        'tipo' => 'required',
+        'monto'         => 'required',
+        'descripcion'   => 'required',
+        'tipo'          => 'required',
     ];
 
     public function render()
@@ -47,31 +47,33 @@ class Abono extends Component
     {
         $this->validate();
 
-        $abono = Ctr_cuenta_det::create([
-            'tipo_movimiento_id' => $this->tipo,
-            'concepto' => $this->descripcion,
-            'monto' => $this->monto,
-            'naturaleza' => 1,
-            'ctr_cuentas_id' => $this->cuenta_select
-        ]);
-
-
         $this->cuenta_abonada = Ctr_cuenta::find($this->cuenta_select);
 
-        $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual + $this->monto;
+        $abono = Ctr_cuenta_det::create([
+            'tipo_movimiento_id'    => $this->tipo,
+            'concepto'              => $this->descripcion,
+            'monto'                 => $this->monto,
+            'naturaleza'            => 1,
+            'ctr_cuentas_id'        => $this->cuenta_select,
+            'saldo_fecha'           => $this->cuenta_abonada->saldo_actual + $this->monto
+        ]);
 
+        $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual + $this->monto;
         $this->cuenta_abonada->save();
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
+        $this->emitTo('cuentas.cuentas','render');
+
         $socioId = $this->cuenta_abonada->crm_socio_id;
-        // dd($socioId);
 
         $this->reset([
             'open',
             'tipo',
             'monto',
-            'descripcion'
+            'descripcion',
+            'cuenta_select',
+            'cuentas'
         ]);
     }
 

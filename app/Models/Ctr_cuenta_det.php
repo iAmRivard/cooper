@@ -14,7 +14,8 @@ class Ctr_cuenta_det extends Model
         'concepto',
         'monto',
         'ctr_cuentas_id',
-        'naturaleza'
+        'naturaleza',
+        'saldo_fecha'
     ];
 
     public function cuenta()

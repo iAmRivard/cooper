@@ -10,11 +10,13 @@ class CreateTiposCuentas extends Component
 {
     public $open = false;
 
-    public $nombre, $descripcion, $porcentaje;
+    public $nombre, $descripcion, $porcentaje, $plazo;
 
     protected $rules = [
-        'nombre' => 'required',
-        'descripcion' => 'required'
+        'nombre'        => 'required',
+        'descripcion'   => 'required',
+        'plazo'         => 'required',
+        'porcentaje'    => 'required'
     ];
 
     public function render()
@@ -32,6 +34,7 @@ class CreateTiposCuentas extends Component
         $tipoCUenta->descripcion = $this->descripcion;
         $tipoCUenta->estado = 1;
         $tipoCUenta->porcentaje = $this->porcentaje;
+        $tipoCUenta->plazo = $this->plazo;
         $tipoCUenta->save();
 
         $this->emitTo('mantenimientos.tipos-cuentas', 'render');
@@ -40,7 +43,8 @@ class CreateTiposCuentas extends Component
             'open',
             'nombre',
             'descripcion',
-            'porcentaje'
+            'porcentaje',
+            'plazo',
         ]);
     }
 }

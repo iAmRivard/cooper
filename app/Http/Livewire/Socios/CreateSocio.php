@@ -22,13 +22,13 @@ class CreateSocio extends Component
     public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion;
 
     protected $rules = [
-        'nombres' => 'required',
-        'apellidos' => 'required',
-        'dui' => 'required|min:10|max:10',
-        'direccion' => 'required',
-        'salario' => 'required',
-        'correo' => 'required|email',
-        'empresa' => 'required'
+        'nombres'       => 'required',
+        'apellidos'     => 'required',
+        'dui'           => 'required|min:10|max:10|unique:crm_socios',
+        'direccion'     => 'required',
+        'salario'       => 'required',
+        'correo'        => 'required|email|unique:crm_socios',
+        'empresa'       => 'required'
     ];
 
     public function render()
@@ -50,33 +50,33 @@ class CreateSocio extends Component
         ]);
 
         $new_socio = Crm_socios::create([
-            'nombres' => $this->nombres,
-            'apellidos' => $this->apellidos,
-            'dui' => $this->dui,
-            'nit' => $this->nit,
-            'direccion' => $this->direccion,
-            'correo' => $this->correo,
-            'salario' => $this->salario,
-            'estado' => true,
-            'aportacion' => $this->aportacion,
-            'user_id' => $user->id,
+            'nombres'       => $this->nombres,
+            'apellidos'     => $this->apellidos,
+            'dui'           => $this->dui,
+            'nit'           => $this->nit,
+            'direccion'     => $this->direccion,
+            'correo'        => $this->correo,
+            'salario'       => $this->salario,
+            'estado'        => true,
+            'aportacion'    => $this->aportacion,
+            'user_id'       => $user->id,
         ]);
 
         $empresas = crm_empresas::create([
-            'nombre' => $this->empresa,
-            'actual' => true,
-            'crm_socio_id' => $new_socio->id,
+            'nombre'        => $this->empresa,
+            'actual'        => true,
+            'crm_socio_id'  => $new_socio->id,
         ]);
 
         $toDay = getDate();
 
         //Creamos la cuenta inicial (Considerando que el primer registro es la cuenta)
         Ctr_cuenta::create([
-            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] . $new_socio->id . $new_socio->id),
-            'crm_socio_id' => $new_socio->id,
-            'crc_topo_cuenta_id' => 1,
-            'saldo_actual' => 0,
-            'estado' => true,
+            'no_cuenta'             => strval($toDay["year"] . $toDay["mon"] . $new_socio->id . $new_socio->id),
+            'crm_socio_id'          => $new_socio->id,
+            'crc_topo_cuenta_id'    => 1,
+            'saldo_actual'          => 0,
+            'estado'                => true,
         ]);
 
         $this->emitTo('socios.socios','render');
