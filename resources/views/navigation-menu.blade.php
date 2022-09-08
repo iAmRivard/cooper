@@ -82,6 +82,9 @@
                                     <x-jet-dropdown-link href="{{ route('mantenimiento.tipo-abono-credito') }}">
                                         Tipos abono credito
                                     </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('mantenimiento.tipo-abono-cuenta') }}">
+                                        Tipos abono cuenta
+                                    </x-jet-dropdown-link>
 
                                     <!-- Team Switcher -->
                                     {{-- <div class="block px-4 py-2 text-xs text-gray-400">

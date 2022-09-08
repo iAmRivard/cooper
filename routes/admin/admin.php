@@ -36,6 +36,9 @@ Route::get('/config/edit-creditos', App\Http\Livewire\Mantenimientos\TiposCredit
 Route::get('/config/edit-creditos-tipo-abono', App\Http\Livewire\Mantenimientos\TiposAbonoCreditos::class)
     ->name('mantenimiento.tipo-abono-credito');
 
+Route::get('/config/edit-cuentas-tipos', App\Http\Livewire\Mantenimientos\TiposAbono::class)
+    ->name('mantenimiento.tipo-abono-cuenta');
+
 //PDF
 Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])
     ->name('cuenta.abono');

@@ -1,7 +1,7 @@
 <div>
     {{-- Botón para abrir el modal --}}
     <x-jet-nav-link class="cursor-pointer" :active="false" wire:click="$set('open', true)">
-        Crear Tipo de Credito
+        Crear Tipo de abono
     </x-jet-nav-link>
 
     {{-- Modal --}}
@@ -30,7 +30,27 @@
                     wire:model.defer="nombre"
                 />
             </div>
-            {{-- natulareza --}}
+            {{-- Descripción --}}
+            <div class="mb-4 form-control w-full">
+                @error('descripcion')
+                <div class="alert alert-error shadow-lg">
+                    <div>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <span>Error! {{ $message }}</span>
+                    </div>
+                </div>
+                @enderror
+                <label class="label">
+                    <span class="label-text">Nombre</span>
+                </label>
+                <input
+                    type="text"
+                    placeholder="Descripción"
+                    class="input input-bordered w-full"
+                    wire:model.defer="descripcion"
+                />
+            </div>
+            {{-- Naturaleza --}}
             <div class="mb-4 form-control w-full">
                 @error('naturaleza')
                 <div class="alert alert-error shadow-lg">
@@ -42,15 +62,15 @@
                 @enderror
 
                 <label class="label">
-                    <span class="label-text">Natulareza</span>
+                    <span class="label-text">Naturaleza</span>
                 </label>
                 <select
                     class="select select-bordered w-full"
                     wire:model.defer="naturaleza"
                 >
                     <option>Selecione un tipo</option>
-                    <option value="0">Ingreso</option>
-                    <option value="1">Salida</option>
+                    <option value="1">Ingreso</option>
+                    <option value="0">Salida</option>
                 </select>
             </div>
         </x-slot>
@@ -62,7 +82,7 @@
             </x-jet-secondary-button>
 
             <x-jet-button wire:click="guardar" wire:loading.remove wire:target="guardar">
-                Crear
+                Crear Credito
             </x-jet-button>
 
             <span wire:loading wire:target="guardar">Procesando ...</span>

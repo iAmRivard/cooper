@@ -20,7 +20,7 @@ return new class extends Migration
 
             /**
              * 1 = Acreedora
-             * 2 = deudora
+             * 0 = deudora
              */
             $table->boolean('naturaleza');
             $table->timestamps();

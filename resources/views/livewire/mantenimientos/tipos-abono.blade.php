@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        @livewire('mantenimientos.create-tipos-creditos')
+        @livewire('mantenimientos.create-tipos-abono')
     </x-slot>
 
     <div class="py-12">
@@ -9,34 +9,29 @@
 
                 <div class="overflow-x-auto">
 
-                    <table class="table table-zebra w-full">
+                    <table class="table table-zebra w-full mb-4">
                       <!-- head -->
                       <thead>
                         <tr>
                           <th>Nombre</th>
-                          <th>Decripción</th>
-                          <th>Porcentaje</th>
-                          <th>Estado</th>
+                          <th>Natulareza</th>
                           <th>Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach ($cuentas as $cuenta)
+                        @foreach ($tipos as $tipo)
                         <tr>
-                            <th>{{ $cuenta->nombre }}</th>
-                            <td>{{ $cuenta->descripcion }}</td>
-                            <td>{{ $cuenta->porcentaje_interes }}%</td>
+                            <td>{{ $tipo->nombre }}</td>
                             <td>
-                                <input
-                                    type="checkbox"
-                                    class="toggle"
-                                    @if($cuenta->estado == 1) checked @endif
-                                    wire:click="actualizarEstado({{$cuenta}})"
-                                />
+                                @if ($tipo->naturaleza == 1)
+                                    EGRESO
+                                @else
+                                    INGRESO
+                                @endif
                             </td>
                             <td>
                                 <button
-                                    wire:click="openModal({{ $cuenta->id }})"
+                                    wire:click="openModal({{ $tipo->id }})"
                                     class="btn btn-info"
                                 >
                                     Editar
@@ -47,8 +42,8 @@
                       </tbody>
                     </table>
 
-                    <div>
-                        {{ $cuentas->links() }}
+                    <div class="my-4 mx-4">
+                        {{ $tipos->links() }}
                     </div>
 
                 </div>
@@ -94,19 +89,18 @@
                 </div>
                 @enderror
                 <label class="label">
-                    <span class="label-text">Descripción</span>
+                    <span class="label-text">Nombre</span>
                 </label>
-                <textarea
-                    class="textarea textarea-bordered"
-                    placeholder="Brebe descripción de que tipo de credito"
+                <input
+                    type="text"
+                    placeholder="Descripción"
+                    class="input input-bordered w-full"
                     wire:model.defer="descripcion"
-                >
-                </textarea>
+                />
             </div>
-
-            {{-- Porcentaje --}}
+            {{-- Naturaleza --}}
             <div class="mb-4 form-control w-full">
-                @error('descripcion')
+                @error('naturaleza')
                 <div class="alert alert-error shadow-lg">
                     <div>
                       <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
@@ -114,15 +108,18 @@
                     </div>
                 </div>
                 @enderror
+
                 <label class="label">
-                    <span class="label-text">Porcentaje</span>
+                    <span class="label-text">Naturaleza</span>
                 </label>
-                <input
-                    type="number"
-                    placeholder="0.00%"
-                    class="input input-bordered w-full"
-                    wire:model.defer="porcentaje"
-                />
+                <select
+                    class="select select-bordered w-full"
+                    wire:model.defer="naturaleza"
+                >
+                    <option>Selecione un tipo</option>
+                    <option value="1">Ingreso</option>
+                    <option value="0">Salida</option>
+                </select>
             </div>
         </x-slot>
 
@@ -132,11 +129,11 @@
                 Cancelar
             </x-jet-secondary-button>
 
-            <x-jet-button wire:click="actualizar" wire:loading.remove wire:target="actualizar">
+            <x-jet-button wire:click="guardar" wire:loading.remove wire:target="guardar">
                 Guardar
             </x-jet-button>
 
-            <span wire:loading wire:target="actualizar">Procesando ...</span>
+            <span wire:loading wire:target="guardar">Procesando ...</span>
 
         </x-slot>
     </x-jet-dialog-modal>
