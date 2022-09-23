@@ -52,7 +52,6 @@ class Abono extends Component
             'descripcion'                   => $this->descripcion
         ]);
 
-
         $this->cuenta_abonada = Credito::find($this->cuenta_select);
 
         $this->cuenta_abonada->monto = $this->cuenta_abonada->monto - $this->monto;
@@ -67,5 +66,7 @@ class Abono extends Component
             'monto',
             'descripcion'
         ]);
+
+        return redirect()->route('credito.retiro', $abono);
     }
 }

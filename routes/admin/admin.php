@@ -46,6 +46,9 @@ Route::get('/cuentas/abono/{abono}', [PDFController::class, 'abono'])
 Route::get('/cuentas/retiro/{retiro}', [PDFController::class, 'retiro'])
     ->name('cuenta.retiro');
 
+Route::get('/credito/abono/{abonoCred}', [PDFController::class, 'abonoCredito'])
+    ->name('credito.retiro');
+
 Route::get('/cuentas/cuenta/{cuenta}', [PDFController::class, 'cuenta'])
     ->name('cuenta.cuenta');
 

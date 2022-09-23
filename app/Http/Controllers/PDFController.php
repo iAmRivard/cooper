@@ -10,38 +10,66 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
+use App\Models\CreditoDet;
+
 use PDF;
+// use \NumberFormatter;
 
 class PDFController extends Controller
 {
     public function abono(Ctr_cuenta_det $abono)
     {
+        // $formatterES = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
+        // $n = $abono->monto;
+        // $izquierda = intval(floor($n));
+        // $derecha = intval(($n - floor($n)) * 100);
+
+        // $textMonet = $formatterES->format($izquierda) . " punto " . $formatterES->format($derecha);
+
         $data = [
             'title' => 'Abono a cuenta',
             'abono' => $abono,
         ];
 
+        $pdfNombre = $abono->id.".pdf";
+
         return PDF::setOptions([
-                'isHtml5ParserEnabled' => true,
-                'isRemoteEnabled' => true
-            ])->loadView('PDF.abono', $data)->stream();
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true
+        ])->loadView('PDF.abono', $data)->download($pdfNombre);
 
-        // return $pdf->stream();
-
-        // return $pdf->download('comprobante.pdf');
+        return $pdf->download('invoice.pdf');
     }
 
     public function retiro(Ctr_cuenta_det $retiro)
     {
-        // var_dump($retiro);
         $data = [
             'title' => 'Retiro de Cuenta',
             'retiro' => $retiro,
         ];
-        // var_dump($data);
 
-        $pdf = Pdf::loadView('PDF.retiro', $data);
-        return $pdf->download('comprobante.pdf');
+        $pdfNombre = $retiro->id.".pdf";
+
+        return PDF::setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true
+        ])->loadView('PDF.retiro', $data)->download($pdfNombre);
+    }
+
+    public function abonoCredito(CreditoDet $abonoCred)
+    {
+        // dd($abono);
+        $data = [
+            'title' => 'Retiro de Cuenta',
+            'retiro' => $abonoCred,
+        ];
+
+        // $pdfNombre = $retiro->id.".pdf";
+
+        return PDF::setOptions([
+            'isHtml5ParserEnabled' => true,
+            'isRemoteEnabled' => true
+        ])->loadView('PDF.abonoCredito', $data)->loadView();
     }
 
     public function cuenta(Ctr_cuenta $cuenta)
