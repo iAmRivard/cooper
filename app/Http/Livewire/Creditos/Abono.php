@@ -60,6 +60,8 @@ class Abono extends Component
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
+        $this->emitTo('creditos.index','render');
+
         $this->reset([
             'open',
             'tipo',
@@ -67,6 +69,6 @@ class Abono extends Component
             'descripcion'
         ]);
 
-        return redirect()->route('credito.retiro', $abono);
+        return redirect()->route('credito.abono', $abono);
     }
 }

@@ -11,6 +11,7 @@ use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
 use App\Models\CreditoDet;
+use App\Models\TipoMovimientoCredito;
 
 use PDF;
 // use \NumberFormatter;
@@ -58,18 +59,15 @@ class PDFController extends Controller
 
     public function abonoCredito(CreditoDet $abonoCred)
     {
-        // dd($abono);
         $data = [
-            'title' => 'Retiro de Cuenta',
-            'retiro' => $abonoCred,
+            'title'     => 'Retiro de Cuenta',
+            'retiro'    => $abonoCred,
         ];
 
-        // $pdfNombre = $retiro->id.".pdf";
+        $pdfNombre = $abonoCred->id.".pdf";
 
-        return PDF::setOptions([
-            'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true
-        ])->loadView('PDF.abonoCredito', $data)->loadView();
+        $pdf = Pdf::loadView('PDF.abonoCredito', $data);
+        return $pdf->download($pdfNombre);
     }
 
     public function cuenta(Ctr_cuenta $cuenta)
@@ -81,8 +79,8 @@ class PDFController extends Controller
             'cuenta' => $cuenta,
         ];
 
-        $pdf = Pdf::loadView('PDF.cuenta', $data);
-        return $pdf->download('reporte.pdf');
+        // $pdf = Pdf::loadView('PDF.cuenta', $data);
+        // return $pdf->download('reporte.pdf');
 
         // return $pdf->stream();
     }
