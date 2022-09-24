@@ -1,4 +1,7 @@
 <x-app-layout>
+    <x-slot name="header">
+        @livewire('user.reset-password',['socio' => $socio])
+    </x-slot>
 
     <div class="py-12">
 
@@ -111,7 +114,7 @@
 
                 <h2 class="flex justify-center text-lg font-bold">Beneficiarios del socio</h2>
 
-                <div class="w-full flex flex-colflex justify-center ">
+                <div class="w-full flex flex-colflex justify-center pb-4">
 
                     @livewire('beneficiarios.tabla',['socio' => $socio])
 

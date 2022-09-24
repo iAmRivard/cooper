@@ -32,8 +32,6 @@
             </select>
         </div>
 
-
-
         <div class="mb-4 mt-6">
             <x-jet-button
                 wire:click="buscar"
