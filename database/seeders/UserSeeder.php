@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('1234'),
             'remember_token' => Str::random(10),
+            'rol' => 'administrador',
         ])->assignRole('admin');
 
     }

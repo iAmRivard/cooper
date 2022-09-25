@@ -27,6 +27,11 @@ class Crm_socios extends Model
         return $this->hasMany(Ctr_cuenta::class, 'crm_socio_id');
     }
 
+    public function creditos()
+    {
+        return $this->hasMany(Credito::class, 'socio_id');
+    }
+
     public function usuario()
     {
         return $this->belongsTo(Users::class, 'user_id');

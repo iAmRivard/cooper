@@ -47,6 +47,7 @@ class CreateSocio extends Component
             'email' => $this->correo,
             'password' => bcrypt($this->dui),
             'remember_token' => Str::random(10),
+            'rol'   => 'socio',
         ]);
 
         $new_socio = Crm_socios::create([
