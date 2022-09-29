@@ -78,6 +78,8 @@ class CrearCredito extends Component
             'estado' => 1
         ]);
 
+        //$plan_pago_det = CrtPlanPagoDet::create([ ])
+
         $this->emitTo('creditos.index','render');
 
         $this->emit('exito', 'La cuenta fue creado con exito');

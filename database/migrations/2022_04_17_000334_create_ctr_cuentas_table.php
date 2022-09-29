@@ -20,7 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('crc_topo_cuenta_id');
             $table->decimal('saldo_actual');
             $table->boolean('estado');
-
+            $table->integer('cantidad_meses')->unsigned()->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
             $table->foreign('crm_socio_id')
                     ->references('id')->on('crm_socios');
 

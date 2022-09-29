@@ -49,7 +49,7 @@
                           <tbody>
                             @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td> <b>{{ $cuenta->no_cuenta}}</b></td>
+                                    <td> <b>{{ $cuenta->id}}</b></td>
                                     <td>
                                         {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                     </td>

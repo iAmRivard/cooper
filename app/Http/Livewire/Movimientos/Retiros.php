@@ -74,7 +74,7 @@ class Retiros extends Component
 
             $this->emitTo('cuentas.cuentas','render');
 
-            return redirect()->route('cuenta.retiro', $retiro);
+     //       return redirect()->route('cuenta.retiro', $retiro);
 
         } else
         {

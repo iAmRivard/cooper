@@ -16,11 +16,6 @@ class Crc_topos_de_movimientoSeeder extends Seeder
      */
     public function run()
     {
-        Crc_tipos_de_movimiento::create([
-            'nombre' => 'Apertura de cuenta',
-            'descripcion' => 'Apertura de cuetna',
-            'naturaleza' => 1
-        ]);
 
         Crc_tipos_de_movimiento::create([
             'nombre' => 'Abono a cuenta',
@@ -33,5 +28,18 @@ class Crc_topos_de_movimientoSeeder extends Seeder
             'descripcion' => 'Retiro de efectido de cuenta se socio',
             'naturaleza' => 0
         ]);
+
+        Crc_tipos_de_movimiento::create([
+            'nombre' => 'Ajuste de abono',
+            'descripcion' => 'Para realizar ajuste de abono a su cuenta. (Incrementa el saldo)',
+            'naturaleza' => 1
+        ]);
+
+        Crc_tipos_de_movimiento::create([
+            'nombre' => 'Ajuste de saldo',
+            'descripcion' => 'Para realizar ajuste de abono a su cuenta. (Descuenta el saldo)',
+            'naturaleza' => 0
+        ]);
+
     }
 }

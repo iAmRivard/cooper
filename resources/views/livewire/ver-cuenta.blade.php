@@ -11,7 +11,7 @@
                     <div class="stats shadow">
                         <div class="stat">
                             <div class="stat-title">Numero de cuenta</div>
-                            <div class="stat-value text-primary">{{$cuenta->no_cuenta}}</div>
+                            <div class="stat-value text-primary">#{{$cuenta->id}}</div>
                             <div class="stat-desc">{{$cuenta->tipoCuenta->nombre}}</div>
                         </div>
                         <div class="stat">
@@ -48,12 +48,12 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    {{ $movimiento->saldo_fecha }}
+                                    ${{ $movimiento->saldo_fecha }}
                                 </td>
                                 <td class="text-center">{{ $movimiento->created_at }}</td>
                                 <td class="text-center">{{$movimiento->tipo->nombre}}</td>
                                 <td>
-                                    <a href="{{ route('cuenta.re.impresion', $movimiento->id) }}" class="a-link">
+                                    <a href="{{ route('cuenta.abono', $movimiento) }}" class="a-link">
                                         re Imprimir
                                     </a>
                                 </td>

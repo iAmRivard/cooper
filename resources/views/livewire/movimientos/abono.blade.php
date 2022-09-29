@@ -11,7 +11,7 @@
         <x-slot name="content">
             {{-- Buscar Cuenta --}}
             <div class="mb-4">
-                <x-jet-label>Buscar Cuetna</x-jet-label>
+                <x-jet-label>Buscar Cuenta</x-jet-label>
                 <x-jet-input
                     class="w-1/2"
                     type="text"
@@ -28,7 +28,7 @@
 
                     @foreach ($cuentas as $cuenta)
                         <option value="{{$cuenta->id}}">
-                            {{$cuenta->no_cuenta}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
+                            {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
                         </option>
                     @endforeach
 

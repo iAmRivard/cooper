@@ -76,7 +76,7 @@ class Abono extends Component
             'cuentas'
         ]);
 
-        return redirect()->route('cuenta.abono', $abono);
+        //return redirect()->route('cuenta.abono', $abono);
     }
 
 }

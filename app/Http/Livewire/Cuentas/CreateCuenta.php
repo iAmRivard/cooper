@@ -34,6 +34,7 @@ class CreateCuenta extends Component
         $this->socios = Crm_socios::where('nombres', 'like', '%' . $this->buscar_socio . '%')
                                 ->orWhere('apellidos', 'like', '%' . $this->buscar_socio . '%')
                                 ->orWhere('dui', 'like', '%' . $this->buscar_socio . '%')
+                                ->orWhere('id', 'like', '%' . $this->buscar_socio . '%')
                                 ->get();
     }
 

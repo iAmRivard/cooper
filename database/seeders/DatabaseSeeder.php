@@ -23,7 +23,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call(Crc_topos_de_movimientoSeeder::class);
 
+        $this->call(TipoCreditoSeeder::class);
+
+        $this->call(TipoMovimientoCreditoSeeder::class);
+
+    
         // \App\Models\User::factory(10)->create();
-        // \App\Models\Crm_socios::factory(10)->create();
+      //  \App\Models\Crm_socios::factory(10)->create();
     }
 }
