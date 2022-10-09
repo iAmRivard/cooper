@@ -106,13 +106,21 @@
             <div class="mb-4 flex">
                 <div class="w-1/2">
                     <x-jet-label value="DUI del Socio" />
-                    <x-jet-input type="text" class="w-full" disabled wire:model.defer="socio.dui" />
+                    <x-jet-input
+                        type="text"
+                        x-mask="99999999-9"
+                        placeholder="99999999-9"
+                        class="w-full" disabled wire:model.defer="socio.dui" />
                     <x-jet-input-error for="dui" />
                 </div>
 
                 <div class="w-1/2">
                     <x-jet-label value="NIT del Socio" />
-                    <x-jet-input type="text" class="w-full" wire:model.defer="socio.nit" />
+                    <x-jet-input type="text"
+                        x-mask="9999-999999-999-9"
+                        placeholder="9999-999999-999-9"
+                        class="w-full"
+                        wire:model.defer="socio.nit" />
                     <x-jet-input-error for="nit" />
                 </div>
             </div>

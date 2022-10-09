@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(UserSeeder::class);
 
+        // $this->call(Crm_SociosSeeder::class);
+
         $this->call(Crc_tipos_cuentasSeeder::class);
 
         $this->call(Crc_topos_de_movimientoSeeder::class);
@@ -27,7 +29,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TipoMovimientoCreditoSeeder::class);
 
-    
+
         // \App\Models\User::factory(10)->create();
       //  \App\Models\Crm_socios::factory(10)->create();
     }

@@ -15,6 +15,12 @@ class TiposAbono extends Component
 
     public $open = false, $nombre, $naturaleza, $descripcion, $editTipo;
 
+    protected $rules = [
+        'nombre'    =>  'required|string',
+        'naturaleza'    =>  'required',
+        'descripcion'   =>  'required',
+    ];
+
     public function render()
     {
         $tipos = Crc_tipos_de_movimiento::paginate(10);
@@ -35,6 +41,8 @@ class TiposAbono extends Component
 
     public function guardar()
     {
+        $this->validate();
+
         $this->editTipo->nombre         = $this->nombre;
         $this->editTipo->naturaleza     = $this->naturaleza;
         $this->editTipo->descripcion    = $this->descripcion;

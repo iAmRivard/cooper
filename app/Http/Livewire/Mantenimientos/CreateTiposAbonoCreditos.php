@@ -24,6 +24,8 @@ class CreateTiposAbonoCreditos extends Component
 
     public function guardar()
     {
+        $this->validate();
+
         TipoMovimientoCredito::create([
             'nombre' => $this->nombre,
             'naturaleza' => $this->naturaleza

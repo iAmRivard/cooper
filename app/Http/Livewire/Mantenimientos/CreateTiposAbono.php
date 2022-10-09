@@ -25,6 +25,8 @@ class CreateTiposAbono extends Component
 
     public function guardar()
     {
+        $this->validate();
+
         Crc_tipos_de_movimiento::create([
             'nombre'        => $this->nombre,
             'descripcion'   => $this->descripcion,

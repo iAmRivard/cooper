@@ -21,6 +21,11 @@
             'route' => route('creditos'),
             'active' => request()->routeIs('creditos')
         ],
+        [
+            'name' => 'empresas',
+            'route' => route('empresas'),
+            'active' => request()->routeIs('empresas')
+        ],
         // [
         //     'name' => 'Movimientos',
         //     'route' => route('movimientos'),
@@ -48,7 +53,6 @@
                         <x-jet-nav-link href="{{ $link['route'] }}" :active="$link['active']">
                             {{ __($link['name']) }}
                         </x-jet-nav-link>
-
                     @endforeach
 
                     <div class="flex items-center">
@@ -221,11 +225,13 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            @foreach($nav_links as $link)
-                <x-jet-responsive-nav-link href="{{ $link['route']}}" :active="$link['active']">
-                    {{ __( $link['name'] ) }}
-                </x-jet-responsive-nav-link>
-            @endforeach
+            @if (Auth::user()->rol == 'administrador')
+                @foreach($nav_links as $link)
+                    <x-jet-responsive-nav-link href="{{ $link['route']}}" :active="$link['active']">
+                        {{ __( $link['name'] ) }}
+                    </x-jet-responsive-nav-link>
+                @endforeach
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

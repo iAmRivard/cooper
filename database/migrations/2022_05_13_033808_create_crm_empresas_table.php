@@ -16,11 +16,7 @@ return new class extends Migration
         Schema::create('crm_empresas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->boolean('actual');
-            $table->unsignedBigInteger('crm_socio_id');
 
-            $table->foreign('crm_socio_id')
-                    ->references('id')->on('crm_socios');
             $table->timestamps();
         });
     }

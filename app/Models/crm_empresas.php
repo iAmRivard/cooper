@@ -11,8 +11,6 @@ class crm_empresas extends Model
 
     protected $fillable = [
         'nombre',
-        'actual',
-        'crm_socio_id'
     ];
 
     public function socio()

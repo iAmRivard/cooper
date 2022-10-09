@@ -20,13 +20,6 @@ class PDFController extends Controller
 {
     public function abono(Ctr_cuenta_det $abono)
     {
-        // $formatterES = new NumberFormatter("en_US", NumberFormatter::SPELLOUT);
-        // $n = $abono->monto;
-        // $izquierda = intval(floor($n));
-        // $derecha = intval(($n - floor($n)) * 100);
-
-        // $textMonet = $formatterES->format($izquierda) . " punto " . $formatterES->format($derecha);
-
         $data = [
             'title' => 'Abono a cuenta',
             'abono' => $abono,
@@ -141,6 +134,5 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView('PDF.reporte-quincenal', $data);
         return $pdf->stream();
-
     }
 }
