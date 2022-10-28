@@ -45,7 +45,7 @@
                     </a>
                 </div>
 
-                @if (Auth::user()->rol == 'administrador')
+                @if (Auth::user()->rol == 'admin')
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     @foreach($nav_links as $link)
@@ -225,7 +225,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            @if (Auth::user()->rol == 'administrador')
+            @if (Auth::user()->rol == 'admin')
                 @foreach($nav_links as $link)
                     <x-jet-responsive-nav-link href="{{ $link['route']}}" :active="$link['active']">
                         {{ __( $link['name'] ) }}
