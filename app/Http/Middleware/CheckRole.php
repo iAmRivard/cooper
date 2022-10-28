@@ -18,7 +18,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->rol != 'administrador') {
+        if(Auth::user()->rol != 'admin') {
             return redirect('/dashboard');
         }
 
