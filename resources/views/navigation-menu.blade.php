@@ -21,11 +21,11 @@
             'route' => route('creditos'),
             'active' => request()->routeIs('creditos')
         ],
-        [
-            'name' => 'empresas',
-            'route' => route('empresas'),
-            'active' => request()->routeIs('empresas')
-        ],
+        // [
+        //     'name' => 'empresas',
+        //     'route' => route('empresas'),
+        //     'active' => request()->routeIs('empresas')
+        // ],
         // [
         //     'name' => 'Movimientos',
         //     'route' => route('movimientos'),
@@ -89,6 +89,9 @@
                                     </x-jet-dropdown-link>
                                     <x-jet-dropdown-link href="{{ route('mantenimiento.tipo-abono-cuenta') }}">
                                         Tipos abono cuenta
+                                    </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('empresas') }}">
+                                        Empresas
                                     </x-jet-dropdown-link>
 
                                     <!-- Team Switcher -->
