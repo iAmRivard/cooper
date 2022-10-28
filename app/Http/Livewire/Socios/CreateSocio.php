@@ -33,7 +33,8 @@ class CreateSocio extends Component
 
     public function render()
     {
-        return view('livewire.socios.create-socio');
+        $empresas = crm_empresas::all();
+        return view('livewire.socios.create-socio', compact('empresas'));
     }
 
     public function guardar()
@@ -61,6 +62,7 @@ class CreateSocio extends Component
             'estado'        => true,
             'aportacion'    => $this->aportacion,
             'user_id'       => $user->id,
+            'empresa_id'    => $this->empresa,
         ]);
 
         $empresas = crm_empresas::create([

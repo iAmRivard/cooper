@@ -121,13 +121,19 @@
 
             {{-- Empresa --}}
             <div class="mb-4">
+                <select class="select select-bordered w-full" wire:model="empresa">
+                    <option >WSeleccionar una empresa</option>
+                    @foreach ($empresas as $empresa)
+                    <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+                    @endforeach
+                </select>
                 <x-jet-label value="Nombre de empresa" />
-                <x-jet-input
+                {{-- <x-jet-input
                     type="text"
                     class="w-full"
                     wire:model.defer="empresa"
                     placeholder="Empresa"
-                />
+                /> --}}
                 <x-jet-input-error for="empresa" />
             </div>
 
