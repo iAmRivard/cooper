@@ -4,11 +4,14 @@ namespace App\Http\Livewire\Mantenimientos;
 
 use Livewire\Component;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\crm_empresas;
 
 class Empresas extends Component
 {
-    public $open = false, $nombre;
+    public $open = false, $open_empresa = false;
+
+    public $nombre, $empresa_selected;
 
     protected $rules = [
         'nombre'    => 'required|string'
@@ -37,6 +40,12 @@ class Empresas extends Component
             'open',
             'nombre',
         ]);
+    }
 
+    public function buscarEmpresa($empresaId)
+    {
+        $this->empresa_selected    =   DB::table('crm_empresas')
+                                        ->find($empresaId);
+        $this->open_empresa = true;
     }
 }

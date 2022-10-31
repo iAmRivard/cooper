@@ -101,39 +101,50 @@
                         placeholder="$10.00"
                         type="number"
                         class="w-full"
-                        wire:model.defer="aportacion"
+                        wire:model="aportacion"
                     />
                     <x-jet-input-error for="aportacion" />
                 </div>
             </div>
 
-            {{-- Correo electronico --}}
-            <div class="mb-4">
-                <x-jet-label value="Correo del Socio" />
-                <x-jet-input
-                    type="email"
-                    class="w-full"
-                    wire:model.defer="correo"
-                    placeholdeR="ejemplo@ejemplo.com"
-                />
-                <x-jet-input-error for="correo" />
+            <div class="flex mb-4">
+                {{-- Correo electronico --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Correo del Socio" />
+                    <x-jet-input
+                        type="email"
+                        class="w-full"
+                        wire:model.defer="correo"
+                        placeholdeR="ejemplo@ejemplo.com"
+                    />
+                    <x-jet-input-error for="correo" />
+                </div>
+
+                {{-- NIT del socio --}}
+
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Código de empleado" />
+                    <x-jet-input
+                        placeholder="Código de empleado"
+                        type="text"
+                        class="w-full"
+                        wire:model.defer="codigoEmpleado"
+                    />
+                    <x-jet-input-error for="codigoEmpleado" />
+                </div>
             </div>
+
+
 
             {{-- Empresa --}}
             <div class="mb-4">
                 <select class="select select-bordered w-full" wire:model="empresa">
-                    <option >WSeleccionar una empresa</option>
+                    <option >Seleccionar una empresa</option>
                     @foreach ($empresas as $empresa)
                     <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
                     @endforeach
                 </select>
                 <x-jet-label value="Nombre de empresa" />
-                {{-- <x-jet-input
-                    type="text"
-                    class="w-full"
-                    wire:model.defer="empresa"
-                    placeholder="Empresa"
-                /> --}}
                 <x-jet-input-error for="empresa" />
             </div>
 

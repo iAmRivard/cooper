@@ -19,7 +19,7 @@ class CreateSocio extends Component
 
     public $open = false;
 
-    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion;
+    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado;
 
     protected $rules = [
         'nombres'       => 'required',
@@ -39,7 +39,6 @@ class CreateSocio extends Component
 
     public function guardar()
     {
-
         $this->validate();
 
         // Creacuón del usuario
@@ -63,6 +62,7 @@ class CreateSocio extends Component
             'aportacion'    => $this->aportacion,
             'user_id'       => $user->id,
             'empresa_id'    => $this->empresa,
+            'codigo_empleado'   => $this->codigoEmpleado,
         ]);
 
         $empresas = crm_empresas::create([

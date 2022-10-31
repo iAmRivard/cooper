@@ -20,7 +20,8 @@ class Crm_socios extends Model
         'estado',
         'aportacion',
         'user_id',
-        'codigo_empleado'
+        'codigo_empleado',
+        'empresa_id'
     ];
 
     public function cuentas()
