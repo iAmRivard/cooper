@@ -19,10 +19,13 @@ return new class extends Migration
             $table->unsignedBigInteger('credito_id');
             $table->unsignedBigInteger('socio_id');
             $table->unsignedBigInteger('user_id');
+            $table->decimal('nro_cuota');
             $table->decimal('cuota');
             $table->decimal('interes');
             $table->decimal('interes_acumulado');
-            $table->decimal('total');
+            $table->decimal('cuota_capital');
+            $table->decimal('saldo');
+            $table->decimal('capital_amortizado');
             $table->timestamp('fecha_programada');
             $table->boolean('estado');
 
