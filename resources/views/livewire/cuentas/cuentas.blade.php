@@ -42,6 +42,8 @@
                                 <th>Socio</th>
                                 <th>Tipo de Cuenta</th>
                                 <th>Saldo Actual</th>
+                                <th>Plazo</th>
+                                <th>Proceso</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
@@ -55,7 +57,9 @@
                                     </td>
                                     <td><b>{{ $cuenta->tipoCuenta->nombre }}</b></td>
                                     <td>${{ $cuenta->saldo_actual }}</td>
-                                    <td>Activa</td>
+                                    <td><b>{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else NO APLICA @endif{{ $cuenta->cantidad_quincenas }} </b> </td>
+                                    <td>{{ $cuenta->finalizado ? 'Finalizado' : 'Ejecución' }}</td>
+                                    <td>{{ $cuenta->estado ? 'Activo' : 'Inactivo' }}</td>
 
                                     <td>
                                         <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">

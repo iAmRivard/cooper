@@ -15,7 +15,9 @@ class Credito extends Model
         'monto',
         'saldo_actual',
         'porcentaje_interes',
-        'estado'
+        'estado',
+        'cantidad_cuotas',
+        'cuota_actual'
     ];
 
     public function socio()

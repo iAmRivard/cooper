@@ -27,6 +27,9 @@ return new class extends Migration
 
             $table->foreign('tipo_credito_id')
                     ->references('id')->on('tipo_creditos');
+
+            $table->unsignedBigInteger('cantidad_cuotas')->default(0);
+            $table->unsignedBigInteger('cuota_actual')->default(0);
             $table->timestamps();
         });
     }

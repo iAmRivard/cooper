@@ -16,12 +16,12 @@
 
                 <div class="flex justify-center">
                     <div class="w-1/2">
-                        <x-jet-label value="{{ __('Buscar cuenta') }}" />
+                        <x-jet-label value="{{ __('Buscar Crédito') }}" />
                         <x-jet-input
                             class="block mt-1 w-full"
                             type="text"
                             wire:model="buscar"
-                            placeholder="Buscar socio por Nº de cuenta"
+                            placeholder="Buscar socio por Nº de credito"
                         />
                     </div>
                 </div>
@@ -33,10 +33,13 @@
                           <!-- head -->
                           <thead>
                             <tr>
-                                <th># Cuenta</th>
+                                <th># Credito</th>
                                 <th>Socio</th>
-                                <th>Tipo de Cuenta</th>
+                                <th>Tipo de Credito</th>
                                 <th>Monto</th>
+                                <th>Saldo Actual</th>
+                                <th>Interes</th>
+                                <th># Cuotas</th>
                                 <th>Estado</th>
                                 <th>&nbsp;</th>
                             </tr>
@@ -50,11 +53,14 @@
                                     </td>
                                     <td>{{ $credito->tipoCredito->nombre }}</td>
                                     <td>${{ $credito->monto }}</td>
+                                    <td>${{ $credito->saldo_actual }}</td>
+                                    <td>{{ $credito->porcentaje_interes}}% </td>
+                                    <td> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
                                     <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
 
                                     <td>
                                         <a href="{{ route('ver.credito', $credito->id) }}" class="a-link">
-                                            ver cuenta
+                                            Detalles
                                         </a>
                                     </td>
                                 </tr>
