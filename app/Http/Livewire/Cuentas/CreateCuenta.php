@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
 use App\Models\Crc_tipos_cuenta;
+use App\Models\Ctr_cuenta_det;
 
 class CreateCuenta extends Component
 {
@@ -63,9 +64,23 @@ class CreateCuenta extends Component
             $nueva_cuenta->monto_plazo  = $this->monto_plazo;
             $nueva_cuenta->cantidad_quincenas =   $this->cantidad_cuotas;
             $nueva_cuenta->quincena_actual =   0;
+            $nueva_cuenta->saldo_actual = $this->monto_plazo;
         }
         $nueva_cuenta->save();
+    
+        // GENERANDO PRIMER MOVIMIENTO CUANDO ES A PLAZO.
+        if($this->othersCamp) {
+        $abono = Ctr_cuenta_det::create([
+            'tipo_movimiento_id'    => 1,
+            'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZI',
+            'monto'                 => $this->monto_plazo,
+            'naturaleza'            => 1,
+            'ctr_cuentas_id'        => $nueva_cuenta->id,
+            'saldo_fecha'           => $this->monto_plazo
+        ]);
 
+        $abono->save();
+        }
         $this->emitTo('cuentas.cuentas','render');
 
         $this->emit('exito', 'La cuenta fue creado con exito');

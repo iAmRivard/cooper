@@ -10,7 +10,7 @@ use App\Models\ViewPresentacionCierreCuentas as Cierre;
 
 class CierreCuentas extends Component
 {
-    public $option, $search, $data;
+    public $option, $search, $data, $quincena,$month,$year;
 
     public function render()
     {
@@ -19,7 +19,9 @@ class CierreCuentas extends Component
 
     public function search()
     {
-        $this->data = Cierre::where($this->option, 'like', '%' . $this->search . '%')
+        $this->data = Cierre::where('quincena', '=', $this->quincena)
+        ->where('mes','=',$this->month)
+        ->where('anio','=',$this->year)
                         ->get();
     }
 }

@@ -31,9 +31,8 @@ return new class extends Migration
 
             $table->foreign('crc_topo_cuenta_id')
                     ->references('id')->on('crc_tipos_cuentas');
-
-
             $table->timestamps();
+            $table->boolean('finalizado')->default(0);
         });
     }
 

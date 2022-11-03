@@ -2,15 +2,17 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="py-4 flex justify-center gap-4">
-                    <select class="select select-bordered w-full max-w-xs" wire:model="option">
-                        <option>Seleccione una opción</option>
-                        <option value="anio">Año</option>
-                        <option value="mes">Mes</option>
-                        <option value="quincena">Quincena</option>
+                <div class="py-4 flex justify-center gap-4 p-2">
+                <label><b>Quincena:</b> </label>
+                    <select class="select select-bordered w-full max-w-xs" wire:model="quincena" required>
+                        <option>Seleccionar</option>
+                        <option value="1">1ra Quincena</option>
+                        <option value="2">2da Quincena</option>
                     </select>
-
-                    <input type="text" placeholder="Ingrese el valor" class="input input-bordered w-full max-w-xs" wire:model="search" />
+                    <label><b>Año:</b> </label>
+                    <input type="number" placeholder="202X" min="1950" max="3000" class="input input-bordered w-full max-w-xs" wire:model="year" required />
+                    <label><b>Mes:</b> </label>
+                    <input type="number" min="1" max="12" placeholder="1" class="input input-bordered w-full max-w-xs" wire:model="month" required />
 
                     <button class="btn" wire:click="search">Buscar</button>
                 </div>
