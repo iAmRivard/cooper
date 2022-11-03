@@ -49,4 +49,9 @@ class Crm_socios extends Model
         return $this->hasMany(crm_empresas::class, 'crm_socio_id');
     }
 
+    public function empresa()
+    {
+        return $this->belongsTo(crm_empresas::class, 'empresa_id');
+    }
+
 }

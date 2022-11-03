@@ -8,9 +8,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
-                <h2 class="text-xl mx-4 py-8"> <b> Consulta / Creación de Socios</b></h2>
-
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar socio') }}" />
@@ -25,12 +22,14 @@
                         <table class="table table-fixed">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
+                                    <th>Empresa</th>
+                                    <th>Cod. Empleado</th>
                                     <th>DUI</th>
-                                    <th>NIT</th>
-                                    <th>Direción</th>
                                     <th>Salario</th>
+                                    <th>Aportacion</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -39,12 +38,14 @@
 
                                 @foreach ($socios as $item)
                                     <tr>
-                                        <td><b> {{ $item->nombres}} </b></td>
+                                        <td class="font-bold">{{ $item->id }}</td>
+                                        <td>{{ $item->nombres}} </td>
                                         <td>{{ $item->apellidos}}</td>
-                                        <td> <b>{{ $item->dui }}</b></td>
-                                        <td>{{ $item->nit}}</td>
-                                        <td>{{ $item->direccion }}</td>
+                                        <td class="font-bold" >{{ $item->empresa->nombre }}</td>
+                                        <td>{{ $item->codigo_empleado }}</td>
+                                        <td>{{ $item->dui }}</td>
                                         <td>${{ $item->salario }}</td>
+                                        <td class="font-bold" >${{ $item->aportacion }}</td>
                                         <td>
                                             <a class="cursor-pointer" wire:click="editar( {{$item}} )">
                                                 <i class="fas fa-edit"></i>

@@ -24,7 +24,7 @@ class Cuentas extends Component
     public function render()
     {
         $cuentas = Ctr_cuenta::where('id', 'like', '%' . $this->buscar . '%')
-                            ->orderBy('id', 'desc')
+                            ->orderBy('created_at', 'desc')
                             ->paginate(5);
 
         return view('livewire.cuentas.cuentas', compact('cuentas'));

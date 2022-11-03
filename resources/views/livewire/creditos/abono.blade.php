@@ -11,13 +11,13 @@
         <x-slot name="content">
             {{-- Buscar Cuenta --}}
             <div class="mb-4">
-                <x-jet-label>Buscar Cuetna</x-jet-label>
+                <x-jet-label>Buscar Crédito a a Abonar</x-jet-label>
                 <x-jet-input
                     class="w-1/2"
                     type="text"
                     wire:model="buscar_cuenta"
                     wire:keydown="buscar"
-                    placeholder="Buscar cuenta por Nº de Cuenta"
+                    placeholder="Buscar cuenta por Nº de credito"
                 />
                 <i class="fa-solid fa-magnifying-glass cursor-pointer" name="buscar" wire:click="buscar"></i>
             </div>

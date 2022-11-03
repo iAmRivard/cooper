@@ -14,6 +14,7 @@ use App\Models\CrtPlanPago;
 use App\Models\Crm_socios;
 use App\Models\CrcPeriodo;
 use App\Models\Credito;
+use App\Models\CreditoDet;
 
 class CrearCredito extends Component
 {
@@ -101,8 +102,19 @@ class CrearCredito extends Component
             'monto' => $this->monto,
             'saldo_actual' => $this->monto,
             'porcentaje_interes' => $this->porcentaje,
+            'cantidad_cuotas' => $this->periodo,
             'estado' => 1
         ]);
+
+        $abono = CreditoDet::create([
+            'credito_id'                    => $nuevo_credito->id,
+            'socio_id'                      => $this->selec_socio,
+            'tipo_movimiento_credito_id'    => 1, // APERTURA DE CREDITO
+            'monto'                         => $this->monto,
+            'descripcion'                   => 'APERTURA DE CRÉDITO'
+        ]);
+
+        $abono->save();
 
         $periodo = new CrcPeriodo();
         $periodo->valor = $this->periodo;
@@ -148,7 +160,7 @@ class CrearCredito extends Component
 
         $this->emitTo('creditos.index','render');
 
-        $this->emit('exito', 'La cuenta fue creado con exito');
+        $this->emit('exito', 'El credito fue creado con exito');
 
         $this->reset([
             'open',
@@ -157,5 +169,7 @@ class CrearCredito extends Component
             'monto',
             'porcentaje'
         ]);
+
+        //return redorect()->route('nombre_ruta');
     }
 }

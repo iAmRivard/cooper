@@ -48,14 +48,14 @@
                             @foreach ($creditos as $credito)
                                 <tr>
                                     <td>{{ $credito->id}}</td>
-                                    <td>
+                                    <td class="font-bold">
                                         {{ $credito->socio->nombres . " " . $credito->socio->apellidos }}
                                     </td>
-                                    <td>{{ $credito->tipoCredito->nombre }}</td>
+                                    <td class="font-bold">{{ $credito->tipoCredito->nombre }}</td>
                                     <td>${{ $credito->monto }}</td>
                                     <td>${{ $credito->saldo_actual }}</td>
                                     <td>{{ $credito->porcentaje_interes}}% </td>
-                                    <td> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
+                                    <td class="font-bold"> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
                                     <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
 
                                     <td>

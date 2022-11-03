@@ -10,18 +10,38 @@
                 <div class="flex justify-center mb-4 mt-4">
                     <div class="stats shadow">
                         <div class="stat">
-                            <div class="stat-title">Numero de cuenta</div>
+                            <div class="stat-title">Numero de cuenta </div>
                             <div class="stat-value text-primary">#{{$cuenta->id}}</div>
                             <div class="stat-desc">{{$cuenta->tipoCuenta->nombre}}</div>
                         </div>
+                        @if ($cuenta->tipoCuenta->plazo)
+                        <div class="stat">
+                            <div class="stat-title">Monto Apertura</div>
+                            <div class="stat-value text-sky-900">${{number_format($cuenta->monto_plazo)}}</div>
+                            <div class="stat-desc">MONTO INICIAL</div>
+                        </div>
+                        @endif
                         <div class="stat">
                             <div class="stat-title">Saldo a la fecha</div>
                             <div class="stat-value text-green-900">${{number_format($cuenta->saldo_actual, 2)}}</div>
+                            @if ($cuenta->tipoCuenta->plazo)
+                            <div class="stat-desc">MONTO INICIAL + INTERESES</div>
+                            @else
+                            <div class="stat-desc">MONTO INICIAL + ABONOS/INTERESES</div>
+                            @endif
                         </div>
                         <div class="stat">
                             <div class="stat-value">{{$cuenta->socio->nombres}}</div>
                             <div class="stat-title">{{$cuenta->socio->apellidos}}</div>
                         </div>
+
+                        @if ($cuenta->tipoCuenta->plazo)
+                        <div class="stat">
+                            <div class="stat-title">{{$cuenta->finalizado ? 'Finalizado' : 'Ejecución'}}</div>
+                            <div class="stat-value">{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else / @endif{{ $cuenta->cantidad_quincenas }}</div>
+                            <div class="stat-desc">CUOTAS</div>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="flex justify-center mb-4">

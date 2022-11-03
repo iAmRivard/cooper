@@ -27,7 +27,7 @@ class Abono extends Component
 
     public function render()
     {
-        $tiposMovimiento = TipoMovimientoCredito::where('naturaleza', '=', '1')
+        $tiposMovimiento = TipoMovimientoCredito::where('naturaleza', '=', '0')
                                                 ->get();
 
         return view('livewire.creditos.abono', compact('tiposMovimiento'));
@@ -54,7 +54,7 @@ class Abono extends Component
 
         $this->cuenta_abonada = Credito::find($this->cuenta_select);
 
-        $this->cuenta_abonada->monto = $this->cuenta_abonada->monto - $this->monto;
+        $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual - $this->monto;
 
         $this->cuenta_abonada->save();
 
@@ -69,6 +69,6 @@ class Abono extends Component
             'descripcion'
         ]);
 
-        return redirect()->route('credito.abono', $abono);
+        //return redirect()->route('credito.abono', $abono);
     }
 }

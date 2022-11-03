@@ -56,9 +56,13 @@
                                         {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                     </td>
                                     <td><b>{{ $cuenta->tipoCuenta->nombre }}</b></td>
-                                    <td>${{ $cuenta->saldo_actual }}</td>
+                                    <td class="text-green">${{ $cuenta->saldo_actual }}</td>
                                     <td><b>{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else NO APLICA @endif{{ $cuenta->cantidad_quincenas }} </b> </td>
-                                    <td>{{ $cuenta->finalizado ? 'Finalizado' : 'Ejecución' }}</td>
+                                    <td class="font-bold text-center">
+                                    <span style="@if ($cuenta->finalizado == 1) color: green; @else color: orange; @endif">
+                                    {{ $cuenta->finalizado ? 'Finalizado' : 'Ejecución' }}
+                                    </span>
+                                  </td>
                                     <td>{{ $cuenta->estado ? 'Activo' : 'Inactivo' }}</td>
 
                                     <td>

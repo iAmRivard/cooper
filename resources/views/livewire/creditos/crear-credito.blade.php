@@ -141,7 +141,7 @@
                 </table>
             </div>
             <div class="modal-action">
-                <label for="my-modal-5" class="btn">Yay!</label>
+{{--                 <label for="my-modal-5" class="btn">Yay!</label>--}}
                 <button class="btn" wire:click="crear">Guardar</button>
             </div>
         </div>
