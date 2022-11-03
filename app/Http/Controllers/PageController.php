@@ -16,10 +16,6 @@ class PageController extends Controller
 
         $socio = Crm_socios::where('user_id', Auth::id())->first();
 
-        // dd($socio->cuentas);
-
-        // $accounts = Ctr_cuenta::where('')
-
         return view('dashboard', compact('typeUser', 'socio'));
     }
 }
