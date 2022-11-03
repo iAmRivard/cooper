@@ -2764,6 +2764,15 @@ html {
   margin-top: 1.5rem;
   justify-content: flex-end;
 }
+.modal-toggle {
+  position: fixed;
+  height: 0px;
+  width: 0px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  opacity: 0;
+}
 .select {
   display: inline-flex;
   flex-shrink: 0;
@@ -4209,6 +4218,9 @@ body[dir="rtl"] .checkbox:checked,
 .w-96 {
   width: 24rem;
 }
+.w-11\/12 {
+  width: 91.666667%;
+}
 .w-5\/6 {
   width: 83.333333%;
 }
@@ -4226,6 +4238,9 @@ body[dir="rtl"] .checkbox:checked,
 }
 .max-w-xs {
   max-width: 20rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
 }
 .max-w-6xl {
   max-width: 72rem;

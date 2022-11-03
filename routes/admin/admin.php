@@ -60,5 +60,7 @@ Route::middleware(['auth', 'rol'])->group(function () {
 
     Route::get('/cuentas/reporte-quincena/{socioId}', [PDFController::class, 'quincena'])
         ->name('reporte.quincenal');
+
+    Route::get('/reporte/cierre-cuentas', App\Http\Livewire\Reporte\CierreCuentas::class)->name('reporte.cierre-cuentas');
 });
 

@@ -6,17 +6,20 @@ use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
 
+use Carbon\Carbon;
+
+use App\Models\CrtPlanPagoDet;
 use App\Models\TipoCredito;
-use App\Models\Crm_socios;
 use App\Models\CrtPlanPago;
-use App\Models\Credito;
+use App\Models\Crm_socios;
 use App\Models\CrcPeriodo;
+use App\Models\Credito;
 
 class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion;
 
     public $socios = [];
 
@@ -26,6 +29,54 @@ class CrearCredito extends Component
         'selec_socio' => 'required',
         'tipo_cuenta' => 'required'
     ];
+
+    public function updatedPeriodo($value)
+    {
+        $plan_pagos = [];
+
+        $frist = [
+            'socio_id'  => $this->selec_socio,
+            'user_id'   => Auth::id(),
+            'nro_cuota' => 0,
+            'cuota' => $this->cuotaFija,
+            'interes'   =>  ($this->porcentaje / 100),
+            'interes_acumulado' => 0,
+            'cuota_capital' =>  0,
+            'saldo' => $this->monto,
+            'capital_amortizado'    => 0,
+            'fecha_programada'  => 0
+        ];
+
+        array_push($plan_pagos, $frist);
+
+        for ($i=0; $i < $value ; $i++) {
+
+            $interes = ((float)$plan_pagos[$i]['saldo'] * ($this->porcentaje / 100));
+
+            $interes_acumulado = ((float)$plan_pagos[$i]['interes_acumulado'] +  $interes);
+
+            $cuota_capital = ((float)$plan_pagos[$i]['cuota'] - $interes);
+
+            $saldo = ((float)$plan_pagos[$i]['saldo'] - $cuota_capital);
+
+            $capital_amortizado = ((float)$plan_pagos[$i]['capital_amortizado'] + $cuota_capital);
+            $semana = [
+                'socio_id'  => $this->selec_socio,
+                'user_id'   => Auth::id(),
+                'nro_cuota' => ($i + 1),
+                'cuota' => $this->cuotaFija,
+                'interes'   =>  $interes,
+                'interes_acumulado' => $interes_acumulado,
+                'cuota_capital' =>  $cuota_capital,
+                'saldo' => $saldo,
+                'capital_amortizado'    => $capital_amortizado,
+                'fecha_programada'  => ''
+            ];
+            array_push($plan_pagos, $semana);
+        }
+
+        $this->tabla_amortizacion = $plan_pagos;
+    }
 
     public function render()
     {
@@ -44,7 +95,6 @@ class CrearCredito extends Component
 
     public function crear()
     {
-
         $nuevo_credito = Credito::create([
             'socio_id' => $this->selec_socio,
             'tipo_credito_id' => $this->tipo_cuenta,
@@ -78,7 +128,23 @@ class CrearCredito extends Component
             'estado' => 1
         ]);
 
-        //$plan_pago_det = CrtPlanPagoDet::create([ ])
+        foreach($this->tabla_amortizacion as $tabla => $t) {
+            CrtPlanPagoDet::create([
+                'plan_pago_id'  =>  $plan_pago->id,
+                'credito_id'    =>  $nuevo_credito->id,
+                'socio_id'      =>  $this->selec_socio,
+                'user_id'   =>  Auth::id(),
+                'nro_cuota' =>  $t['nro_cuota'],
+                'cuota' =>  $t['cuota'],
+                'interes'   =>  $t['interes'],
+                'interes_acumulado' =>  $t['interes_acumulado'],
+                'cuota_capital' =>  $t['cuota_capital'],
+                'saldo' =>  $t['saldo'],
+                'capital_amortizado'    =>  $t['capital_amortizado'],
+                'fecha_programada'  =>  Carbon::now(),
+                'estado'    =>  1,
+            ]);
+        }
 
         $this->emitTo('creditos.index','render');
 
@@ -91,6 +157,5 @@ class CrearCredito extends Component
             'monto',
             'porcentaje'
         ]);
-
     }
 }
