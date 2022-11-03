@@ -12,7 +12,7 @@ class CreateCuenta extends Component
 {
     public $open = false;
 
-    public $selec_socio, $plazo, $cuenta, $othersCamp = false;
+    public $selec_socio, $plazo, $cuenta, $monto_plazo, $cantidad_cuotas, $othersCamp = false;
 
     public $socios = [];
 
@@ -20,7 +20,7 @@ class CreateCuenta extends Component
 
     protected $rules = [
         'selec_socio' => 'required',
-        'tipo_cuenta' => 'required'
+        'cuenta' => 'required'
     ];
 
     public function render()
@@ -32,7 +32,7 @@ class CreateCuenta extends Component
     public function updatedCuenta($value)
     {
         $das = json_decode($value);
-        if($das->plazo == 1) 
+        if($das->plazo == 1)
         {
             $this->othersCamp = true;
         }
@@ -49,18 +49,22 @@ class CreateCuenta extends Component
 
     public function crear()
     {
-
+        $tipo_cuenta = json_decode($this->cuenta);
         $socio_selected = Crm_socios::find($this->selec_socio);
-        $tipo_cuenta_selected = Crc_tipos_cuenta::find($this->cuenta->id);
         $toDay = getDate();
 
-        $nueva_cuenta = Ctr_cuenta::create([
-            'no_cuenta' => strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta_selected->id),
-            'crm_socio_id' => $this->selec_socio,
-            'crc_topo_cuenta_id' => $this->cuenta->id,
-            'saldo_actual' => 0,
-            'estado' => true,
-        ]);
+        $nueva_cuenta   =   new Ctr_cuenta();
+        $nueva_cuenta->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta->id);
+        $nueva_cuenta->crm_socio_id = $this->selec_socio;
+        $nueva_cuenta->crc_topo_cuenta_id = $tipo_cuenta->id;
+        $nueva_cuenta->saldo_actual = 0;
+        $nueva_cuenta->estado   =   true;
+        if($this->othersCamp) {
+            $nueva_cuenta->monto_plazo  = $this->monto_plazo;
+            $nueva_cuenta->cantidad_quincenas =   $this->cantidad_cuotas;
+            $nueva_cuenta->quincena_actual =   0;
+        }
+        $nueva_cuenta->save();
 
         $this->emitTo('cuentas.cuentas','render');
 
@@ -69,7 +73,7 @@ class CreateCuenta extends Component
         $this->reset([
             'open',
             'selec_socio',
-            'tipo_cuenta'
+            'cuenta'
         ]);
 
     }

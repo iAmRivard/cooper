@@ -40,16 +40,12 @@
             {{--    Selección de socio --}}
             <div class="mb-4">
                 <select class="select select-bordered w-full overflow-hidden appearance-none" size="3" required wire:model="selec_socio">
-
                     @foreach ($socios as $socio)
                         <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }}</option>
                     @endforeach
-
                 </select>
             </div>
-
             {{-- Selección de tipo de cuenta --}}
-          
             <div class="mb-4">
                 <x-jet-label>Selección del tipo de cuenta</x-jet-label>
                 <select class="select select-bordered w-full" wire:model="cuenta">
@@ -62,21 +58,35 @@
             </div>
 
             @if($othersCamp)
-               adsasdasd
+            <div class="mb-4">
+                <x-jet-label>Monto</x-jet-label>
+                <x-jet-input
+                    class="w-full input input-bordered"
+                    type="number"
+                    wire:model="monto_plazo"
+                    placeholder="Ingrese el monto"
+                />
+            </div>
+            <div class="mb-4">
+                <x-jet-label>Cuotas</x-jet-label>
+                <x-jet-input
+                    class="w-full input input-bordered"
+                    type="number"
+                    wire:model="cantidad_cuotas"
+                    placeholder="Ingrese la cantidad de cuotas"
+                />
+            </div>
             @endif
-
         </x-slot>
 
         <x-slot name="footer">
-
-            <x-jet-secondary-button class="mx-4" wire:click="$set('open', false)" >
+            <x-jet-secondary-button wire:loading.remove wire:target="crear" class="mx-4" wire:click="$set('open', false)" >
                 cancelar
             </x-jet-secondary-button>
-            <x-jet-button  wire:click="crear">
+            <x-jet-button  wire:loading.remove wire:target="crear" wire:click="crear">
                 crear
             </x-jet-button>
             <span wire:loading wire:target="crear">Procesando ...</span>
-
         </x-slot>
     </x-jet-dialog-modal>
 </div>

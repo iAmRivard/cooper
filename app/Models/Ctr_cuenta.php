@@ -15,6 +15,12 @@ class Ctr_cuenta extends Model
         'crc_topo_cuenta_id',
         'saldo_actual',
         'estado',
+        'monto_plazo',
+        'cantidad_quincenas',
+        'quincena_actual',
+        'fecha_inicio',
+        'fecha_fin',
+        'finalizado',
     ];
 
     public function socio()
