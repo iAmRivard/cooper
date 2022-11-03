@@ -12,7 +12,7 @@ class CreateCuenta extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta;
+    public $selec_socio, $plazo, $cuenta, $othersCamp = false;
 
     public $socios = [];
 
@@ -29,6 +29,15 @@ class CreateCuenta extends Component
         return view('livewire.cuentas.create-cuenta', compact('tipos_cuentas'));
     }
 
+    public function updatedCuenta($value)
+    {
+        $das = json_decode($value);
+        if($das->plazo == 1) 
+        {
+            $this->othersCamp = true;
+        }
+    }
+
     public function buscar()
     {
         $this->socios = Crm_socios::where('nombres', 'like', '%' . $this->buscar_socio . '%')
@@ -42,13 +51,13 @@ class CreateCuenta extends Component
     {
 
         $socio_selected = Crm_socios::find($this->selec_socio);
-        $tipo_cuenta_selected = Crc_tipos_cuenta::find($this->tipo_cuenta);
+        $tipo_cuenta_selected = Crc_tipos_cuenta::find($this->cuenta->id);
         $toDay = getDate();
 
         $nueva_cuenta = Ctr_cuenta::create([
             'no_cuenta' => strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta_selected->id),
             'crm_socio_id' => $this->selec_socio,
-            'crc_topo_cuenta_id' => $this->tipo_cuenta,
+            'crc_topo_cuenta_id' => $this->cuenta->id,
             'saldo_actual' => 0,
             'estado' => true,
         ]);

@@ -49,16 +49,21 @@
             </div>
 
             {{-- Selección de tipo de cuenta --}}
+          
             <div class="mb-4">
                 <x-jet-label>Selección del tipo de cuenta</x-jet-label>
-                <select class="select select-bordered w-full" wire:model="tipo_cuenta">
+                <select class="select select-bordered w-full" wire:model="cuenta">
                     <option>Seleccionar tipo de cuenta</option>
                     @foreach($tipos_cuentas as $tipo_cuenta)
-                        <option value="{{ $tipo_cuenta->id }}">{{ $tipo_cuenta->nombre }}</option>
+                        <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
                     @endforeach
 
                 </select>
             </div>
+
+            @if($othersCamp)
+               adsasdasd
+            @endif
 
         </x-slot>
 

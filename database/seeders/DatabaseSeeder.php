@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoCreditoSeeder::class);
 
         $this->call(TipoMovimientoCreditoSeeder::class);
+        $this->call(EmpresasSeeder::class);
+
 
 
         // \App\Models\User::factory(10)->create();

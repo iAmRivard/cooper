@@ -26,6 +26,13 @@ return new class extends Migration
              * Egreso = 0
              */
             $table->boolean('naturaleza');
+            /**
+             * 1 = primera
+             * 2 = segunda
+             */
+            $table->integer('quincena')->nullable();
+            
+     
 
             $table->foreign('tipo_movimiento_id')
                     ->references('id')->on('crc_tipos_de_movimientos');
@@ -35,6 +42,7 @@ return new class extends Migration
 
 
             $table->timestamps();
+            $table->boolean('automatico')->default(0);
         });
     }
 

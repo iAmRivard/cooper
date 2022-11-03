@@ -41,5 +41,18 @@ class Crc_topos_de_movimientoSeeder extends Seeder
             'naturaleza' => 0
         ]);
 
+        Crc_tipos_de_movimiento::create([
+            'nombre' => 'Aportacion',
+            'descripcion' => 'Utilizado los movimientos de las aportaciones',
+            'naturaleza' => 1
+        ]);
+
+        
+        Crc_tipos_de_movimiento::create([
+            'nombre' => 'Intereses',
+            'descripcion' => 'Movimiento utilizado para la percepcion de intereses',
+            'naturaleza' => 1
+        ]);
+
     }
 }
