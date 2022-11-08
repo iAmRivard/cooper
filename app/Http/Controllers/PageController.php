@@ -18,4 +18,11 @@ class PageController extends Controller
 
         return view('dashboard', compact('typeUser', 'socio'));
     }
+
+    public function getCuenta($id)
+    {
+        $cuenta = Ctr_cuenta::with('mv')
+                            ->find($id);
+        return view('socio.cuenta', compact('cuenta'));
+    }
 }

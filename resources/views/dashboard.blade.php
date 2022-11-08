@@ -18,14 +18,16 @@
                 </div>
                 <div class="flex flex-col sm:flex-row">
                 @foreach ($socio->cuentas as $cuenta)
-                <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
-                    <div class="card-body">
-                        <h2 class="card-title">${{ $cuenta->saldo_actual }}</h2>
-                        <p>
-                            <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">{{ $cuenta->tipoCuenta->nombre }} </a>
-                        </p>
+                <a href="{{ route('cuenta.detalle', $cuenta->id) }}">
+                    <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">${{ $cuenta->saldo_actual }}</h2>
+                            <p>
+                                <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="a-link">{{ $cuenta->tipoCuenta->nombre }} </a>
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
                 @endforeach
                 </div>
             </div>

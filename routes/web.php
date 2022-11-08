@@ -23,7 +23,10 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
-    Route::get('/dashboard', [App\Http\Controllers\PageController::class, 'getWelcome'])->name('dashboard');
+    Route::get('/dashboard', [App\Http\Controllers\PageController::class, 'getWelcome'])
+            ->name('dashboard');
+    Route::get('/cuenta/{id}', [App\Http\Controllers\PageController::class, 'getCuenta'])
+            ->name('cuenta.detalle');
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');
