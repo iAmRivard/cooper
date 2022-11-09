@@ -29,4 +29,9 @@ class Credito extends Model
     {
         return $this->belongsTo(TipoCredito::class, 'tipo_credito_id');
     }
+
+    public function detalles()
+    {
+        return $this->hasMany(CreditoDet::class, 'credito_id');
+    }
 }

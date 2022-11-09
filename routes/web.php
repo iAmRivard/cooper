@@ -27,6 +27,9 @@ Route::middleware([
             ->name('dashboard');
     Route::get('/cuenta/{id}', [App\Http\Controllers\PageController::class, 'getCuenta'])
             ->name('cuenta.detalle');
+
+    Route::get('/credito/{id}', [App\Http\Controllers\PageController::class, 'getCredito'])
+            ->name('credito.detalle');
     // Route::get('/dashboard', function () {
     //     return view('dashboard');
     // })->name('dashboard');

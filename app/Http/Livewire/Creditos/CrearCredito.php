@@ -170,6 +170,6 @@ class CrearCredito extends Component
             'porcentaje'
         ]);
 
-        //return redorect()->route('nombre_ruta');
+        return redirect()->route('creditos');
     }
 }

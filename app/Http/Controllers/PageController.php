@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Ctr_cuenta;
 use App\Models\Crm_socios;
+use App\Models\Credito;
 
 class PageController extends Controller
 {
@@ -24,5 +25,15 @@ class PageController extends Controller
         $cuenta = Ctr_cuenta::with('mv')
                             ->find($id);
         return view('socio.cuenta', compact('cuenta'));
+    }
+
+    public function getCredito($id)
+    {
+        $credito = Credito::with('detalles')
+                            ->find($id);
+
+        // dd($credito);
+
+        return view('socio.credito', compact('credito'));
     }
 }

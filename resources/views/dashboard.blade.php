@@ -41,12 +41,14 @@
                     </div>
                     <div class="flex flex-col sm:flex-row">
                         @foreach ($socio->creditos as $credito)
-                        <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
-                            <div class="card-body">
-                                <h2 class="card-title">${{ $credito->monto }}</h2>
-                                <p>{{ $credito->tipoCredito->nombre }}</p>
+                        <a href="{{ route('credito.detalle', $credito->id) }}">
+                            <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
+                                <div class="card-body">
+                                    <h2 class="card-title">${{ $credito->monto }}</h2>
+                                    <p>{{ $credito->tipoCredito->nombre }}</p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         @endforeach
                     </div>
                 </div>
