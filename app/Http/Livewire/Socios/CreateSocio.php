@@ -16,19 +16,18 @@ use App\Models\crm_empresas;
 
 class CreateSocio extends Component
 {
-
     public $open = false;
 
     public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado;
 
     protected $rules = [
-        'nombres'       => 'required',
-        'apellidos'     => 'required',
-        'dui'           => 'required|min:10|max:10|unique:crm_socios',
-        'direccion'     => 'required',
-        'salario'       => 'required',
-        'correo'        => 'required|email|unique:crm_socios',
-        'empresa'       => 'required'
+        // 'nombres'       => 'required',
+        // 'apellidos'     => 'required',
+        'dui'           => 'min:10|max:10|unique:crm_socios',
+        // 'direccion'     => 'required',
+        // 'salario'       => 'required',
+        'correo'        => 'email|unique:crm_socios',
+        // 'empresa'       => 'required'
     ];
 
     public function render()
