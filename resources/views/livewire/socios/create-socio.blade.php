@@ -11,7 +11,6 @@
         </x-slot>
 
         <x-slot name="content">
-
             <div class="flex mb-4">
                 {{-- Nombre del socio --}}
                 <div class="w-1/2 pr-4">
@@ -39,6 +38,32 @@
             </div>
 
             <div class="flex mb-4">
+                {{-- Numero de socio --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Número de socio" />
+                    <x-jet-input
+                        type="text"
+                        class="w-full"
+                        wire:model.defer="numero_socio"
+                        placeholdeR="Número de socio"
+                    />
+                    <x-jet-input-error for="numero_socio" />
+                </div>
+
+                {{-- Codigo del empleado --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Código de empleado" />
+                    <x-jet-input
+                        placeholder="Código de empleado"
+                        type="text"
+                        class="w-full"
+                        wire:model.defer="codigoEmpleado"
+                    />
+                    <x-jet-input-error for="codigoEmpleado" />
+                </div>
+            </div>
+
+            <div class="flex mb-4">
                 {{-- DUI del socio --}}
                 <div class="w-1/2 pr-4">
                     <x-jet-label value="DUI del Socio" />
@@ -53,7 +78,6 @@
                 </div>
 
                 {{-- NIT del socio --}}
-
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="NIT del Socio" />
                     <x-jet-input
@@ -92,9 +116,7 @@
                     <x-jet-input-error for="salario" />
                 </div>
 
-
                 {{-- Aportación del socio --}}
-
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Aportacion" />
                     <x-jet-input
@@ -120,38 +142,21 @@
                     <x-jet-input-error for="correo" />
                 </div>
 
-                {{-- NIT del socio --}}
-
+                {{-- Empresa --}}
                 <div class="w-1/2 pl-4">
-                    <x-jet-label value="Código de empleado" />
-                    <x-jet-input
-                        placeholder="Código de empleado"
-                        type="text"
-                        class="w-full"
-                        wire:model.defer="codigoEmpleado"
-                    />
-                    <x-jet-input-error for="codigoEmpleado" />
+                    <x-jet-label value="Nombre de empresa" />
+                    <select class="select select-bordered w-full" wire:model="empresa">
+                        <option >Seleccionar una empresa</option>
+                        @foreach ($empresas as $empresa)
+                        <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="empresa" />
                 </div>
             </div>
-
-
-
-            {{-- Empresa --}}
-            <div class="mb-4">
-                <select class="select select-bordered w-full" wire:model="empresa">
-                    <option >Seleccionar una empresa</option>
-                    @foreach ($empresas as $empresa)
-                    <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
-                    @endforeach
-                </select>
-                <x-jet-label value="Nombre de empresa" />
-                <x-jet-input-error for="empresa" />
-            </div>
-
         </x-slot>
 
         <x-slot name="footer">
-
             <x-jet-secondary-button class="mx-4" wire:click="$set('open', false)">
                 Cancelar
             </x-jet-secondary-button>
@@ -159,11 +164,7 @@
             <x-jet-button wire:click="guardar" wire:loading.remove wire:target="guardar">
                 Crear Socio
             </x-jet-button>
-
             <span wire:loading wire:target="guardar">Procesando ...</span>
-
         </x-slot>
     </x-jet-dialog-modal>
-
-
 </div>

@@ -18,7 +18,7 @@ class CreateSocio extends Component
 {
     public $open = false;
 
-    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado;
+    public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado, $numero_socio;
 
     protected $rules = [
         // 'nombres'       => 'required',
@@ -50,11 +50,11 @@ class CreateSocio extends Component
         ]);
 
         $new_socio = Crm_socios::create([
-            'nombres'       => $this->nombres,
-            'apellidos'     => $this->apellidos,
+            'nombres'       => strtoupper($this->nombres),
+            'apellidos'     => strtoupper($this->apellidos),
             'dui'           => $this->dui,
             'nit'           => $this->nit,
-            'direccion'     => $this->direccion,
+            'direccion'     => strtoupper($this->direccion),
             'correo'        => $this->correo,
             'salario'       => $this->salario,
             'estado'        => true,
@@ -64,14 +64,7 @@ class CreateSocio extends Component
             'codigo_empleado'   => $this->codigoEmpleado,
         ]);
 
-        $empresas = crm_empresas::create([
-            'nombre'        => $this->empresa,
-            'actual'        => true,
-            'crm_socio_id'  => $new_socio->id,
-        ]);
-
         $toDay = getDate();
-
         //Creamos la cuenta inicial (Considerando que el primer registro es la cuenta)
         Ctr_cuenta::create([
             'no_cuenta'             => strval($toDay["year"] . $toDay["mon"] . $new_socio->id . $new_socio->id),
