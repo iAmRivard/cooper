@@ -21,13 +21,13 @@ class CreateSocio extends Component
     public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado, $numero_socio;
 
     protected $rules = [
-        // 'nombres'       => 'required',
-        // 'apellidos'     => 'required',
+        'nombres'       => 'required',
+        'apellidos'     => 'required',
         'dui'           => 'min:10|max:10|unique:crm_socios',
-        // 'direccion'     => 'required',
-        // 'salario'       => 'required',
+        'direccion'     => 'required',
+        'salario'       => 'required',
         'correo'        => 'email|unique:crm_socios',
-        // 'empresa'       => 'required'
+        'empresa'       => 'required'
     ];
 
     public function render()
@@ -90,7 +90,6 @@ class CreateSocio extends Component
         ]);
 
         return redirect()->route('ver.socio', $new_socio);
-
     }
 
 }
