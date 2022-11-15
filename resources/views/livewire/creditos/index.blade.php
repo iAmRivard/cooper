@@ -13,8 +13,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
-
                 <div class="flex justify-center">
+                    {{-- input buscar socio --}}
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar Crédito') }}" />
                         <x-jet-input
@@ -26,11 +26,9 @@
                     </div>
                 </div>
 
-
                 <div class="container py-8 flex justify-center">
                     <div class="overflow-x-auto w-5/6">
                         <table class="table table-zebra w-full">
-                          <!-- head -->
                           <thead>
                             <tr>
                                 <th># Credito</th>
@@ -57,7 +55,6 @@
                                     <td>{{ $credito->porcentaje_interes}}% </td>
                                     <td class="font-bold"> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
                                     <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
-
                                     <td>
                                         <a href="{{ route('ver.credito', $credito->id) }}" class="a-link">
                                             Detalles

@@ -1,25 +1,17 @@
 <div>
     <x-slot name="header">
-
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
             @livewire('cuentas.create-cuenta')
             @livewire('movimientos.abono')
             @livewire('movimientos.retiros')
-
         </div>
-        {{-- <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Socios') }}
-        </h2> --}}
     </x-slot>
 
     <div class="py-12">
-
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
-
                 <div class="flex justify-center">
+                    {{-- Input buscar --}}
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
                         <x-jet-input
@@ -31,11 +23,9 @@
                     </div>
                 </div>
 
-
                 <div class="container py-8 flex justify-center">
                     <div class="overflow-x-auto w-5/6">
                         <table class="table table-zebra w-full">
-                          <!-- head -->
                           <thead>
                             <tr>
                                 <th># Cuenta</th>
@@ -79,11 +69,7 @@
                 <div class="px-6 py-3 flex justify-items-center justify-around">
                     {{$cuentas->links()}}
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
