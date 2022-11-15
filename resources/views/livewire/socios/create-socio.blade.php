@@ -39,7 +39,7 @@
 
             <div class="flex mb-4">
                 {{-- Numero de socio --}}
-                <div class="w-1/2 pr-4">
+                {{-- <div class="w-1/2 pr-4">
                     <x-jet-label value="Número de socio" />
                     <x-jet-input
                         type="text"
@@ -48,10 +48,10 @@
                         placeholdeR="Número de socio"
                     />
                     <x-jet-input-error for="numero_socio" />
-                </div>
+                </div> --}}
 
                 {{-- Codigo del empleado --}}
-                <div class="w-1/2 pl-4">
+                <div class="w-full">
                     <x-jet-label value="Código de empleado" />
                     <x-jet-input
                         placeholder="Código de empleado"
