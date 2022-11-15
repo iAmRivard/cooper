@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 
 use App\Models\Crm_socios;
+use App\Models\crm_empresas;
 
 class Socios extends Component
 {
@@ -45,7 +46,7 @@ class Socios extends Component
 
     public function render()
     {
-
+        $empresas = crm_empresas::all();
         // TODO: Agregar campo full name a la tabla socios
         $socios = Crm_socios::where('nombres', 'like', '%' . $this->buscarSocio . '%')
                             ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
@@ -55,7 +56,7 @@ class Socios extends Component
                             ->paginate(5);
 
 
-        return view('livewire.socios.socios', compact('socios'));
+        return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
 
     public function editar(Crm_socios $socio)
