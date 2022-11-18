@@ -22,7 +22,7 @@
         <x-slot name="content">
 
             <div class="mb-4">
-                <x-jet-label>Buscar Cuetna</x-jet-label>
+                <x-jet-label>Buscar Cuenta</x-jet-label>
                 <x-jet-input
                     class="w-1/2"
                     type="text"
