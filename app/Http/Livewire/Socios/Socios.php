@@ -33,6 +33,7 @@ class Socios extends Component
         'socio.apellidos' => 'required',
         'socio.aportacion' => 'required',
         'socio.empresa' => 'required',
+        'socio.codigoEmpleado' => 'required',
         'socio.dui' => 'required|min:9|max:9',
         'socio.nit' => 'required|min:13|max:13',
         'socio.direccion' => 'required',
