@@ -31,6 +31,8 @@ class Socios extends Component
     protected $rules = [
         'socio.nombres' => 'required',
         'socio.apellidos' => 'required',
+        'socio.aportacion' => 'required',
+        'socio.empresa_id' => 'required',
         'socio.dui' => 'required|min:9|max:9',
         'socio.nit' => 'required|min:13|max:13',
         'socio.direccion' => 'required',
