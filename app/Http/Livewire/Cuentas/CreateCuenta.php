@@ -13,7 +13,7 @@ class CreateCuenta extends Component
 {
     public $open = false;
 
-    public $selec_socio, $plazo, $cuenta, $monto_plazo, $cantidad_cuotas, $othersCamp = false;
+    public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $othersCamp = false;
 
     public $socios = [];
 
@@ -21,7 +21,8 @@ class CreateCuenta extends Component
 
     protected $rules = [
         'selec_socio' => 'required',
-        'cuenta' => 'required'
+        'cuenta' => 'required',
+        // 'numero_cuenta' =>  'string'
     ];
 
     public function render()
@@ -50,12 +51,18 @@ class CreateCuenta extends Component
 
     public function crear()
     {
+        $this->validate();
+
         $tipo_cuenta = json_decode($this->cuenta);
         $socio_selected = Crm_socios::find($this->selec_socio);
         $toDay = getDate();
 
         $nueva_cuenta   =   new Ctr_cuenta();
-        $nueva_cuenta->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta->id);
+        if($this->numero_cuenta == "") {
+            $nueva_cuenta->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta->id);
+        } else {
+            $nueva_cuenta->no_cuenta = $this->numero_cuenta;
+        }
         $nueva_cuenta->crm_socio_id = $this->selec_socio;
         $nueva_cuenta->crc_topo_cuenta_id = $tipo_cuenta->id;
         $nueva_cuenta->saldo_actual = 0;
@@ -67,7 +74,7 @@ class CreateCuenta extends Component
             $nueva_cuenta->saldo_actual = $this->monto_plazo;
         }
         $nueva_cuenta->save();
-    
+
         // GENERANDO PRIMER MOVIMIENTO CUANDO ES A PLAZO.
         if($this->othersCamp) {
         $abono = Ctr_cuenta_det::create([

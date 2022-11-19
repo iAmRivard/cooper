@@ -1,6 +1,9 @@
 <div>
     <x-slot name="header">
-        @livewire('cuentas.activar-desactivar-cuenta', ['cuenta' => $cuenta])
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            @livewire('cuentas.activar-desactivar-cuenta', ['cuenta' => $cuenta])
+            @livewire('cuentas.editar-numero', ['cuenta' => $cuenta])
+        </div>
     </x-slot>
 
     <div class="py-12">

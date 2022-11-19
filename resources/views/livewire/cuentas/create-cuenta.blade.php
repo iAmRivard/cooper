@@ -9,23 +9,12 @@
         </x-slot>
 
         <x-slot name="content">
-
             <div class="mb-4">
-
-                {{-- Integración --}}
-
-                {{-- <x-select
-                    class="form-control"
-                    name="category_id"
-                    id="category_id"
-                    wire:model="buscar_socio"
-                    :options="$this->socios"
-                /> --}}
-
                 <x-jet-label>Buscar Socio</x-jet-label>
                 <x-jet-input
                     class="w-1/2 input input-bordered max-w-xs"
                     type="text"
+                    x-mask="99999999-9"
                     wire:model="buscar_socio"
                     wire:keydown="buscar"
                     placeholder="Buscar socio por: Nombre o DUI"
@@ -36,27 +25,38 @@
                 >
                 </i>
             </div>
-
-            {{--    Selección de socio --}}
+            {{-- Selección de socio --}}
             <div class="mb-4">
                 <select class="select select-bordered w-full overflow-hidden appearance-none" size="3" required wire:model="selec_socio">
                     @foreach ($socios as $socio)
                         <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }}</option>
                     @endforeach
                 </select>
+                <x-jet-input-error for="selec_socio" />
             </div>
-            {{-- Selección de tipo de cuenta --}}
-            <div class="mb-4">
-                <x-jet-label>Selección del tipo de cuenta</x-jet-label>
-                <select class="select select-bordered w-full" wire:model="cuenta">
-                    <option>Seleccionar tipo de cuenta</option>
-                    @foreach($tipos_cuentas as $tipo_cuenta)
-                        <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
-                    @endforeach
-
-                </select>
+            <div class="flex mb-4">
+                {{-- selección de cuenta --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Selección del tipo de cuenta</x-jet-label>
+                    <select class="select select-bordered w-full" wire:model="cuenta">
+                        <option>Seleccionar tipo de cuenta</option>
+                        @foreach($tipos_cuentas as $tipo_cuenta)
+                            <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
+                        @endforeach
+                    </select>
+                    <x-jet-input-error for="cuenta" />
+                </div>
+                {{-- NIT del socio --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Número de cuenta" />
+                    <input type="text"
+                        placeholder="Type here"
+                        wire.model.defer="numero_cuenta"
+                        class="input input-bordered w-full max-w-xs"
+                    />
+                    <x-jet-input-error for="numero_cuenta" />
+                </div>
             </div>
-
             @if($othersCamp)
             <div class="mb-4">
                 <x-jet-label>Monto</x-jet-label>
