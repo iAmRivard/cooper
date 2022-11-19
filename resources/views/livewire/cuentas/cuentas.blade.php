@@ -66,7 +66,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="px-6 py-3 flex justify-items-center justify-around">
+                <div class="m-4">
                     {{$cuentas->links()}}
                 </div>
             </div>
