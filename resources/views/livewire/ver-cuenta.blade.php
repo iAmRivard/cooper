@@ -50,6 +50,24 @@
                         @endif
                     </div>
                 </div>
+                @if ($cuenta->tipoCuenta->plazo == true)
+                <div class="flex gap-4 justify-center mb-4 mt-4">
+                    {{-- fecha de inicio --}}
+                    <div class="stats shadow">
+                        <div class="stat">
+                            <div class="stat-title">Fecha de inicio</div>
+                            <div class="stat-value">{{ $cuenta->fecha_inicio }}</div>
+                        </div>
+                    </div>
+                    {{-- Fecha fin --}}
+                    <div class="stats shadow">
+                        <div class="stat">
+                            <div class="stat-title">Fecha fin</div>
+                            <div class="stat-value">{{ $cuenta->fecha_fin }}</div>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div class="flex justify-center mb-4">
                     <table class="table table-zebra">
                         <thead>

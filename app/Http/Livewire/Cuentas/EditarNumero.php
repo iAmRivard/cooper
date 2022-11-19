@@ -6,7 +6,6 @@ use Livewire\Component;
 
 use App\Models\Ctr_cuenta;
 
-
 class EditarNumero extends Component
 {
     public $open = false;
