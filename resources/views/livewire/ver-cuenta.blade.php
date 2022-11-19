@@ -88,7 +88,9 @@
                         </tbody>
                     </table>
                 </div>
-                {{$movimientos->links()}}
+                <div class="m-4">
+                    {{$movimientos->links()}}
+                </div>
             </div>
 
         </div>
