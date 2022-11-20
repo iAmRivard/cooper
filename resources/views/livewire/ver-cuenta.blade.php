@@ -3,6 +3,7 @@
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
             @livewire('cuentas.activar-desactivar-cuenta', ['cuenta' => $cuenta])
             @livewire('cuentas.editar-numero', ['cuenta' => $cuenta])
+            @livewire('cuentas.edit-descuento-quincenal', ['cuenta' => $cuenta])
         </div>
     </x-slot>
 

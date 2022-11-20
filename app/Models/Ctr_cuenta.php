@@ -21,6 +21,7 @@ class Ctr_cuenta extends Model
         'fecha_inicio',
         'fecha_fin',
         'finalizado',
+        'pago_quincenal',
     ];
 
     public function socio()

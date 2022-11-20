@@ -13,7 +13,7 @@ class CreateCuenta extends Component
 {
     public $open = false;
 
-    public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $othersCamp = false;
+    public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $desceutno_quincenal, $othersCamp = false;
 
     public $socios = [];
 
@@ -67,12 +67,20 @@ class CreateCuenta extends Component
         $nueva_cuenta->crc_topo_cuenta_id = $tipo_cuenta->id;
         $nueva_cuenta->saldo_actual = 0;
         $nueva_cuenta->estado   =   true;
+
+        if($this->desceutno_quincenal == "") {
+            $nueva_cuenta->pago_quincenal = 0;
+        } else {
+            $nueva_cuenta->pago_quincenal = $this->desceutno_quincenal;
+        }
+
         if($this->othersCamp) {
             $nueva_cuenta->monto_plazo  = $this->monto_plazo;
             $nueva_cuenta->cantidad_quincenas =   $this->cantidad_cuotas;
             $nueva_cuenta->quincena_actual =   0;
             $nueva_cuenta->saldo_actual = $this->monto_plazo;
         }
+
         $nueva_cuenta->save();
 
         // GENERANDO PRIMER MOVIMIENTO CUANDO ES A PLAZO.

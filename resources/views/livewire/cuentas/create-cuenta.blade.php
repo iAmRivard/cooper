@@ -35,27 +35,37 @@
                 <x-jet-input-error for="selec_socio" />
             </div>
             <div class="flex mb-4">
-                {{-- selección de cuenta --}}
                 <div class="w-1/2 pr-4">
-                    <x-jet-label>Selección del tipo de cuenta</x-jet-label>
-                    <select class="select select-bordered w-full" wire:model="cuenta">
-                        <option>Seleccionar tipo de cuenta</option>
-                        @foreach($tipos_cuentas as $tipo_cuenta)
-                            <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
-                        @endforeach
-                    </select>
-                    <x-jet-input-error for="cuenta" />
+                    <x-jet-label>Descuento Quincenal</x-jet-label>
+                    <input
+                        class="input input-bordered w-full max-w-xs"
+                        type="text"
+                        placeholder="$10.00"
+                        wire:model="desceutno_quincenal"
+                    />
+                    <x-jet-input-error for="desceutno_quincenal" />
                 </div>
                 {{-- NIT del socio --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Número de cuenta" />
                     <input type="text"
-                        placeholder="Type here"
+                        placeholder="000000"
                         wire.model.defer="numero_cuenta"
                         class="input input-bordered w-full max-w-xs"
                     />
                     <x-jet-input-error for="numero_cuenta" />
                 </div>
+            </div>
+            {{-- selección de cuenta --}}
+            <div class="mb-4">
+                <x-jet-label>Selección del tipo de cuenta</x-jet-label>
+                <select class="select select-bordered w-full" wire:model="cuenta">
+                    <option>Seleccionar tipo de cuenta</option>
+                    @foreach($tipos_cuentas as $tipo_cuenta)
+                        <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
+                    @endforeach
+                </select>
+                <x-jet-input-error for="cuenta" />
             </div>
             @if($othersCamp)
             <div class="mb-4">
