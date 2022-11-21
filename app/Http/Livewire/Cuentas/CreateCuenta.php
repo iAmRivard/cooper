@@ -85,16 +85,16 @@ class CreateCuenta extends Component
 
         // GENERANDO PRIMER MOVIMIENTO CUANDO ES A PLAZO.
         if($this->othersCamp) {
-        $abono = Ctr_cuenta_det::create([
-            'tipo_movimiento_id'    => 1,
-            'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZI',
-            'monto'                 => $this->monto_plazo,
-            'naturaleza'            => 1,
-            'ctr_cuentas_id'        => $nueva_cuenta->id,
-            'saldo_fecha'           => $this->monto_plazo
-        ]);
+            $abono = Ctr_cuenta_det::create([
+                'tipo_movimiento_id'    => 1,
+                'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZI',
+                'monto'                 => $this->monto_plazo,
+                'naturaleza'            => 1,
+                'ctr_cuentas_id'        => $nueva_cuenta->id,
+                'saldo_fecha'           => $this->monto_plazo
+            ]);
 
-        $abono->save();
+            $abono->save();
         }
         $this->emitTo('cuentas.cuentas','render');
 

@@ -14,6 +14,7 @@
                 <x-jet-input
                     class="w-1/2 input input-bordered max-w-xs"
                     type="text"
+                    x-mask="99999999-9"
                     wire:model="buscar_socio"
                     wire:keydown="buscar"
                     placeholder="Buscar socio por: Nombre o DUI"
@@ -32,8 +33,45 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="flex mb-4">
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Selección del tipo de Credito</x-jet-label>
+                    <select class="select select-bordered w-full" wire:model="tipo_cuenta">
+                        <option>Seleccionar tipo de Credito</option>
+                        @foreach($tipos_creditos as $tipo_credito)
+                            <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
+                        @endforeach
+                    </select>
+                    {{-- <x-jet-label>Selección del monto</x-jet-label>
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model="monto"
+                        placeholder="$0.00"
+                    /> --}}
+                </div>
+                {{-- Apellidos del socio --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Número de credito" />
+                    <input
+                        type="text"
+                        placeholder="Colocar número de credito"
+                        wire:model="numero_credito"
+                        class="input input-bordered w-full max-w-xs"
+                    />
+                    {{-- <input type="text" class="text" /> --}}
+                    {{-- <x-jet-label value="Cuota Fija" />
+                    <x-jet-input
+                        type="number "
+                        class="w-full"
+                        wire:model="cuotaFija"
+                        placeholder="$0.00"
+                    /> --}}
+                </div>
+            </div>
             {{-- Selección de tipo de cuenta --}}
-            <div class="mb-4">
+            {{-- <div class="mb-4">
                 <x-jet-label>Selección del tipo de Credito</x-jet-label>
                 <select class="select select-bordered w-full" wire:model="tipo_cuenta">
                     <option>Seleccionar tipo de Credito</option>
@@ -41,7 +79,7 @@
                         <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
                     @endforeach
                 </select>
-            </div>
+            </div> --}}
             <div class="flex mb-4">
                 {{-- Nombre del socio --}}
                 <div class="w-1/2 pr-4">
@@ -104,9 +142,8 @@
     <input type="checkbox" id="my-modal-5" class="modal-toggle" />
     <div class="modal">
         <div class="modal-box w-11/12 max-w-5xl">
-
-            <div>
-
+            <div class="mb-4">
+                <h3 class="text-2xl">Tabla de amortización de credito</h3>
             </div>
 
             <div class="overflow-x-auto">
@@ -141,7 +178,7 @@
                 </table>
             </div>
             <div class="modal-action">
-{{--                 <label for="my-modal-5" class="btn">Yay!</label>--}}
+                <label for="my-modal-5" class="btn btn-success">Cancelar</label>
                 <button class="btn" wire:click="crear">Guardar</button>
             </div>
         </div>

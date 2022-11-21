@@ -20,7 +20,7 @@ class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $numero_credito;
 
     public $socios = [];
 
@@ -96,15 +96,23 @@ class CrearCredito extends Component
 
     public function crear()
     {
-        $nuevo_credito = Credito::create([
-            'socio_id' => $this->selec_socio,
-            'tipo_credito_id' => $this->tipo_cuenta,
-            'monto' => $this->monto,
-            'saldo_actual' => $this->monto,
-            'porcentaje_interes' => $this->porcentaje,
-            'cantidad_cuotas' => $this->periodo,
-            'estado' => 1
-        ]);
+        $toDay = getDate();
+
+        $nuevo_credito = new Credito();
+        $nuevo_credito->socio_id = $this->selec_socio;
+        $nuevo_credito->tipo_credito_id = $this->tipo_cuenta;
+        $nuevo_credito->monto = $this->monto;
+        $nuevo_credito->saldo_actual = $this->monto;
+        $nuevo_credito->porcentaje_interes = $this->porcentaje;
+        $nuevo_credito->cantidad_cuotas = $this->periodo;
+        $nuevo_credito->estado = 1;
+
+        if($this->numero_credito != "") {
+            $nuevo_credito->no_cuenta = $this->numero_credito;
+        } else {
+            $nuevo_credito->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $this->selec_socio . $this->tipo_cuenta);
+        }
+        $nuevo_credito->save();
 
         $abono = CreditoDet::create([
             'credito_id'                    => $nuevo_credito->id,
