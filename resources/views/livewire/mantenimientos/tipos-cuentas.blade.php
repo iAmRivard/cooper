@@ -15,7 +15,7 @@
                         <tr>
                           <th>Nombre</th>
                           <th>Decripción</th>
-                          <th>Porcentaje</th>
+                          <th>Tasa Anual</th>
                           <th>Estado</th>
                           <th>Acciones</th>
                         </tr>

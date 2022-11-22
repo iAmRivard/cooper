@@ -35,17 +35,7 @@
                 <x-jet-input-error for="selec_socio" />
             </div>
             <div class="flex mb-4">
-                <div class="w-1/2 pr-4">
-                    <x-jet-label>Descuento Quincenal</x-jet-label>
-                    <input
-                        class="input input-bordered w-full max-w-xs"
-                        type="text"
-                        placeholder="$10.00"
-                        wire:model="desceutno_quincenal"
-                    />
-                    <x-jet-input-error for="desceutno_quincenal" />
-                </div>
-                {{-- NIT del socio --}}
+                {{-- # de cuenta --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Número de cuenta" />
                     <input type="text"
@@ -67,7 +57,9 @@
                 </select>
                 <x-jet-input-error for="cuenta" />
             </div>
-            @if($othersCamp)
+
+        @if(isset($cuenta) && $cuenta->plazo)  
+              
             <div class="mb-4">
                 <x-jet-label>Monto</x-jet-label>
                 <x-jet-input
@@ -77,6 +69,7 @@
                     placeholder="Ingrese el monto"
                 />
             </div>
+
             <div class="mb-4">
                 <x-jet-label>Cuotas</x-jet-label>
                 <x-jet-input
@@ -86,6 +79,20 @@
                     placeholder="Ingrese la cantidad de cuotas"
                 />
             </div>
+ @endif   
+
+@if($cuenta != null && $cuenta->id != '1' && $cuenta->plazo == 0)
+           <div class="mb-4">
+                    <x-jet-label>Descuento Quincenal</x-jet-label>
+                    <input
+                        class="input input-bordered w-full max-w-xs"
+                        type="text"
+                        placeholder="$10.00"
+                        wire:model="desceutno_quincenal"
+                    />
+                    <x-jet-input-error for="desceutno_quincenal" />
+                </div>
+                
             @endif
         </x-slot>
 

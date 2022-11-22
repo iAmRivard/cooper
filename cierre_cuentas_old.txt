@@ -1,0 +1,94 @@
+CREATE DEFINER=`root`@`%` PROCEDURE `calculo_cuentas_quincenal`(IN v_numero_quincena INT, IN v_mes INT, IN v_anio INT)
+BEGIN
+
+  DECLARE v_cantidad_dias, v_ultimo_dia_mes INT;
+  DECLARE v_fecha_evaluar VARCHAR(20);
+  DECLARE v_dias_anio INT;
+  DECLARE v_fecha_busqueda_movimiento DATE;
+  SET v_fecha_evaluar = CONCAT(v_anio,'-',v_mes,'-','01');
+  SET v_dias_anio = (SELECT DAYOFYEAR(CONCAT(v_anio,'-12-31')));
+  SET v_ultimo_dia_mes = (SELECT DAY(LAST_DAY(v_fecha_evaluar)));
+  
+  
+   IF  v_numero_quincena = 1 THEN 
+    SET v_cantidad_dias = 15;
+    SET v_fecha_busqueda_movimiento = (SELECT date(concat(v_anio,'-',v_mes,'-',15)));
+  ELSEIF v_numero_quincena = 2 THEN 
+    SET v_cantidad_dias = v_ultimo_dia_mes - 15;
+    SET v_fecha_busqueda_movimiento = (SELECT date(concat(v_anio,'-',v_mes,'-',v_ultimo_dia_mes)));
+  END IF;
+  
+	#ELIMINANDO CALCULO REALIZADO POR CIERRE EJECUTADO MULTIPLES VECES	  
+	DELETE FROM ctr_cuenta_dets
+	WHERE tipo_movimiento_id in (6,5) AND automatico =1 and quincena = v_numero_quincena and MONTH(created_at) = v_mes AND year(created_at) = v_anio;
+    
+  	#ACTUALIZANDO MAESTRO DE CUENTAS
+	UPDATE ctr_cuentas c
+	SET c.saldo_actual = ( SELECT sum(cdets.monto) FROM ctr_cuenta_dets cdets where cdets.ctr_cuentas_id = c.id); 
+
+  
+  SELECT v_cantidad_dias,v_dias_anio, v_fecha_busqueda_movimiento,v_fecha_busqueda_movimiento;
+  #CALCULANDO INTERESES Y GENEREANDO CIERRE
+  REPLACE INTO  cierre_cuenta_quincenal 
+  SELECT id_cuenta,id_tipo_cuenta,v_anio,v_mes,v_numero_quincena ,IF(tcuenta.plazo = 1, c.monto_plazo ,sum(monto)) AS saldo_cierre, DATE(fecha_aplicacion) AS fecha_operacion,
+    v_dias_anio AS dias_anio,v_cantidad_dias AS cantidad_dias, v.porcentaje AS porcentaje_anual, round(v.porcentaje/v_dias_anio,6) porcentaje_diario,
+    ROUND((round(v.porcentaje/v_dias_anio,6) * IF(tcuenta.plazo = 1, c.monto_plazo ,sum(monto)) * v_cantidad_dias),2) AS intereses_generados, IF(id_tipo_cuenta = 1, s.aportacion,0.00)
+  FROM view_pre_cierre_cuentas v
+  inner join ctr_cuentas c ON c.id = id_cuenta 
+  inner join crm_socios s ON s.id = c.crm_socio_id 
+  inner join crc_tipos_cuentas tcuenta ON tcuenta.id = c.crc_topo_cuenta_id
+  WHERE  DATE(fecha_movimiento) <=  DATE(v_fecha_busqueda_movimiento) AND c.finalizado = 0
+  GROUP BY id_cuenta,id_tipo_cuenta,v.porcentaje,DATE(fecha_aplicacion);
+
+  
+  #REGISTRANDO MOVIMIENTO EN CUENTA DET. DEL INTERESES
+  INSERT INTO ctr_cuenta_dets
+  SELECT null,6,ccq.id_cuenta,CONCAT('PERCEPCION DE INTERESES #',v_numero_quincena, ' QUINCENA ',v_mes,'/',v_anio), ccq.intereses_generados, ccq.intereses_generados + c.saldo_actual,
+		1, ccq.quincena,v_fecha_busqueda_movimiento, now(),1
+	FROM cierre_cuenta_quincenal ccq 
+	INNER JOIN ctr_cuentas c ON ccq.id_cuenta = c.id
+	INNER JOIN crm_socios s ON c.crm_socio_id = s.id
+	WHERE ccq.anio = v_anio AND ccq.mes = v_mes AND ccq.quincena = v_numero_quincena
+    AND c.estado = 1 AND s.estado = 1;
+
+	#ACTUALIZANDO MAESTRO DE CUENTAS
+	UPDATE ctr_cuentas c
+	SET c.saldo_actual = ( SELECT sum(cdets.monto) FROM ctr_cuenta_dets cdets where cdets.ctr_cuentas_id = c.id);
+    
+    
+	#CALCULO DE APORTACION QUINCENAL
+    INSERT INTO ctr_cuenta_dets
+	SELECT null,5,c.id,CONCAT('APORTACION #',v_numero_quincena, ' QUINCENA ',v_mes,'/',v_anio), s.aportacion, s.aportacion + c.saldo_actual,
+		1, v_numero_quincena,v_fecha_busqueda_movimiento, now(),1
+	FROM ctr_cuentas c
+    INNER JOIN crm_socios s ON c.crm_socio_id = s.id
+    WHERE c.estado = 1 AND s.estado = 1 AND c.crc_topo_cuenta_id = 1;
+    #ACTUALIZANDO MAESTRO DE CUENTAS
+	UPDATE ctr_cuentas c
+	SET c.saldo_actual = ( SELECT sum(cdets.monto) FROM ctr_cuenta_dets cdets where cdets.ctr_cuentas_id = c.id);
+
+
+	#ACTUALIZANDO LA CANTIDAD DE CUOTAS 
+	UPDATE ctr_cuentas cc 
+	INNER JOIN
+	 (
+	SELECT c.id AS id_cuenta,count(cdet.id) AS cantidad_cuotas FROM ctr_cuentas c 
+	INNER JOIN ctr_cuenta_dets cdet ON cdet.ctr_cuentas_id = c.id
+	INNER JOIN crc_tipos_cuentas tcuenta ON tcuenta.id = c.crc_topo_cuenta_id
+	WHERE tcuenta.plazo = 1 and c.finalizado = 0 and c.estado = 1 AND cdet.quincena IS NOT NULL -- quicena is not null because the first row is a creation credit
+	) AS result on result.id_cuenta = cc.id
+	SET cc.quincena_actual = result.cantidad_cuotas;
+
+	UPDATE ctr_cuentas c
+		INNER JOIN crc_tipos_cuentas tcuenta ON tcuenta.id = c.crc_topo_cuenta_id
+		SET c.finalizado = 1, c.fecha_fin = DATE(v_fecha_busqueda_movimiento)
+		WHERE tcuenta.plazo = 1 AND c.finalizado = 0 AND c.estado = 1 AND c.cantidad_quincenas = c.quincena_actual;
+    
+    #ACTUALIZADO EL CAMPO FINALIZADO EN CASO NO ESTE TERMINADO EL PERIODO (DEBIDO A REPROCESAR EL CIERRE, EJECUTARLO DOS VECES)
+	UPDATE ctr_cuentas c
+		INNER JOIN crc_tipos_cuentas tcuenta ON tcuenta.id = c.crc_topo_cuenta_id
+		SET c.finalizado = 0
+		WHERE tcuenta.plazo = 1 AND c.finalizado = 1 AND c.estado = 1 AND c.cantidad_quincenas <> c.quincena_actual;
+
+
+END

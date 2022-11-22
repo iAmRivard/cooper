@@ -31,8 +31,8 @@
                                 <th># Cuenta</th>
                                 <th>Socio</th>
                                 <th>Tipo de Cuenta</th>
+                                <th>Aporte Quincenal</th>
                                 <th>Saldo Actual</th>
-                                <th>Plazo</th>
                                 <th>Proceso</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
@@ -41,13 +41,13 @@
                           <tbody>
                             @foreach ($cuentas as $cuenta)
                                 <tr>
-                                    <td> <b>{{ $cuenta->id}}</b></td>
+                                    <td> <b>{{ $cuenta->id}}</b> - {{ $cuenta->no_cuenta}} </td>
                                     <td>
                                         {{ $cuenta->socio->nombres . " " . $cuenta->socio->apellidos }}
                                     </td>
                                     <td><b>{{ $cuenta->tipoCuenta->nombre }}</b></td>
+                                    <td>{{ $cuenta->pago_quincenal != null ? '$'.$cuenta->pago_quincenal : 'N/A' }}</td>
                                     <td class="text-green">${{ $cuenta->saldo_actual }}</td>
-                                    <td><b>{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else NO APLICA @endif{{ $cuenta->cantidad_quincenas }} </b> </td>
                                     <td class="font-bold text-center">
                                     <span style="@if ($cuenta->finalizado == 1) color: green; @else color: orange; @endif">
                                     {{ $cuenta->finalizado ? 'Finalizado' : 'Ejecución' }}
