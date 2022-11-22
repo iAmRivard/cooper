@@ -27,16 +27,27 @@
             </div>
             {{-- Selección de socio --}}
             <div class="mb-4">
-                <select class="select select-bordered w-full overflow-hidden appearance-none" size="3" required wire:model="selec_socio">
+                <select class="select select-bordered w-full overflow-hidden appearance-none" size="5" required wire:model="selec_socio">
                     @foreach ($socios as $socio)
                         <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }}</option>
                     @endforeach
                 </select>
                 <x-jet-input-error for="selec_socio" />
             </div>
-            <div class="flex mb-4">
+            {{-- selección de cuenta --}}
+            <div class="mb-4">
+                <x-jet-label>Selección del tipo de cuenta</x-jet-label>
+                <select class="select select-bordered w-full" wire:model="cuenta">
+                    <option>Seleccionar tipo de cuenta</option>
+                    @foreach($tipos_cuentas as $tipo_cuenta)
+                        <option value="{{ $tipo_cuenta }}" class="@if ($tipo_cuenta->id == 1) hidden @endif">{{ $tipo_cuenta->nombre }}</option>
+                    @endforeach
+                </select>
+                <x-jet-input-error for="cuenta" />
+            </div>
+            <div class="grid grid-cols-2 gap-4 mb-4">
                 {{-- # de cuenta --}}
-                <div class="w-1/2 pl-4">
+                <div>
                     <x-jet-label value="Número de cuenta" />
                     <input type="text"
                         placeholder="000000"
@@ -45,44 +56,20 @@
                     />
                     <x-jet-input-error for="numero_cuenta" />
                 </div>
-            </div>
-            {{-- selección de cuenta --}}
-            <div class="mb-4">
-                <x-jet-label>Selección del tipo de cuenta</x-jet-label>
-                <select class="select select-bordered w-full" wire:model="cuenta">
-                    <option>Seleccionar tipo de cuenta</option>
-                    @foreach($tipos_cuentas as $tipo_cuenta)
-                        <option value="{{ $tipo_cuenta }}">{{ $tipo_cuenta->nombre }}</option>
-                    @endforeach
-                </select>
-                <x-jet-input-error for="cuenta" />
-            </div>
-
-        @if(isset($cuenta) && $cuenta->plazo)  
-              
-            <div class="mb-4">
-                <x-jet-label>Monto</x-jet-label>
-                <x-jet-input
-                    class="w-full input input-bordered"
-                    type="number"
-                    wire:model="monto_plazo"
-                    placeholder="Ingrese el monto"
-                />
-            </div>
-
-            <div class="mb-4">
-                <x-jet-label>Cuotas</x-jet-label>
-                <x-jet-input
-                    class="w-full input input-bordered"
-                    type="number"
-                    wire:model="cantidad_cuotas"
-                    placeholder="Ingrese la cantidad de cuotas"
-                />
-            </div>
- @endif   
-
-@if($cuenta != null && $cuenta->id != '1' && $cuenta->plazo == 0)
-           <div class="mb-4">
+                {{-- # de cuenta --}}
+                @if ($selec_1 or $selec_2)
+                <div>
+                    <x-jet-label>Cuotas</x-jet-label>
+                    <x-jet-input
+                        class="w-full input input-bordered"
+                        type="number"
+                        wire:model="cantidad_cuotas"
+                        placeholder="Ingrese la cantidad de cuotas"
+                    />
+                </div>
+                @endif
+                @if ($selec_2 or $selec_3)
+                <div>
                     <x-jet-label>Descuento Quincenal</x-jet-label>
                     <input
                         class="input input-bordered w-full max-w-xs"
@@ -92,8 +79,20 @@
                     />
                     <x-jet-input-error for="desceutno_quincenal" />
                 </div>
-                
-            @endif
+                @endif
+                @if ($selec_3)
+                <div>
+                    <x-jet-label>Monto plazo</x-jet-label>
+                    <input
+                        class="input input-bordered w-full max-w-xs"
+                        type="number"
+                        placeholder="$10.00"
+                        wire:model="monto_plazo"
+                    />
+                    <x-jet-input-error for="monto_plazo" />
+                </div>
+                @endif
+            </div>
         </x-slot>
 
         <x-slot name="footer">
