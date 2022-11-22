@@ -57,7 +57,7 @@
                     <x-jet-input-error for="numero_cuenta" />
                 </div>
                 {{-- # de cuenta --}}
-                @if ($selec_1 or $selec_2)
+                @if ($selec_2 or $selec_3)
                 <div>
                     <x-jet-label>Cuotas</x-jet-label>
                     <x-jet-input
@@ -68,7 +68,7 @@
                     />
                 </div>
                 @endif
-                @if ($selec_2 or $selec_3)
+                @if ($selec_1 or $selec_2)
                 <div>
                     <x-jet-label>Descuento Quincenal</x-jet-label>
                     <input
