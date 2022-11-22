@@ -16,7 +16,7 @@ class EditDescuentoQuincenal extends Component
         'descuento_quincenal'   =>  'required|number',
     ];
 
-    public function mount(Ctr_cuenta $cuetna)
+    public function mount(Ctr_cuenta $cuenta)
     {
         $this->cuenta = $cuenta;
     }

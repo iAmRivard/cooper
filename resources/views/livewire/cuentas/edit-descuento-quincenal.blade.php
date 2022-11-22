@@ -13,7 +13,7 @@
             <div class="w-full mb-4">
                 <x-jet-label value="Número de cuenta" />
                 <input type="number"
-                    value="{{ number_format($centa->pago_quincenal, 2) }}"
+                    value="{{ number_format($cuenta->pago_quincenal, 2) }}"
                     wire.model.defer="descuento_quincenal"
                     class="input input-bordered w-full"
                 />
