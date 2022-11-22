@@ -1,6 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        @livewire('user.reset-password',['socio' => $socio])
+        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+            @livewire('user.reset-password',['socio' => $socio])
+            @livewire('socios.activar-desactivar',['socio' => $socio])
+        </div>
     </x-slot>
 
     <div class="py-12">
