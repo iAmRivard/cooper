@@ -43,43 +43,18 @@
                             <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
                         @endforeach
                     </select>
-                    {{-- <x-jet-label>Selección del monto</x-jet-label>
-                    <x-jet-input
-                        type="number"
-                        class="w-full"
-                        wire:model="monto"
-                        placeholder="$0.00"
-                    /> --}}
                 </div>
-                {{-- Apellidos del socio --}}
+                {{-- Número de credito --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Número de credito" />
                     <input
                         type="text"
                         placeholder="Colocar número de credito"
-                        wire:model="numero_credito"
+                        wire:model="no_cuenta"
                         class="input input-bordered w-full max-w-xs"
                     />
-                    {{-- <input type="text" class="text" /> --}}
-                    {{-- <x-jet-label value="Cuota Fija" />
-                    <x-jet-input
-                        type="number "
-                        class="w-full"
-                        wire:model="cuotaFija"
-                        placeholder="$0.00"
-                    /> --}}
                 </div>
             </div>
-            {{-- Selección de tipo de cuenta --}}
-            {{-- <div class="mb-4">
-                <x-jet-label>Selección del tipo de Credito</x-jet-label>
-                <select class="select select-bordered w-full" wire:model="tipo_cuenta">
-                    <option>Seleccionar tipo de Credito</option>
-                    @foreach($tipos_creditos as $tipo_credito)
-                        <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
-                    @endforeach
-                </select>
-            </div> --}}
             <div class="flex mb-4">
                 {{-- Nombre del socio --}}
                 <div class="w-1/2 pr-4">
@@ -130,10 +105,13 @@
             <x-jet-secondary-button class="mx-4" wire:click="$set('open', false)" >
                 cancelar
             </x-jet-secondary-button>
-            <label for="my-modal-5" class="btn">Crear</label>
-            {{-- <x-jet-button  wire:click="crear">
-                crear
-            </x-jet-button> --}}
+            <label
+                for="my-modal-5"
+                class="btn"
+                wire:click="calcularAmortizacion"
+            >
+                Crear
+            </label>
             <span wire:loading wire:target="crear">Procesando ...</span>
         </x-slot>
     </x-jet-dialog-modal>
@@ -143,12 +121,48 @@
     <div class="modal">
         <div class="modal-box w-11/12 max-w-5xl">
             <div class="mb-4">
-                <h3 class="text-2xl">Tabla de amortización de credito</h3>
+                <div class="flex gap-4 mb-4">
+                    <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text">Número de credito</span>
+                        </label>
+                        <input type="text" placeholder="Número de credito" class="input input-bordered w-full max-w-xs" wire:model="no_cuenta" />
+                    </div>
+                    <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text">Monto</span>
+                        </label>
+                        <input type="number" class="input input-bordered w-full max-w-xs" wire:model="monto" />
+                    </div>
+                    <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text">Cuota Fija</span>
+                        </label>
+                        <input type="number" class="input input-bordered w-full max-w-xs" wire:model="cuotaFija" />
+                    </div>
+                    <div class="form-control w-full max-w-xs">
+                        <label class="label">
+                            <span class="label-text">Periodo</span>
+                        </label>
+                        <input type="number" class="input input-bordered w-full max-w-xs" wire:model="periodo" />
+                    </div>
+                </div>
+                <div class="flex justify-end mb-4">
+                    <button
+                        class="btn"
+                        wire:click="calcularAmortizacion"
+                    >
+                        recalcular
+                    </button>
+                </div>
             </div>
 
+            <div class="text-center mb-4">
+                <h3 class="text-2xl">Tabla de amortización de credito</h3>
+            </div>
+            @if ($tabla_amortizacion)
             <div class="overflow-x-auto">
                 <table class="table table-zebra w-full">
-                  <!-- head -->
                     <thead>
                         <tr>
                             <th>Semana</th>
@@ -160,23 +174,26 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                        @if ($tabla_amortizacion)
                         <!-- row 1 -->
-                            @foreach($tabla_amortizacion as $tabla => $t)
-                            <tr>
-                                <th>{{ $t['nro_cuota'] }}</th>
-                                <td>{{ $t['cuota'] }}</td>
-                                <td>{{ $t['interes'] }}</td>
-                                <td>{{ $t['cuota_capital'] }}</td>
-                                <td>{{ $t['saldo'] }}</td>
-                                <td>{{ $t['capital_amortizado'] }}</td>
-                            </tr>
-                            @endforeach
-                        @endif
+                        @foreach($tabla_amortizacion as $tabla => $t)
+                        <tr>
+                            <th>{{ $t['nro_cuota'] }}</th>
+                            <td>{{ $t['cuota'] }}</td>
+                            <td>{{ $t['interes'] }}</td>
+                            <td>{{ $t['cuota_capital'] }}</td>
+                            <td>{{ $t['saldo'] }}</td>
+                            <td>{{ $t['capital_amortizado'] }}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            @else
+            <div class="flex justify-center">
+                <progress class="progress w-56"></progress>
+            </div>
+            @endif
+
             <div class="modal-action">
                 <label for="my-modal-5" class="btn btn-success">Cancelar</label>
                 <button class="btn" wire:click="crear">Guardar</button>

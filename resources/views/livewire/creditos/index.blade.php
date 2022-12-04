@@ -66,7 +66,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="px-6 py-3 flex justify-items-center justify-around">
+                <div class="px-6 py-3">
                     {{$creditos->links()}}
                 </div>
 

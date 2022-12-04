@@ -20,19 +20,26 @@ class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $numero_credito;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $no_cuenta;
 
     public $socios = [];
 
     public $buscar_socio = '';
 
     protected $rules = [
-        'selec_socio' => 'required',
-        'tipo_cuenta' => 'required'
+        'monto'         =>  'required',
+        'porcentaje'    =>  'required',
+        'cuotaFija'     =>  'required',
+        'periodo'       =>  'required',
+        // 'no_cuenta'     =>  'unique:creditos'
     ];
 
-    public function updatedPeriodo($value)
+    public function calcularAmortizacion()
     {
+        $this->validate();
+
+        $this->reset(['tabla_amortizacion']);
+
         $plan_pagos = [];
 
         $frist = [
@@ -50,7 +57,7 @@ class CrearCredito extends Component
 
         array_push($plan_pagos, $frist);
 
-        for ($i=0; $i < $value ; $i++) {
+        for ($i=0; $i < $this->periodo ; $i++) {
 
             $interes = ((float)$plan_pagos[$i]['saldo'] * ($this->porcentaje / 100));
 
@@ -107,8 +114,8 @@ class CrearCredito extends Component
         $nuevo_credito->cantidad_cuotas = $this->periodo;
         $nuevo_credito->estado = 1;
 
-        if($this->numero_credito != "") {
-            $nuevo_credito->no_cuenta = $this->numero_credito;
+        if($this->no_cuenta != "") {
+            $nuevo_credito->no_cuenta = $this->no_cuenta;
         } else {
             $nuevo_credito->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $this->selec_socio . $this->tipo_cuenta);
         }
