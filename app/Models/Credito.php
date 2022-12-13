@@ -35,4 +35,19 @@ class Credito extends Model
     {
         return $this->hasMany(CreditoDet::class, 'credito_id');
     }
+
+    /**
+     * Get all of the comments for the CreditoDet
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function planPago()
+    {
+        return $this->hasMany(CrtPlanPago::class, 'credito_id', 'id');
+    }
+
+    public function cuotaFija()
+    {
+        return $this->hasMany(CrtPlanPago::class, 'credito_id', 'id')->first();
+    }
 }

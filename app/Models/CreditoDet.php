@@ -31,5 +31,4 @@ class CreditoDet extends Model
     {
         return $this->belongsTo(TipoMovimientoCredito::class, 'tipo_movimiento_credito_id');
     }
-
 }
