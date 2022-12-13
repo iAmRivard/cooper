@@ -42,7 +42,13 @@ class Abono extends Component
     {
         $this->validate();
 
-        $cuenta_abonada = Credito::where('id', $this->cuenta_select)->first();
+        $this->cuenta_abonada = Credito::where('id', $this->cuenta_select)->first();
+
+        if($this->monto > $this->cuenta_abonada->saldo_actual) {
+            $this->addError('count', 'No es posible abonar');
+        }
+
+        $this->validate();
 
         $abono = CreditoDet::create([
             'credito_id'                    => $this->cuenta_select,
