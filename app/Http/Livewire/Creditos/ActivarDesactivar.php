@@ -27,6 +27,11 @@ class ActivarDesactivar extends Component
         $this->credito->estado  =   $this->credito->estado == 1 ? 0 : 1;
         $this->credito->save();
 
+        $message    =   $this->credito->estado == 0 ? 'Credito desactivado' : 'Credito Activado';
+
+
+        $this->emit('exito', $message);
+
         $this->reset([
             'open'
         ]);
