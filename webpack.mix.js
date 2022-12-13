@@ -17,7 +17,6 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ])
     .postCss('resources/css/lib.css', 'public/css');
-
 if (mix.inProduction()) {
     mix.version();
 }
