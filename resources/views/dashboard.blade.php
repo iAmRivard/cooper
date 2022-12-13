@@ -17,10 +17,10 @@
                                     Cuentas de ahorro
                                 </h2>
                             </div>
-                            <div class="flex sm:flex-row lg:flex-col ">
+                            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-4">
                                 @foreach ($socio->cuentas as $cuenta)
                                 <a href="{{ route('cuenta.detalle', $cuenta->id) }}" class="sm:w-full">
-                                    <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
+                                    <div class="card w-100 mx-4 my-2 bg-base-100 shadow-xl">
                                         <div class="card-body">
                                             <h2 class="card-title">${{ $cuenta->saldo_actual }}</h2>
                                             <p>
@@ -41,10 +41,10 @@
                                     Creditos
                                 </h2>
                             </div>
-                            <div class="sm:flex flex-row">
+                            <div class="grid lg:grid-cols-2 grid-cols-1 gap-4 mb-4">
                                 @foreach ($socio->creditos as $credito)
                                 <a href="{{ route('credito.detalle', $credito->id) }}" class="sm:w-full">
-                                    <div class="card w-96 sm:w-1/2 mx-4 my-2 bg-base-100 shadow-xl">
+                                    <div class="card w-100 mx-4 my-2 bg-base-100 shadow-xl">
                                         <div class="card-body">
                                             <h2 class="card-title">${{ $credito->monto }}</h2>
                                             <p>
