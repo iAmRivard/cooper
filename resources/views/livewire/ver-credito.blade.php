@@ -23,6 +23,10 @@
                             <div class="stat-value text-green-900">${{number_format($credito->monto, 2)}}</div>
                         </div>
                         <div class="stat">
+                            <div class="stat-title">Cuota</div>
+                            <div class="stat-value text-rose-900"> ${{ $credito->cuotaFija()->cuota_fija}}</div>
+                        </div>
+                        <div class="stat">
                             <div class="stat-title">Saldo a la fecha</div>
                             <div class="stat-value text-sky-900">${{number_format($credito->saldo_actual, 2)}}</div>
                         </div>
@@ -77,8 +81,42 @@
                     </table>
                 </div>
                 {{$movimientos->links()}}
+                <hr/>
+                <div class="text-center">
+                    <h4> <b> PLAN DE PAGO</b></h4>
+                </div>
+                <div class="flex justify-center mb-4">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cuota</th>
+                                <th>Intereses</th>
+                                <th>Interes Acumulado</th>
+                                <th>Cuota Capital</th>
+                                <th>Saldo</th>
+                                <th>Capital Amortizado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($credito->detallePlanPago as $detp)
+                            <tr>
+                                
+                                <td class="text-center">#{{ $detp->nro_cuota }}</td>      
+                                <td class="text-center">${{ $detp->cuota }}</td>
+                                <td class="text-center">${{ $detp->interes }}</td>
+                                <td class="text-center">${{ $detp->interes_acumulado }}</td>
+                                <td class="text-center">${{ $detp->cuota_capital }}</td>
+                                <td class="text-center">${{ $detp->saldo }}</td>
+                                <td class="text-center">${{ $detp->capital_amortizado }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </div>
 
     <input type="checkbox" id="my-modal-5" class="modal-toggle" />
