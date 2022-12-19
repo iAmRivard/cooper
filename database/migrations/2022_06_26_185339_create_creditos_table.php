@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('saldo_actual', 14, 2);
             $table->decimal('porcentaje_interes', 5, 2);
             $table->boolean('estado');
+            $table->string('no_cuenta');
 
             $table->foreign('socio_id')
                     ->references('id')->on('crm_socios');

@@ -25,8 +25,6 @@ class Table extends Component
 
     public function buscar()
     {
-
-        //dd( $this->desde );
         $this->mov = Ctr_cuenta_det::where('ctr_cuentas_id', '=', $this->cuenta)
                                 ->whereBetween('created_at', [$this->desde, $this->hasta])
                                 ->get();

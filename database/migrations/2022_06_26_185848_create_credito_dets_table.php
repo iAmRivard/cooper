@@ -29,7 +29,9 @@ return new class extends Migration
 
             $table->foreign('tipo_movimiento_credito_id')
                     ->references('id')->on('tipo_movimiento_creditos');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

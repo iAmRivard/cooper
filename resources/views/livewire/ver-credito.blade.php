@@ -2,16 +2,16 @@
     <x-slot name="header">
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
             @livewire('creditos.activar-desactivar', ['credito' => $credito])
-            {{-- @if (count($movimientos) == 1)
-                <label for="my-modal-5" class="open-moda-lable">open modal</label>
-            @endif --}}
+            @if (count($movimientos) == 1)
+                @livewire('creditos.editar', ['credito' => $credito])
+            @endif
         </div>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="flex justify-center mb-4 mt-4">
+                <div class="flex justify-center m-4 mt-4">
                     <div class="stats shadow">
                         <div class="stat">
                             <div class="stat-title">Crédito </div>
@@ -83,7 +83,9 @@
                 {{$movimientos->links()}}
                 <hr/>
                 <div class="text-center">
-                    <h4> <b> PLAN DE PAGO</b></h4>
+                    <h4>
+                        <b>PLAN DE PAGO</b>
+                    </h4>
                 </div>
                 <div class="flex justify-center mb-4">
                     <table class="table table-zebra">
@@ -99,17 +101,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($credito->detallePlanPago as $detp)
-                            <tr>
-                                
-                                <td class="text-center">#{{ $detp->nro_cuota }}</td>      
-                                <td class="text-center">${{ $detp->cuota }}</td>
-                                <td class="text-center">${{ $detp->interes }}</td>
-                                <td class="text-center">${{ $detp->interes_acumulado }}</td>
-                                <td class="text-center">${{ $detp->cuota_capital }}</td>
-                                <td class="text-center">${{ $detp->saldo }}</td>
-                                <td class="text-center">${{ $detp->capital_amortizado }}</td>
-                            </tr>
+                            @foreach ($plan_pago as $pago)
+                                <tr>
+                                    <td class="text-center">#{{ $pago->nro_cuota }}</td>
+                                    <td class="text-center">${{ $pago->cuota }}</td>
+                                    <td class="text-center">${{ $pago->interes }}</td>
+                                    <td class="text-center">${{ $pago->interes_acumulado }}</td>
+                                    <td class="text-center">${{ $pago->cuota_capital }}</td>
+                                    <td class="text-center">${{ $pago->saldo }}</td>
+                                    <td class="text-center">${{ $pago->capital_amortizado }}</td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -117,46 +118,6 @@
             </div>
         </div>
 
-    </div>
-
-    <input type="checkbox" id="my-modal-5" class="modal-toggle" />
-    <div class="modal">
-        <div class="modal-box w-11/12 max-w-5xl">
-            <form action="" method="post" id="edit-credito">
-                <div class="flex gap-4">
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">monto</span>
-                        </label>
-                        <input type="text" placeholder="Monto del credito" class="input input-bordered w-full" value="{{ number_format($credito->monto, 2) }}" />
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Cuota Fija</span>
-                        </label>
-                        <input type="text" placeholder="Cuota fija" class="input input-bordered w-full" value="{{ number_format($credito->cuotaFija()->cuota_fija, 2) }}" />
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Periodo</span>
-                        </label>
-                        <input type="text" placeholder="Periodo en quincenas" class="input input-bordered w-full" value="{{ $credito->cantidad_cuotas }}" />
-                    </div>
-                    <div class="form-control w-full">
-                        <label class="label">
-                            <span class="label-text">Porcenaje</span>
-                        </label>
-                        <input type="text" placeholder="Porcentaje de interes" class="input input-bordered w-full" value="{{ number_format($credito->porcentaje_interes, 2) }}" />
-                    </div>
-                </div>
-            </form>
-            <div class="modal-action">
-                <label for="my-modal-5" class="btn">Cancelar!</label>
-                <button class="btn">Editar</button>
-            </div>
-        </div>
     </div>
 </div>
 

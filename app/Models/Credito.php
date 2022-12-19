@@ -33,7 +33,7 @@ class Credito extends Model
 
     public function detalles()
     {
-        return $this->hasMany(CreditoDet::class, 'credito_id');
+        return $this->hasMany(CreditoDet::class, 'credito_id', 'id');
     }
 
     /**
@@ -51,10 +51,14 @@ class Credito extends Model
         return $this->hasMany(CrtPlanPago::class, 'credito_id', 'id')->first();
     }
 
-
     public function detallePlanPago()
     {
         return $this->hasMany(CrtPlanPagoDet::class, 'credito_id', 'id');
+    }
+
+    public function planPagos()
+    {
+        return $this->hasOne(CrtPlanPago::class);
     }
 
 }

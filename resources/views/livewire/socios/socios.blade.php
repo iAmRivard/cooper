@@ -7,7 +7,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar socio') }}" />
@@ -18,7 +18,6 @@
                 <div class="container py-8 flex justify-center">
 
                     @if ($socios->count())
-
                         <table class="table table-fixed">
                             <thead>
                                 <tr>
@@ -35,7 +34,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($socios as $item)
                                     <tr>
                                         <td class="font-bold">{{ $item->id }}</td>

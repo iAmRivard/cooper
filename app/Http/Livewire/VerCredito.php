@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\WithPagination;
 use Livewire\Component;
 
+use App\Models\CrtPlanPagoDet;
 use App\Models\CreditoDet;
 use App\Models\Credito;
 
@@ -13,6 +14,8 @@ class VerCredito extends Component
     use WithPagination;
 
     public $credito;
+
+    protected $listeners = ['render' => 'render'];
 
     public function mount(Credito $credito)
     {
@@ -25,6 +28,10 @@ class VerCredito extends Component
                                     ->orderBy('id', 'desc')
                                     ->paginate(10);
 
-        return view('livewire.ver-credito', compact('movimientos'));
+        $plan_pago  =   CrtPlanPagoDet::where('credito_id', $this->credito->id)->get();
+
+        // dd($movimientos);
+
+        return view('livewire.ver-credito', compact('movimientos', 'plan_pago'));
     }
 }

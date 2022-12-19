@@ -129,8 +129,6 @@ class CrearCredito extends Component
             'descripcion'                   => 'APERTURA DE CRÉDITO'
         ]);
 
-        $abono->save();
-
         $periodo = new CrcPeriodo();
         $periodo->valor = $this->periodo;
         if($this->periodo > 1) {

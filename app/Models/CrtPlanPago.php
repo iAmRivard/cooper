@@ -3,11 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class CrtPlanPago extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'credito_id',
@@ -21,4 +22,9 @@ class CrtPlanPago extends Model
         'vigente',
         'estado',
     ];
+
+    public function credito()
+    {
+        return $this->belongsTo(Credito::class, 'credito_id', 'id');
+    }
 }
