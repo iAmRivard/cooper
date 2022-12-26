@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 //Controladores
 
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ExportController;
 Use App\Http\Controllers\SociosController;
 
 use App\Http\Livewire\Cuentas\Cuentas;
@@ -62,5 +63,6 @@ Route::middleware(['auth', 'rol'])->group(function () {
         ->name('reporte.quincenal');
 
     Route::get('/reporte/cierre-cuentas', App\Http\Livewire\Reporte\CierreCuentas::class)->name('reporte.cierre-cuentas');
+    Route::get('/reporte/cobro-cuotas-quincenames', [ExportController::class, 'cobroCuotasQuincenal'])->name('reporte.cobro-cuotas');
 });
 
