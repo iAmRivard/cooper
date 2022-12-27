@@ -6,7 +6,7 @@
     {{-- Desactivar cuenta --}}
     <x-jet-dialog-modal wire:ignore.self wire:model="open">
         <x-slot name="title">
-            Deseas cambiar el número de cuenta # {{ $cuenta->id }}
+            Deseas cambiar el número de cuenta # {{ $cuenta->id }} {{ $cuenta->no_cuenta }} 
         </x-slot>
 
         <x-slot name="content">
@@ -14,10 +14,10 @@
                 <x-jet-label value="Número de cuenta" />
                 <input type="text"
                     placeholder="Ingrese el número de cuenta"
-                    wire.model.defer="no_cuenta"
+                    wire.model="numero_cuenta"
                     class="input input-bordered w-full"
                 />
-                <x-jet-input-error for="no_cuenta" />
+                <x-jet-input-error for="numero_cuenta" />
             </div>
         </x-slot>
 

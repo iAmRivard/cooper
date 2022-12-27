@@ -10,11 +10,11 @@ class EditarNumero extends Component
 {
     public $open = false;
 
-    public $cuenta, $no_cuenta;
+    public $cuenta, $numero_cuenta;
 
-    protected $rules = [
-        'no_cuenta' => 'required|string'
-    ];
+    // protected $rules = [
+    //     'numero_cuenta' => 'required'
+    // ];
 
     public function mount(Ctr_cuenta $cuenta)
     {
@@ -28,10 +28,10 @@ class EditarNumero extends Component
 
     public function update()
     {
-        $this->validate();
+        // $this->validate();
 
-        $this->cuenta->no_cuenta = $this->no_cuenta;
-        $this->save();
+        $this->cuenta->no_cuenta = $this->numero;
+        $this->cuenta->save();
 
         $this->emit('exito', 'El número de cuenta se ha actualizado');
 

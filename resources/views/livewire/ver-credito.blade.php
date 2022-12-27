@@ -61,6 +61,7 @@
                                 <th>Concepto</th>
                                 <th>Monto</th>
                                 <th>Fecha</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -75,6 +76,11 @@
                                     </span>
                                 </td>
                                 <td class="text-center">{{ $movimiento->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('credito.abono', $movimiento) }}" class="a-link">
+                                        re Imprimir
+                                    </a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

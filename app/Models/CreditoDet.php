@@ -26,7 +26,7 @@ class CreditoDet extends Model
 
     public function credito()
     {
-        return $this->belongsTo(TipoCredito::class, 'credito_id');
+        return $this->belongsTo(Credito::class, 'credito_id');
     }
 
     public function tipoMovimiento()
