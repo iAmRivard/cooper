@@ -18,7 +18,7 @@
                     <div class="stats shadow">
                         <div class="stat">
                             <div class="stat-title">Numero de cuenta </div>
-                            <div class="stat-value text-primary">#{{$cuenta->id}}</div>
+                            <div class="stat-value text-primary">#{{$cuenta->no_cuenta}}</div>
                             <div class="stat-desc">{{$cuenta->tipoCuenta->nombre}}</div>
                         </div>
                         @if ($cuenta->tipoCuenta->plazo)
@@ -40,6 +40,10 @@
                         <div class="stat">
                             <div class="stat-value">{{$cuenta->socio->nombres}}</div>
                             <div class="stat-title">{{$cuenta->socio->apellidos}}</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-title">Descuento Quincenal </div>
+                            <div class="stat-value text-green-900">${{$cuenta->pago_quincenal}}</div>
                         </div>
 
                         @if ($cuenta->tipoCuenta->plazo)

@@ -16,7 +16,7 @@
         <tbody>
             <tr>
                 <td>
-                    <img src="{{ asset('logo.svg') }}" alt="" height="150px" class="img-fluid">
+                    <img src="{{ asset('logo.svg') }}" alt="" height="50px" class="img-fluid">
                 </td>
                 <td>
                     <h4 class="text-center">Asociación Cooperativa de Ahorro y Credito de Empleados de Algiers
@@ -73,7 +73,7 @@
         <tbody>
             <tr>
                 <td>
-                    <img src="{{ asset('logo.svg') }}" alt="" height="150px" class="img-fluid">
+                    <img src="{{ asset('logo.svg') }}" alt="" height="50px" class="img-fluid">
                 </td>
                 <td>
                     <h4 class="text-center">Asociación Cooperativa de Ahorro y Credito de Empleados de Algiers
