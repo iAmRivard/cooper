@@ -5,18 +5,15 @@
 
     <div class="py-12">
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="p-4 overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="flex justify-center">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar socio') }}" />
-                        <x-jet-input placeholder="Buscar socio por: Nombre o DUI" class="block mt-1 w-full" type="text" wire:model="buscarSocio" />
+                        <x-jet-input placeholder="Buscar socio por: Nombre o DUI" class="block w-full mt-1" type="text" wire:model="buscarSocio" />
                     </div>
                 </div>
-
-                <div class="container py-8 flex justify-center">
-
+                <div class="container flex justify-center py-8">
                     @if ($socios->count())
                         <table class="table table-fixed">
                             <thead>
@@ -56,24 +53,15 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
-
                         </table>
-
                     @endif
-
                 </div>
                 <div class="px-6 py-3 ">
                     {{$socios->links()}}
                 </div>
-
             </div>
-
-
         </div>
-
-
     </div>
 
     {{-- Edición socio --}}
@@ -222,7 +210,7 @@
                 {{-- Empresa --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Nombre de empresa" />
-                    <select class="select select-bordered w-full" wire:model="socio.empresa">
+                    <select class="w-full select select-bordered" wire:model="socio.empresa">
                         <option >Seleccionar una empresa</option>
                         @foreach ($empresas as $empresa)
                         <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
@@ -241,10 +229,8 @@
             <x-jet-button wire:click="actualizar" wire:loading.attr="disabled" class="disabled:opacity-25">
                 Actualizar
             </x-jet-button>
-
             <span wire:loading wire:target="guardar">Procesando ...</span>
         </x-slot>
-
     </x-jet-dialog-modal>
 
 </div>

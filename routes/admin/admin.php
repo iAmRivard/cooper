@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ExportController;
-Use App\Http\Controllers\SociosController;
+use App\Http\Controllers\SociosController;
+use App\Http\Controllers\CuentasController;
 
 use App\Http\Livewire\Cuentas\Cuentas;
 use App\Http\Livewire\Socios\Socios;
@@ -19,7 +20,12 @@ Route::middleware(['auth', 'rol'])->group(function () {
 
     Route::get('/cuentas', Cuentas::class)->name('cuentas');
 
-    Route::get('/cuentas/ver-cuenta/{cuenta}', VerCuenta::class)->name('ver.cuenta');
+    // Route::get('/cuentas/ver-cuenta/{cuenta}', VerCuenta::class)->name('ver.cuenta');
+
+    Route::get('/cuentas/ver-cuenta/{cuenta}', [CuentasController::class, 'verCuenta'])->name('ver.cuenta');
+    Route::post('/cuentas/cange-state/{cuenta}', [CuentasController::class, 'changeState'])->name('cuenta.change-state');
+    Route::post('/cuentas/update-number/{cuenta}', [CuentasController::class, 'changeNumber'])->name('cuenta.update-number');
+    Route::post('/cuentas/update-discount/{cuenta}', [CuentasController::class, 'updateDiscount'])->name('cuenta.update-discount');
 
     Route::get('/config/edit-cuentas', App\Http\Livewire\Mantenimientos\TiposCuentas::class)
         ->name('mantenimiento.tipo-cuenta');
