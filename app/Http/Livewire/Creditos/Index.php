@@ -22,9 +22,16 @@ class Index extends Component
 
     public function render()
     {
-        $creditos = Credito::where('id', 'like', '%' . $this->buscar . '%')
-                            ->orderBy('id', 'desc')
-                            ->paginate(5);
+        $creditos = Credito::with('socio')
+                    ->when($this->buscar, function ($query) {
+                        return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
+                            ->orWhereHas('socio', function ($q) {
+                                $q->where('nombres', 'like', '%' . $this->buscar . '%')
+                                    ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%');
+                            });
+                    })
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(5);
 
         return view('livewire.creditos.index', compact('creditos'));
     }

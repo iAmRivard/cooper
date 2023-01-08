@@ -23,7 +23,14 @@ class Cuentas extends Component
 
     public function render()
     {
-        $cuentas = Ctr_cuenta::where('id', 'like', '%' . $this->buscar . '%')
+        $cuentas = Ctr_cuenta::with('socio')
+                            ->when($this->buscar, function ($query) {
+                                return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
+                                    ->orWhereHas('socio', function ($q) {
+                                        $q->where('nombres', 'like', '%' . $this->buscar . '%')
+                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%');
+                                    });
+                            })
                             ->orderBy('created_at', 'desc')
                             ->paginate(5);
 
