@@ -48,11 +48,6 @@ class CreateCuenta extends Component
         } else if($das->plazo == 1 and $das->aplica_monto == 1) {
             $this->selec_3 = true;
         }
-
-        // if($das->plazo == 1)
-        // {
-        //     $this->othersCamp = true;
-        // }
     }
 
     public function buscar()

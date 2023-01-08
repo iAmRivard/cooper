@@ -34,8 +34,16 @@ class Abono extends Component
     }
     public function buscar()
     {
-        $this->cuentas = Credito::where('id', 'like', '%' . $this->buscar_cuenta . '%')
-                                    ->get();
+        $this->cuentas = Credito::with('socio')
+                            ->when($this->buscar_cuenta, function ($query) {
+                                return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
+                                    ->orWhereHas('socio', function ($q) {
+                                        $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
+                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%');
+                                    });
+                            })
+                            ->orderBy('created_at', 'desc')
+                            ->get();
     }
 
     public function abonar()
