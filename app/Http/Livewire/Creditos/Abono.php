@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\TipoMovimientoCredito;
 use App\Models\CreditoDet;
 use App\Models\Credito;
+use App\Models\CrtPlanPagoDet;
 
 class Abono extends Component
 {
@@ -16,14 +17,30 @@ class Abono extends Component
 
     public $cuentas = [];
 
-    public $cuenta_select, $monto, $descripcion, $tipo, $cuenta_abonada;
+    public $cuenta, $monto, $descripcion, $tipo, $cuenta_abonada, $cuota_cacelada;
 
     protected $rules = [
-        'cuenta_select' => 'required',
+        'cuenta' => 'required',
         'monto' => 'required',
         'descripcion' => 'required',
         'tipo' => 'required',
     ];
+
+    public function updatedCuenta($value)
+    {
+        $credito_select = Credito::with('tipoCredito')->find($value);
+
+        $cuota  =   CrtPlanPagoDet::where('nro_cuota', '>=', 1)->where('estado', 1)->first();
+        $tipo_abono =   TipoMovimientoCredito::where('nombre', 'like', '%' . 'ABONO CREDITO' . '%')->first();
+
+        if($cuota) {
+            $this->cuota_cacelada   =   $cuota;
+
+            $this->monto    =   $cuota->cuota;
+            $this->tipo     =   $tipo_abono->id ? $tipo_abono->id  : '';
+            $this->descripcion  =   "Abono a credito # $credito_select->no_cuenta por" . number_format($this->monto, 2);
+        }
+    }
 
     public function render()
     {
@@ -32,6 +49,7 @@ class Abono extends Component
 
         return view('livewire.creditos.abono', compact('tiposMovimiento'));
     }
+
     public function buscar()
     {
         $this->cuentas = Credito::with('socio')
@@ -50,7 +68,7 @@ class Abono extends Component
     {
         $this->validate();
 
-        $this->cuenta_abonada = Credito::where('id', $this->cuenta_select)->first();
+        $this->cuenta_abonada = Credito::where('id', $this->cuenta)->first();
 
         if($this->monto > $this->cuenta_abonada->saldo_actual) {
             $this->addError('count', 'No es posible abonar');
@@ -59,18 +77,22 @@ class Abono extends Component
         $this->validate();
 
         $abono = CreditoDet::create([
-            'credito_id'                    => $this->cuenta_select,
+            'credito_id'                    => $this->cuenta,
             'socio_id'                      => $this->cuenta_abonada->socio->id,
             'tipo_movimiento_credito_id'    => $this->tipo,
             'monto'                         => $this->monto,
             'descripcion'                   => $this->descripcion
         ]);
 
-        $this->cuenta_abonada = Credito::find($this->cuenta_select);
+        $this->cuenta_abonada = Credito::find($this->cuenta);
 
         $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual - $this->monto;
-
         $this->cuenta_abonada->save();
+
+        if($this->cuota_cacelada) {
+            $this->cuota_cacelada->estado   =   0;
+            $this->cuota_cacelada->save();
+        }
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
@@ -82,7 +104,5 @@ class Abono extends Component
             'monto',
             'descripcion'
         ]);
-
-        //return redirect()->route('credito.abono', $abono);
     }
 }
