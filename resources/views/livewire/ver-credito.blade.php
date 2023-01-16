@@ -9,10 +9,10 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="flex justify-center m-4 mt-4">
-                    <div class="stats shadow">
+                    <div class="shadow stats">
                         <div class="stat">
                             <div class="stat-title">Crédito </div>
                             <div class="stat-value text-primary">#{{$credito->id}}</div>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="stat">
                             <div class="stat-title">Monto otorgado</div>
-                            <div class="stat-value text-green-900">${{number_format($credito->monto, 2)}}</div>
+                            <div class="text-green-900 stat-value">${{number_format($credito->monto, 2)}}</div>
                         </div>
                         <div class="stat">
                             <div class="stat-title">Cuota</div>
@@ -68,7 +68,7 @@
                             @foreach ($movimientos as $movimiento)
                             <tr>
                                 <td class="text-center">{{ $movimiento->id }}</td>
-                                <td class="text-center font-bold">{{$movimiento->tipoMovimiento->nombre}}</td>
+                                <td class="font-bold text-center">{{$movimiento->tipoMovimiento->nombre}}</td>
                                 <td class="text-center">{{ $movimiento->descripcion }}</td>
                                 <td class="font-bold text-center" >
                                    <span style="@if ($movimiento->tipoMovimiento->naturaleza == 0) color: green; @else color: red; @endif">
@@ -104,6 +104,7 @@
                                 <th>Cuota Capital</th>
                                 <th>Saldo</th>
                                 <th>Capital Amortizado</th>
+                                <th>Estado/th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,6 +117,7 @@
                                     <td class="text-center">${{ $pago->cuota_capital }}</td>
                                     <td class="text-center">${{ $pago->saldo }}</td>
                                     <td class="text-center">${{ $pago->capital_amortizado }}</td>
+                                    <td class="text-center"><strong>{{ $pago->estado == 1 ? 'Pendiente' : 'Pagada' }}</strong></td>
                                 </tr>
                             @endforeach
                         </tbody>

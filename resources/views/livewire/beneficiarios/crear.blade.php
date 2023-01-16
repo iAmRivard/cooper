@@ -9,14 +9,16 @@
         </x-slot>
         <x-slot name="content">
 
-            <div class="mb-4">
-                <x-jet-label>Nombres</x-jet-label>
+            <div class="flex mb-4">
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Nombres</x-jet-label>
                 <x-jet-input type="text" class="w-full" wire:model="nombres" />
-            </div>
+                </div>
 
-            <div class="mb-4">
-                <x-jet-label>Apellidos</x-jet-label>
-                <x-jet-input type="text" class="w-full" wire:model="apellidos" />
+                <div class="w-1/2 pl-4">
+                    <x-jet-label>Apellidos</x-jet-label>
+                    <x-jet-input type="text" class="w-full" wire:model="apellidos" />
+                </div>
             </div>
 
             <div class="mb-4">
