@@ -28,9 +28,11 @@ class VerCredito extends Component
                                     ->orderBy('id', 'desc')
                                     ->paginate(10);
 
-        $plan_pago  =   CrtPlanPagoDet::where('credito_id', $this->credito->id)->get();
+        $plan_pago  =   CrtPlanPagoDet::where('credito_id', $this->credito->id)
+                                        ->where('nro_cuota', '>', 0)
+                                        ->get();
 
-        // dd($movimientos);
+
 
         return view('livewire.ver-credito', compact('movimientos', 'plan_pago'));
     }

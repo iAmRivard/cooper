@@ -104,7 +104,7 @@
                                 <th>Cuota Capital</th>
                                 <th>Saldo</th>
                                 <th>Capital Amortizado</th>
-                                <th>Estado/th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody>
