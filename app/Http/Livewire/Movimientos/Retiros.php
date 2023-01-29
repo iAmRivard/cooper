@@ -42,7 +42,8 @@ class Retiros extends Component
                                 return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
                                     ->orWhereHas('socio', function ($q) {
                                         $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
-                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%');
+                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
+                                            ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
                                     });
                             })
                             ->orderBy('created_at', 'desc')
