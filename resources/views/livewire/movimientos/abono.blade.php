@@ -24,13 +24,20 @@
                         <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="cuenta_abonada" />
                         <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
                             @foreach ($cuentas as $cuenta)
-                                <button class="w-2/3 px-0 mb-2 cursor-pointer chat-bubble chat-bubble-success" x-on:click="account = {{ $cuenta->id }}">
+                                <button class="w-2/3 px-0 mb-2 cursor-pointer btn btn-secondary" x-on:click="account = {{ $cuenta->id }}">
                                     {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
                                 </button>
                             @endforeach
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="p-4 mb-4">
+                <x-jet-label>Socio</x-jet-label>
+                @if ($cuenta_place_holder)
+                {{$cuenta_place_holder->id}} | {{$cuenta_place_holder->socio->nombres}} {{$cuenta_place_holder->socio->apellidos}} | {{ $cuenta_place_holder->tipoCuenta->nombre }}
+                @endif
             </div>
 
             <div class="flex mb-4">

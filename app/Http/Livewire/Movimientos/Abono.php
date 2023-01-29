@@ -20,7 +20,7 @@ class Abono extends Component
 
     public $cuentas = [];
 
-    public $cuenta_select, $monto, $descripcion, $tipo, $cuenta_abonada;
+    public $cuenta_select, $monto, $descripcion, $tipo, $cuenta_abonada, $cuenta_place_holder;
 
     protected $rules = [
         'cuenta_select' => 'required',
@@ -28,6 +28,11 @@ class Abono extends Component
         'descripcion'   => 'required',
         'tipo'          => 'required',
     ];
+
+    public function UpdatedCuentaSelect($value)
+    {
+        $this->cuenta_place_holder  =   Ctr_cuenta::with('socio')->find($value);
+    }
 
     public function render()
     {
