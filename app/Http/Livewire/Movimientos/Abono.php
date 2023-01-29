@@ -34,21 +34,20 @@ class Abono extends Component
         $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '1')
                                                 ->get();
 
-        return view('livewire.movimientos.abono', compact('tiposMovimiento'));
-    }
-
-    public function buscar()
-    {
         $this->cuentas  =    Ctr_cuenta::with('socio')
-                                    ->when($this->buscar_cuenta, function ($query) {
-                                        return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
-                                            ->orWhereHas('socio', function ($q) {
-                                                $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
-                                                    ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%');
-                                            });
-                                    })
-                                    ->orderBy('created_at', 'desc')
-                                    ->get();
+                        ->when($this->buscar_cuenta, function ($query) {
+                            return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
+                                ->orWhereHas('socio', function ($q) {
+                                    $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
+                                        ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
+                                        ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
+                                });
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+
+        return view('livewire.movimientos.abono', compact('tiposMovimiento'));
     }
 
     public function abonar()

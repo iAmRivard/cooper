@@ -11,37 +11,34 @@
         <x-slot name="content">
             {{-- Buscar Cuenta --}}
             <div class="mb-4">
-                <x-jet-label>Buscar Cuenta</x-jet-label>
-                <x-jet-input
-                    class="w-1/2"
-                    type="text"
-                    wire:model="buscar_cuenta"
-                    wire:keydown="buscar"
-                    placeholder="Buscar cuenta por Nº de Cuenta"
-                />
-                <i class="fa-solid fa-magnifying-glass cursor-pointer" name="buscar" wire:click="buscar"></i>
+                <div x-data="{
+                        list: true,
+                        account: ''
+                    }"
+                    x-init="$watch('account', value => $wire.set('cuenta_select', value))"
+                >
+                    <div class="w-full form-control">
+                        <label class="label">
+                            <span class="label-text">Buscar socio</span>
+                        </label>
+                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="cuenta_abonada" />
+                        <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
+                            @foreach ($cuentas as $cuenta)
+                                <button class="w-2/3 px-0 mb-2 cursor-pointer chat-bubble chat-bubble-success" x-on:click="account = {{ $cuenta->id }}">
+                                    {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            {{-- Selección de cuenta --}}
-            <div class="mb-4">
-                <select class="w-full select select-bordered overflow-hidden" size="3" required wire:model="cuenta_select">
-
-                    @foreach ($cuentas as $cuenta)
-                        <option value="{{$cuenta->id}}">
-                            {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
-                        </option>
-                    @endforeach
-
-                </select>
-            </div>
-
-            <div class="mb-4 flex">
-
+            <div class="flex mb-4">
                 {{-- Monto de Depostio --}}
                 <div class="w-1/2">
                     <x-jet-label>Monto</x-jet-label>
                     <input
-                        class="input input-bordered w-full"
+                        class="w-full input input-bordered"
                         type="text"
                         type="number"
                         wire:model.defer="monto"
@@ -78,7 +75,6 @@
                 >
                 </textarea>
             </div>
-
         </x-slot>
 
         <x-slot name="footer">
@@ -92,5 +88,4 @@
 
         </x-slot>
     </x-jet-dialog-modal>
-
 </div>
