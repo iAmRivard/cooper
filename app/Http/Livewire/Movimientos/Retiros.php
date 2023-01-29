@@ -18,7 +18,7 @@ class Retiros extends Component
 
     public $cuentas = [];
 
-    public $cuenta_select, $monto, $descripcion, $tipo, $cuenta_retirada;
+    public $cuenta_select, $monto, $descripcion, $tipo, $cuenta_retirada, $cuenta_place_holder;
 
     protected $rules = [
         'cuenta_select' => 'required',
@@ -27,16 +27,16 @@ class Retiros extends Component
         'tipo'          => 'required',
     ];
 
+    public function UpdatedCuentaSelect($value)
+    {
+        $this->cuenta_place_holder  =   Ctr_cuenta::with('socio')->find($value);
+    }
+
     public function render()
     {
         $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '0')
                                                     ->get();
 
-        return view('livewire.movimientos.retiros', compact('tiposMovimiento'));
-    }
-
-    public function buscar()
-    {
         $this->cuentas  =   Ctr_cuenta::with('socio')
                             ->when($this->buscar_cuenta, function ($query) {
                                 return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
@@ -47,6 +47,8 @@ class Retiros extends Component
                             })
                             ->orderBy('created_at', 'desc')
                             ->get();
+
+        return view('livewire.movimientos.retiros', compact('tiposMovimiento'));
     }
 
     public function retirar()
@@ -82,7 +84,7 @@ class Retiros extends Component
 
             $this->emitTo('cuentas.cuentas','render');
 
-     //       return redirect()->route('cuenta.retiro', $retiro);
+            //return redirect()->route('cuenta.retiro', $retiro);
 
         } else
         {
