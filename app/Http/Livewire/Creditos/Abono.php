@@ -38,7 +38,7 @@ class Abono extends Component
 
             $this->monto    =   $cuota->cuota;
             $this->tipo     =   $tipo_abono->id ? $tipo_abono->id  : '';
-            $this->descripcion  =   "Abono a credito # $credito_select->no_cuenta por" . number_format($this->monto, 2);
+            $this->descripcion  =   "Abono a crédito # $credito_select->no_cuenta por" . number_format($this->monto, 2);
         }
     }
 
@@ -47,21 +47,18 @@ class Abono extends Component
         $tiposMovimiento = TipoMovimientoCredito::where('naturaleza', '=', '0')
                                                 ->get();
 
-        return view('livewire.creditos.abono', compact('tiposMovimiento'));
-    }
-
-    public function buscar()
-    {
         $this->cuentas = Credito::with('socio')
-                            ->when($this->buscar_cuenta, function ($query) {
-                                return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
-                                    ->orWhereHas('socio', function ($q) {
-                                        $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
-                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%');
-                                    });
-                            })
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+                        ->when($this->buscar_cuenta, function ($query) {
+                            return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
+                                ->orWhereHas('socio', function ($q) {
+                                    $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
+                                        ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%');
+                                });
+                        })
+                        ->orderBy('created_at', 'desc')
+                        ->get();
+
+        return view('livewire.creditos.abono', compact('tiposMovimiento'));
     }
 
     public function abonar()

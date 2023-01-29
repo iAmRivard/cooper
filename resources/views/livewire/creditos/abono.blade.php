@@ -22,28 +22,26 @@
 
             {{-- Buscar Cuenta --}}
             <div class="mb-4">
-                <x-jet-label>Buscar Crédito a a Abonar</x-jet-label>
-                <x-jet-input
-                    class="w-1/2"
-                    type="text"
-                    wire:model="buscar_cuenta"
-                    wire:keydown="buscar"
-                    placeholder="Buscar cuenta por Nº de credito"
-                />
-                <i class="cursor-pointer fa-solid fa-magnifying-glass" name="buscar" wire:click="buscar"></i>
-            </div>
-
-            {{-- Selección de cuenta --}}
-            <div class="mb-4">
-                <select class="w-full overflow-hidden select select-bordered" size="3" required wire:model="cuenta">
-
-                    @foreach ($cuentas as $cuenta)
-                        <option value="{{$cuenta->id}}">
-                            {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCredito->nombre }}
-                        </option>
-                    @endforeach
-
-                </select>
+                <div x-data="{
+                        list: true,
+                        account: ''
+                    }"
+                    x-init="$watch('account', value => $wire.set('cuenta', value))"
+                >
+                    <div class="w-full form-control">
+                        <label class="label">
+                            <span class="label-text">Buscar socio</span>
+                        </label>
+                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="cuenta_abonada" />
+                        <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
+                            @foreach ($cuentas as $cuenta)
+                                <button class="w-2/3 px-0 mb-2 cursor-pointer btn btn-secondary" x-on:click="account = {{ $cuenta->id }}">
+                                    {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCredito->nombre }}
+                                </button>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="flex mb-4">
