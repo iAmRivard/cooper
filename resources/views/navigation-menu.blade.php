@@ -21,6 +21,11 @@
             'route' => route('creditos'),
             'active' => request()->routeIs('creditos')
         ],
+        [
+            'name' => 'Reportes',
+            'route' => route('reportes'),
+            'active' => request()->routeIs('reportes')
+        ],
     ];
 @endphp
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">

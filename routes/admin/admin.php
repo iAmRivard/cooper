@@ -69,6 +69,12 @@ Route::middleware(['auth', 'rol'])->group(function () {
         ->name('reporte.quincenal');
 
     Route::get('/reporte/cierre-cuentas', App\Http\Livewire\Reporte\CierreCuentas::class)->name('reporte.cierre-cuentas');
+
+    Route::get('/reportes', [ExportController::class, 'getExport'])->name('reportes');
+
     Route::get('/reporte/cobro-cuotas-quincenames', [ExportController::class, 'cobroCuotasQuincenal'])->name('reporte.cobro-cuotas');
+    Route::get('/reporte/cobro-cuotas-quincenames-consolidado', [ExportController::class, 'cobroCuotasQuincelanConsolidado'])->name('reporte.cobro-cuotas-consolidado');
+
+
 });
 
