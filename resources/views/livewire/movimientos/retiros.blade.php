@@ -33,7 +33,7 @@
                         <label class="label">
                             <span class="label-text">Buscar socio</span>
                         </label>
-                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="cuenta_abonada" />
+                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="buscar_cuenta" />
                         <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
                             @foreach ($cuentas as $cuenta)
                                 <button class="w-2/3 px-0 mb-2 cursor-pointer btn btn-secondary" x-on:click="account = {{ $cuenta->id }}">
