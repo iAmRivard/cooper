@@ -122,7 +122,7 @@
                         placeholder="Código de empleado"
                         type="text"
                         class="w-full"
-                        wire:model.defer="socio.codigoEmpleado"
+                        wire:model.defer="socio.codigo_empleado"
                     />
                     <x-jet-input-error for="codigoEmpleado" />
                 </div>
@@ -210,7 +210,7 @@
                 {{-- Empresa --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Nombre de empresa" />
-                    <select class="w-full select select-bordered" wire:model="socio.empresa">
+                    <select class="w-full select select-bordered" wire:model="socio.empresa_id">
                         <option >Seleccionar una empresa</option>
                         @foreach ($empresas as $empresa)
                         <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>

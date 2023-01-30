@@ -32,8 +32,8 @@ class Socios extends Component
         'socio.nombres' => 'required',
         'socio.apellidos' => 'required',
         'socio.aportacion' => 'required',
-        'socio.empresa' => 'required',
-        'socio.codigoEmpleado' => 'required',
+        'socio.empresa_id' => 'required',
+        'socio.codigo_empleado' => 'required',
         'socio.dui' => 'required|min:9|max:9',
         'socio.nit' => 'min:13|max:13',
         'socio.direccion' => 'required',
@@ -57,7 +57,6 @@ class Socios extends Component
                             ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
                             ->orderBy('id', 'desc') //Ordenamos de manera descendente
                             ->paginate(5);
-
 
         return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
