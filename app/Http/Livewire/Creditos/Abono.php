@@ -30,14 +30,18 @@ class Abono extends Component
     {
         $credito_select = Credito::with('tipoCredito')->find($value);
 
-        $cuota  =   CrtPlanPagoDet::where('nro_cuota', '>=', 1)->where('estado', 1)->first();
+        $cuota      =   CrtPlanPagoDet::where('nro_cuota', '>=', 1)
+                                        ->where('estado', 1)
+                                        ->where('ctr_cuentas_id', $credito_select->id)
+                                        ->first();
+
         $tipo_abono =   TipoMovimientoCredito::where('nombre', 'like', '%' . 'ABONO CREDITO' . '%')->first();
 
         if($cuota) {
             $this->cuota_cacelada   =   $cuota;
 
-            $this->monto    =   $cuota->cuota;
-            $this->tipo     =   $tipo_abono->id ? $tipo_abono->id  : '';
+            $this->monto        =   $cuota->cuota;
+            $this->tipo         =   $tipo_abono->id ? $tipo_abono->id  : '';
             $this->descripcion  =   "Abono a crédito # $credito_select->no_cuenta por" . number_format($this->monto, 2);
         }
     }
