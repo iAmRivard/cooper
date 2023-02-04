@@ -32,7 +32,7 @@ class Abono extends Component
 
         $cuota      =   CrtPlanPagoDet::where('nro_cuota', '>=', 1)
                                         ->where('estado', 1)
-                                        ->where('ctr_cuentas_id', $credito_select->id)
+                                        ->where('credito_id', $credito_select->id)
                                         ->first();
 
         $tipo_abono =   TipoMovimientoCredito::where('nombre', 'like', '%' . 'ABONO CREDITO' . '%')->first();
