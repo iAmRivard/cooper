@@ -74,7 +74,6 @@ Route::middleware(['auth', 'rol'])->group(function () {
 
     Route::get('/reporte/cobro-cuotas-quincenames', [ExportController::class, 'cobroCuotasQuincenal'])->name('reporte.cobro-cuotas');
     Route::get('/reporte/cobro-cuotas-quincenames-consolidado', [ExportController::class, 'cobroCuotasQuincelanConsolidado'])->name('reporte.cobro-cuotas-consolidado');
-
-
+    Route::get('/reporte/cobro-cuotas-quincenales-planilla', [ExportController::class, 'cobroCuotasQuincenalesPlanilla'])->name('reporte.cobro-cuotas-quincenales-planilla');
 });
 
