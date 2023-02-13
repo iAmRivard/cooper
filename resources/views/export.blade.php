@@ -49,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="flex justify-between gap-4">
+                {{-- <div class="flex justify-between gap-4">
                     <div class="shadow-xl card w-96 bg-base-100">
                         <div class="card-body">
                             <h2 class="card-title">Cobro Cuotas Quincenales Planilla</h2>
@@ -73,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
