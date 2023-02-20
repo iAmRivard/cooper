@@ -3,15 +3,20 @@
 namespace App\Exports;
 
 use App\Models\CobroCuotasQuincenales;
-use Maatwebsite\Excel\Concerns\FromCollection;
 
-class CobroCuotasExport implements FromCollection
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+
+class CobroCuotasExport implements FromView, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function view(): View
     {
-        return CobroCuotasQuincenales::all();
+        return view('reports.cobro-cuotas', [
+            'cuotas'    =>  CobroCuotasQuincenales::all()
+        ]);
     }
 }
