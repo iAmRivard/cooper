@@ -50,7 +50,7 @@
                         <div class="stat">
                             <div class="stat-title">{{$cuenta->finalizado ? 'Finalizado' : 'Ejecución'}}</div>
                             <div class="stat-value">{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else / @endif{{ $cuenta->cantidad_quincenas }}</div>
-                            <div class="stat-desc">MESES</div>
+                            <div class="stat-desc">QUINCENAS</div>
                         </div>
                         @endif
                     </div>
