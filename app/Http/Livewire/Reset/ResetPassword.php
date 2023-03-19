@@ -11,7 +11,7 @@ class ResetPassword extends Component
     public $open_modal = false;
     public $error = false;
 
-    public $contrasenna, $confirmar_contrasenna;
+    public $contrasenna, $confirmar_contrasenna, $user_id;
 
     protected $rules = [
         'contrasenna' => 'required',
