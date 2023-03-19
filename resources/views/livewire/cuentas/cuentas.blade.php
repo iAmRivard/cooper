@@ -31,7 +31,7 @@
                                 <th># Cuenta</th>
                                 <th>Socio</th>
                                 <th>Tipo de Cuenta</th>
-                                <th>Aporte Quincenal</th>
+                                <th>Cuota Quincenal</th>
                                 <th>Saldo Actual</th>
                                 <th>Proceso</th>
                                 <th>Estado</th>
