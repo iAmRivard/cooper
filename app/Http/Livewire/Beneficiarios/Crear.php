@@ -13,15 +13,15 @@ class Crear extends Component
 
     public $error = false;
 
-    public $socio, $nombres, $apellidos, $parentesco, $fecha_nacimiento, $porcentaje, $direccion;
+    public $socio, $nombres, $apellidos, $parentesco, $fecha_nacimiento, $porcentaje, $direccion, $phone_number;
 
     protected $rules = [
-        'nombres' => 'required',
-        'apellidos' => 'required',
-        'parentesco' => 'required',
-        'fecha_nacimiento' => 'required',
-        'porcentaje' => 'required',
-        'direccion' => 'required'
+        'nombres'           =>  'required',
+        'apellidos'         =>  'required',
+        'parentesco'        =>  'required',
+        'fecha_nacimiento'  =>  'required',
+        'porcentaje'        =>  'required',
+        'phone_number'      =>  'required'
     ];
 
     public function mount(Crm_socios $socio)
@@ -48,13 +48,14 @@ class Crear extends Component
         if($porcentajes <= 100 && $this->porcentaje + $porcentajes <= 100)
         {
             Crm_beneficiarios::create([
-                'nombres' => $this->nombres,
-                'apellidos' => $this->apellidos,
-                'parentesco' => $this->parentesco,
-                'fecha_nacimiento' => $this->fecha_nacimiento,
-                'porcentaje'=> $this->porcentaje,
-                'direccion'=> $this->direccion,
-                'crm_socio_id' => $this->socio->id
+                'nombres'           =>  $this->nombres,
+                'apellidos'         =>  $this->apellidos,
+                'parentesco'        =>  $this->parentesco,
+                'fecha_nacimiento'  =>  $this->fecha_nacimiento,
+                'porcentaje'        =>  $this->porcentaje,
+                'direccion'         =>  $this->direccion,
+                'crm_socio_id'      =>  $this->socio->id,
+                'phone_number'      =>  $this->phone_number
             ]);
 
             $this->emitTo('beneficiarios.tabla', 'render');
@@ -69,8 +70,7 @@ class Crear extends Component
                 'direccion',
             ]);
 
-        } else
-        {
+        } else {
             $this->error = true;
         }
     }
