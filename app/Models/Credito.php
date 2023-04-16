@@ -18,7 +18,9 @@ class Credito extends Model
         'estado',
         'cantidad_cuotas',
         'cuota_actual',
-        'no_cuenta'
+        'no_cuenta',
+        'comentarios',
+        'de_baja',
     ];
 
     public function socio()

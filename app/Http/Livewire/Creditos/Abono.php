@@ -57,7 +57,8 @@ class Abono extends Component
                                 ->orWhereHas('socio', function ($q) {
                                     $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
                                         ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
-                                        ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
+                                        ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%')
+                                        ->orWhere('numero_socio', '%' . $this->buscar_cuenta . '%');
                                 });
                         })
                         ->orderBy('created_at', 'desc')

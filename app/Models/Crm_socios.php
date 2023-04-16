@@ -21,7 +21,8 @@ class Crm_socios extends Model
         'aportacion',
         'user_id',
         'codigo_empleado',
-        'empresa_id'
+        'empresa_id',
+        'numero_socio'
     ];
 
     public function cuentas()

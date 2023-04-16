@@ -28,7 +28,9 @@ class Cuentas extends Component
                                 return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
                                     ->orWhereHas('socio', function ($q) {
                                         $q->where('nombres', 'like', '%' . $this->buscar . '%')
-                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%');
+                                            ->orWhere('dui', 'like', '%' . $this->buscar . '%')
+                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%')
+                                            ->orWhere('numero_socio', 'like', '%' . $this->buscar . '%');
                                     });
                             })
                             ->orderBy('created_at', 'desc')

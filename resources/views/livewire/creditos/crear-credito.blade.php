@@ -99,6 +99,18 @@
                     />
                 </div>
             </div>
+
+            <div class="flex mb-4">
+                <div class="w-full">
+                    <x-jet-label>Comentario</x-jet-label>
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model="comentarios"
+                        placeholder="comentarios"
+                    />
+                </div>
+            </div>
         </x-slot>
 
         <x-slot name="footer">

@@ -20,7 +20,7 @@ class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $no_cuenta;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $no_cuenta, $comentarios;
 
     public $socios = [];
 
@@ -31,6 +31,7 @@ class CrearCredito extends Component
         'porcentaje'    =>  'required',
         'cuotaFija'     =>  'required',
         'periodo'       =>  'required',
+        'comentarios'   =>  'max:255'
         // 'no_cuenta'     =>  'unique:creditos'
     ];
 
@@ -113,6 +114,7 @@ class CrearCredito extends Component
         $nuevo_credito->porcentaje_interes = $this->porcentaje;
         $nuevo_credito->cantidad_cuotas = $this->periodo;
         $nuevo_credito->estado = 1;
+        $nuevo_credito->de_baja = 0;
 
         if($this->no_cuenta != "") {
             $nuevo_credito->no_cuenta = $this->no_cuenta;

@@ -62,6 +62,7 @@ class CreateSocio extends Component
             'user_id'       => $user->id,
             'empresa_id'    => $this->empresa,
             'codigo_empleado'   => $this->codigoEmpleado,
+            'numero_socio'  =>  $this->numero_socio
         ]);
 
         $toDay = getDate();

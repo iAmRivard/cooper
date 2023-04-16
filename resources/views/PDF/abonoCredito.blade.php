@@ -23,8 +23,8 @@
         <tr>
             <td><strong>POR: </strong></td>
             <td>${{ number_format($retiro->monto, 2) }}</td>
-            <td></td>
-            <td></td>
+            <td>Socio #</td>
+            <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>
@@ -79,8 +79,8 @@
         <tr>
             <td><strong>POR: </strong></td>
             <td>${{ number_format($retiro->monto, 2) }}</td>
-            <td></td>
-            <td></td>
+            <td>Socio #</td>
+            <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>
