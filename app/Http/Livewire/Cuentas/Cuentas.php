@@ -24,19 +24,18 @@ class Cuentas extends Component
     public function render()
     {
         $cuentas = Ctr_cuenta::with('socio')
-                            ->when($this->buscar, function ($query) {
-                                return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
-                                    ->orWhereHas('socio', function ($q) {
-                                        $q->where('nombres', 'like', '%' . $this->buscar . '%')
-                                            ->orWhere('dui', 'like', '%' . $this->buscar . '%')
-                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%')
-                                            ->orWhere('numero_socio', 'like', '%' . $this->buscar . '%');
-                                    });
-                            })
-                            ->orderBy('created_at', 'desc')
-                            ->paginate(5);
+            ->when($this->buscar, function ($query) {
+                return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
+                    ->orWhereHas('socio', function ($q) {
+                        $q->where('nombres', 'like', '%' . $this->buscar . '%')
+                            ->orWhere('dui', 'like', '%' . $this->buscar . '%')
+                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar . '%')
+                            ->orWhere('numero_socio', 'like', '%' . $this->buscar . '%');
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
 
         return view('livewire.cuentas.cuentas', compact('cuentas'));
     }
-
 }

@@ -8,64 +8,23 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 {{-- <a href="{{route('cuenta.cuenta', $cuenta)}}" class="a-link">
-                    Imprimir
+                Imprimir
                 </a> --}}
-                {{-- <x-jet-welcome /> --}}
-                <div class="flex justify-center mb-4 mt-4">
-                    <div class="stats shadow">
-                        <div class="stat">
-                            <div class="stat-title">Numero de cuenta </div>
-                            <div class="stat-value text-primary">#{{$cuenta->no_cuenta}}</div>
-                            <div class="stat-desc">{{$cuenta->tipoCuenta->nombre}}</div>
-                        </div>
-                        @if ($cuenta->tipoCuenta->plazo)
-                        <div class="stat">
-                            <div class="stat-title">Monto Apertura</div>
-                            <div class="stat-value text-sky-900">${{number_format($cuenta->monto_plazo)}}</div>
-                            <div class="stat-desc">MONTO INICIAL</div>
-                        </div>
-                        @endif
-                        <div class="stat">
-                            <div class="stat-title">Saldo a la fecha</div>
-                            <div class="stat-value text-green-900">${{number_format($cuenta->saldo_actual, 2)}}</div>
-                            @if ($cuenta->tipoCuenta->plazo)
-                            <div class="stat-desc">MONTO INICIAL + INTERESES</div>
-                            @else
-                            <div class="stat-desc">MONTO INICIAL + ABONOS/INTERESES</div>
-                            @endif
-                        </div>
-                        <div class="stat">
-                            <div class="stat-value">{{$cuenta->socio->nombres}}</div>
-                            <div class="stat-title">{{$cuenta->socio->apellidos}}</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-title">Descuento Quincenal </div>
-                            <div class="stat-value text-green-900">${{$cuenta->pago_quincenal}}</div>
-                        </div>
-
-                        @if ($cuenta->tipoCuenta->plazo)
-                        <div class="stat">
-                            <div class="stat-title">{{$cuenta->finalizado ? 'Finalizado' : 'Ejecución'}}</div>
-                            <div class="stat-value">{{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/@else / @endif{{ $cuenta->cantidad_quincenas }}</div>
-                            <div class="stat-desc">QUINCENAS</div>
-                        </div>
-                        @endif
-                    </div>
-                </div>
+                @include('partials.cuentas.resume-cuenta')
                 @if ($cuenta->tipoCuenta->plazo == true)
-                <div class="flex gap-4 justify-center mb-4 mt-4">
+                <div class="flex justify-center gap-4 mt-4 mb-4">
                     {{-- fecha de inicio --}}
-                    <div class="stats shadow">
+                    <div class="shadow stats">
                         <div class="stat">
                             <div class="stat-title">Fecha de inicio</div>
                             <div class="stat-value">{{ $cuenta->fecha_inicio }}</div>
                         </div>
                     </div>
                     {{-- Fecha fin --}}
-                    <div class="stats shadow">
+                    <div class="shadow stats">
                         <div class="stat">
                             <div class="stat-title">Fecha fin</div>
                             <div class="stat-value">{{ $cuenta->fecha_fin }}</div>
@@ -91,8 +50,9 @@
                             <tr>
                                 <td class="text-center">{{ $movimiento->id }}</td>
                                 <td class="text-center">{{ $movimiento->concepto }}</td>
-                                <td class="font-bold text-center" >
-                                   <span style="@if ($movimiento->naturaleza == 1) color: green; @else color: red; @endif">
+                                <td class="font-bold text-center">
+                                    <span
+                                        style="@if ($movimiento->naturaleza == 1) color: green; @else color: red; @endif">
                                         ${{ number_format($movimiento->monto,2) }}
                                     </span>
                                 </td>

@@ -13,8 +13,8 @@ class CuentasController extends Controller
         $cuenta =   Ctr_cuenta::find($id);
 
         $movimientos    =   Ctr_cuenta_det::where('ctr_cuentas_id', '=', $id)
-                                    ->orderBy('id', 'desc')
-                                    ->paginate(10);
+            ->orderBy('id', 'desc')
+            ->paginate(10);
 
         return view('cuentas.ver-cuenta', compact('movimientos', 'cuenta'));
     }
