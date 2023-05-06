@@ -22,27 +22,67 @@
 
             {{-- Buscar Cuenta --}}
             <div class="mb-4">
-                <div x-data="{
-                        list: true,
-                        account: ''
-                    }"
-                    x-init="$watch('account', value => $wire.set('cuenta', value))"
-                >
-                    <div class="w-full form-control">
-                        <label class="label">
-                            <span class="label-text">Buscar socio</span>
-                        </label>
-                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="buscar_cuenta" />
-                        <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
-                            @foreach ($cuentas as $cuenta)
-                                <button class="w-2/3 px-0 mb-2 cursor-pointer btn btn-secondary" x-on:click="account = {{ $cuenta->id }}">
-                                    {{$cuenta->id}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCredito->nombre }}
-                                </button>
-                            @endforeach
+    <div x-data="{
+            list: true,
+            account: '',
+            search: '',
+            filteredCuentas: [],
+            selectedAccount: null
+        }"
+        x-init="
+            $watch('search', async (value) => {
+                if (value.length >= 3) {
+                    filteredCuentas = await $wire.searchAccounts(value);
+                } else {
+                    filteredCuentas = [];
+                }
+            });
+
+            $watch('account', value => {
+                if (value) {
+                    selectedAccount = filteredCuentas.find(cuenta => cuenta.id === value);
+                    $wire.set('cuenta', value);
+                } else {
+                    selectedAccount = null;
+                }
+            })
+
+        "
+    >
+        <div x-show="!account" class="w-full form-control">
+            <label class="label">
+                <span class="label-text">Buscar socio</span>
+            </label>
+            <input x-model="search" type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" />
+            <div class="p-2 overflow-auto max-h-48 bg-white border border-gray-200 rounded shadow-lg" x-show="list && search.length > 0" x-transition>
+                <template x-for="(cuenta, index) in filteredCuentas" :key="index">
+                    <button class="w-full px-2 py-1 mb-1 text-left cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none" x-on:click="account = cuenta.id; list = false;">
+                        <div class="flex items-center">
+                            <div class="flex-1">
+                                <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> | <span x-text="cuenta.socio.nombres"></span> <span x-text="cuenta.socio.apellidos"></span>
+                            </div>
+               
                         </div>
-                    </div>
-                </div>
+                    </button>
+                </template>
+                <template x-if="filteredCuentas.length === 0">
+                    <p class="text-sm text-gray-400">No se encontraron resultados.</p>
+                </template>
             </div>
+        </div>
+        <div x-show="account" class="bg-white p-4 border border-gray-200 rounded">
+            <button class="mb-2 text-sm text-blue-500 focus:outline-none" x-on:click="account = ''; selectedAccount = null;">Cambiar selección</button>
+            <p><strong>Crédito:</strong> #<span x-text="selectedAccount && selectedAccount.no_cuenta"></span></p>
+            <p><strong>Nombre:</strong> <span x-text="selectedAccount && selectedAccount.socio.nombres"></span> <span x-text="selectedAccount && selectedAccount.socio.apellidos"></span></p>
+            <p><strong>Monto:</strong> $<span x-text="selectedAccount && selectedAccount.monto"></span></p>
+            <p><strong>Saldo Actual:</strong> $<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></p>
+
+        </div>
+    </div>
+</div>
+
+
+
 
             <div class="flex mb-4">
 

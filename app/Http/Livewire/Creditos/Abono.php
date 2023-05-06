@@ -16,6 +16,7 @@ class Abono extends Component
     public $buscar_cuenta = '';
 
     public $cuentas = [];
+    
 
     public $cuenta, $monto, $descripcion, $tipo, $cuenta_abonada, $cuota_cacelada;
 
@@ -42,7 +43,7 @@ class Abono extends Component
 
             $this->monto        =   $cuota->cuota;
             $this->tipo         =   $tipo_abono->id ? $tipo_abono->id  : '';
-            $this->descripcion  =   "Abono a crédito # $credito_select->no_cuenta por" . number_format($this->monto, 2);
+            $this->descripcion  =   "ABONO CRÉDITO #$credito_select->no_cuenta POR $" . number_format($this->monto, 2). ".\nINTERESES $".$cuota->interes. "\nCAPITAL $". $cuota->cuota_capital. "\nCUOTA #" .$cuota->nro_cuota ;
         }
     }
 
@@ -90,6 +91,7 @@ class Abono extends Component
         $this->cuenta_abonada = Credito::find($this->cuenta);
 
         $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual - $this->monto;
+        $this->cuenta_abonada->cuota_actual = $this->cuenta_abonada->cuota_actual + 1;
         $this->cuenta_abonada->save();
 
         if($this->cuota_cacelada) {
@@ -108,4 +110,25 @@ class Abono extends Component
             'descripcion'
         ]);
     }
+
+    public function searchAccounts($searchTerm)
+    {
+        return Credito::with(['socio', 'tipoCredito'])
+        ->when($searchTerm, function ($query) use ($searchTerm) {
+            return $query->where('no_cuenta', 'like', '%' . $searchTerm . '%')
+                ->orWhereHas('socio', function ($q) use ($searchTerm) {
+                    $q->where('nombres', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('codigo_empleado', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('dui', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('numero_socio', 'like', '%' . $searchTerm . '%');
+                });
+        })
+        ->where('estado', 1) 
+        ->orderBy('created_at', 'desc')
+        ->get()->jsonSerialize();
+    }
+    
+    
+    
+
 }

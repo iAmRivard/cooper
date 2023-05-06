@@ -104,7 +104,7 @@
                 <div class="w-full">
                     <x-jet-label>Comentario</x-jet-label>
                     <x-jet-input
-                        type="number"
+                        type="text"
                         class="w-full"
                         wire:model="comentarios"
                         placeholder="comentarios"
