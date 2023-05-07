@@ -138,10 +138,11 @@ class Abono extends Component
 
     public function searCuota($credito_id)
     {
-        return CrtPlanPagoDet::where('nro_cuota', '>=', 1)
+        $cuota = CrtPlanPagoDet::where('nro_cuota', '>=', 1)
             ->where('estado', 1)
             ->where('credito_id', $credito_id)
-            ->first()
-            ->jsonSerialize();
+            ->first();
+
+        return $cuota ? $cuota->jsonSerialize() : null;
     }
 }
