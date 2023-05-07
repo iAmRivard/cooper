@@ -34,7 +34,7 @@ class Cuentas extends Component
                     });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.cuentas.cuentas', compact('cuentas'));
     }

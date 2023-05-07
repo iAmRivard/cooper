@@ -29,28 +29,10 @@ class Abono extends Component
         'tipo'          => 'required',
     ];
 
-    public function UpdatedCuentaSelect($value)
-    {
-        $this->cuenta_place_holder  =   Ctr_cuenta::with('socio')->find($value);
-    }
-
     public function render()
     {
         $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '1')
-                                                ->get();
-
-        $this->cuentas  =    Ctr_cuenta::with('socio')
-                        ->when($this->buscar_cuenta, function ($query) {
-                            return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
-                                ->orWhereHas('socio', function ($q) {
-                                    $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
-                                        ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
-                                        ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
-                                });
-                        })
-                        ->orderBy('created_at', 'desc')
-                        ->get();
-
+            ->get();
 
         return view('livewire.movimientos.abono', compact('tiposMovimiento'));
     }
@@ -75,7 +57,7 @@ class Abono extends Component
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
-        $this->emitTo('cuentas.cuentas','render');
+        $this->emitTo('cuentas.cuentas', 'render');
 
         $socioId = $this->cuenta_abonada->crm_socio_id;
 
@@ -91,4 +73,19 @@ class Abono extends Component
         return redirect()->route('cuenta.abono', $abono);
     }
 
+    public function searchAccount($value)
+    {
+        return Ctr_cuenta::with('socio')
+            ->when($value, function ($query) use ($value) {
+                return $query->where('no_cuenta', 'like', '%' . $value . '%')
+                    ->orWhereHas('socio', function ($q) use ($value) {
+                        $q->where('nombres', 'like', '%' . $value . '%')
+                            ->orWhere('codigo_empleado', 'like', '%' . $value . '%')
+                            ->orWhere('dui', 'like', '%' . $value . '%');
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->jsonSerialize();
+    }
 }

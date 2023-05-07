@@ -5,7 +5,6 @@
 
     <x-jet-dialog-modal wire:model="open">
         <x-slot name="title">
-
             <h3 wire:target="error">Retiro de cuenta</h3>
 
             @if($error)
@@ -16,13 +15,105 @@
                     </div>
                 </div>
             @endif
-
         </x-slot>
 
         <x-slot name="content">
 
-            {{-- Buscar Cuenta --}}
             <div class="mb-4">
+                <div x-data="{
+                    list: true,
+                    account: '',
+                    search: '',
+                    filteredCuentas: [],
+                    selectedAccount: null,
+                }" x-init="
+                    $watch('search', async (value) => {
+                        filteredCuentas = value.length >= 3
+                            ? await $wire.searchAccount(value)
+                            : [];
+                    });
+                    $watch('account', value => {
+                        selectedAccount = value
+                            ? filteredCuentas.find(cuenta => cuenta.id === value)
+                            : null;
+                    });
+                ">
+                    <div x-show="!account" class="w-full form-control">
+                        <label class="label">
+                            <span class="label-text">Buscar socio</span>
+                        </label>
+                        <input
+                            x-model="search"
+                            type="text"
+                            placeholder="Código de empleado, DUI, Nombre, Número de cuenta"
+                            class="w-full input input-bordered"
+                        />
+                        <div
+                            class="p-2 overflow-auto bg-white border border-gray-200 rounded shadow-lg max-h-48"
+                            x-show="list && search.length > 0"
+                            x-transition
+                        >
+                            <template x-for="(cuenta, index) in filteredCuentas" :key="index">
+                                <button
+                                    class="w-full px-2 py-1 mb-1 text-left cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
+                                    x-on:click="
+                                        account = cuenta.id;
+                                        list = false;
+                                        $wire.set('cuenta_select', cuenta.id);
+                                    "
+                                >
+                                    <div class="flex items-center">
+                                        <div class="flex-1">
+                                            <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> |
+                                            <span x-text="cuenta.socio.nombres"></span>
+                                            <span x-text="cuenta.socio.apellidos"></span>
+                                        </div>
+                                    </div>
+                                </button>
+                            </template>
+                            <template x-if="filteredCuentas.length === 0">
+                                <p class="text-sm text-gray-400">No se encontraron resultados.</p>
+                            </template>
+                        </div>
+                    </div>
+                    {{-- Presentar información al usuario --}}
+                    <div x-show="account" class="p-4 bg-white border border-gray-200 rounded shadow-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold">Información de la Cuenta</h2>
+                            <button
+                                class="text-sm text-blue-500 focus:outline-none"
+                                x-on:click="
+                                    account = '';
+                                    selectedAccount = null;
+                                    list = true;
+                                "
+                            >
+                                Cambiar selección
+                            </button>
+                        </div>
+                        <table class="w-full text-left">
+                            <tr>
+                                <td class="py-2 font-semibold">Cuenta:</td>
+                                <td class="py-2">#<span x-text="selectedAccount && selectedAccount.no_cuenta"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Nombre:</td>
+                                <td class="py-2">
+                                    <span x-text="selectedAccount && selectedAccount.socio.nombres"></span>
+                                    <span x-text="selectedAccount && selectedAccount.socio.apellidos"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Saldo Actual:</td>
+                                <td class="py-2">$<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Buscar Cuenta --}}
+            {{-- <div class="mb-4">
                 <div x-data="{
                         list: true,
                         account: ''
@@ -50,7 +141,7 @@
                 @if ($cuenta_place_holder)
                 {{$cuenta_place_holder->id}} | {{$cuenta_place_holder->socio->nombres}} {{$cuenta_place_holder->socio->apellidos}} | {{ $cuenta_place_holder->tipoCuenta->nombre }}
                 @endif
-            </div>
+            </div> --}}
 
             <div class="flex mb-4">
 

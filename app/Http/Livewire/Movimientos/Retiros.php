@@ -35,19 +35,19 @@ class Retiros extends Component
     public function render()
     {
         $tiposMovimiento = Crc_tipos_de_movimiento::where('naturaleza', '=', '0')
-                                                    ->get();
+            ->get();
 
         $this->cuentas  =   Ctr_cuenta::with('socio')
-                            ->when($this->buscar_cuenta, function ($query) {
-                                return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
-                                    ->orWhereHas('socio', function ($q) {
-                                        $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
-                                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
-                                            ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
-                                    });
-                            })
-                            ->orderBy('created_at', 'desc')
-                            ->get();
+            ->when($this->buscar_cuenta, function ($query) {
+                return $query->where('no_cuenta', 'like', '%' . $this->buscar_cuenta . '%')
+                    ->orWhereHas('socio', function ($q) {
+                        $q->where('nombres', 'like', '%' . $this->buscar_cuenta . '%')
+                            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_cuenta . '%')
+                            ->orWhere('dui', 'like', '%' . $this->buscar_cuenta . '%');
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('livewire.movimientos.retiros', compact('tiposMovimiento'));
     }
@@ -58,8 +58,7 @@ class Retiros extends Component
 
         $this->cuenta_retirada = Ctr_cuenta::find($this->cuenta_select);
 
-        if($this->monto <= $this->cuenta_retirada->saldo_actual)
-        {
+        if ($this->monto <= $this->cuenta_retirada->saldo_actual) {
             $retiro = Ctr_cuenta_det::create([
                 'tipo_movimiento_id'    => $this->tipo,
                 'concepto'              => $this->descripcion,
@@ -83,14 +82,25 @@ class Retiros extends Component
 
             $this->emit('exito', 'Retiro procesado exitosamente');
 
-            $this->emitTo('cuentas.cuentas','render');
-
-            //return redirect()->route('cuenta.retiro', $retiro);
-
-        } else
-        {
+            $this->emitTo('cuentas.cuentas', 'render');
+        } else {
             $this->error = true;
         }
+    }
 
+    public function searchAccount($value)
+    {
+        return Ctr_cuenta::with('socio')
+            ->when($value, function ($query) use ($value) {
+                return $query->where('no_cuenta', 'like', '%' . $value . '%')
+                    ->orWhereHas('socio', function ($q) use ($value) {
+                        $q->where('nombres', 'like', '%' . $value . '%')
+                            ->orWhere('codigo_empleado', 'like', '%' . $value . '%')
+                            ->orWhere('dui', 'like', '%' . $value . '%');
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->get()
+            ->jsonSerialize();
     }
 }
