@@ -30,24 +30,22 @@
                     search: '',
                     filteredCuentas: [],
                     selectedAccount: null,
+                    detCuota: null,
                 }" x-init="
                     $watch('search', async (value) => {
-                        if (value.length >= 3) {
-                            filteredCuentas = await $wire.searchAccounts(value);
-                        } else {
-                            filteredCuentas = [];
-                        }
+                        filteredCuentas = value.length >= 3
+                            ? await $wire.searchAccounts(value)
+                            : [];
+                    });
+                    $watch('account', value => {
+                        selectedAccount = value
+                            ? filteredCuentas.find(cuenta => cuenta.id === value)
+                            : null;
                     });
 
-                    $watch('account', value => {
-                        if (value) {
-                            selectedAccount = filteredCuentas.find(cuenta => cuenta.id === value);
-                            $wire.set('cuenta', value);
-                        } else {
-                            selectedAccount = null;
-                        }
-                    })
-
+                    $watch('account', async (value) => {
+                        detCuota = await $wire.searCuota(value) ?? null;
+                    });
                 ">
                     <div x-show="!account" class="w-full form-control">
                         <label class="label">
@@ -83,35 +81,62 @@
                             </template>
                         </div>
                     </div>
-                    <div x-show="account" class="p-4 bg-white border border-gray-200 rounded">
-                        <button
-                            class="mb-2 text-sm text-blue-500 focus:outline-none"
-                            x-on:click="
-                                account = '';
-                                selectedAccount = null;
-                                list = true;
-                                $wire.resetProperties();
-                            "
-                        >
-                            Cambiar selección
-                        </button>
-                        <p>
-                            <strong>Crédito:</strong>
-                            #<span x-text="selectedAccount && selectedAccount.no_cuenta"></span>
-                        </p>
-                        <p>
-                            <strong>Nombre:</strong>
-                            <span x-text="selectedAccount && selectedAccount.socio.nombres"></span>
-                            <span x-text="selectedAccount && selectedAccount.socio.apellidos"></span>
-                        </p>
-                        <p>
-                            <strong>Monto:</strong> $<span x-text="selectedAccount && selectedAccount.monto"></span>
-                        </p>
-                        <p>
-                            <strong>Saldo Actual:</strong>
-                            $<span x-text="selectedAccount && selectedAccount.saldo_actual"></span>
-                        </p>
+                    {{-- Presentar información al usuario --}}
+                    <div x-show="account" class="p-4 bg-white border border-gray-200 rounded shadow-md">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold">Información del crédito</h2>
+                            <button
+                                class="text-sm text-blue-500 focus:outline-none"
+                                x-on:click="
+                                    account = '';
+                                    selectedAccount = null;
+                                    list = true;
+                                    $wire.resetProperties();
+                                "
+                            >
+                                Cambiar selección
+                            </button>
+                        </div>
+                        <table class="w-full text-left">
+                            <tr>
+                                <td class="py-2 font-semibold">Crédito:</td>
+                                <td class="py-2">#<span x-text="selectedAccount && selectedAccount.no_cuenta"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Nombre:</td>
+                                <td class="py-2">
+                                    <span x-text="selectedAccount && selectedAccount.socio.nombres"></span>
+                                    <span x-text="selectedAccount && selectedAccount.socio.apellidos"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Monto:</td>
+                                <td class="py-2">$<span x-text="selectedAccount && selectedAccount.monto"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Saldo Actual:</td>
+                                <td class="py-2">$<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></td>
+                            </tr>
+                        </table>
 
+                        <div x-show="detCuota !== null && detCuota !== undefined" class="mt-4">
+                            <h3 class="mb-2 text-lg font-semibold">Detalle de cuota</h3>
+                            <table class="w-full text-left">
+                                <tr>
+                                    <td class="py-2 font-semibold">Cuota #</td>
+                                    <td class="py-2"><span x-text="detCuota && detCuota.nro_cuota"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 font-semibold">Monto</td>
+                                    <td class="py-2"><span x-text="detCuota && detCuota.cuota"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="flex justify-end mt-4">
+                            <button x-on:click="$wire.set('cuenta', selectedAccount.id)" class="btn btn-sm">
+                                Seleccionar Cuota
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -150,7 +175,6 @@
                 >
                 </textarea>
             </div>
-
         </x-slot>
 
         <x-slot name="footer">

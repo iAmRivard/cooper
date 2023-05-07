@@ -83,5 +83,4 @@ class Socios extends Component
         $this->socio = $socio;
         $this->nueva_contrasena = true;
     }
-
 }

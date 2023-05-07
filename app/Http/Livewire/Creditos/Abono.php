@@ -20,23 +20,14 @@ class Abono extends Component
     public $cuenta, $monto, $descripcion, $tipo, $cuenta_abonada, $cuota_cacelada;
 
     protected $rules = [
-        'cuenta' => 'required',
-        'monto' => 'required',
-        'descripcion' => 'required',
-        'tipo' => 'required',
+        'cuenta'        => 'required',
+        'monto'         => 'required',
+        'descripcion'   => 'required',
+        'tipo'          => 'required',
     ];
 
     public function updatedCuenta($value)
     {
-        if (!$value == null) {
-            return $this->reset([
-                'cuota_cacelada',
-                'monto',
-                'tipo',
-                'descripcion'
-            ]);
-        }
-
         $credito_select = Credito::with('tipoCredito')->find($value);
 
         $cuota      =   CrtPlanPagoDet::where('nro_cuota', '>=', 1)
@@ -130,7 +121,7 @@ class Abono extends Component
 
     public function searchAccounts($searchTerm)
     {
-        return Credito::with(['socio', 'tipoCredito'])
+        return Credito::with(['socio', 'tipoCredito', 'planPago'])
             ->when($searchTerm, function ($query) use ($searchTerm) {
                 return $query->where('no_cuenta', 'like', '%' . $searchTerm . '%')
                     ->orWhereHas('socio', function ($q) use ($searchTerm) {
@@ -143,5 +134,14 @@ class Abono extends Component
             ->where('estado', 1)
             ->orderBy('created_at', 'desc')
             ->get()->jsonSerialize();
+    }
+
+    public function searCuota($credito_id)
+    {
+        return CrtPlanPagoDet::where('nro_cuota', '>=', 1)
+            ->where('estado', 1)
+            ->where('credito_id', $credito_id)
+            ->first()
+            ->jsonSerialize();
     }
 }
