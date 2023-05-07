@@ -26,7 +26,7 @@ class Abono extends Component
         'tipo'          => 'required',
     ];
 
-    public function updatedCuenta($value)
+    public function selectCuenta($value)
     {
         $credito_select = Credito::with('tipoCredito')->find($value);
 
@@ -48,7 +48,7 @@ class Abono extends Component
     public function resetProperties()
     {
         $this->reset([
-            'cuota_cacelada',
+            // 'cuota_cacelada',
             'monto',
             'tipo',
             'descripcion'

@@ -9,6 +9,18 @@
         </x-slot>
 
         <x-slot name="content">
+
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             @error('count')
             <div class="shadow-lg alert alert-error">
                 <div>
@@ -65,7 +77,11 @@
                             <template x-for="(cuenta, index) in filteredCuentas" :key="index">
                                 <button
                                     class="w-full px-2 py-1 mb-1 text-left cursor-pointer hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-                                    x-on:click="account = cuenta.id; list = false;"
+                                    x-on:click="
+                                        account = cuenta.id;
+                                        list = false;
+                                        $wire.set('cuenta', cuenta.id);
+                                    "
                                 >
                                     <div class="flex items-center">
                                         <div class="flex-1">
@@ -133,7 +149,7 @@
                             </table>
                         </div>
                         <div class="flex justify-end mt-4">
-                            <button x-on:click="$wire.set('cuenta', selectedAccount.id)" class="btn btn-sm">
+                            <button x-on:click="$wire.selectCuenta(selectedAccount.id)" class="btn btn-sm">
                                 Seleccionar Cuota
                             </button>
                         </div>
