@@ -28,8 +28,8 @@
                 </div>
 
                 <div class="w-1/2 pl-4">
-                    <x-jet-label>Número de tepefono</x-jet-label>
-                    <x-jet-input type="text" class="w-full" wire:model="phone_number" placeholder="Lopez" />
+                    <x-jet-label>Número de teléfono </x-jet-label>
+                    <x-jet-input type="text" class="w-full" wire:model="phone_number" placeholder="7777-7777" />
                 </div>
             </div>
 
