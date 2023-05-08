@@ -51,6 +51,16 @@
         </x-slot>
         <x-slot name="content">
 
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             <div class="mb-4">
                 <x-jet-label>Nombres</x-jet-label>
                 <x-jet-input type="text" class="w-full" wire:model.defer="beneficiario.nombres" />
@@ -61,9 +71,21 @@
                 <x-jet-input type="text" class="w-full" wire:model.defer="beneficiario.apellidos" />
             </div>
 
-            <div class="mb-4">
-                <x-jet-label>Parentesco</x-jet-label>
-                <x-jet-input type="text" class="w-full" wire:model.defer="beneficiario.parentesco" />
+            <div class="flex mb-4">
+                <div class="w-1/2 pr-4">
+                    <x-jet-label>Parentesco</x-jet-label>
+                    <x-jet-input type="text" class="w-full" wire:model.defer="beneficiario.parentesco" />
+                </div>
+
+                <div class="w-1/2 pl-4">
+                    <x-jet-label>Número de teléfono </x-jet-label>
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model="beneficiario.numero_telefono"
+                        placeholder="7777-7777"
+                    />
+                </div>
             </div>
 
             <div class="flex mb-4">

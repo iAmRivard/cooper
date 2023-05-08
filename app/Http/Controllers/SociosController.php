@@ -55,12 +55,10 @@ class SociosController extends Controller
         $socio_creditos = [];
 
         $socio_cuentas = Ctr_cuenta::where('crm_socio_id', $socio->id)
-                                    ->get();
+            ->get();
 
         $socio_creditos = Credito::where('socio_id', $socio->id)
-                                ->get();
-
-        // dd($socio_creditos);
+            ->get();
 
         return view('socios.index', compact('socio', 'socio_cuentas', 'socio_creditos'));
     }

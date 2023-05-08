@@ -20,12 +20,13 @@ class Tabla extends Component
     }
 
     protected $rules = [
-        'beneficiario.nombres' => 'required',
-        'beneficiario.apellidos' => 'required',
-        'beneficiario.parentesco' => 'required',
+        'beneficiario.nombres'          => 'required',
+        'beneficiario.apellidos'        => 'required',
+        'beneficiario.parentesco'       => 'required',
         'beneficiario.fecha_nacimiento' => 'required',
-        'beneficiario.porcentaje' => 'required',
-        'beneficiario.direccion' => 'required'
+        'beneficiario.porcentaje'       => 'required',
+        'beneficiario.direccion'        => 'required',
+        'beneficiario.numero_telefono'  => 'required'
     ];
 
     protected $listeners = ['render' => 'render'];
