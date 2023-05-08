@@ -13,105 +13,83 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
 
                 <div class="flex mx-2 mb-8">
+                <div class="w-1/2 mx-8 mt-6">
+                    <div class="bg-white shadow-lg rounded-lg p-6">
+                        <h2 class="text-center text-lg font-bold mb-4">INFORMACIÓN DE SOCIO</h2>
 
-                    <div class="w-1/2 mx-8 mt-6">
-                        <h2 class="flex justify-center text-lg font-bold">INFORMACIÓN DE SOCIO</h2>
+                        <div class="space-y-2 text-lg">
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-user text-xl"></i>
+                                <div class="font-normal"> {{ $socio->nombres }} {{ $socio->apellidos }}</div>
+                            </div>
 
-                        <div class="flex flex-col mt-4 space-y-4">
-                            <p> <strong>Nombres:</strong> <span>{{ $socio->nombres }}</span> </p>
-                            <p> <strong>Apellidos:</strong> <span>{{ $socio->apellidos }}</span> </p>
-                            <p> <strong>DUI:</strong> <span>{{ $socio->dui }}</span> </p>
-                            <p> <strong>NIT:</strong> <span>{{ $socio->nit }}</span> </p>
-                            <p> <strong>Correo:</strong> <span>{{ $socio->correo }}</span> </p>
-                           <p>  <strong>Estado:</strong> {{ $socio->estado = 1 ? 'Activo' : 'Inactivo' }} </p>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-id-card text-xl"></i>
+                                <div class="font-semibold"> DUI:</div>
+                                <div class="font-normal">{{ $socio->dui }}</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-id-card text-xl"></i>
+                                <div class="font-semibold"> NIT:</div>
+                                <div class="font-normal">{{ $socio->nit }}</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-envelope text-xl"></i>
+                                <div class="font-normal"> {{ $socio->correo }}</div>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <i class="fas fa-toggle-on text-xl"></i>
+                                <div class="font-semibold"> Estado:</div>
+                                <div class="font-normal">{{ $socio->estado = 1 ? 'Activo' : 'Inactivo' }}</div>
+                            </div>
                         </div>
-
                     </div>
+                </div>
 
-                    <div class="w-1/2 mt-6">
 
-                        <h2 class="flex justify-center text-lg font-bold">CUENTAS / CREDITOS ACTIVAS </h2>
-                        <div x-data="{open: true}">
+                <div class="w-1/2 mt-6">
+    <h2 class="text-center text-lg font-bold mb-4">CUENTAS / CREDITOS ACTIVAS</h2>
+    <div x-data="{ open: true }">
+        <div class="flex justify-center space-x-4 mb-4">
+            <button class="bg-gray-200 px-4 py-2 rounded-lg focus:outline-none" :class="{ 'bg-blue-500 text-white': open }" @click="open = true">Cuentas</button>
+            <button class="bg-gray-200 px-4 py-2 rounded-lg focus:outline-none" :class="{ 'bg-blue-500 text-white': !open }" @click="open = false">Creditos</button>
+        </div>
 
-                            <div class="tabs w-full">
-                                <a
-                                    class="tab tab-lifted"
-                                    :class="open ? 'tab-active' : ''"
-                                    @click="open = ! open"
-                                >
-                                    Cuentas
-                                </a>
-                                <a
-                                    class="tab tab-lifted"
-                                    :class="!open ? 'tab-active' : ''"
-                                    @click="open = ! open"
-                                >
-                                    Creditos
-                                </a>
-                            </div>
-
-                            <div class="block" :class="open ? '' : 'hidden' ">
-
-                                <div class="carousel">
-                                    @foreach ($socio_cuentas as $cuenta)
-                                    <div id="{{ $cuenta->id }}" class="carousel-item w-full">
-
-                                        <div class="card w-full bg-base-100">
-                                            <div class="card-body shadow-xl">
-                                                <h2 class="card-title">#{{$cuenta->id}}</h2>
-                                                <p>{{$cuenta->tipoCuenta->nombre}}</p>
-                                                <p><strong>Saldo Actual:</strong> {{ $cuenta->saldo_actual }}</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="flex justify-center w-full py-2 gap-2">
-                                    @foreach ($socio_cuentas as $cuenta)
-                                    <a href="#{{ $cuenta->id }}" class="btn btn-xs">o</a>
-                                    @endforeach
-                                </div>
-
-                            </div>
-
-                            {{-- Creditos --}}
-                            <div
-                                class="card w-96 bg-base-100 "
-                                :class="open ? 'hidden' : '' "
-                            >
-                                <div class="carousel">
-                                    @foreach ($socio_creditos as $credito)
-                                    <div id="credito-{{ $credito->id }}" class="carousel-item w-full">
-
-                                        <div class="card w-full bg-base-100">
-                                            <div class="card-body shadow-xl">
-                                                <h2 class="card-title">#{{$credito->id}}</h2>
-                                                <p>{{$credito->tipoCredito->nombre}}</p>
-                                                <p><strong>Saldo Actual:</strong> {{ $credito->saldo_actual }}</p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="flex justify-center w-full py-2 gap-2">
-                                    @foreach ($socio_creditos as $credito)
-                                    <a href="#credito-{{ $credito->id }}" class="btn btn-xs">o</a>
-                                    @endforeach
-                                </div>
-                            </div>
-
+        <div class="space-y-4">
+            <div x-show="open">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @foreach ($socio_cuentas as $cuenta)
+                        <div class="bg-white shadow-lg rounded-lg p-6">
+                            <h2 class="font-bold">#{{$cuenta->no_cuenta}}</h2>
+                            <p>{{$cuenta->tipoCuenta->nombre}}</p>
+                            <p><strong>Saldo Actual:</strong> {{ $cuenta->saldo_actual }}</p>
                         </div>
+                    @endforeach
+                </div>
+            </div>
 
-                    </div>
+            <div x-show="!open">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    @foreach ($socio_creditos as $credito)
+                        <div class="bg-white shadow-lg rounded-lg p-6">
+                            <h2 class="font-bold">#{{$credito->no_cuenta}}</h2>
+                            <p>{{$credito->tipoCredito->nombre}}</p>
+                            <p><strong>Saldo Actual:</strong> {{ $credito->saldo_actual }}</p>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 </div>
 
                 {{-- Información de las transacciones de los socios --}}
                 <div class="w-full flex flex-col mt-4 mx-10 space-y-4">
 
-                    @livewire('socios.table', ['socio' => $socio])
+                @livewire('beneficiarios.crear',['socio' => $socio])
 
                 </div>
 
