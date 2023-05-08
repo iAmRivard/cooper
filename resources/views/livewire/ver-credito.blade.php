@@ -3,6 +3,7 @@
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
             @livewire('creditos.activar-desactivar', ['credito' => $credito])
             @livewire('creditos.de-baja', ['credito' => $credito])
+            @livewire('creditos.comentarios', ['credito' => $credito])
 
             @if (count($movimientos) == 1)
             @livewire('creditos.editar', ['credito' => $credito])
