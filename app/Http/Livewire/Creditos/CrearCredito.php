@@ -20,7 +20,7 @@ class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija, $periodo, $tabla_amortizacion, $no_cuenta, $comentarios;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija = 0.00, $periodo, $tabla_amortizacion, $no_cuenta, $comentarios;
 
     public $socios = [];
 
@@ -40,52 +40,98 @@ class CrearCredito extends Component
         $this->validate();
 
         $this->reset(['tabla_amortizacion']);
+        
+        $monto = $this->monto;
+        $porcentajeQuincenal = (($this->porcentaje)/12)/2;
+        $periodoQuincenal = $this->periodo;
+        
+        $this->cuotaFija  = number_format($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal),2);
+        $tablaAmortizacion = $this->generarTablaAmortizacion($monto, $porcentajeQuincenal, $periodoQuincenal);
 
         $plan_pagos = [];
 
-        $frist = [
-            'socio_id'  => $this->selec_socio,
-            'user_id'   => Auth::id(),
-            'nro_cuota' => 0,
-            'cuota' => $this->cuotaFija,
-            'interes'   =>  ($this->porcentaje / 100),
-            'interes_acumulado' => 0,
-            'cuota_capital' =>  0,
-            'saldo' => $this->monto,
-            'capital_amortizado'    => 0,
-            'fecha_programada'  => 0
+        $primer_pago = [
+            'socio_id'           => $this->selec_socio,
+            'user_id'            => Auth::id(),
+            'nro_cuota'          => 0,
+            'cuota'              => $this->cuotaFija,
+            'interes'            => 0,
+            'interes_acumulado'  => 0,
+            'cuota_capital'      => 0,
+            'saldo'              => $this->monto,
+            'capital_amortizado' => 0,
+            'fecha_programada'   => 0
         ];
+        
+        array_push($plan_pagos, $primer_pago);
+        
 
-        array_push($plan_pagos, $frist);
+        $capital_amortizado_acumulado = 0;
+        $interes_acumulado = 0;
 
-        for ($i=0; $i < $this->periodo ; $i++) {
+        foreach ($tablaAmortizacion as $fila) {
+            $capital_amortizado_acumulado += $fila['capital'];
+            $interes_acumulado += $fila['interes'];
 
-            $interes = ((float)$plan_pagos[$i]['saldo'] * ($this->porcentaje / 100));
 
-            $interes_acumulado = ((float)$plan_pagos[$i]['interes_acumulado'] +  $interes);
-
-            $cuota_capital = ((float)$plan_pagos[$i]['cuota'] - $interes);
-
-            $saldo = ((float)$plan_pagos[$i]['saldo'] - $cuota_capital);
-
-            $capital_amortizado = ((float)$plan_pagos[$i]['capital_amortizado'] + $cuota_capital);
-            $semana = [
-                'socio_id'  => $this->selec_socio,
-                'user_id'   => Auth::id(),
-                'nro_cuota' => ($i + 1),
-                'cuota' => $this->cuotaFija,
-                'interes'   =>  $interes,
-                'interes_acumulado' => $interes_acumulado,
-                'cuota_capital' =>  $cuota_capital,
-                'saldo' => $saldo,
-                'capital_amortizado'    => $capital_amortizado,
-                'fecha_programada'  => ''
-            ];
-            array_push($plan_pagos, $semana);
+                $pago = [
+                    'socio_id'           => $this->selec_socio,
+                    'user_id'            => Auth::id(),
+                    'nro_cuota'          => $fila['quincena'],
+                    'cuota'              => $this->cuotaFija,
+                    'interes'            =>  number_format($fila['interes'], 2),
+                    'interes_acumulado'  => number_format($interes_acumulado, 2),
+                    'cuota_capital'      => number_format($fila['capital'],2),
+                    'saldo'              => number_format($fila['saldo']),
+                    'capital_amortizado' => number_format($capital_amortizado_acumulado, 2),
+                    'fecha_programada'   => ''
+                ];
+            
+                array_push($plan_pagos, $pago);
         }
-
+        
         $this->tabla_amortizacion = $plan_pagos;
+        
     }
+
+
+
+    function calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+        $tasaInteresDecimal = $tasaInteresQuincenal / 100;
+        $factorAmortizacion = (1 - pow(1 + $tasaInteresDecimal, -$numeroQuincenas)) / $tasaInteresDecimal;
+    
+        $cuotaQuincenal = $monto / $factorAmortizacion;
+    
+        return $cuotaQuincenal;
+    }
+    
+    function generarTablaAmortizacion($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+        $tasaInteresDecimal = $tasaInteresQuincenal / 100;
+        $saldo = $monto;
+        $cuotaQuincenal = $this->calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas);
+        $tablaAmortizacion = [];
+    
+        for ($i = 1; $i <= $numeroQuincenas; $i++) {
+            $interesPagado = $saldo * $tasaInteresDecimal;
+            $capitalPagado = $cuotaQuincenal - $interesPagado;
+            $saldo -= $capitalPagado;
+    
+            $tablaAmortizacion[] = [
+                'quincena' => $i,
+                'cuota' => $cuotaQuincenal,
+                'interes' => $interesPagado,
+                'capital' => $capitalPagado,
+                'saldo' => $saldo
+            ];
+        }
+    
+        return $tablaAmortizacion;
+    }
+    
+    
+    
+    
+
 
     public function render()
     {

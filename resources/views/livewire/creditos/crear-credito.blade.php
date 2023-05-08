@@ -8,31 +8,32 @@
             Asignación de credito
         </x-slot>
         <x-slot name="content">
-            <div class="mb-4">
-                {{-- Integración --}}
-                <x-jet-label>Buscar Socio</x-jet-label>
-                <x-jet-input
-                    class="w-1/2 input input-bordered max-w-xs"
-                    type="text"
-                    x-mask="99999999-9"
-                    wire:model="buscar_socio"
-                    wire:keydown="buscar"
-                    placeholder="Buscar socio por: Nombre o DUI"
-                />
-                <i class="fa-solid fa-magnifying-glass cursor-pointer"
-                    name="buscar"
-                    wire:click="buscar"
-                >
-                </i>
-            </div>
-            {{-- Selección de socio --}}
-            <div class="mb-4">
-                <select class="select select-bordered w-full overflow-hidden appearance-none" size="3" required wire:model="selec_socio">
-                    @foreach ($socios as $socio)
-                        <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }}</option>
-                    @endforeach
-                </select>
-            </div>
+        <div class="mb-4">
+    <div class="flex items-center">
+        <x-jet-label class="mr-2">Buscar Socio:</x-jet-label>
+        <x-jet-input
+            class="input input-bordered w-full md:w-1/2 max-w-md"
+            type="text"
+            wire:model="buscar_socio"
+            wire:keydown="buscar"
+            placeholder="Buscar socio por: Nombre o DUI"
+        />
+        <button class="ml-2 btn btn-primary" name="buscar" wire:click="buscar">
+            <i class="fa-solid fa-magnifying-glass"></i> 
+        </button>
+    </div>
+</div>
+<div class="mb-4">
+    <x-jet-label>Seleccionar Socio:</x-jet-label>
+    <div class="relative">
+    <select class="select select-bordered w-full appearance-none  h-26" size="3" style="heigth:50px" required wire:model="selec_socio">
+            @foreach ($socios as $socio)
+                <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }} | {{$socio->dui}}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
 
             <div class="flex mb-4">
                 <div class="w-1/2 pr-4">
@@ -64,28 +65,20 @@
                         class="w-full"
                         wire:model="monto"
                         placeholder="$0.00"
+                        step="0.01"
                     />
                 </div>
-                {{-- Apellidos del socio --}}
-                <div class="w-1/2 pl-4">
-                    <x-jet-label value="Cuota Fija" />
-                    <x-jet-input
-                        type="number "
-                        class="w-full"
-                        wire:model="cuotaFija"
-                        placeholder="$0.00"
-                    />
-                </div>
+
             </div>
             <div class="flex mb-4">
                 {{-- Porcentaje --}}
                 <div class="w-1/2 pr-4">
-                    <x-jet-label>Selección del porcentaje</x-jet-label>
+                    <x-jet-label>Porcentaje Anual de Interes</x-jet-label>
                     <x-jet-input
                         type="number"
                         class="w-full"
                         wire:model="porcentaje"
-                        placeholder="%"
+                        placeholder="36%"
                     />
                 </div>
                 {{-- Apellidos del socio --}}
@@ -109,6 +102,11 @@
                         wire:model="comentarios"
                         placeholder="comentarios"
                     />
+                </div>
+            </div>
+            <div class="flex mb-4">
+                <div class="w-full">
+                    <x-jet-label><strong>NOTA:</strong>Se asignará automaticamente la cuota en base al monto, interes y periodo seleccionado.</x-jet-label>
                 </div>
             </div>
         </x-slot>
@@ -150,7 +148,7 @@
                         <label class="label">
                             <span class="label-text">Cuota Fija</span>
                         </label>
-                        <input type="number" class="input input-bordered w-full max-w-xs" wire:model="cuotaFija" />
+                        <input type="number" disabled="true" class="input input-bordered w-full max-w-xs" wire:model="cuotaFija" />
                     </div>
                     <div class="form-control w-full max-w-xs">
                         <label class="label">
@@ -180,7 +178,7 @@
                             <th>Semana</th>
                             <th>Cuota Mensual</th>
                             <th>Intereses</th>
-                            <th>Cuota de Capital</th>
+                            <th>Cuota Quincenal</th>
                             <th>Saldo</th>
                             <th>Capital Amortizado</th>
                         </tr>
@@ -191,10 +189,10 @@
                         <tr>
                             <th>{{ $t['nro_cuota'] }}</th>
                             <td>{{ $t['cuota'] }}</td>
-                            <td>{{ $t['interes'] }}</td>
-                            <td>{{ $t['cuota_capital'] }}</td>
-                            <td>{{ $t['saldo'] }}</td>
-                            <td>{{ $t['capital_amortizado'] }}</td>
+                            <td>${{ $t['interes'] }}</td>
+                            <td>${{ $t['cuota_capital'] }}</td>
+                            <td>${{ $t['saldo'] }}</td>
+                            <td>${{ $t['capital_amortizado'] }}</td>
                         </tr>
                         @endforeach
                     </tbody>

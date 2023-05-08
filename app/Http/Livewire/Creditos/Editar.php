@@ -52,44 +52,55 @@ class Editar extends Component
     {
         $this->validate();
 
-        $plan_pagos_det = [];
+        $plan_pagos = [];
 
-        $frist = [
-            'socio_id'              =>  $this->credito->socio->id,
-            'user_id'               =>  Auth::id(),
-            'nro_cuota'             =>  0,
-            'cuota'                 =>  $this->cuota_fija,
-            'interes'               =>  ($this->porcentaje / 100),
-            'interes_acumulado'     =>  0,
-            'cuota_capital'         =>  0,
-            'saldo'                 =>  $this->monto,
-            'capital_amortizado'    =>  0,
-            'fecha_programada'      =>  0
+        $monto = $this->monto;
+        $porcentajeQuincenal = (($this->porcentaje)/12)/2;
+        $periodoQuincenal = $this->periodo;
+        
+        $this->cuotaFija  = number_format($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal),2);
+        $tablaAmortizacion = $this->generarTablaAmortizacion($monto, $porcentajeQuincenal, $periodoQuincenal);
+
+        $plan_pagos = [];
+
+        $primer_pago = [
+            'socio_id'           => $this->credito->socio->id,
+            'user_id'            => Auth::id(),
+            'nro_cuota'          => 0,
+            'cuota'              => $this->cuotaFija,
+            'interes'            => 0,
+            'interes_acumulado'  => 0,
+            'cuota_capital'      => 0,
+            'saldo'              => $this->monto,
+            'capital_amortizado' => 0,
+            'fecha_programada'   => 0
         ];
+        
+        array_push($plan_pagos, $primer_pago);
+        
 
-        array_push($plan_pagos_det, $frist);
+        $capital_amortizado_acumulado = 0;
+        $interes_acumulado = 0;
 
-        for ($i=0; $i < $this->periodo ; $i++) {
-            $interes = ((float)$plan_pagos_det[$i]['saldo'] * ($this->porcentaje / 100));
-            $interes_acumulado = ((float)$plan_pagos_det[$i]['interes_acumulado'] +  $interes);
-            $cuota_capital = ((float)$plan_pagos_det[$i]['cuota'] - $interes);
-            $saldo = ((float)$plan_pagos_det[$i]['saldo'] - $cuota_capital);
-            $capital_amortizado = ((float)$plan_pagos_det[$i]['capital_amortizado'] + $cuota_capital);
+        foreach ($tablaAmortizacion as $fila) {
+            $capital_amortizado_acumulado += $fila['capital'];
+            $interes_acumulado += $fila['interes'];
 
-            $semana = [
-                'socio_id'              =>  $this->credito->socio->id,
-                'user_id'               =>  Auth::id(),
-                'nro_cuota'             =>  ($i + 1),
-                'cuota'                 =>  $this->cuota_fija,
-                'interes'               =>  $interes,
-                'interes_acumulado'     =>  $interes_acumulado,
-                'cuota_capital'         =>  $cuota_capital,
-                'saldo'                 =>  $saldo,
-                'capital_amortizado'    =>  $capital_amortizado,
-                'fecha_programada'      =>  ''
-            ];
 
-            array_push($plan_pagos_det, $semana);
+                $pago = [
+                    'socio_id'           => $this->credito->socio->id,
+                    'user_id'            => Auth::id(),
+                    'nro_cuota'          => $fila['quincena'],
+                    'cuota'              => $this->cuotaFija,
+                    'interes'            =>  number_format($fila['interes'], 2),
+                    'interes_acumulado'  => number_format($interes_acumulado, 2),
+                    'cuota_capital'      => number_format($fila['capital'],2),
+                    'saldo'              => number_format($fila['saldo']),
+                    'capital_amortizado' => number_format($capital_amortizado_acumulado, 2),
+                    'fecha_programada'   => ''
+                ];
+            
+                array_push($plan_pagos, $pago);
         }
 
         $this->credito->tipo_credito_id      =   $this->tipo_credito;
@@ -132,14 +143,14 @@ class Editar extends Component
             'pediodo_id'        => $periodo->id,
             'socio_id'          => $this->credito->socio->id,
             'monto'             => $this->monto,
-            'cuota_fija'        => $this->cuota_fija,
+            'cuota_fija'        => $this->cuotaFija,
             'interes_acumulado' => 0,
             'refinanciamiento'  => 0,
             'vigente'           => 1,
             'estado'            => 1
         ]);
 
-        foreach($plan_pagos_det as $tabla => $t) {
+        foreach($plan_pagos as $tabla => $t) {
             CrtPlanPagoDet::create([
                 'plan_pago_id'          =>  $plan_pago->id,
                 'credito_id'            =>  $this->credito->id,
@@ -166,4 +177,37 @@ class Editar extends Component
         ]);
 
     }
+
+      function calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+        $tasaInteresDecimal = $tasaInteresQuincenal / 100;
+        $factorAmortizacion = (1 - pow(1 + $tasaInteresDecimal, -$numeroQuincenas)) / $tasaInteresDecimal;
+    
+        $cuotaQuincenal = $monto / $factorAmortizacion;
+    
+        return $cuotaQuincenal;
+    }
+    
+    function generarTablaAmortizacion($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+        $tasaInteresDecimal = $tasaInteresQuincenal / 100;
+        $saldo = $monto;
+        $cuotaQuincenal = $this->calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas);
+        $tablaAmortizacion = [];
+    
+        for ($i = 1; $i <= $numeroQuincenas; $i++) {
+            $interesPagado = $saldo * $tasaInteresDecimal;
+            $capitalPagado = $cuotaQuincenal - $interesPagado;
+            $saldo -= $capitalPagado;
+    
+            $tablaAmortizacion[] = [
+                'quincena' => $i,
+                'cuota' => $cuotaQuincenal,
+                'interes' => $interesPagado,
+                'capital' => $capitalPagado,
+                'saldo' => $saldo
+            ];
+        }
+    
+        return $tablaAmortizacion;
+    }
+    
 }
