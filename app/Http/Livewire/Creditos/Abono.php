@@ -99,13 +99,15 @@ class Abono extends Component
         $this->cuenta_abonada = Credito::find($this->cuenta);
 
         $this->cuenta_abonada->saldo_actual = $this->cuenta_abonada->saldo_actual - $this->monto;
-        $this->cuenta_abonada->cuota_actual = $this->cuenta_abonada->cuota_actual + 1;
-        $this->cuenta_abonada->save();
+
 
         if ($this->cuota_cacelada) {
             $this->cuota_cacelada->estado   =   0;
+            $this->cuenta_abonada->cuota_actual = $this->cuenta_abonada->cuota_actual + 1;
             $this->cuota_cacelada->save();
         }
+        $this->cuenta_abonada->save();
+
 
         $this->emit('exito', 'Abono procesado exitosamente');
 

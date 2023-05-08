@@ -22,9 +22,8 @@
                     </div>
                 </div>
 
-                <div class="container py-8 flex justify-center">
-                    <div class="overflow-x-auto w-5/6">
-                        <table class="table table-zebra w-full">
+                <div class="w-full m-4 md:w-5/6">
+                    <table class="table w-full text-sm table-zebra md:text-base">
                             <thead>
                                 <tr>
                                     <th># Credito</th>
@@ -32,9 +31,7 @@
                                     <th>Tipo de Credito</th>
                                     <th>Monto</th>
                                     <th>Saldo Actual</th>
-                                    <th>Interes</th>
                                     <th># Cuotas</th>
-                                    <th>Comentario</th>
                                     <th>Estado</th>
                                     <th>&nbsp;</th>
                                 </tr>
@@ -49,9 +46,7 @@
                                         <td class="font-bold">{{ $credito->tipoCredito->nombre }}</td>
                                         <td>${{ $credito->monto }}</td>
                                         <td>${{ $credito->saldo_actual }}</td>
-                                        <td>{{ $credito->porcentaje_interes}}% </td>
                                         <td class="font-bold"> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
-                                        <td>{{ $credito->comentarios }}</td>
                                         <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
                                         <td>
                                             <a href="{{ route('ver.credito', $credito->id) }}" class="a-link">
@@ -62,7 +57,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
                 </div>
                 <div class="px-6 py-3">
                     {{$creditos->links()}}
