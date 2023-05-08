@@ -66,7 +66,8 @@
                                         <div class="flex-1">
                                             <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> |
                                             <span x-text="cuenta.socio.nombres"></span>
-                                            <span x-text="cuenta.socio.apellidos"></span>
+                                            <span x-text="cuenta.socio.apellidos"></span> |
+                                            <span x-text="cuenta.tipo_cuenta.nombre"></span>
                                         </div>
                                     </div>
                                 </button>
@@ -107,43 +108,16 @@
                                 <td class="py-2 font-semibold">Saldo Actual:</td>
                                 <td class="py-2">$<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></td>
                             </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Cuenta</td>
+                                <td class="py-2"><span x-text="selectedAccount && selectedAccount.tipo_cuenta.nombre"></span></td>
+                            </tr>
                         </table>
                     </div>
                 </div>
             </div>
 
-            {{-- Buscar Cuenta --}}
-            {{-- <div class="mb-4">
-                <div x-data="{
-                        list: true,
-                        account: ''
-                    }"
-                    x-init="$watch('account', value => $wire.set('cuenta_select', value))"
-                >
-                    <div class="w-full form-control">
-                        <label class="label">
-                            <span class="label-text">Buscar socio</span>
-                        </label>
-                        <input type="text" placeholder="Código de empleado, DUI, Nombre, Número de cuenta" class="w-full input input-bordered" wire:model="buscar_cuenta" />
-                        <div class="p-2 overflow-auto max-h-16" x-show="list" x-transition>
-                            @foreach ($cuentas as $cuenta)
-                                <button class="w-2/3 px-0 mb-2 cursor-pointer btn btn-secondary" x-on:click="account = {{ $cuenta->id }}">
-                                    {{$cuenta->no_cuenta}} | {{$cuenta->socio->nombres}} {{$cuenta->socio->apellidos}} | {{ $cuenta->tipoCuenta->nombre }}
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-4 mb-4">
-                <x-jet-label>Socio</x-jet-label>
-                @if ($cuenta_place_holder)
-                {{$cuenta_place_holder->id}} | {{$cuenta_place_holder->socio->nombres}} {{$cuenta_place_holder->socio->apellidos}} | {{ $cuenta_place_holder->tipoCuenta->nombre }}
-                @endif
-            </div> --}}
-
-            <div class="flex mb-4">
+            <div class="flex gap-4 mb-4">
 
                 {{-- Monto de Retiro --}}
                 <div class="w-1/2">
