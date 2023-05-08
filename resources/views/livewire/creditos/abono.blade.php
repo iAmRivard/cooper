@@ -87,7 +87,8 @@
                                         <div class="flex-1">
                                             <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> |
                                             <span x-text="cuenta.socio.nombres"></span>
-                                            <span x-text="cuenta.socio.apellidos"></span>
+                                            <span x-text="cuenta.socio.apellidos"></span> |
+                                            <span x-text="cuenta.tipo_credito.nombre"></span>
                                         </div>
                                     </div>
                                 </button>

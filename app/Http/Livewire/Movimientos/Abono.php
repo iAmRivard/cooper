@@ -75,7 +75,7 @@ class Abono extends Component
 
     public function searchAccount($value)
     {
-        return Ctr_cuenta::with('socio')
+        return Ctr_cuenta::with('socio', 'tipoCuenta')
             ->when($value, function ($query) use ($value) {
                 return $query->where('no_cuenta', 'like', '%' . $value . '%')
                     ->orWhereHas('socio', function ($q) use ($value) {

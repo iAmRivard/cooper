@@ -58,7 +58,8 @@
                                         <div class="flex-1">
                                             <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> |
                                             <span x-text="cuenta.socio.nombres"></span>
-                                            <span x-text="cuenta.socio.apellidos"></span>
+                                            <span x-text="cuenta.socio.apellidos"></span> |
+                                            <span x-text="cuenta.tipo_cuenta.nombre"></span>
                                         </div>
                                     </div>
                                 </button>
@@ -98,6 +99,10 @@
                             <tr>
                                 <td class="py-2 font-semibold">Saldo Actual:</td>
                                 <td class="py-2">$<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 font-semibold">Cuenta</td>
+                                <td class="py-2"><span x-text="selectedAccount && selectedAccount.tipo_cuenta.nombre"></span></td>
                             </tr>
                         </table>
                     </div>
