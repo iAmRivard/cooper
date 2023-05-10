@@ -106,8 +106,8 @@ class Abono extends Component
             $this->cuenta_abonada->cuota_actual = $this->cuenta_abonada->cuota_actual + 1;
             $this->cuota_cacelada->save();
         }
-        $this->cuenta_abonada->save();
 
+        $this->cuenta_abonada->save();
 
         $this->emit('exito', 'Abono procesado exitosamente');
 
@@ -119,6 +119,8 @@ class Abono extends Component
             'monto',
             'descripcion'
         ]);
+
+        return redirect()->route('credito.abono', $abono);
     }
 
     public function searchAccounts($searchTerm)

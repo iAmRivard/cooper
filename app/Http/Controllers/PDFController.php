@@ -12,8 +12,9 @@ use App\Models\Ctr_cuenta;
 
 use App\Models\CreditoDet;
 use App\Models\TipoMovimientoCredito;
+use Barryvdh\DomPDF\Facade\Pdf;
 
-use PDF;
+// use PDF;
 // use \NumberFormatter;
 
 class PDFController extends Controller
@@ -27,12 +28,10 @@ class PDFController extends Controller
 
         $pdfNombre = $abono->id.".pdf";
 
-        return PDF::setOptions([
+        return Pdf::setOptions([
             'isHtml5ParserEnabled' => true,
             'isRemoteEnabled' => true
         ])->loadView('PDF.abono', $data)->download($pdfNombre);
-
-        return $pdf->download('invoice.pdf');
     }
 
     public function retiro(Ctr_cuenta_det $retiro)
@@ -44,9 +43,9 @@ class PDFController extends Controller
 
         $pdfNombre = $retiro->id.".pdf";
 
-        return PDF::setOptions([
+        return Pdf::setOptions([
             'isHtml5ParserEnabled' => true,
-            'isRemoteEnabled' => true
+            'isRemoteEnabled'       => true
         ])->loadView('PDF.retiro', $data)->download($pdfNombre);
     }
 

@@ -10,7 +10,6 @@
 
         <x-slot name="content">
 
-
             @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
