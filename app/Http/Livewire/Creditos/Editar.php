@@ -16,7 +16,7 @@ use App\Models\CrtPlanPagoDet;
 
 class Editar extends Component
 {
-    public $credito, $monto, $porcentaje, $periodo, $cuota_fija, $tipo_credito, $no_cuenta, $tipos_creditos, $plan_pagos;
+    public $credito, $monto, $porcentaje, $periodo, $cuota_fija, $tipo_credito, $no_cuenta, $tipos_creditos, $plan_pagos, $cuotaFija;
 
     public $open;
 
@@ -55,10 +55,10 @@ class Editar extends Component
         $plan_pagos = [];
 
         $monto = $this->monto;
-        $porcentajeQuincenal = (($this->porcentaje)/12)/2;
+        $porcentajeQuincenal = (($this->porcentaje) / 12) / 2;
         $periodoQuincenal = $this->periodo;
-        
-        $this->cuotaFija  = number_format($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal),2);
+
+        $this->cuotaFija  = round($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal), 2);
         $tablaAmortizacion = $this->generarTablaAmortizacion($monto, $porcentajeQuincenal, $periodoQuincenal);
 
         $plan_pagos = [];
@@ -71,13 +71,12 @@ class Editar extends Component
             'interes'            => 0,
             'interes_acumulado'  => 0,
             'cuota_capital'      => 0,
-            'saldo'              => $this->monto,
+            'saldo'              => round($this->monto, 2),
             'capital_amortizado' => 0,
             'fecha_programada'   => 0
         ];
-        
+
         array_push($plan_pagos, $primer_pago);
-        
 
         $capital_amortizado_acumulado = 0;
         $interes_acumulado = 0;
@@ -86,22 +85,23 @@ class Editar extends Component
             $capital_amortizado_acumulado += $fila['capital'];
             $interes_acumulado += $fila['interes'];
 
+            $pago = [
+                'socio_id'           => $this->credito->socio->id,
+                'user_id'            => Auth::id(),
+                'nro_cuota'          => $fila['quincena'],
+                'cuota'              => $this->cuotaFija,
+                'interes'            => round($fila['interes'], 2),
+                'interes_acumulado'  => round($interes_acumulado, 2),
+                'cuota_capital'      => round($fila['capital'], 2),
+                'saldo'              => round($fila['saldo'], 2),
+                'capital_amortizado' => round($capital_amortizado_acumulado, 2),
+                'fecha_programada'   => ''
+            ];
 
-                $pago = [
-                    'socio_id'           => $this->credito->socio->id,
-                    'user_id'            => Auth::id(),
-                    'nro_cuota'          => $fila['quincena'],
-                    'cuota'              => $this->cuotaFija,
-                    'interes'            =>  number_format($fila['interes'], 2),
-                    'interes_acumulado'  => number_format($interes_acumulado, 2),
-                    'cuota_capital'      => number_format($fila['capital'],2),
-                    'saldo'              => number_format($fila['saldo']),
-                    'capital_amortizado' => number_format($capital_amortizado_acumulado, 2),
-                    'fecha_programada'   => ''
-                ];
-            
-                array_push($plan_pagos, $pago);
+            array_push($plan_pagos, $pago);
         }
+
+        // dd($plan_pagos);
 
         $this->credito->tipo_credito_id      =   $this->tipo_credito;
         $this->credito->monto                =   $this->monto;
@@ -128,10 +128,10 @@ class Editar extends Component
 
         $periodo = new CrcPeriodo();
         $periodo->valor = $this->periodo;
-        if($this->periodo > 1) {
-            $periodo->descripcion = $this->periodo. " Meses";
+        if ($this->periodo > 1) {
+            $periodo->descripcion = $this->periodo . " Meses";
         } else {
-            $periodo->descripcion = $this->periodo. " Mese";
+            $periodo->descripcion = $this->periodo . " Mese";
         }
         $periodo->estado = 1;
         $periodo->user_id = Auth::id();
@@ -150,7 +150,7 @@ class Editar extends Component
             'estado'            => 1
         ]);
 
-        foreach($plan_pagos as $tabla => $t) {
+        foreach ($plan_pagos as $tabla => $t) {
             CrtPlanPagoDet::create([
                 'plan_pago_id'          =>  $plan_pago->id,
                 'credito_id'            =>  $this->credito->id,
@@ -168,36 +168,37 @@ class Editar extends Component
             ]);
         }
 
-        $this->emitTo('ver-credito','render');
+        $this->emitTo('ver-credito', 'render');
 
         $this->emit('exito', 'El credito fue creado con exito');
 
         $this->reset([
             'open'
         ]);
-
     }
 
-      function calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+    function calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas)
+    {
         $tasaInteresDecimal = $tasaInteresQuincenal / 100;
         $factorAmortizacion = (1 - pow(1 + $tasaInteresDecimal, -$numeroQuincenas)) / $tasaInteresDecimal;
-    
+
         $cuotaQuincenal = $monto / $factorAmortizacion;
-    
+
         return $cuotaQuincenal;
     }
-    
-    function generarTablaAmortizacion($monto, $tasaInteresQuincenal, $numeroQuincenas) {
+
+    function generarTablaAmortizacion($monto, $tasaInteresQuincenal, $numeroQuincenas)
+    {
         $tasaInteresDecimal = $tasaInteresQuincenal / 100;
         $saldo = $monto;
         $cuotaQuincenal = $this->calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas);
         $tablaAmortizacion = [];
-    
+
         for ($i = 1; $i <= $numeroQuincenas; $i++) {
             $interesPagado = $saldo * $tasaInteresDecimal;
             $capitalPagado = $cuotaQuincenal - $interesPagado;
             $saldo -= $capitalPagado;
-    
+
             $tablaAmortizacion[] = [
                 'quincena' => $i,
                 'cuota' => $cuotaQuincenal,
@@ -206,8 +207,7 @@ class Editar extends Component
                 'saldo' => $saldo
             ];
         }
-    
+
         return $tablaAmortizacion;
     }
-    
 }
