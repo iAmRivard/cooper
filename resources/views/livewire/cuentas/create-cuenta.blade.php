@@ -34,7 +34,7 @@
             {{-- selección de cuenta --}}
             <div class="mb-4">
                 <x-jet-label>Selección del tipo de cuenta</x-jet-label>
-                <select class="select select-bordered w-full" wire:model="cuenta">
+                <select class="w-full select select-bordered" wire:model="cuenta">
                     <option>Seleccionar tipo de cuenta</option>
                     @foreach($tipos_cuentas as $tipo_cuenta)
                         <option value="{{ $tipo_cuenta }}" class="@if ($tipo_cuenta->id == 1) hidden @endif">{{ $tipo_cuenta->nombre }}</option>
@@ -48,8 +48,8 @@
                     <x-jet-label value="Número de cuenta" />
                     <input type="text"
                         placeholder="000000"
-                        wire.model.defer="numero_cuenta"
-                        class="input input-bordered w-full max-w-xs"
+                        wire:model="numero_cuenta"
+                        class="w-full max-w-xs input input-bordered"
                     />
                     <x-jet-input-error for="numero_cuenta" />
                 </div>
@@ -69,7 +69,7 @@
                 <div>
                     <x-jet-label>Descuento Quincenal</x-jet-label>
                     <input
-                        class="input input-bordered w-full max-w-xs"
+                        class="w-full max-w-xs input input-bordered"
                         type="text"
                         placeholder="$10.00"
                         wire:model="desceutno_quincenal"
@@ -81,7 +81,7 @@
                 <div>
                     <x-jet-label>Monto plazo</x-jet-label>
                     <input
-                        class="input input-bordered w-full max-w-xs"
+                        class="w-full max-w-xs input input-bordered"
                         type="number"
                         placeholder="$10.00"
                         wire:model="monto_plazo"
