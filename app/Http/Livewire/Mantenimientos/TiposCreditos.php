@@ -16,9 +16,9 @@ class TiposCreditos extends Component
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
-        'nombre',
-        'descripcion',
-        'porcentaje'
+        'nombre'        =>  'required',
+        'descripcion'   =>  'required',
+        'porcentaje'    =>  'required'
     ];
 
     public function render()
@@ -30,7 +30,7 @@ class TiposCreditos extends Component
 
     public function actualizarEstado(TipoCredito $cuenta)
     {
-        if($cuenta->estado == 1) {
+        if ($cuenta->estado == 1) {
             $cuenta->update([
                 'estado' => 0
             ]);
@@ -61,7 +61,7 @@ class TiposCreditos extends Component
         $this->editTipo->nombre             = $this->nombre;
         $this->editTipo->descripcion        = $this->descripcion;
         $this->editTipo->porcentaje_interes = $this->porcentaje;
-        $this->editTipo->save();
+        $this->editTipo->update();
 
         $this->emitTo('mantenimientos.tipos-cuentas', 'render');
 
@@ -72,5 +72,4 @@ class TiposCreditos extends Component
             'open'
         ]);
     }
-
 }
