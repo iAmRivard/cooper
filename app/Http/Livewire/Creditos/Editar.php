@@ -93,7 +93,7 @@ class Editar extends Component
                 'interes'            => round($fila['interes'], 2),
                 'interes_acumulado'  => round($interes_acumulado, 2),
                 'cuota_capital'      => round($fila['capital'], 2),
-                'saldo'              => round($fila['saldo'], 2),
+                'saldo'              => round($fila['saldo'], 2) == -0 ? 0 : round($fila['saldo'], 2),
                 'capital_amortizado' => round($capital_amortizado_acumulado, 2),
                 'fecha_programada'   => ''
             ];
