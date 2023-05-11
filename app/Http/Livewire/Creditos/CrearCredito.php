@@ -42,7 +42,7 @@ class CrearCredito extends Component
         $this->reset(['tabla_amortizacion']);
 
         $monto = $this->monto;
-        $porcentajeQuincenal = (($this->porcentaje) / 12) / 2;
+        $porcentajeQuincenal = $this->porcentaje;
         $periodoQuincenal = $this->periodo;
 
         $this->cuotaFija  = round($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal), 2);
@@ -138,6 +138,7 @@ class CrearCredito extends Component
         $this->socios = Crm_socios::where('nombres', 'like', '%' . $this->buscar_socio . '%')
             ->orWhere('apellidos', 'like', '%' . $this->buscar_socio . '%')
             ->orWhere('dui', 'like', '%' . $this->buscar_socio . '%')
+            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_socio . '%')
             ->get();
     }
 

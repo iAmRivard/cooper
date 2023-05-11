@@ -8,31 +8,25 @@
             Asignación de credito
         </x-slot>
         <x-slot name="content">
-        <div class="mb-4">
-    <div class="flex items-center">
-        <x-jet-label class="mr-2">Buscar Socio:</x-jet-label>
-        <x-jet-input
-            class="input input-bordered w-full md:w-1/2 max-w-md"
-            type="text"
-            wire:model="buscar_socio"
-            wire:keydown="buscar"
-            placeholder="Buscar socio por: Nombre o DUI"
-        />
-        <button class="ml-2 btn btn-primary" name="buscar" wire:click="buscar">
-            <i class="fa-solid fa-magnifying-glass"></i> 
-        </button>
-    </div>
-</div>
-<div class="mb-4">
-    <x-jet-label>Seleccionar Socio:</x-jet-label>
-    <div class="relative">
-    <select class="select select-bordered w-full appearance-none  h-26" size="3" style="heigth:50px" required wire:model="selec_socio">
-            @foreach ($socios as $socio)
-                <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }} | {{$socio->dui}}</option>
-            @endforeach
-        </select>
-    </div>
-</div>
+            <div class="mb-4">
+                <div class="flex items-center">
+                    <x-jet-label class="mr-2">Buscar Socio:</x-jet-label>
+                    <x-jet-input class="input input-bordered w-full md:w-1/2 max-w-md" type="text" wire:model="buscar_socio" wire:keydown="buscar" placeholder="Buscar socio por: Nombre, DUI o Cod. Empleado" />
+                    <button class="ml-2 btn btn-primary" name="buscar" wire:click="buscar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mb-4">
+                <x-jet-label>Seleccionar Socio:</x-jet-label>
+                <div class="relative">
+                    <select class="select select-bordered w-full appearance-none  h-26" size="3" style="heigth:50px" required wire:model="selec_socio">
+                        @foreach ($socios as $socio)
+                        <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }} | {{$socio->dui}} | {{$socio->codigo_empleado}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
 
 
             <div class="flex mb-4">
@@ -41,67 +35,51 @@
                     <select class="select select-bordered w-full" wire:model="tipo_cuenta">
                         <option>Seleccionar tipo de Credito</option>
                         @foreach($tipos_creditos as $tipo_credito)
-                            <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
+                        <option value="{{ $tipo_credito->id }}">{{ $tipo_credito->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
                 {{-- Número de credito --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Número de credito" />
-                    <input
-                        type="text"
-                        placeholder="Colocar número de credito"
-                        wire:model="no_cuenta"
-                        class="input input-bordered w-full max-w-xs"
-                    />
+                    <input type="text" placeholder="Colocar número de credito" wire:model="no_cuenta" class="input input-bordered w-full max-w-xs" />
                 </div>
             </div>
             <div class="flex mb-4">
                 {{-- Nombre del socio --}}
                 <div class="w-1/2 pr-4">
                     <x-jet-label>Selección del monto</x-jet-label>
-                    <x-jet-input
-                        type="number"
-                        class="w-full"
-                        wire:model="monto"
-                        placeholder="$0.00"
-                        step="0.01"
-                    />
+                    <x-jet-input type="number" class="w-full" wire:model="monto" placeholder="$0.00" step="0.01" />
                 </div>
 
             </div>
             <div class="flex mb-4">
                 {{-- Porcentaje --}}
                 <div class="w-1/2 pr-4">
-                    <x-jet-label>Porcentaje Anual de Interes</x-jet-label>
-                    <x-jet-input
-                        type="number"
-                        class="w-full"
-                        wire:model="porcentaje"
-                        placeholder="36%"
-                    />
+                    <x-jet-label>Porcentaje Quincenal</x-jet-label>
+                    <x-jet-input type="number" class="w-full" wire:model="porcentaje" placeholder="2.5%" />
                 </div>
                 {{-- Apellidos del socio --}}
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Periodo" />
-                    <x-jet-input
-                        type="number "
-                        class="w-full"
-                        wire:model="periodo"
-                        placeholder="Cantidad de quincenas"
-                    />
+                    <x-jet-input type="number " class="w-full" wire:model="periodo" placeholder="Cantidad de quincenas" />
                 </div>
             </div>
+            @if($tipo_cuenta)
+
+            <div class="flex mb-4">
+                <div class="w-full">
+                    <x-jet-label><small><strong>NOTA:</strong> {{$tipo_cuenta->nombre}} </small></x-jet-label>
+
+                </div>
+            </div>
+            @endif
+
 
             <div class="flex mb-4">
                 <div class="w-full">
                     <x-jet-label>Comentario</x-jet-label>
-                    <x-jet-input
-                        type="text"
-                        class="w-full"
-                        wire:model="comentarios"
-                        placeholder="comentarios"
-                    />
+                    <x-jet-input type="text" class="w-full" wire:model="comentarios" placeholder="comentarios" />
                 </div>
             </div>
             <div class="flex mb-4">
@@ -112,14 +90,10 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button class="mx-4" wire:click="$set('open', false)" >
+            <x-jet-secondary-button class="mx-4" wire:click="$set('open', false)">
                 cancelar
             </x-jet-secondary-button>
-            <label
-                for="my-modal-5"
-                class="btn"
-                wire:click="calcularAmortizacion"
-            >
+            <label for="my-modal-5" class="btn" wire:click="calcularAmortizacion">
                 Crear
             </label>
             <span wire:loading wire:target="crear">Procesando ...</span>
@@ -158,10 +132,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end mb-4">
-                    <button
-                        class="btn"
-                        wire:click="calcularAmortizacion"
-                    >
+                    <button class="btn" wire:click="calcularAmortizacion">
                         recalcular
                     </button>
                 </div>

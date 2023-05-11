@@ -55,7 +55,7 @@ class Editar extends Component
         $plan_pagos = [];
 
         $monto = $this->monto;
-        $porcentajeQuincenal = (($this->porcentaje) / 12) / 2;
+        $porcentajeQuincenal = $this->porcentaje;
         $periodoQuincenal = $this->periodo;
 
         $this->cuotaFija  = round($this->calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal), 2);
