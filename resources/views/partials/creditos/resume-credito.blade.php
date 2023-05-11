@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="stat">
-            <div class="text-sm text-gray-500">Tasa Interés</div>
+            <div class="text-sm text-gray-500">Interés Quincenal</div>
             <div class="text-xl font-bold text-rose-900">{{ $credito->porcentaje_interes}}%</div>
         </div>
         <div class="stat">
@@ -39,4 +39,10 @@
             <div class="text-sm text-gray-500">Estado</div>
         </div>
     </div>
+
 </div>
+
+<div class="flex justify-center m-4 mt-4">
+    <div class="text-xl font-bold text-secondary"> {{$credito->comentarios}}</div>
+</div>
+

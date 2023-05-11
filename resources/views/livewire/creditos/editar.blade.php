@@ -42,6 +42,7 @@
                         class="w-full"
                         wire:model="monto"
                         placeholder="$0.00"
+                        step="0.01"
                     />
                 </div>
                 {{-- Apellidos del socio --}}
@@ -53,6 +54,7 @@
                         class="w-full"
                         wire:model="cuota_fija"
                         placeholder="$0.00"
+                        disabled 
                     />
                 </div>
             </div>

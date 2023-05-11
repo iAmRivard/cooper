@@ -167,6 +167,8 @@ class CrearCredito extends Component
         $nuevo_credito->cantidad_cuotas = $this->periodo;
         $nuevo_credito->estado = 1;
         $nuevo_credito->de_baja = 0;
+        $nuevo_credito->comentarios = $this->comentarios;
+
 
         if ($this->no_cuenta != "") {
             $nuevo_credito->no_cuenta = $this->no_cuenta;

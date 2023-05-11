@@ -59,8 +59,8 @@
             <div class="flex mb-4">
                 {{-- Porcentaje --}}
                 <div class="w-1/2 pr-4">
-                    <x-jet-label>Porcentaje Anual de Interes</x-jet-label>
-                    <x-jet-input type="number" class="w-full" wire:model="porcentaje" placeholder="36%" />
+                    <x-jet-label>Porcentaje quincenal</x-jet-label>
+                    <x-jet-input type="number" class="w-full" wire:model="porcentaje" placeholder="2.5%" disabled />
                 </div>
                 {{-- Apellidos del socio --}}
                 <div class="w-1/2 pl-4">
@@ -69,7 +69,11 @@
                         placeholder="Cantidad de quincenas" />
                 </div>
             </div>
-
+            <div class="flex mb-4">
+                <div class="w-full">
+                    <x-jet-label><small><strong>NOTA:</strong> Calculo quincenal <strong>PCT_ANUAL ÷ 24 ÷ 2</strong></small></x-jet-label>
+                </div>
+            </div>
 
 
             <div class="flex mb-4">
@@ -80,7 +84,7 @@
             </div>
             <div class="flex mb-4">
                 <div class="w-full">
-                    <x-jet-label><strong>NOTA:</strong>Se asignará automaticamente la cuota en base al monto, interes y
+                    <x-jet-label><strong>NOTA:</strong> Se asignará automaticamente la cuota en base al monto, interes y
                         periodo seleccionado.</x-jet-label>
                 </div>
             </div>
