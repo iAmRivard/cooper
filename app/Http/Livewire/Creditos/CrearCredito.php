@@ -46,7 +46,9 @@ class CrearCredito extends Component
             return $tipo_credito->id == $value;
         });
 
-        $this->porcentaje = $data[0]['porcentaje_interes'];
+        if ($data->count() > 0) {
+            $this->porcentaje = $data->first()->porcentaje_interes;
+        }
     }
 
     public function calcularAmortizacion()
