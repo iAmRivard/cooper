@@ -20,7 +20,7 @@ class CrearCredito extends Component
 {
     public $open = false;
 
-    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija = 0.00, $periodo, $tabla_amortizacion, $no_cuenta, $comentarios;
+    public $selec_socio, $tipo_cuenta, $monto, $porcentaje, $cuotaFija = 0.00, $periodo, $tabla_amortizacion, $no_cuenta, $comentarios, $tipos_creditos;
 
     public $socios = [];
 
@@ -34,6 +34,20 @@ class CrearCredito extends Component
         'comentarios'   =>  'max:255'
         // 'no_cuenta'     =>  'unique:creditos'
     ];
+
+    public function mount()
+    {
+        $this->tipos_creditos = TipoCredito::get();
+    }
+
+    public function updatedTipoCuenta($value)
+    {
+        $data = $this->tipos_creditos->filter(function ($tipo_credito) use ($value) {
+            return $tipo_credito->id == $value;
+        });
+
+        $this->porcentaje = $data[0]['porcentaje_interes'];
+    }
 
     public function calcularAmortizacion()
     {
@@ -128,9 +142,7 @@ class CrearCredito extends Component
 
     public function render()
     {
-        $tipos_creditos = TipoCredito::all();
-
-        return view('livewire.creditos.crear-credito', compact('tipos_creditos'));
+        return view('livewire.creditos.crear-credito');
     }
 
     public function buscar()
