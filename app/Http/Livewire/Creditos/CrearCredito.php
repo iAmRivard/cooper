@@ -88,7 +88,6 @@ class CrearCredito extends Component
             $capital_amortizado_acumulado += $fila['capital'];
             $interes_acumulado += $fila['interes'];
 
-
             $pago = [
                 'socio_id'           => $this->selec_socio,
                 'user_id'            => Auth::id(),
@@ -97,7 +96,7 @@ class CrearCredito extends Component
                 'interes'            => round($fila['interes'], 2),
                 'interes_acumulado'  => round($interes_acumulado, 2),
                 'cuota_capital'      => round($fila['capital'], 2),
-                'saldo'              => round($fila['saldo']),
+                'saldo'              => round($fila['saldo']) == -0 ? 0 : round($fila['saldo']),
                 'capital_amortizado' => round($capital_amortizado_acumulado, 2),
                 'fecha_programada'   => ''
             ];
@@ -238,7 +237,8 @@ class CrearCredito extends Component
             'selec_socio',
             'tipo_cuenta',
             'monto',
-            'porcentaje'
+            'porcentaje',
+            'tabla_amortizacion'
         ]);
 
         return redirect()->route('creditos');
