@@ -15,7 +15,7 @@
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
                         <x-jet-input class="block w-full mt-1" type="text" wire:model="buscar"
-                            placeholder="Buscar socio por Nº de cuenta" />
+                            placeholder="Buscar por socio, cuenta, cod. empleado, dui" />
                     </div>
                 </div>
 

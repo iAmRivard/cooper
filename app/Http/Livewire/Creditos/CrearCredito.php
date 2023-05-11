@@ -47,7 +47,7 @@ class CrearCredito extends Component
         });
 
         if ($data->count() > 0) {
-            $this->porcentaje = $data->first()->porcentaje_interes;
+            $this->porcentaje = ROUND((($data->first()->porcentaje_interes/24)),2);
         }
     }
 

@@ -50,13 +50,14 @@ class CreateCuenta extends Component
         }
     }
 
+
     public function buscar()
     {
         $this->socios = Crm_socios::where('nombres', 'like', '%' . $this->buscar_socio . '%')
-                                ->orWhere('apellidos', 'like', '%' . $this->buscar_socio . '%')
-                                ->orWhere('dui', 'like', '%' . $this->buscar_socio . '%')
-                                ->orWhere('id', 'like', '%' . $this->buscar_socio . '%')
-                                ->get();
+            ->orWhere('apellidos', 'like', '%' . $this->buscar_socio . '%')
+            ->orWhere('dui', 'like', '%' . $this->buscar_socio . '%')
+            ->orWhere('codigo_empleado', 'like', '%' . $this->buscar_socio . '%')
+            ->get();
     }
 
     public function crear()
@@ -68,11 +69,9 @@ class CreateCuenta extends Component
         $toDay = getDate();
 
         $nueva_cuenta   =   new Ctr_cuenta();
-        if($this->numero_cuenta == "") {
-            $nueva_cuenta->no_cuenta = strval($toDay["year"] . $toDay["mon"] .  $socio_selected->id . $tipo_cuenta->id);
-        } else {
-            $nueva_cuenta->no_cuenta = $this->numero_cuenta;
-        }
+    
+        $nueva_cuenta->no_cuenta = $this->numero_cuenta;
+
         $nueva_cuenta->crm_socio_id = $this->selec_socio;
         $nueva_cuenta->crc_topo_cuenta_id = $tipo_cuenta->id;
         $nueva_cuenta->saldo_actual = 0;

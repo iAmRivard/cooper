@@ -9,30 +9,27 @@
         </x-slot>
 
         <x-slot name="content">
-            <div class="mb-4">
-                <x-jet-label>Buscar Socio</x-jet-label>
-                <x-jet-input
-                    class="w-1/2 input input-bordered max-w-xs"
-                    type="text"
-                    x-mask="99999999-9"
-                    wire:model="buscar_socio"
-                    wire:keydown="buscar"
-                    placeholder="Buscar socio por: Nombre o DUI"
-                />
-                <i class="fa-solid fa-magnifying-glass cursor-pointer"
-                    name="buscar"
-                    wire:click="buscar"
-                >
-                </i>
+        <div class="mb-4">
+                <div class="flex items-center">
+                    <x-jet-label class="mr-2">Buscar Socio:</x-jet-label>
+                    <x-jet-input class="w-full max-w-md input input-bordered md:w-1/2" type="text"
+                        wire:model="buscar_socio" wire:keydown="buscar" placeholder="Buscar socio por: Nombre o DUI" />
+                    <button class="ml-2 btn btn-primary" name="buscar" wire:click="buscar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
             </div>
-            {{-- Selección de socio --}}
             <div class="mb-4">
-                <select class="select select-bordered w-full overflow-hidden appearance-none" size="5" required wire:model="selec_socio">
-                    @foreach ($socios as $socio)
-                        <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }}</option>
-                    @endforeach
-                </select>
-                <x-jet-input-error for="selec_socio" />
+                <x-jet-label>Seleccionar Socio:</x-jet-label>
+                <div class="relative">
+                    <select class="w-full appearance-none select select-bordered h-26" size="3" style="heigth:50px"
+                        required wire:model="selec_socio">
+                        @foreach ($socios as $socio)
+                        <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }} | {{$socio->dui}}  | {{$socio->codigo_empleado}}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             {{-- selección de cuenta --}}
             <div class="mb-4">
@@ -59,12 +56,12 @@
                 {{-- # de cuenta --}}
                 @if ($selec_2 or $selec_3)
                 <div>
-                    <x-jet-label>Cuotas</x-jet-label>
+                    <x-jet-label>Periodo</x-jet-label>
                     <x-jet-input
                         class="w-full input input-bordered"
                         type="number"
                         wire:model="cantidad_cuotas"
-                        placeholder="Ingrese la cantidad de cuotas"
+                        placeholder="Cantidad de quincenas"
                     />
                 </div>
                 @endif

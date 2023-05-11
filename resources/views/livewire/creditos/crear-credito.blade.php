@@ -71,7 +71,7 @@
             </div>
             <div class="flex mb-4">
                 <div class="w-full">
-                    <x-jet-label><small><strong>NOTA:</strong> Calculo quincenal <strong>PCT_ANUAL ÷ 24 ÷ 2</strong></small></x-jet-label>
+                    <x-jet-label><small><strong>NOTA:</strong> Calculo quincenal <strong>PCT_ANUAL ÷ 24 </strong></small></x-jet-label>
                 </div>
             </div>
 
@@ -149,12 +149,13 @@
                 <table class="table w-full table-zebra">
                     <thead>
                         <tr>
-                            <th>Semana</th>
-                            <th>Cuota Mensual</th>
-                            <th>Intereses</th>
-                            <th>Cuota Quincenal</th>
-                            <th>Saldo</th>
+                            <th>Quincena</th>
+                            <th>Cuota Fija</th>
+                            <th>Capital</th>
                             <th>Capital Amortizado</th>
+                            <th>Intereses</th>
+                            <th>Intereses Acumulado</th>
+                            <th>Saldo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -163,10 +164,11 @@
                         <tr>
                             <th>{{ $t['nro_cuota'] }}</th>
                             <td>{{ $t['cuota'] }}</td>
-                            <td>${{ $t['interes'] }}</td>
                             <td>${{ $t['cuota_capital'] }}</td>
-                            <td>${{ $t['saldo'] }}</td>
                             <td>${{ $t['capital_amortizado'] }}</td>
+                            <td>${{ $t['interes'] }}</td>
+                            <td>${{ $t['interes_acumulado'] }}</td>
+                            <td>${{ $t['saldo'] }}</td>
                         </tr>
                         @endforeach
                     </tbody>
