@@ -9,7 +9,7 @@ use Livewire\WithPagination;
 use App\Models\Ctr_cuenta;
 use App\Models\Ctr_cuenta_det;
 
-class cuentas extends Component
+class VerCuenta extends Component
 {
     use WithPagination;
 
