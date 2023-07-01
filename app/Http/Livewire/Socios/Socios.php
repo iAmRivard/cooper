@@ -52,11 +52,12 @@ class Socios extends Component
         $empresas = crm_empresas::all();
         // TODO: Agregar campo full name a la tabla socios
         $socios = Crm_socios::where('nombres', 'like', '%' . $this->buscarSocio . '%')
-                            ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
-                            ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
-                            ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
-                            ->orderBy('id', 'desc') //Ordenamos de manera descendente
-                            ->paginate(5);
+            ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
+            ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
+            ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
+            ->orWhere('numero_socio', 'like', '%' . $this->buscarSocio . '%')
+            ->orderBy('id', 'desc') //Ordenamos de manera descendente
+            ->paginate(5);
 
         return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
