@@ -24,7 +24,7 @@
                                     <th>Empresa</th>
                                     <th>Cod. Empleado</th>
                                     <th>DUI</th>
-                                    <th>Salario</th>
+                                    <th># de Socio</th>
                                     <th>Aportacion</th>
                                     <th></th>
                                     <th></th>
@@ -39,7 +39,7 @@
                                         <td class="font-bold" >{{ $item->empresa->nombre }}</td>
                                         <td>{{ $item->codigo_empleado }}</td>
                                         <td>{{ $item->dui }}</td>
-                                        <td>${{ $item->salario }}</td>
+                                        <td>{{ $item->numero_socio ?? 'No definido' }}</td>
                                         <td class="font-bold" >${{ $item->aportacion }}</td>
                                         <td>
                                             <a class="cursor-pointer" wire:click="editar( {{$item}} )">
