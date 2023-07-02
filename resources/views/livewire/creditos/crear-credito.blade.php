@@ -21,7 +21,7 @@
             <div class="mb-4">
                 <x-jet-label>Seleccionar Socio:</x-jet-label>
                 <div class="relative">
-                    <select class="w-full appearance-none select select-bordered h-26" size="3" style="heigth:50px"
+                    <select class="w-full appearance-none select select-bordered h-26" size="3" style="height:50px"
                         required wire:model="selec_socio">
                         @foreach ($socios as $socio)
                         <option value="{{ $socio->id }}">{{ $socio->nombres }} {{ $socio->apellidos }} | {{$socio->dui}}  | {{$socio->codigo_empleado}}
