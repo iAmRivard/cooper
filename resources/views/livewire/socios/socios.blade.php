@@ -25,9 +25,9 @@
                                     <th>Cod. Empleado</th>
                                     <th>DUI</th>
                                     <th># de Socio</th>
-                                    <th>Aportacion</th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Ap. Quincenal</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
