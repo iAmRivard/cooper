@@ -42,6 +42,16 @@
                                     <div class="font-semibold"> Estado:</div>
                                     <div class="font-normal">{{ $socio->estado = 1 ? 'Activo' : 'Inactivo' }}</div>
                                 </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="text-xl fa-solid fa-hashtag"></i>
+                                    <div class="font-semibold"> # de Socio:</div>
+                                    <div class="font-normal">{{ $socio->numero_socio ?? 'No asignado' }}</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <i class="text-xl fa-solid fa-hashtag"></i>
+                                    <div class="font-semibold"> Código de empleado:</div>
+                                    <div class="font-normal">{{ $socio->codigo_empleado}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
