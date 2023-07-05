@@ -54,5 +54,4 @@ class Crm_socios extends Model
     {
         return $this->belongsTo(crm_empresas::class, 'empresa_id');
     }
-
 }

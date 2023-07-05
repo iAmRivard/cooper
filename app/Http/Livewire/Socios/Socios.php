@@ -46,11 +46,10 @@ class Socios extends Component
         $this->resetPage();
     }
 
-
     public function render()
     {
         $empresas = crm_empresas::all();
-        // TODO: Agregar campo full name a la tabla socios
+
         $socios = Crm_socios::where('nombres', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
