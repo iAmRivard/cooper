@@ -8,13 +8,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg py-8">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8">
+            <div class="py-8 overflow-hidden bg-white shadow-xl sm:rounded-lg">
                 <div class="flex justify-center mb-8">
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar Crédito') }}" />
                         <x-jet-input
-                            class="block mt-1 w-full"
+                            class="block w-full mt-1"
                             type="text"
                             wire:model="buscar"
                             placeholder="Buscar socio por Nº de credito"
@@ -22,41 +22,8 @@
                     </div>
                 </div>
 
-                <div class="w-full m-4 md:w-5/6">
-                    <table class="table w-full text-sm table-zebra md:text-base">
-                            <thead>
-                                <tr>
-                                    <th># Credito</th>
-                                    <th>Socio</th>
-                                    <th>Tipo de Credito</th>
-                                    <th>Monto</th>
-                                    <th>Saldo Actual</th>
-                                    <th># Cuotas</th>
-                                    <th>Estado</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($creditos as $credito)
-                                    <tr>
-                                        <td>{{$credito->id}}/<strong>{{ $credito->no_cuenta}}</strong></td>
-                                        <td class="font-bold">
-                                            {{ $credito->socio->nombres . " " . $credito->socio->apellidos }}
-                                        </td>
-                                        <td class="font-bold">{{ $credito->tipoCredito->nombre }}</td>
-                                        <td>${{ $credito->monto }}</td>
-                                        <td>${{ $credito->saldo_actual }}</td>
-                                        <td class="font-bold"> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
-                                        <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
-                                        <td>
-                                            <a href="{{ route('ver.credito', $credito->id) }}" class="a-link">
-                                                Detalles
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                <div class="flex justify-center m-4">
+                    @include('livewire.creditos.partials.table')
                 </div>
                 <div class="px-6 py-3">
                     {{$creditos->links()}}
