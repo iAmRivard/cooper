@@ -11,7 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ module_default),
-/* harmony export */   "stripDown": () => (/* binding */ stripDown)
+/* harmony export */   stripDown: () => (/* binding */ stripDown)
 /* harmony export */ });
 // packages/mask/src/index.js
 function src_default(Alpine) {
