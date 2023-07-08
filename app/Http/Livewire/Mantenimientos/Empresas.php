@@ -45,7 +45,7 @@ class Empresas extends Component
     public function buscarEmpresa($empresaId)
     {
         $this->empresa_selected    =   DB::table('crm_empresas')
-                                        ->find($empresaId);
+            ->find($empresaId);
         $this->open_empresa = true;
     }
 }

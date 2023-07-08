@@ -11,7 +11,7 @@ class TiposCuentas extends Component
 {
     use WithPagination;
 
-    public $cuenta_id, $open_modal = false, $editTipo, $nombre, $descripcion, $porcentaje, $plazo;
+    public $cuenta_id, $open_modal = false, $editTipo, $nombre, $descripcion, $porcentaje, $plazo, $modalDelete = false, $accountDelete;
 
     protected $listeners = ['render' => 'render'];
 
@@ -31,7 +31,7 @@ class TiposCuentas extends Component
 
     public function actualizarEstado(Crc_tipos_cuenta $cuenta)
     {
-        if($cuenta->estado == 1){
+        if ($cuenta->estado == 1) {
             $cuenta->update([
                 'estado' => 0
             ]);
@@ -67,7 +67,7 @@ class TiposCuentas extends Component
 
         $this->editTipo->save();
 
-        $this->emitTo('mantenimientos.tipos-cuentas','render');
+        $this->emitTo('mantenimientos.tipos-cuentas', 'render');
 
         $this->reset([
             'nombre',
@@ -76,7 +76,24 @@ class TiposCuentas extends Component
             'plazo',
             'open_modal',
         ]);
-
     }
 
+    public function openModalDelete(Crc_tipos_cuenta $cuenta)
+    {
+        $this->modalDelete = true;
+        $this->accountDelete = $cuenta;
+    }
+
+    public function deleteType(Crc_tipos_cuenta $cuenta)
+    {
+        $cuenta->delete();
+        $this->emitTo('mantenimientos.tipos-cuentas', 'render');
+
+        $this->emit('exito', 'Tipo de cuenta eliminada');
+
+        $this->reset([
+            'modalDelete',
+            'accountDelete',
+        ]);
+    }
 }
