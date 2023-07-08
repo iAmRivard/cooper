@@ -57,6 +57,7 @@
                                     <div class="flex items-center">
                                         <div class="flex-1">
                                             <span class="font-bold text-gray-800" x-text="cuenta.no_cuenta"></span> |
+                                            <span class="font-bold text-gray-800" x-text="cuenta.socio.codigo_empleado"></span> |
                                             <span x-text="cuenta.socio.nombres"></span>
                                             <span x-text="cuenta.socio.apellidos"></span> |
                                             <span x-text="cuenta.tipo_cuenta.nombre"></span>
