@@ -25,10 +25,10 @@
             <div class="text-xl font-bold">{{$cuenta->socio->nombres}}</div>
             <div class="text-sm text-gray-500">{{$cuenta->socio->apellidos}}</div>
         </div>
-        <div class="stat">
+        {{-- <div class="stat">
             <div class="text-sm text-gray-500">Descuento Quincenal</div>
             <div class="text-xl font-bold text-green-900">${{$cuenta->pago_quincenal}}</div>
-        </div>
+        </div> --}}
 
         @if ($cuenta->tipoCuenta->plazo)
         <div class="stat">

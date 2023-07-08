@@ -3,7 +3,7 @@
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
             <x-activar-desactivar-cuenta :id="$cuenta->id" :status="$cuenta->estado" />
             <x-change-number-accunt :id="$cuenta->id" :number="$cuenta->no_cuenta" />
-            <x-eddit-discount :id="$cuenta->id" :discount="$cuenta->pago_quincenal" />
+            {{-- <x-eddit-discount :id="$cuenta->id" :discount="$cuenta->pago_quincenal" /> --}}
         </div>
     </x-slot>
 
