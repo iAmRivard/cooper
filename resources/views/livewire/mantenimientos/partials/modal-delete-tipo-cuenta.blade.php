@@ -9,12 +9,13 @@
 
     </x-slot>
     <x-slot name="footer">
-        <x-jet-secondary-button class="mx-4" wire:click="$set('modalDelete', false)">
+        <x-jet-secondary-button class="mx-4" wire:click="$set('modalDelete', false)" wire:loading.remove
+            wire:target="deleteType">
             Cancelar
         </x-jet-secondary-button>
 
-        <x-jet-button wire:click="updateTipo" wire:loading.remove wire:target="updateTipo">
-            Actualizar
+        <x-jet-button wire:click="deleteType({{ $accountDelete->id }})" wire:loading.remove wire:target="deleteType">
+            Eliminar
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>

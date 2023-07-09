@@ -87,6 +87,7 @@ class TiposCuentas extends Component
     public function deleteType(Crc_tipos_cuenta $cuenta)
     {
         $cuenta->delete();
+
         $this->emitTo('mantenimientos.tipos-cuentas', 'render');
 
         $this->emit('exito', 'Tipo de cuenta eliminada');
