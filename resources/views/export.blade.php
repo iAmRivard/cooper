@@ -9,6 +9,8 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="p-8 overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
+                @include('partials.reportes.alerts')
+
                 <div class="flex justify-between gap-4 mb-4">
                     <div class="shadow-xl card w-96 bg-base-100">
                         <div class="card-body">
@@ -70,6 +72,34 @@
                                 <a href="{{ route('reporte.cobro-cuotas-quincenales-planilla') }}" class="btn btn-primary">
                                     Decargar
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-xl card w-96 bg-base-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Reporte Cierre de cuentas</h2>
+                            <p>Campos:</p>
+                            <ul>
+                                <li>Código Empleado</li>
+                                <li>socio</li>
+                                <li>APORTACION</li>
+                                <li>AHORRO QUINCENAL VISTA</li>
+                                <li>AHORRO QUINCENAL NAVIDENO</li>
+                                <li>AHORRO QUINCENAL PROGRAMADO</li>
+                                <li>DESCUENTO QUINCENAL</li>
+                                <li>CUOTA PRESTAMO</li>
+                                <li>INTERES PRESTAMO</li>
+                                <li>CAPITAL PRESTAMO</li>
+                            </ul>
+                            <div class="justify-end card-actions">
+                                <form action="{{ route('reporte.cierre-cuentas-excel') }}" method="GET">
+                                    <input type="month" class="input input-bordered" name="date" />
+
+                                    <button type="submit" class="btn">Descargar</button>
+                                </form>
+                                {{-- <a href="{{ route('reporte.cobro-cuotas-quincenales-planilla') }}" class="btn btn-primary">
+                                    Decargar
+                                </a> --}}
                             </div>
                         </div>
                     </div>

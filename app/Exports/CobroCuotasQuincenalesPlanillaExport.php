@@ -13,8 +13,8 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 class CobroCuotasQuincenalesPlanillaExport implements FromView, ShouldAutoSize
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function view(): View
     {
         DB::statement("SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))");
