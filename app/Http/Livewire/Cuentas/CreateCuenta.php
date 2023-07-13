@@ -11,7 +11,7 @@ use App\Models\Ctr_cuenta_det;
 
 class CreateCuenta extends Component
 {
-    public $open = false, $selec_1 = false, $selec_2 = false, $selec_3 = false;
+    public $open = false, $selec_1 = false, $selec_2 = false, $selec_3 = false, $errorPlazo = false;
 
     public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $desceutno_quincenal;
 
@@ -24,6 +24,15 @@ class CreateCuenta extends Component
         'cuenta'        => 'required',
         // 'numero_cuenta' =>  'string'
     ];
+
+    public function updatedCantidadCuotas($value)
+    {
+        $cuenta = json_decode($this->cuenta);
+
+        if ($cuenta->id == 3) {
+            $this->errorPlazo = $value > 22 ? true : false;
+        }
+    }
 
     public function render()
     {
@@ -41,11 +50,11 @@ class CreateCuenta extends Component
             'selec_3'
         ]);
 
-        if($das->plazo == 0 and $das->aplica_monto == 0) {
+        if ($das->plazo == 0 and $das->aplica_monto == 0) {
             $this->selec_1 = true;
-        } else if($das->plazo == 1 and $das->aplica_monto == 0) {
+        } else if ($das->plazo == 1 and $das->aplica_monto == 0) {
             $this->selec_2 = true;
-        } else if($das->plazo == 1 and $das->aplica_monto == 1) {
+        } else if ($das->plazo == 1 and $das->aplica_monto == 1) {
             $this->selec_3 = true;
         }
     }
@@ -65,11 +74,17 @@ class CreateCuenta extends Component
         $this->validate();
 
         $tipo_cuenta = json_decode($this->cuenta);
+
+        if ($tipo_cuenta->id = 3 and $this->cantidad_cuotas > 22) {
+            $this->addError('cantidad_cuotas', "El periodo no es valido");
+            return;
+        }
+
         $socio_selected = Crm_socios::find($this->selec_socio);
         $toDay = getDate();
 
         $nueva_cuenta   =   new Ctr_cuenta();
-    
+
         $nueva_cuenta->no_cuenta = $this->numero_cuenta;
 
         $nueva_cuenta->crm_socio_id = $this->selec_socio;
@@ -77,19 +92,19 @@ class CreateCuenta extends Component
         $nueva_cuenta->saldo_actual = 0;
         $nueva_cuenta->estado   =   true;
 
-        if($this->desceutno_quincenal == "") {
+        if ($this->desceutno_quincenal == "") {
             $nueva_cuenta->pago_quincenal = 0;
         } else {
             $nueva_cuenta->pago_quincenal = $this->desceutno_quincenal;
         }
 
-        if($this->monto_plazo == "") {
+        if ($this->monto_plazo == "") {
             $nueva_cuenta->monto_plazo  = 0;
         } else {
             $nueva_cuenta->monto_plazo  = $this->monto_plazo;
         }
 
-        if($this->cantidad_cuotas == "") {
+        if ($this->cantidad_cuotas == "") {
             $nueva_cuenta->cantidad_quincenas = 0;
         } else {
             $nueva_cuenta->cantidad_quincenas =   $this->cantidad_cuotas;
@@ -101,7 +116,7 @@ class CreateCuenta extends Component
         $nueva_cuenta->save();
 
         // GENERANDO PRIMER MOVIMIENTO CUANDO ES A PLAZO.
-        if($this->selec_3) {
+        if ($this->selec_3) {
             $new_abono_plazo = Ctr_cuenta_det::create([
                 'tipo_movimiento_id'    => 1,
                 'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZI',
@@ -114,7 +129,7 @@ class CreateCuenta extends Component
             $nueva_cuenta->save();
         }
 
-        $this->emitTo('cuentas.cuentas','render');
+        $this->emitTo('cuentas.cuentas', 'render');
 
         $this->emit('exito', 'La cuenta fue creado con exito');
 
@@ -123,6 +138,5 @@ class CreateCuenta extends Component
             'selec_socio',
             'cuenta'
         ]);
-
     }
 }
