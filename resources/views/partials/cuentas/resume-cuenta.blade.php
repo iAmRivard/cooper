@@ -37,7 +37,7 @@
                 class="text-xl font-bold text-sky-900">
                 {{ $cuenta->quincena_actual }}@if($cuenta->quincena_actual != null)/ @else / @endif{{ $cuenta->cantidad_quincenas }}
             </div>
-            <div class="text-xs">QUINCENAS</div>
+            <div class="text-xs">MESES</div>
         </div>
         @endif
     </div>
