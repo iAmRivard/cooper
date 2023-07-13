@@ -22,7 +22,7 @@ class CreateCuenta extends Component
     protected $rules = [
         'selec_socio'   => 'required',
         'cuenta'        => 'required',
-        // 'numero_cuenta' =>  'string'
+        'numero_cuenta' =>  'string'
     ];
 
     public function updatedCantidadCuotas($value)
