@@ -41,7 +41,7 @@
 
     @stack('scripts')
 
-    @livewireScripts
+    <script src="/livewire/livewire.js"></script>
 
     <script>
         Livewire.on('exito', function(message){
