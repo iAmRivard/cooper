@@ -10,9 +10,6 @@
 
     <script src="https://kit.fontawesome.com/2115fb84e0.js" crossorigin="anonymous"></script>
 
-    {{-- LIB externas Fontawesone Free --}}
-    <link rel="stylesheet" href="{{ asset('css/lib.css') }}">
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @livewireStyles
