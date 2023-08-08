@@ -7,16 +7,12 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
         {{-- LIB externas Fontawesone Free --}}
         <link rel="stylesheet" href="{{ asset('css/lib.css') }}">
 
-        @livewireStyles
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireStyles
 
     </head>
     <body class="font-sans antialiased">
