@@ -10,9 +10,12 @@ module.exports = {
     ],
 
     theme: {
+        daisyui: {
+            // themes: ["light"],
+        },
         extend: {
             fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+                sans: ["Figtree", ...defaultTheme.fontFamily.sans],
             },
         },
     },
@@ -22,15 +25,4 @@ module.exports = {
         require("@tailwindcss/typography"),
         require("daisyui"),
     ],
-
-    daisyui: {
-        styled: true,
-        themes: true,
-        base: true,
-        utils: true,
-        logs: true,
-        rtl: false,
-        prefix: "",
-        themes: "light",
-    },
 };
