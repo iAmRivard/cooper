@@ -15,10 +15,10 @@
         <div class="stat">
             <div class="text-sm text-gray-500">Saldo a la fecha</div>
             <div class="text-xl font-bold text-green-900">${{number_format($cuenta->saldo_actual, 2)}}</div>
-            @if ($cuenta->tipoCuenta->plazo)
-            <div class="text-xs">MONTO INICIAL + INTERESES</div>
+            @if ($cuenta->tipoCuenta->plazo == 0)
+                <div class="text-xs">MONTO INICIAL + INTERESES</div>
             @else
-            <div class="text-xs">MONTO INICIAL + ABONOS/INTERESES</div>
+                <div class="text-xs">MONTO INICIAL + ABONOS/INTERESES</div>
             @endif
         </div>
         <div class="stat">

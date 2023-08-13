@@ -1,46 +1,3 @@
-{{-- <div class="flex justify-center mb-4">
-    <table class="table table-zebra">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>Concepto</th>
-                <th>Monto</th>
-                <th>Saldo a la fecha</th>
-                <th>fecha</th>
-                <th>Tipo</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($movimientos as $movimiento)
-            <tr>
-                <td class="text-center">{{ $movimiento->id }}</td>
-<td class="text-center">{{ $movimiento->concepto }}</td>
-<td class="font-bold text-center">
-    <span style="@if ($movimiento->naturaleza == 1) color: green; @else color: red; @endif">
-        ${{ number_format($movimiento->monto,2) }}
-    </span>
-</td>
-<td class="text-center">
-    ${{ $movimiento->saldo_fecha }}
-</td>
-<td class="text-center">{{ $movimiento->created_at }}</td>
-<td class="text-center">{{$movimiento->tipo->nombre}}</td>
-<td>
-    <a href="{{ route('cuenta.abono', $movimiento) }}" class="a-link">
-        re Imprimir
-    </a>
-</td>
-</tr>
-@endforeach
-</tbody>
-</table>
-</div>
-<div class="m-4">
-    {{$movimientos->links()}}
-</div> --}}
-
-
 <div class="flex justify-center m-4 rounded-md shadow-lg">
     <div class="w-full overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -62,7 +19,8 @@
                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $movimiento->id }}</td>
                     <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">{{ $movimiento->concepto }}</td>
                     <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                        <span class="@if ($movimiento->naturaleza == 1) text-green-600 @else text-red-600 @endif">
+                        <span @if ($movimiento->naturaleza == 1) class="text-green-600" @else class="text-red-600"
+                            @endif>
                             ${{ number_format($movimiento->monto,2) }}
                         </span>
                     </td>
@@ -82,6 +40,7 @@
         </table>
     </div>
 </div>
+
 <div class="m-4">
     {{$movimientos->links()}}
 </div>

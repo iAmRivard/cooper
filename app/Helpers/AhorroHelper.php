@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class AhorroHelper
 {
-    public static function calcularTablaAmortizacion(Crc_tipos_cuenta $tipoCUenta, int $plazo, Carbon $dia, float $monto): array
+    public static function calcularTablaAmortizacion(Crc_tipos_cuenta $tipoCUenta, int $plazo, Carbon $dia = null, float $monto): array
     {
         // Inicializar variables
         $tasaInteresQuincenal = ($tipoCUenta->porcentaje / 100) / 24; // Tasa de interés quincenal
