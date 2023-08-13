@@ -9,7 +9,7 @@
         </x-slot>
 
         <x-slot name="content">
-        <div class="mb-4">
+            <div class="mb-4">
                 <div class="flex items-center">
                     <x-jet-label class="mr-2">Buscar Socio:</x-jet-label>
                     <x-jet-input class="w-full max-w-md input input-bordered md:w-1/2" type="text"
