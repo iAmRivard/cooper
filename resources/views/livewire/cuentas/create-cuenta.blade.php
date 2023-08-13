@@ -104,7 +104,7 @@
 
             <x-jet-button wire:loading.remove wire:target="crear" wire:click="crear">
             crear
-        </x-jet-button>
+            </x-jet-button>
 
             <span wire:loading wire:target="verTabla">Procesando ...</span>
         </x-slot>
