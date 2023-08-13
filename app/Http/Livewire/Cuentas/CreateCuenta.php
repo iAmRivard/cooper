@@ -4,16 +4,22 @@ namespace App\Http\Livewire\Cuentas;
 
 use Livewire\Component;
 
-use App\Models\Crm_socios;
-use App\Models\Ctr_cuenta;
+use App\Helpers\AhorroHelper;
+
 use App\Models\Crc_tipos_cuenta;
 use App\Models\Ctr_cuenta_det;
+use App\Models\Crm_socios;
+use App\Models\Ctr_cuenta;
+
+use Carbon\Carbon;
 
 class CreateCuenta extends Component
 {
     public $open = false, $selec_1 = false, $selec_2 = false, $selec_3 = false, $errorPlazo = false;
 
     public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $desceutno_quincenal;
+
+    public $openTable = false, $tabla = [];
 
     public $socios = [];
 
@@ -75,13 +81,10 @@ class CreateCuenta extends Component
 
         $tipo_cuenta = json_decode($this->cuenta);
 
-        if ($tipo_cuenta->id = 3 and $this->cantidad_cuotas > 22) {
+        if ($tipo_cuenta->id == 3 and $this->cantidad_cuotas > 22) {
             $this->addError('cantidad_cuotas', "El periodo no es valido");
             return;
         }
-
-        $socio_selected = Crm_socios::find($this->selec_socio);
-        $toDay = getDate();
 
         $nueva_cuenta   =   new Ctr_cuenta();
 
@@ -111,7 +114,7 @@ class CreateCuenta extends Component
         }
 
         $nueva_cuenta->quincena_actual  =   0;
-        $nueva_cuenta->saldo_actual     = 0;
+        $nueva_cuenta->saldo_actual     =   0;
 
         $nueva_cuenta->save();
 
@@ -119,7 +122,7 @@ class CreateCuenta extends Component
         if ($this->selec_3) {
             $new_abono_plazo = Ctr_cuenta_det::create([
                 'tipo_movimiento_id'    => 1,
-                'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZI',
+                'concepto'              => 'ABONO POR APERTURA DE DEPOSITO A PLAZO',
                 'monto'                 => $this->monto_plazo,
                 'naturaleza'            => 1,
                 'ctr_cuentas_id'        => $nueva_cuenta->id,
@@ -138,5 +141,28 @@ class CreateCuenta extends Component
             'selec_socio',
             'cuenta'
         ]);
+    }
+
+    public function verTabla()
+    {
+        $tipo_cuenta = json_decode($this->cuenta);
+
+        $tipoCuentaSelected = Crc_tipos_cuenta::find($tipo_cuenta->id);
+
+        $this->tabla = AhorroHelper::calcularTablaAmortizacion(
+            tipoCUenta: $tipoCuentaSelected,
+            plazo: $this->cantidad_cuotas,
+            dia: Carbon::now(),
+            monto: $this->monto_plazo,
+        );
+
+        $this->open = false;
+        $this->openTable = true;
+    }
+
+    public function cerarTabla()
+    {
+        $this->openTable = false;
+        $this->open = true;
     }
 }

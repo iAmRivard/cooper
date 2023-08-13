@@ -14,7 +14,8 @@ class Crc_tipos_cuenta extends Model
         'descripcion',
         'estado',
         'plazo',
-        'aplica_monto'
+        'aplica_monto',
+        'porcentaje'
     ];
 
     public function cuentas()

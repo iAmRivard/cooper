@@ -94,15 +94,21 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-jet-secondary-button wire:loading.remove wire:target="crear" class="mx-4" wire:click="$set('open', false)" >
+            <x-jet-secondary-button wire:loading.remove wire:target="verTabla" class="mx-4" wire:click="$set('open', false)" >
                 cancelar
             </x-jet-secondary-button>
 
-            <x-jet-button  wire:loading.remove wire:target="crear" wire:click="crear">
-                crear
+            <x-jet-button  wire:loading.remove wire:target="verTabla" class="mx-4" wire:click="verTabla">
+                Ver tabla
             </x-jet-button>
 
-            <span wire:loading wire:target="crear">Procesando ...</span>
+            <x-jet-button wire:loading.remove wire:target="crear" wire:click="crear">
+            crear
+        </x-jet-button>
+
+            <span wire:loading wire:target="verTabla">Procesando ...</span>
         </x-slot>
     </x-jet-dialog-modal>
+
+    @include('livewire.cuentas.partials.tabla-amortizacion')
 </div>
