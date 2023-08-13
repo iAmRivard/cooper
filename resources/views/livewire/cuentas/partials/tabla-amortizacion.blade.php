@@ -4,7 +4,6 @@
     </x-slot>
 
     <x-slot name="content">
-
         <div class="overflow-x-auto">
             <table class="table table-zebra">
                 <!-- head -->
@@ -27,24 +26,11 @@
                 </tbody>
             </table>
         </div>
-
-
-
     </x-slot>
 
     <x-slot name="footer">
         <x-jet-secondary-button class="mx-4" wire:click="cerarTabla">
             cancelar
         </x-jet-secondary-button>
-
-        {{-- <x-jet-secondary-button wire:loading.remove wire:target="crear" class="mx-4" wire:click="$set('openTable', false)">
-            cancelar
-        </x-jet-secondary-button>
-
-        <x-jet-button wire:loading.remove wire:target="crear" wire:click="crear">
-            crear
-        </x-jet-button> --}}
-
-        {{-- <span wire:loading wire:target="crear">Procesando ...</span> --}}
     </x-slot>
 </x-jet-dialog-modal>
