@@ -11,6 +11,7 @@ use App\Http\Controllers\CuentasController;
 
 use App\Http\Livewire\Cuentas\Cuentas;
 use App\Http\Livewire\Socios\Socios;
+
 use App\Http\Livewire\VerCuenta;
 
 Route::middleware(['auth', 'rol'])->group(function () {

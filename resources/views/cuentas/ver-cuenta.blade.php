@@ -33,6 +33,12 @@
                 @endif
 
                 @include('partials.cuentas.table-movimientos')
+
+                @isset($tablaAmor)
+                    <div class="flex justify-center m-4">
+                        @include('cuentas.tabla-amortizacion')
+                    </div>
+                @endisset
             </div>
         </div>
     </div>

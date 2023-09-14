@@ -1,3 +1,7 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <table class="table text-sm table-zebra md:text-base">
     <thead>
         <tr>
@@ -9,6 +13,7 @@
             <th class="px-4">Cuota Quincenal</th>
             <th class="px-4">Saldo</th>
             <th class="px-4">Proceso</th>
+            <th class="px-4">Fecha</th>
             <th class="px-4">Estado</th>
             <th class="px-4">Acciones</th>
         </tr>
@@ -36,6 +41,7 @@
                     {{ $cuenta->finalizado ? 'Finalizado' : 'Ejecución' }}
                 </span>
             </td>
+            <td class="px-4">{{ Carbon::parse($cuenta->created_at)->locale('es_ES')->format('d-m-Y') }}</td>
             <td class="px-4">{{ $cuenta->estado ? 'Activo' : 'Inactivo' }}</td>
 
             <td class="px-4">

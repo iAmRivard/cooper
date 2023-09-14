@@ -26,7 +26,7 @@ class PDFController extends Controller
             'abono' => $abono,
         ];
 
-        $pdfNombre = $abono->id.".pdf";
+        $pdfNombre = $abono->id . ".pdf";
 
         return Pdf::setOptions([
             'isHtml5ParserEnabled' => true,
@@ -41,7 +41,7 @@ class PDFController extends Controller
             'retiro' => $retiro,
         ];
 
-        $pdfNombre = $retiro->id.".pdf";
+        $pdfNombre = $retiro->id . ".pdf";
 
         return Pdf::setOptions([
             'isHtml5ParserEnabled' => true,
@@ -56,7 +56,7 @@ class PDFController extends Controller
             'retiro'    => $abonoCred,
         ];
 
-        $pdfNombre = $abonoCred->id.".pdf";
+        $pdfNombre = $abonoCred->id . ".pdf";
 
         $pdf = Pdf::loadView('PDF.abonoCredito', $data);
         return $pdf->download($pdfNombre);
@@ -109,23 +109,23 @@ class PDFController extends Controller
         return $pdf->stream();
 
         $movimientos_credito = DB::table('creditos')
-                                ->join('credito_dets', 'creditos.id', '=', 'credito_dets.credito_id')
-                                // ->select('')
-                                ->where('creditos.socio_id','=', $socio_id)
-                                ->where('credito_dets.created_at', '>=', now()->subDays(15))
-                                ->get();
+            ->join('credito_dets', 'creditos.id', '=', 'credito_dets.credito_id')
+            // ->select('')
+            ->where('creditos.socio_id', '=', $socio_id)
+            ->where('credito_dets.created_at', '>=', now()->subDays(15))
+            ->get();
 
-        if(count($movimientos_credito)){
+        if (count($movimientos_credito)) {
             $data["creditos"] = $movimientos_credito;
         }
 
         $movimientos_cuenta = DB::table('ctr_cuentas')
-                            ->join('ctr_cuenta_dets', 'ctr_cuentas.id', '=', 'ctr_cuenta_dets.tipo_movimiento_id')
-                            ->where('ctr_cuentas.crm_socio_id', $socio_id)
-                            ->where('ctr_cuenta_dets.created_at', '>=', now()->subDays(15))
-                            ->get();
+            ->join('ctr_cuenta_dets', 'ctr_cuentas.id', '=', 'ctr_cuenta_dets.tipo_movimiento_id')
+            ->where('ctr_cuentas.crm_socio_id', $socio_id)
+            ->where('ctr_cuenta_dets.created_at', '>=', now()->subDays(15))
+            ->get();
 
-        if(count($movimientos_cuenta)){
+        if (count($movimientos_cuenta)) {
             $data["abonos"] = $movimientos_cuenta;
         }
 
@@ -133,5 +133,9 @@ class PDFController extends Controller
 
         $pdf = Pdf::loadView('PDF.reporte-quincenal', $data);
         return $pdf->stream();
+    }
+
+    public function descargaTablaAmortizacionCuenta(Request $request)
+    {
     }
 }

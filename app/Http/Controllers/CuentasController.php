@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
+use App\Helpers\AhorroHelper;
+
 use App\Models\Ctr_cuenta;
 use App\Models\Ctr_cuenta_det;
-use Illuminate\Http\Request;
+
+use Carbon\Carbon;
 
 class CuentasController extends Controller
 {
@@ -16,7 +21,20 @@ class CuentasController extends Controller
             ->orderBy('id', 'desc')
             ->paginate(10);
 
-        return view('cuentas.ver-cuenta', compact('movimientos', 'cuenta'));
+        if ($cuenta->tipoCuenta->plazo == true) {
+            $tabla = AhorroHelper::calcularTablaAmortizacion(
+                tipoCUenta: $cuenta->tipoCuenta,
+                plazo: $cuenta->cantidad_quincenas,
+                dia: Carbon::parse($cuenta->created_at),
+                monto: $cuenta->monto_plazo,
+            );
+        }
+
+        return view('cuentas.ver-cuenta', [
+            'movimientos'   => $movimientos,
+            'cuenta'    =>  $cuenta,
+            'tablaAmor' =>  $tabla ?? null
+        ]);
     }
 
     public function changeState($id)
