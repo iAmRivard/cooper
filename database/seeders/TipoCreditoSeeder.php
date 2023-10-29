@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\TipoCredito;
+
 class TipoCreditoSeeder extends Seeder
 {
     /**
@@ -41,6 +42,5 @@ class TipoCreditoSeeder extends Seeder
             'estado'        => true,
             'porcentaje_interes'    => 3.5,
         ]);
-
     }
 }
