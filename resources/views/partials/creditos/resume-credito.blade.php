@@ -11,7 +11,7 @@
         </div>
         <div class="stat">
             <div class="text-sm text-gray-500">Cuota</div>
-            <div class="text-xl font-bold text-rose-900">${{$credito->cuotaFija()->cuota_fija}}</div>
+            <div class="text-xl font-bold text-rose-900">${{$credito->cuotaFija()->cuota_fija ?? 0}}</div>
         </div>
         <div class="stat">
             <div class="text-sm text-gray-500">Saldo a la fecha</div>
