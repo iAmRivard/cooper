@@ -18,13 +18,17 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->boolean('estado');
-            $table->decimal('porcentaje', 5,2);
+            $table->decimal('porcentaje', 5, 2);
             /**
              * Campo plazo
              * 1 = si tiene plazo
              * 0 = no tiene plazo la cuenta
              */
             $table->boolean('plazo');
+
+            $table->boolean('aplica_monto')
+                ->default(0)
+                ->comment('APLICA PARA NAVIDEÑO/PROGRAMADOR QUE TIENEN DESCUENTOS QUINCENALES DE PLANILLA Y UN PLAZO DEFINIDO');
             $table->timestamps();
         });
     }

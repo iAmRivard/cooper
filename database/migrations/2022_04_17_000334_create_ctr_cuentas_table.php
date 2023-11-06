@@ -26,13 +26,15 @@ return new class extends Migration
             $table->integer('quincena_actual')->unsigned()->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
+            $table->boolean('finalizado')->default(0);
+            $table->decimal('pago_quincenal')->nullable();
+
             $table->foreign('crm_socio_id')
-                    ->references('id')->on('crm_socios');
+                ->references('id')->on('crm_socios');
 
             $table->foreign('crc_topo_cuenta_id')
-                    ->references('id')->on('crc_tipos_cuentas');
+                ->references('id')->on('crc_tipos_cuentas');
             $table->timestamps();
-            $table->boolean('finalizado')->default(0);
         });
     }
 

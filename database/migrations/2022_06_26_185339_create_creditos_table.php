@@ -22,15 +22,19 @@ return new class extends Migration
             $table->decimal('porcentaje_interes', 5, 2);
             $table->boolean('estado');
             $table->string('no_cuenta');
-
-            $table->foreign('socio_id')
-                    ->references('id')->on('crm_socios');
-
-            $table->foreign('tipo_credito_id')
-                    ->references('id')->on('tipo_creditos');
-
             $table->unsignedBigInteger('cantidad_cuotas')->default(0);
             $table->unsignedBigInteger('cuota_actual')->default(0);
+
+            $table->boolean('de_baja');
+
+            $table->string('comentarios');
+
+            $table->foreign('socio_id')
+                ->references('id')->on('crm_socios');
+
+            $table->foreign('tipo_credito_id')
+                ->references('id')->on('tipo_creditos');
+
             $table->timestamps();
         });
     }

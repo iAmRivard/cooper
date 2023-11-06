@@ -27,11 +27,12 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('empresa_id')->unsigned();
             $table->string('codigo_empleado');
+            $table->string('numero_socio');
 
             $table->foreign('user_id')
                 ->references('id')->on('users');
             $table->foreign('empresa_id')
-                    ->references('id')->on('crm_empresas');
+                ->references('id')->on('crm_empresas');
             $table->timestamps();
         });
     }
