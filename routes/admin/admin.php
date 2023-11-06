@@ -75,5 +75,7 @@ Route::middleware(['auth', 'rol'])->group(function () {
         Route::get('/cobro-cuotas-quincenames-consolidado', [ExportController::class, 'cobroCuotasQuincelanConsolidado'])->name('reporte.cobro-cuotas-consolidado');
         Route::get('/cobro-cuotas-quincenales-planilla', [ExportController::class, 'cobroCuotasQuincenalesPlanilla'])->name('reporte.cobro-cuotas-quincenales-planilla');
         Route::get('/cierre-cuentas-excel', [ExportController::class, 'cierreCuentas'])->name('reporte.cierre-cuentas-excel');
+
+        Route::get('/movimientos-creditos', [PDFController::class, 'movimientosCreditos'])->name('reporte.movimientos-creditos-pdf');
     });
 });

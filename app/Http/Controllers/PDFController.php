@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
-
 use App\Models\Ctr_cuenta_det;
+use App\Models\CreditoDet;
 use App\Models\Ctr_cuenta;
 
-use App\Models\CreditoDet;
-use App\Models\TipoMovimientoCredito;
 use Barryvdh\DomPDF\Facade\Pdf;
 
-// use PDF;
-// use \NumberFormatter;
+use Carbon\Carbon;
 
 class PDFController extends Controller
 {
@@ -137,5 +137,43 @@ class PDFController extends Controller
 
     public function descargaTablaAmortizacionCuenta(Request $request)
     {
+    }
+
+    /**
+     * Genera el reporte de abonos a creditos
+     *
+     * @param Request $request
+     */
+    public function movimientosCreditos(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'start_date'    =>  'required',
+            'end_date'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $movimeitos = CreditoDet::with('credito', 'socio')
+            ->whereBetween(
+                'created_at',
+                [
+                    Carbon::parse($request->start_date),
+                    Carbon::parse($request->end_date)
+                ]
+            )->get();
+
+        $data = [
+            'title'     => 'Retiro de Cuenta',
+            'retiros'    => $movimeitos,
+        ];
+
+
+        $pdf = Pdf::loadView('PDF.detalle-creditos', $data);
+        return $pdf->download(now('m') . '.pdf');
     }
 }
