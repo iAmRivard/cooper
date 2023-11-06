@@ -77,5 +77,6 @@ Route::middleware(['auth', 'rol'])->group(function () {
         Route::get('/cierre-cuentas-excel', [ExportController::class, 'cierreCuentas'])->name('reporte.cierre-cuentas-excel');
 
         Route::get('/movimientos-creditos', [PDFController::class, 'movimientosCreditos'])->name('reporte.movimientos-creditos-pdf');
+        Route::get('/movimientos-cuentas', [PDFController::class, 'movimientosCuentas'])->name('reporte.movimientos-cuentas-pdf');
     });
 });

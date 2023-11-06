@@ -107,12 +107,40 @@
                 </div>
                 <hr>
 
-                <div class="flex justify-between gap-4">
+                <div class="flex justify-between gap-4 mb-4">
                     <div class="shadow-xl card w-96 bg-base-100">
                         <div class="card-body">
                             <h2 class="card-title">Reporte de movimeintos Credito</h2>
                             <div class="justify-end card-actions">
                                 <form action="{{ route('reporte.movimientos-creditos-pdf') }}" method="GET">
+                                    <input
+                                        type="date"
+                                        class="w-full mb-2 input input-bordered"
+                                        name="start_date"
+                                        required
+                                    />
+                                    <input
+                                        type="date"
+                                        class="w-full mb-2 input input-bordered"
+                                        name="end_date"
+                                        required
+                                    />
+
+                                    <div class="flex justify-end">
+                                        <button type="submit" class="btn">Descargar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shadow-xl card w-96 bg-base-100">
+                        <div class="card-body">
+                            <h2 class="card-title">Reporte de movimeintos Cuentas</h2>
+                            <div class="justify-end card-actions">
+                                <form
+                                    action="{{ route('reporte.movimientos-cuentas-pdf') }}"
+                                    method="GET"
+                                >
                                     <input
                                         type="date"
                                         class="w-full mb-2 input input-bordered"

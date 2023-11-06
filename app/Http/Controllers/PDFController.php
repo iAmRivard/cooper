@@ -172,8 +172,39 @@ class PDFController extends Controller
             'retiros'    => $movimeitos,
         ];
 
-
         $pdf = Pdf::loadView('PDF.detalle-creditos', $data);
-        return $pdf->download(now('m') . '.pdf');
+        return $pdf->download(now('m') . '-creditos.pdf');
+    }
+
+    public function movimientosCuentas (Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'start_date'    =>  'required',
+            'end_date'  => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $movimeitos = Ctr_cuenta_det::with('cuenta','tipo')
+            ->whereBetween(
+                'created_at',
+                [
+                    Carbon::parse($request->start_date),
+                    Carbon::parse($request->end_date)
+                ]
+            )->get();
+
+        $data = [
+            'title'     => 'Retiro de Cuenta',
+            'abonos'    => $movimeitos,
+        ];
+
+        $pdf = Pdf::loadView('PDF.detalle-cuentas', $data);
+        return $pdf->download(now('m') . 'cuentas.pdf');
     }
 }
