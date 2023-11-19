@@ -7,14 +7,14 @@
     "require": {
         "php": "^8.0.1",
         "barryvdh/laravel-dompdf": "^2.0.1",
-        "geekcom/phpjasper": "^3.1",
+        "geekcom/phpjasper": "^3.4",
         "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^9.52.16",
         "laravel/jetstream": "^2.16.2",
         "laravel/sanctum": "^2.15.1",
         "laravel/tinker": "^2.8.2",
         "livewire/livewire": "^2.12.6",
-        "maatwebsite/excel": "^3.1.49",
+        "maatwebsite/excel": "^3.1.50",
         "psr/simple-cache": "2.0",
         "spatie/laravel-tail": "^4.4.2"
     },
