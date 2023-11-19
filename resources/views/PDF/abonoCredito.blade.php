@@ -40,6 +40,8 @@
         </tr>
     </tbody>
 </table>
+<hr>
+<hr>
 <table class="table table-borderless">
     <tbody>
         <tr>
