@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+import forms from "@tailwindcss/forms";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,11 +8,12 @@ module.exports = {
         "./vendor/laravel/jetstream/**/*.blade.php",
         "./storage/framework/views/*.php",
         "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.js",
     ],
 
     theme: {
         daisyui: {
-            // themes: ["light"],
+            themes: ["light"],
         },
         extend: {
             fontFamily: {
@@ -20,9 +22,5 @@ module.exports = {
         },
     },
 
-    plugins: [
-        require("@tailwindcss/forms"),
-        require("@tailwindcss/typography"),
-        require("daisyui"),
-    ],
+    plugins: [forms, require("daisyui")],
 };
