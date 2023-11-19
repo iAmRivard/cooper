@@ -14,22 +14,22 @@
                 @include('partials.cuentas.resume-cuenta')
 
                 @if ($cuenta->tipoCuenta->plazo == true)
-                <div class="flex justify-center gap-4 mt-4 mb-4">
-                    {{-- fecha de inicio --}}
-                    <div class="shadow stats">
-                        <div class="stat">
-                            <div class="stat-title">Fecha de inicio</div>
-                            <div class="stat-value">{{ $cuenta->fecha_inicio }}</div>
+                    <div class="flex justify-center gap-4 mt-4 mb-4">
+                        {{-- fecha de inicio --}}
+                        <div class="shadow stats">
+                            <div class="stat">
+                                <div class="stat-title">Fecha de inicio</div>
+                                <div class="stat-value">{{ $cuenta->fecha_inicio }}</div>
+                            </div>
+                        </div>
+                        {{-- Fecha fin --}}
+                        <div class="shadow stats">
+                            <div class="stat">
+                                <div class="stat-title">Fecha fin</div>
+                                <div class="stat-value">{{ $cuenta->fecha_fin }}</div>
+                            </div>
                         </div>
                     </div>
-                    {{-- Fecha fin --}}
-                    <div class="shadow stats">
-                        <div class="stat">
-                            <div class="stat-title">Fecha fin</div>
-                            <div class="stat-value">{{ $cuenta->fecha_fin }}</div>
-                        </div>
-                    </div>
-                </div>
                 @endif
 
                 @include('partials.cuentas.table-movimientos')
