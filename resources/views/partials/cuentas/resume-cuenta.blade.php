@@ -5,11 +5,18 @@
             <div class="text-xl font-bold text-primary">#{{$cuenta->no_cuenta}}</div>
             <div class="text-xs">{{$cuenta->tipoCuenta->nombre}}</div>
         </div>
-        @if ($cuenta->tipoCuenta->plazo)
+        @if ($cuenta->tipoCuenta->plazo &&  $cuenta->tipoCuenta->aplica_monto)
         <div class="stat">
             <div class="text-sm text-gray-500">Monto Apertura</div>
             <div class="text-xl font-bold text-sky-900">${{number_format($cuenta->monto_plazo)}}</div>
             <div class="text-xs">MONTO INICIAL</div>
+        </div>
+        @endif
+        @if ($cuenta->tipoCuenta->plazo &&  !$cuenta->tipoCuenta->aplica_monto)
+        <div class="stat">
+            <div class="text-sm text-gray-500">Cuota Quincenal</div>
+            <div class="text-xl font-bold text-sky-900">${{number_format($cuenta->pago_quincenal,2)}}</div>
+            <div class="text-xs"></div>
         </div>
         @endif
         <div class="stat">

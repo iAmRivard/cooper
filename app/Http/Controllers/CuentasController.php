@@ -25,8 +25,8 @@ class CuentasController extends Controller
             $tabla = AhorroHelper::calcularTablaAmortizacion(
                 tipoCUenta: $cuenta->tipoCuenta,
                 plazo: $cuenta->cantidad_quincenas,
-                dia: Carbon::parse($cuenta->created_at),
-                monto: $cuenta->monto_plazo,
+                dia: Carbon::parse($cuenta->created_at ?? getdate() ),
+                monto:  $cuenta->tipoCUenta->aplica_monto == true ? $cuenta->monto_plazo :  $cuenta->pago_quincenal,
             );
         }
 
