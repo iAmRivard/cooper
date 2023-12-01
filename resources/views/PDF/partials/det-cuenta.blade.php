@@ -15,8 +15,10 @@
         <tr>
             <td><strong>POR: </strong></td>
             <td>${{ number_format($abono->monto, 2) }} A CUENTA #{{$abono->cuenta->no_cuenta}}</td>
-            <td>Socio #</td>
+            <td><strong>Socio #</strong></td>
             <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
+            <td><strong>Codigo Empleado #</strong></td>
+            <td>{{ $abono->cuenta->socio->codigo_empleado ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>
