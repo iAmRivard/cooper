@@ -10,6 +10,7 @@
             <th>PAGO QUINCENAL</th>
             <th>NÚMERO CUOTA</th>
             <th>ID SOCIO</th>
+            <th>NUMERO SOCIO</th>
             <th>INTERES</th>
             <th>CUOTA CAPITAL</th>
             <th>PLAN PAGO DET</th>
@@ -27,6 +28,10 @@
                 <td>{{ $cuota->pago_quincenal }}</td>
                 <td>{{ $cuota->nr_cuota }}</td>
                 <td>{{ $cuota->id_socio }}</td>
+                @php
+                    $socio = \App\Models\Crm_socios::where('codigo_empleado', $cuota->codigo_empleado)->first();
+                @endphp
+                <th>{{ $socio->numero_socio ?? '' }}</th>
                 <td>{{ $cuota->interes }}</td>
                 <td>{{ $cuota->cuota_capital }}</td>
                 <td>{{ $cuota->id_plan_pago_det }}</td>

@@ -14,6 +14,7 @@
             <th>Interes Generado</th>
             <th>Saldo Final</th>
             <th>Saldo Final Cierre</th>
+            <th>NUMERO SOCIO</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +34,11 @@
                 <td>{{ $cierre->intereses_generados }}</td>
                 <td>{{ $cierre->saldo_final }}</td>
                 <td>{{ $cierre->saldo_final_cierre }}</td>
+
+                @php
+                    $socio = \App\Models\Crm_socios::where('dui', $cierre->dui)->first();
+                @endphp
+                <th>{{ $socio->numero_socio ?? '' }}</th>
             </tr>
         @endforeach
     </tbody>
