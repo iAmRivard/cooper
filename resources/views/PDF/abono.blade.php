@@ -7,7 +7,7 @@
 <table class="table table-borderless">
     <tbody>
         <tr>
-            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }} - {{ $abono->tipo->nombre}} </td>
+            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }}</td>
             <td></td>
             <td> <strong>T.CUENTA:</strong>  {{ $abono->cuenta->tipoCuenta->nombre }}</td>
             <td>{{ $abono->created_at->format('d-m-Y')}}</td>
