@@ -37,7 +37,7 @@ class Crm_socios extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Users::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function beneficiarios()
