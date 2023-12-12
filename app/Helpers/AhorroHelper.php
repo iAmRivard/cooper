@@ -10,7 +10,8 @@ class AhorroHelper
     public static function calcularTablaAmortizacion(Crc_tipos_cuenta $tipoCUenta, int $plazo, Carbon $dia = null, $monto): array
     {
         // Inicializar variables
-        $tasaInteresQuincenal = ($tipoCUenta->porcentaje / 100) / 24; // Tasa de interés quincenal
+        $tasaInteres =  ($tipoCUenta->porcentaje / 100) /  ($tipoCUenta->aplica_monto == false ? 24 : 12 ); // Tasa de interés quincenal/mensual
+        
         $capitalActual = $monto; // Capital actual al inicio
         $tablaMovimientos = []; // Arreglo para almacenar los movimientos
 
@@ -19,12 +20,16 @@ class AhorroHelper
 
             $interesQuincena = 0.00;
             if ($tipoCUenta->aplica_monto == false && $quincena != 1) {
-             $interesQuincena = $capitalActual * $tasaInteresQuincenal;
-               $capitalActual += $interesQuincena + $monto;
+                
+                if($quincena % 2 == 0){// Si es par deberá calcular interes.
+                    $interesQuincena = $capitalActual * $tasaInteres;
+                }
+             
+             $capitalActual += $interesQuincena + $monto;
             }
 
             if ($tipoCUenta->aplica_monto == true && $quincena != 1) {
-                $interesQuincena = $monto * $tasaInteresQuincenal;
+                $interesQuincena = $monto * $tasaInteres;
                 $capitalActual += $interesQuincena;
              }
             
@@ -33,7 +38,8 @@ class AhorroHelper
                 'quincena' => number_format($quincena, 0),
                 'interes' => number_format($interesQuincena, 2),
                 'capital' => number_format($capitalActual, 2),
-                'monto' => number_format($monto, 2)
+                'monto' => number_format($monto, 2),
+                'tasaInteres' => number_format($tasaInteres, 6)
             ];
         }
 

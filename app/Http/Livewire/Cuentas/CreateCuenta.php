@@ -19,7 +19,7 @@ class CreateCuenta extends Component
 
     public $selec_socio, $plazo, $cuenta, $numero_cuenta, $monto_plazo, $cantidad_cuotas, $desceutno_quincenal;
 
-    public $openTable = false, $tabla = [];
+    public $openTable = false, $tabla = [], $tipo_cuenta_selected = null;
 
     public $socios = [];
 
@@ -156,11 +156,14 @@ class CreateCuenta extends Component
 
         $tipoCuentaSelected = Crc_tipos_cuenta::find($tipo_cuenta->id);
 
+      //return  $this->emit('alerta', 'Abono procesado exitosamente');
+
+        $this->tipo_cuenta_selected = $tipoCuentaSelected;
         $this->tabla = AhorroHelper::calcularTablaAmortizacion(
             tipoCUenta: $tipoCuentaSelected,
             plazo: $this->cantidad_cuotas,
             dia: Carbon::now(),
-            monto: $this->monto_plazo,
+            monto: ($tipoCuentaSelected->aplica_monto == true ? $this->monto_plazo : $this->desceutno_quincenal),
         );
 
         $this->open = false;

@@ -61,9 +61,10 @@
                         class="w-full input input-bordered"
                         type="number"
                         wire:model="cantidad_cuotas"
-                        placeholder="Cantidad de quincenas"
+                        placeholder="Cantidad de quincenas/meses"
                     />
                     <x-jet-input-error for="cantidad_cuotas" />
+                    <small>Si son montos a plazo fijos, usar meses.</small>
                 </div>
                 @endif
                 @if ($selec_1 or $selec_2)

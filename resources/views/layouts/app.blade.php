@@ -8,7 +8,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('logo.svg')}} ">
+    <link rel="icon" type="image/png" href="{{ asset('logo.svg') }} ">
 
     <script src="https://kit.fontawesome.com/2115fb84e0.js" crossorigin="anonymous"></script>
 
@@ -26,11 +26,11 @@
 
         <!-- Page Heading -->
         @if (isset($header))
-        <header class="bg-white shadow">
-            <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
+            <header class="bg-white shadow">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
         @endif
 
         <!-- Page Content -->
@@ -46,10 +46,18 @@
     @livewireScripts
 
     <script>
-        Livewire.on('exito', function(message){
+        Livewire.on('exito', function(message) {
             Swal.fire(
                 message
             )
+        })
+
+        Livewire.on('alerta', function(message) {
+            Swal.fire({
+                title: "Atención!!",
+                text: message,
+                icon: "warning"
+            })
         })
     </script>
 </body>
