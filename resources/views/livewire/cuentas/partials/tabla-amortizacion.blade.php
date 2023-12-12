@@ -9,7 +9,7 @@
         <strong>Porcentaje Quincenal: </strong>%{{ (($tipo_cuenta_selected->porcentaje ?? 0) / 100)/24}}<br/>
         <strong>¿Es plazo?:</strong>{{ $tipo_cuenta_selected->plazo ?? 0 == 1 ? 'Si' : 'No' }} <br/>
         <strong>¿Aportación Quincenal o Monto Fijo?:</strong>{{ $tipo_cuenta_selected->aplica_monto ?? 0 == 1 ? 'Plazo Fijo' : ' Con Aportación Quincenal'}} <br/>
-        <small>Intereses serán calculados mensualmente antes del cobro de la cuota, independientemente la fecha en que se aperture. Se recomienda aperturar antes de la primera quincena de cada mes.</small>
+        <small>Intereses serán calculados mensualmente despues del cobro de la 2da cuota quincenal, independientemente la fecha en que se aperture. Se recomienda aperturar antes de la primera quincena de cada mes.</small>
         <hr/>
         <div class="overflow-x-auto">
             <table class="table table-zebra">
@@ -33,7 +33,7 @@
                         <th>{{ $t['quincena'] }}</th>
                         <th>${{ $t['monto'] }}</th>
                         @if(($tipo_cuenta_selected->aplica_monto ?? 0) == 0 )
-                        <th>${{ $t['capital'] - $t['interes'] - $t['monto']}}</th>
+                        <th>${{ $t['capital'] - $t['interes']}}</th>
                         @endif
                         <th>%{{ $t['tasaInteres']}}</th>
                         <td>${{ $t['interes'] }}</td>

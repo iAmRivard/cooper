@@ -21,11 +21,13 @@ class AhorroHelper
             $interesQuincena = 0.00;
             if ($tipoCUenta->aplica_monto == false && $quincena != 1) {
                 
+                $capitalActual += $monto ;
+
                 if($quincena % 2 == 0){// Si es par deberá calcular interes.
                     $interesQuincena = $capitalActual * $tasaInteres;
                 }
-             
-             $capitalActual += $interesQuincena + $monto;
+
+                $capitalActual +=  $interesQuincena;
             }
 
             if ($tipoCUenta->aplica_monto == true && $quincena != 1) {
