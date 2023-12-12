@@ -25,6 +25,8 @@
             <td>${{ number_format($retiro->monto, 2) }}</td>
             <td>Socio #</td>
             <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
+            <td><strong>Codigo Empleado #</strong></td>
+            <td>{{ $abono->cuenta->socio->codigo_empleado ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>
@@ -83,6 +85,8 @@
             <td>${{ number_format($retiro->monto, 2) }}</td>
             <td>Socio #</td>
             <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
+            <td><strong>Codigo Empleado #</strong></td>
+            <td>{{ $abono->cuenta->socio->codigo_empleado ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>

@@ -7,7 +7,7 @@
 <table class="table table-borderless">
     <tbody>
         <tr>
-            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }} - {{ $abono->tipo->nombre}} </td>
+            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }}</td>
             <td></td>
             <td> <strong>T.CUENTA:</strong>  {{ $abono->cuenta->tipoCuenta->nombre }}</td>
             <td>{{ $abono->created_at->format('d-m-Y')}}</td>
@@ -19,8 +19,10 @@
         <tr>
             <td><strong>POR: </strong></td>
             <td>${{ number_format($abono->monto, 2) }} A CUENTA #{{$abono->cuenta->no_cuenta}}</td>
-            <td>Socio #</td>
+            <td><strong>Socio #</strong></td>
             <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
+            <td><strong>Codigo Empleado #</strong></td>
+            <td>{{ $abono->cuenta->socio->codigo_empleado ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>
@@ -61,7 +63,7 @@
 <table class="table table-borderless">
     <tbody>
         <tr>
-            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }} - {{ $abono->tipo->nombre}}</td>
+            <td><strong>TRANSACCION No. </strong> #{{ $abono->id }}</td>
             <td></td>
             <td> <strong>T.CUENTA:</strong>  {{ $abono->cuenta->tipoCuenta->nombre }}</td>
             <td>{{ $abono->created_at->format('d-m-Y')}}</td>
@@ -73,8 +75,10 @@
         <tr>
             <td><strong>POR: </strong></td>
             <td>${{ number_format($abono->monto, 2) }} A CUENTA #{{$abono->cuenta->no_cuenta}}</td>
-            <td>Socio #</td>
+            <td><strong>Socio #</strong></td>
             <td>{{ $abono->cuenta->socio->numero_socio ?? '' }}</td>
+            <td><strong>Codigo Empleado #</strong></td>
+            <td>{{ $abono->cuenta->socio->codigo_empleado ?? '' }}</td>
         </tr>
         <tr>
             <td><strong>NOMBRE: </strong></td>

@@ -2,7 +2,6 @@
     use Carbon\Carbon;
 ?>
 
-
 <div class="overflow-x-auto">
     <table class="table table-xs table-zebra">
         <thead>

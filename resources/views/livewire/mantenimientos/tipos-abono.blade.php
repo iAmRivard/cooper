@@ -4,12 +4,12 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
 
                 <div class="overflow-x-auto">
 
-                    <table class="table table-zebra w-full mb-4">
+                    <table class="table w-full mb-4 table-zebra">
                       <!-- head -->
                       <thead>
                         <tr>
@@ -24,7 +24,7 @@
                             <td>{{ $tipo->nombre }}</td>
                             <td>
                                 @if ($tipo->naturaleza == 1)
-                                    EGRESO
+                                    SALIDA
                                 @else
                                     INGRESO
                                 @endif
@@ -42,7 +42,7 @@
                       </tbody>
                     </table>
 
-                    <div class="my-4 mx-4">
+                    <div class="mx-4 my-4">
                         {{ $tipos->links() }}
                     </div>
 
@@ -59,11 +59,11 @@
 
         <x-slot name="content">
             {{-- Nombre --}}
-            <div class="mb-4 form-control w-full">
+            <div class="w-full mb-4 form-control">
                 @error('nombre')
-                <div class="alert alert-error shadow-lg">
+                <div class="shadow-lg alert alert-error">
                     <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span>Error! {{ $message }}</span>
                     </div>
                 </div>
@@ -74,16 +74,16 @@
                 <input
                     type="text"
                     placeholder="Nombre del tipo de credito"
-                    class="input input-bordered w-full"
+                    class="w-full input input-bordered"
                     wire:model.defer="nombre"
                 />
             </div>
             {{-- Descripción --}}
-            <div class="mb-4 form-control w-full">
+            <div class="w-full mb-4 form-control">
                 @error('descripcion')
-                <div class="alert alert-error shadow-lg">
+                <div class="shadow-lg alert alert-error">
                     <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span>Error! {{ $message }}</span>
                     </div>
                 </div>
@@ -94,16 +94,16 @@
                 <input
                     type="text"
                     placeholder="Descripción"
-                    class="input input-bordered w-full"
+                    class="w-full input input-bordered"
                     wire:model.defer="descripcion"
                 />
             </div>
             {{-- Naturaleza --}}
-            <div class="mb-4 form-control w-full">
+            <div class="w-full mb-4 form-control">
                 @error('naturaleza')
-                <div class="alert alert-error shadow-lg">
+                <div class="shadow-lg alert alert-error">
                     <div>
-                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                       <span>Error! {{ $message }}</span>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
                     <span class="label-text">Naturaleza</span>
                 </label>
                 <select
-                    class="select select-bordered w-full"
+                    class="w-full select select-bordered"
                     wire:model.defer="naturaleza"
                 >
                     <option>Selecione un tipo</option>

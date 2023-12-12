@@ -1,4 +1,5 @@
-<table class="table table-fixed">
+<div class="overflow-x-auto">
+    <table class="table table-xs table-zebra">
     <thead>
         <tr>
             <th>Cod. Empleado</th>
@@ -35,7 +36,21 @@
                         Ver socio
                     </a>
                 </td>
+                </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Cod. Empleado</th>
+                <th># de Socio</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Empresa</th>
+                <th>DUI</th>
+                <th>Ap. Quincenal</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
-        @endforeach
-    </tbody>
-</table>
+        </tfoot>
+    </table>
+</div>
