@@ -8,6 +8,7 @@
             <th>Empresa</th>
             <th>DUI</th>
             <th>Ap. Quincenal</th>
+            <th>Estado</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
         </tr>
@@ -22,6 +23,8 @@
                 <td class="font-bold" >{{ $item->empresa->nombre }}</td>
                 <td>{{ $item->dui }}</td>
                 <td class="font-bold" >${{ $item->aportacion }}</td>
+                <td class="font-bold" >{{ $item->estado == 0 ? 'Inactivo' : 'Activo' }}</td>
+
                 <td>
                     <a class="cursor-pointer" wire:click="editar( {{$item}} )">
                         <i class="fas fa-edit"></i>

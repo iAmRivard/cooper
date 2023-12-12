@@ -40,7 +40,7 @@
                                 <div class="flex items-center space-x-2">
                                     <i class="text-xl fas fa-toggle-on"></i>
                                     <div class="font-semibold"> Estado:</div>
-                                    <div class="font-normal">{{ $socio->estado = 1 ? 'Activo' : 'Inactivo' }}</div>
+                                    <div class="font-normal">{{ $socio->estado == 1 ? 'Activo' : 'Inactivo' }}</div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <i class="text-xl fa-solid fa-hashtag"></i>
