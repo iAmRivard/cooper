@@ -7,11 +7,10 @@ use Illuminate\Support\Str;
 
 use Livewire\Component;
 
-
+//Models
 use App\Models\User;
 use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
-use App\Models\Crc_tipos_cuenta;
 use App\Models\crm_empresas;
 
 class CreateSocio extends Component
@@ -33,6 +32,7 @@ class CreateSocio extends Component
     public function render()
     {
         $empresas = crm_empresas::all();
+
         return view('livewire.socios.create-socio', compact('empresas'));
     }
 

@@ -37,6 +37,9 @@
         </x-slot>
 
         <x-slot name='content'>
+            @if ($errors->any())
+                @include('livewire.socios.partials.errors-edit')
+            @endif
             <div class="flex mb-4">
                 {{-- Nombre del socio --}}
                 <div class="w-1/2 pr-4">

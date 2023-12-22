@@ -5,12 +5,12 @@ namespace App\Http\Livewire\Socios;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+//models
 use App\Models\Crm_socios;
 use App\Models\crm_empresas;
 
 class Socios extends Component
 {
-
     use WithPagination;
 
     public $buscarSocio, $socio;
@@ -34,8 +34,7 @@ class Socios extends Component
         'socio.aportacion' => 'required',
         'socio.empresa_id' => 'required',
         'socio.codigo_empleado' => 'required',
-        'socio.dui' => 'required|min:9|max:9',
-        'socio.nit' => 'min:13|max:13',
+        'socio.dui' => 'min:9|max:10',
         'socio.direccion' => 'required',
         'socio.salario' => 'required',
         'socio.correo' => 'required|email'
@@ -62,7 +61,7 @@ class Socios extends Component
         return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
 
-    public function editar(Crm_socios $socio)
+    public function editar(Crm_socios $socio): void
     {
         $this->socio = $socio;
         $this->open_edit = true;
@@ -79,7 +78,7 @@ class Socios extends Component
         ]);
     }
 
-    public function actualizar_pass(Crm_socios $socio)
+    public function actualizar_pass(Crm_socios $socio): void
     {
         $this->socio = $socio;
         $this->nueva_contrasena = true;
