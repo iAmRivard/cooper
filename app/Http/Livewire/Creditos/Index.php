@@ -22,7 +22,7 @@ class Index extends Component
 
     public function render()
     {
-        $creditos = Credito::with('socio')
+        $creditos = Credito::with('socio', 'tipoCredito')
             ->when($this->buscar, function ($query) {
                 return $query->where('no_cuenta', 'like', '%' . $this->buscar . '%')
                     ->orWhereHas('socio', function ($q) {

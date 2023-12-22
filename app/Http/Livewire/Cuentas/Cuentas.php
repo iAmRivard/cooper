@@ -5,7 +5,6 @@ namespace App\Http\Livewire\Cuentas;
 use Livewire\WithPagination;
 use Livewire\Component;
 
-use App\Models\Crc_tipos_de_movimiento;
 use App\Models\Ctr_cuenta;
 
 class Cuentas extends Component

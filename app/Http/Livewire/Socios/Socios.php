@@ -50,7 +50,8 @@ class Socios extends Component
     {
         $empresas = crm_empresas::all();
 
-        $socios = Crm_socios::where('nombres', 'like', '%' . $this->buscarSocio . '%')
+        $socios = Crm_socios::with('empresa')
+            ->where('nombres', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
