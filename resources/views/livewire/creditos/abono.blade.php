@@ -149,7 +149,10 @@
                             </table>
                         </div>
                         <div class="flex justify-end mt-4">
-                            <button x-on:click="$wire.selectCuenta(selectedAccount.id)" class="btn btn-sm">
+                            <button
+                                class="btn btn-primary btn-sm"
+                                x-on:click="$wire.selectCuenta(selectedAccount.id)"
+                            >
                                 Seleccionar Cuota
                             </button>
                         </div>
