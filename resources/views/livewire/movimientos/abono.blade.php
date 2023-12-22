@@ -75,7 +75,7 @@
                         <div class="flex items-center justify-between mb-4">
                             <h2 class="text-lg font-semibold">Información de la Cuenta</h2>
                             <button
-                                class="text-sm text-blue-500 focus:outline-none"
+                                class="text-sm text-blue-500 cursor-pointer focus:outline-none"
                                 x-on:click="
                                     account = '';
                                     selectedAccount = null;
@@ -99,11 +99,15 @@
                             </tr>
                             <tr>
                                 <td class="py-2 font-semibold">Saldo Actual:</td>
-                                <td class="py-2">$<span x-text="selectedAccount && selectedAccount.saldo_actual"></span></td>
+                                <td class="py-2">
+                                    $<span x-text="selectedAccount && selectedAccount.saldo_actual"></span>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="py-2 font-semibold">Cuenta</td>
-                                <td class="py-2"><span x-text="selectedAccount && selectedAccount.tipo_cuenta.nombre"></span></td>
+                                <td class="py-2">
+                                    <span x-text="selectedAccount && selectedAccount.tipo_cuenta.nombre"></span>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -136,7 +140,6 @@
                         @endforeach
                     </select>
                 </div>
-
             </div>
 
             {{-- Descripción del movimiento --}}
