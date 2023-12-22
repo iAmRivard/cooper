@@ -110,6 +110,19 @@
                                 </td>
                             </tr>
                         </table>
+                        <div class="flex justify-end">
+                            <button
+                                type="button"
+                                class="btn btn-primary btn-sm"
+                                x-bind:disabled="selectedAccount && selectedAccount.tipo_cuenta.plazo != 1"
+                                x-on:click="
+                                    $wire.set('monto', selectedAccount.pago_quincenal);
+                                    $wire.set('tipo', 1);
+                                "
+                            >
+                                Seleccionar Cuota
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,7 +144,7 @@
                 {{-- Tipo de Depostio --}}
                 <div class="w-1/2">
                     <x-jet-label>Tipo</x-jet-label>
-                    <select class="w-full select select-bordered" required wire:model.defer="tipo">
+                    <select class="w-full select select-bordered" required wire:model="tipo">
                         <option>Tipo de desposito</option>
                         @foreach($tiposMovimiento as $movimiento)
                             <option value="{{ $movimiento->id }}">
@@ -150,7 +163,7 @@
                 <textarea
                     rows="4"
                     class="w-full textarea textarea-bordered"
-                    wire:model.defer="descripcion"
+                    wire:model="descripcion"
                     placeholder="Descripción del Abono"
                 >
                 </textarea>
