@@ -188,12 +188,6 @@ return [
          * Laravel Excel
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
-
-        /**
-         * Debugbar
-         */
-        Barryvdh\Debugbar\ServiceProvider::class,
-
     ],
 
     /*
