@@ -189,6 +189,11 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+        /**
+         * Debugbar
+         */
+        Barryvdh\Debugbar\ServiceProvider::class,
+
     ],
 
     /*
@@ -201,11 +206,11 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Debugbar' => Barryvdh\Debugbar\Facades\Debugbar::class,
     ])->toArray(),
 
 ];
