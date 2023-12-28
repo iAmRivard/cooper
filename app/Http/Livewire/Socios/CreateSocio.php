@@ -13,11 +13,15 @@ use App\Models\Crm_socios;
 use App\Models\Ctr_cuenta;
 use App\Models\crm_empresas;
 
+use Carbon\Carbon;
+
 class CreateSocio extends Component
 {
-    public $open = false;
+    public $open = true;
 
     public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado, $numero_socio;
+
+    public $municipio, $departamento, $dui_epiracion, $fecha_nacimiento, $fecha_inicio, $cargo, $numero_dependencia, $profesion_uficio;
 
     protected $rules = [
         'nombres'       => 'required',
@@ -26,7 +30,15 @@ class CreateSocio extends Component
         'direccion'     => 'required',
         'salario'       => 'required',
         'correo'        => 'email|unique:crm_socios',
-        'empresa'       => 'required'
+        'empresa'       => 'required',
+        'departamento'  => 'required',
+        'municipio' => 'required',
+        'dui_epiracion'    => 'required',
+        'fecha_nacimiento'  => 'required',
+        'fecha_inicio'  => 'required',
+        'cargo' => 'required',
+        'profesion_uficio'  => 'required',
+        'numero_dependencia'    => 'required',
     ];
 
     public function render()
@@ -62,7 +74,16 @@ class CreateSocio extends Component
             'user_id'       => $user->id,
             'empresa_id'    => $this->empresa,
             'codigo_empleado'   => $this->codigoEmpleado,
-            'numero_socio'  =>  $this->numero_socio
+            'numero_socio'  =>  $this->numero_socio,
+            'departamento'  => $this->departamento,
+            'municipio'  => $this->municipio,
+            'dui_epiracion'   =>  Carbon::parse($this->dui_epiracion),
+            'fecha_nacimiento'  => Carbon::parse($this->fecha_nacimiento),
+            'edad'  => Carbon::now()->diffInYears(Carbon::parse($this->fecha_nacimiento)),
+            'fecha_inicio'  =>  Carbon::parse($this->fecha_inicio),
+            'cargo' =>  $this->cargo,
+            'profesion_uficio'  =>  $this->profesion_uficio,
+            'numero_dependencia'    =>  $this->numero_dependencia,
         ]);
 
         $toDay = getDate();
@@ -75,7 +96,7 @@ class CreateSocio extends Component
             'estado'                => true,
         ]);
 
-        $this->emitTo('socios.socios','render');
+        $this->emitTo('socios.socios', 'render');
 
         $this->emit('exito', 'Socio creado exitosamente');
 
@@ -92,5 +113,4 @@ class CreateSocio extends Component
 
         return redirect()->route('ver.socio', $new_socio);
     }
-
 }
