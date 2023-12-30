@@ -68,19 +68,19 @@
 
             <div class="flex mb-4">
                 {{-- Numero de socio --}}
-                {{-- <div class="w-1/2 pr-4">
+                <div class="w-1/2 pr-4">
                     <x-jet-label value="Número de socio" />
                     <x-jet-input
                         type="text"
                         class="w-full"
-                        wire:model.defer="numero_socio"
+                        wire:model.defer="socio.numero_socio"
                         placeholdeR="Número de socio"
                     />
-                    <x-jet-input-error for="numero_socio" />
-                </div> --}}
+                    <x-jet-input-error for="socio.numero_socio" />
+                </div>
 
                 {{-- Codigo del empleado --}}
-                <div class="w-full">
+                <div class="w-1/2 pl-4">
                     <x-jet-label value="Código de empleado" />
                     <x-jet-input
                         placeholder="Código de empleado"
@@ -88,7 +88,7 @@
                         class="w-full"
                         wire:model.defer="socio.codigo_empleado"
                     />
-                    <x-jet-input-error for="codigoEmpleado" />
+                    <x-jet-input-error for="socio.codigo_empleado" />
                 </div>
             </div>
 
@@ -117,6 +117,29 @@
                         wire:model.defer="socio.nit"
                     />
                     <x-jet-input-error for="nit" />
+                </div>
+            </div>
+
+            <div class="flex mb-4">
+                {{-- Expiración DUI --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Fecha expiración DUI" />
+                    <x-jet-input
+                        type="date"
+                        class="w-full"
+                        wire:model.defer="socio.dui_epiracion"
+                    />
+                    <x-jet-input-error for="socio.dui_epiracion" />
+                </div>
+                {{-- Fecha de nacimiento --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Fecha de nacimiento" />
+                    <x-jet-input
+                        type="date"
+                        class="w-full"
+                        wire:model.defer="socio.fecha_nacimiento"
+                    />
+                    <x-jet-input-error for="socio.fecha_nacimiento" />
                 </div>
             </div>
 
@@ -157,6 +180,31 @@
                     <x-jet-input-error for="aportacion" />
                 </div>
             </div>
+            <div class="flex mb-4">
+                {{-- Salario del socio --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Cargo" />
+                    <x-jet-input
+                        type="text"
+                        class="w-full"
+                        wire:model.defer="socio.cargo"
+                        placeholder="Cargo"
+                    />
+                    <x-jet-input-error for="socio.cargo" />
+                </div>
+
+                {{-- Aportación del socio --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Profesión u oficio" />
+                    <x-jet-input
+                        placeholder="Estudiante"
+                        type="text"
+                        class="w-full"
+                        wire:model="socio.profesion_uficio"
+                    />
+                    <x-jet-input-error for="socio.profesion_uficio" />
+                </div>
+            </div>
 
             <div class="flex mb-4">
                 {{-- Correo electronico --}}
@@ -168,7 +216,7 @@
                         wire:model.defer="socio.correo"
                         placeholdeR="ejemplo@ejemplo.com"
                     />
-                    <x-jet-input-error for="correo" />
+                    <x-jet-input-error for="socio.correo" />
                 </div>
 
                 {{-- Empresa --}}
@@ -180,7 +228,29 @@
                         <option value="{{ $empresa->id }}">{{ $empresa->nombre }}</option>
                         @endforeach
                     </select>
-                    <x-jet-input-error for="empresa" />
+                    <x-jet-input-error for="socio.empresa_id" />
+                </div>
+            </div>
+            <div class="flex mb-4">
+                {{-- Expiración DUI --}}
+                <div class="w-1/2 pr-4">
+                    <x-jet-label value="Fecha de ingreso a la COOPERATIVA" />
+                    <x-jet-input
+                        type="date"
+                        class="w-full"
+                        wire:model="socio.fecha_inicio"
+                    />
+                    <x-jet-input-error for="socio.fecha_inicio" />
+                </div>
+                {{-- Fecha de nacimiento --}}
+                <div class="w-1/2 pl-4">
+                    <x-jet-label value="Número de personas que dependen económicamente" />
+                    <x-jet-input
+                        type="number"
+                        class="w-full"
+                        wire:model.defer="socio.numero_dependencia"
+                    />
+                    <x-jet-input-error for="socio.numero_dependencia" />
                 </div>
             </div>
         </x-slot>
@@ -196,5 +266,4 @@
             <span wire:loading wire:target="guardar">Procesando ...</span>
         </x-slot>
     </x-jet-dialog-modal>
-
 </div>
