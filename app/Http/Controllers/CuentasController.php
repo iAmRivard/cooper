@@ -15,7 +15,7 @@ class CuentasController extends Controller
 {
     public function verCuenta($id)
     {
-        $cuenta =   Ctr_cuenta::find($id);
+        $cuenta =   Ctr_cuenta::with("socio", "tipoCuenta")->findOrFail($id);
 
         $movimientos    =   Ctr_cuenta_det::where('ctr_cuentas_id', '=', $id)
             ->orderBy('id', 'desc')
