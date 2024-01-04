@@ -65,7 +65,7 @@ class CreateSocio extends Component
             'nombres'       => strtoupper($this->nombres),
             'apellidos'     => strtoupper($this->apellidos),
             'dui'           => $this->dui,
-            'nit'           => $this->nit,
+            'nit'           => $this->nit ?? null,
             'direccion'     => strtoupper($this->direccion),
             'correo'        => $this->correo,
             'salario'       => $this->salario,

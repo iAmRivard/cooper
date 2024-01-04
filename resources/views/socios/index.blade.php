@@ -60,10 +60,18 @@
                         <h2 class="mb-4 text-lg font-bold text-center">CUENTAS / CREDITOS ACTIVAS</h2>
                         <div x-data="{ open: true }">
                             <div class="flex justify-center mb-4 space-x-4">
-                                <button class="px-4 py-2 bg-gray-200 rounded-lg focus:outline-none"
-                                    :class="{ 'bg-blue-500 text-white': open }" @click="open = true">Cuentas</button>
-                                <button class="px-4 py-2 bg-gray-200 rounded-lg focus:outline-none"
-                                    :class="{ 'bg-blue-500 text-white': !open }" @click="open = false">Creditos</button>
+                                <button
+                                    type="button"
+                                    :class="open == true ? 'btn-active' : 'btn-no-active'" @click="open = true"
+                                >
+                                    Cuentas
+                                </button>
+                                <button
+                                    type="button"
+                                    :class="open == false ? 'btn-active' : 'btn-no-active'" @click="open = false"
+                                >
+                                    Creditos
+                                </button>
                             </div>
 
                             <div class="space-y-4">
@@ -93,28 +101,19 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
                 {{-- Información de las transacciones de los socios --}}
                 <div class="flex flex-col w-full mx-10 mt-4 space-y-4">
-
-                    @livewire('beneficiarios.crear',['socio' => $socio])
-
+                    @livewire('beneficiarios.crear', ['socio' => $socio])
                 </div>
 
                 <h2 class="flex justify-center text-lg font-bold">Beneficiarios del socio</h2>
 
                 <div class="flex justify-center w-full pb-4 flex-colflex">
-
                     @livewire('beneficiarios.tabla',['socio' => $socio])
-
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </x-app-layout>

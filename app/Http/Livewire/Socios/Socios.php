@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 //models
 use App\Models\Crm_socios;
 use App\Models\crm_empresas;
+use Carbon\Carbon;
 
 class Socios extends Component
 {
@@ -23,22 +24,34 @@ class Socios extends Component
 
     public function mount()
     {
-        $this->socio = new Crm_socios;
+        $this->socio = new Crm_socios();
+        $this->socio->fecha_inicio = Carbon::parse($this->socio->fecha_inicio)->format('Y-m-d');
     }
 
     protected $listeners = ['render' => 'render'];
 
-    protected $rules = [
-        'socio.nombres' => 'required',
-        'socio.apellidos' => 'required',
-        'socio.aportacion' => 'required',
-        'socio.empresa_id' => 'required',
-        'socio.codigo_empleado' => 'required',
-        'socio.dui' => 'min:9|max:10',
-        'socio.direccion' => 'required',
-        'socio.salario' => 'required',
-        'socio.correo' => 'required|email'
-    ];
+    protected function rules()
+    {
+        return [
+            'socio.nombres' => 'required',
+            'socio.apellidos' => 'required',
+            'socio.aportacion' => 'required',
+            'socio.empresa_id' => 'required',
+            'socio.codigo_empleado' => 'required',
+            'socio.dui' => ['min:10', 'max:10', 'unique:crm_socios,dui,' . $this->socio->id],
+            'socio.direccion' => 'required',
+            'socio.salario' => 'required',
+            'socio.correo' => ['required', 'email', 'unique:crm_socios,correo,' . $this->socio->id],
+            'socio.departamento' => 'required',
+            'socio.municipio' => 'required',
+            'socio.dui_epiracion' => 'required',
+            'socio.fecha_nacimiento' => 'required',
+            'socio.fecha_inicio' => 'required',
+            'socio.cargo' => 'required',
+            'socio.profesion_uficio' => 'required',
+            'socio.numero_dependencia' => 'required',
+        ];
+    }
 
     public function updatingBuscarSocio()
     {

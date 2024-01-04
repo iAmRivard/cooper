@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 use App\Models\Crm_socios;
-use App\Models\Ctr_cuenta_det;
 use App\Models\Ctr_cuenta;
 
 use App\Models\Credito;
@@ -17,7 +17,7 @@ class SociosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Crm_socios $socio)
+    public function index(Crm_socios $socio): void
     {
         // return view('socios.index', compact(['socio' => $socio, 'socio_cuentas' => $socio_cuentas]));
     }
@@ -27,7 +27,7 @@ class SociosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): View
     {
         return view('socios.create');
     }
@@ -38,7 +38,7 @@ class SociosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): void
     {
         //
     }
@@ -47,9 +47,9 @@ class SociosController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
-    public function show(Crm_socios $socio)
+    public function show(Crm_socios $socio): View
     {
         $socio_cuentas = [];
         $socio_creditos = [];
@@ -67,9 +67,9 @@ class SociosController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function edit($id)
+    public function edit($id): void
     {
         //
     }
@@ -81,7 +81,7 @@ class SociosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): void
     {
         //
     }
@@ -92,7 +92,7 @@ class SociosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): void
     {
         //
     }
