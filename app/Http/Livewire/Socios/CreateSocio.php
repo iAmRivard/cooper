@@ -17,7 +17,7 @@ use Carbon\Carbon;
 
 class CreateSocio extends Component
 {
-    public $open = true;
+    public $open = false;
 
     public $nombres, $apellidos, $dui, $nit, $direccion, $salario, $correo, $empresa, $aportacion, $codigoEmpleado, $numero_socio;
 

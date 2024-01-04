@@ -8,7 +8,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SociosController;
 use App\Http\Controllers\CuentasController;
-
+use App\Http\Controllers\ReporteInteresPlazosController;
 use App\Http\Livewire\Cuentas\Cuentas;
 use App\Http\Livewire\Socios\Socios;
 
@@ -66,6 +66,8 @@ Route::middleware(['auth', 'rol'])->group(function () {
         ->name('reporte.quincenal');
 
     Route::get('/reportes', [ExportController::class, 'getExport'])->name('reportes');
+    Route::get('/reportes/interes-plazo', [ReporteInteresPlazosController::class, 'index'])->name('rpt.interes.plazo');
+
 
     Route::prefix('reporte')->group(function () {
         Route::get('/cierre-cuentas', App\Http\Livewire\Reporte\CierreCuentas::class)->name('reporte.cierre-cuentas');

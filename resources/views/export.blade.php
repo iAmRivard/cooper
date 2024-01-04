@@ -110,7 +110,7 @@
                 <div class="flex justify-between gap-4 mb-4">
                     <div class="shadow-xl card w-96 bg-base-100">
                         <div class="card-body">
-                            <h2 class="card-title">Reporte de movimeintos Credito</h2>
+                            <h2 class="card-title">Reporte de movimientos Credito</h2>
                             <div class="justify-end card-actions">
                                 <form action="{{ route('reporte.movimientos-creditos-pdf') }}" method="GET">
                                     <input
@@ -135,7 +135,7 @@
                     </div>
                     <div class="shadow-xl card w-96 bg-base-100">
                         <div class="card-body">
-                            <h2 class="card-title">Reporte de movimeintos Cuentas</h2>
+                            <h2 class="card-title">Reporte de movimientos Cuentas</h2>
                             <div class="justify-end card-actions">
                                 <form
                                     action="{{ route('reporte.movimientos-cuentas-pdf') }}"

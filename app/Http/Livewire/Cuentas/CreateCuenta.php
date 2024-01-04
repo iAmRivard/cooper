@@ -113,11 +113,17 @@ class CreateCuenta extends Component
             $nueva_cuenta->cantidad_quincenas =   $this->cantidad_cuotas;
         }
 
-        if ($tipo_cuenta->plazo == 1) {
+        if ($tipo_cuenta->plazo == 1 && $tipo_cuenta->aplica_monto == 0)  {
             $now = Carbon::now();
             $totalDias = $this->cantidad_cuotas * 15;
             $nueva_cuenta->fecha_inicio = $now->format('Y-m-d');
             $nueva_cuenta->fecha_fin = $now->addDay($totalDias)->format('Y-m-d');
+        }
+
+        if ($tipo_cuenta->plazo == 1 && $tipo_cuenta->aplica_monto == 1)  {
+            $now = Carbon::now();
+            $nueva_cuenta->fecha_inicio = $now->format('Y-m-d');
+            $nueva_cuenta->fecha_fin = $now->addMonth($this->cantidad_cuotas)->format('Y-m-d');
         }
 
         $nueva_cuenta->quincena_actual  =   0;
