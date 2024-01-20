@@ -9,23 +9,25 @@
         "barryvdh/laravel-dompdf": "^2.0.1",
         "geekcom/phpjasper": "^3.4",
         "guzzlehttp/guzzle": "^7.8.1",
-        "laravel/framework": "^9.52.16",
+        "laravel/framework": "^10.41",
         "laravel/jetstream": "^2.16.2",
-        "laravel/sanctum": "^2.15.1",
+        "laravel/sanctum": "^3.3.3",
         "laravel/tinker": "^2.9.0",
         "livewire/livewire": "^2.12.6",
         "maatwebsite/excel": "^3.1.52",
         "psr/simple-cache": "2.0",
-        "spatie/laravel-tail": "^4.4.2"
+        "spatie/laravel-tail": "^4.4.2",
+        "doctrine/dbal": "^3.7.2",
+        "spatie/laravel-ignition": "^2.4.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9.2",
         "fakerphp/faker": "^1.23.1",
         "laravel/sail": "^1.27.1",
         "mockery/mockery": "^1.6.7",
-        "nunomaduro/collision": "^6.4.0",
-        "phpunit/phpunit": "^9.6.16",
-        "spatie/laravel-ignition": "^1.6.4"
+        "nunomaduro/collision": "^7.10",
+        "phpunit/phpunit": "^10.5.8",
+        "spatie/laravel-ignition": "^2.4.1"
     },
     "autoload": {
         "psr-4": {
@@ -64,6 +66,6 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }
