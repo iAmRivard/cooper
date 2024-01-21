@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire\Creditos;
 
+//Enums
+use App\Enums\Credito\DebajaCreditoEnum;
+
+//Models
 use App\Models\Credito;
 
 use Livewire\Component;
@@ -24,10 +28,10 @@ class DeBaja extends Component
 
     public function dow()
     {
-        $this->credito->de_baja = $this->credito->de_baja  == 1 ? 0 : 1;
-        $this->credito->save();
+        $this->credito->de_baja = $this->credito->de_baja   === DebajaCreditoEnum::ACTIVE->value ? DebajaCreditoEnum::DE_BAJA->value : DebajaCreditoEnum::ACTIVE->value;
+        $this->credito->update();
 
-        $message    =   $this->credito->estado == 0 ? 'Credito desactivado' : 'Credito Activado';
+        $message    =   $this->credito->de_baja === DebajaCreditoEnum::ACTIVE->value ? 'Credito Activado' : 'Credito desactivado';
 
         $this->emit('exito', $message);
         $this->reset([
