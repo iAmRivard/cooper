@@ -4,6 +4,10 @@ namespace App\Http\Livewire\Creditos;
 
 use Livewire\Component;
 
+//Enums
+use App\Emuns\Credito\StateCreditoEnum;
+
+//Modes
 use App\Models\Credito;
 
 class ActivarDesactivar extends Component
@@ -24,11 +28,10 @@ class ActivarDesactivar extends Component
 
     public function updateState()
     {
-        $this->credito->estado  =   $this->credito->estado == 1 ? 0 : 1;
-        $this->credito->save();
+        $this->credito->estado  =   $this->credito->estado === StateCreditoEnum::ACTIVE->value ? StateCreditoEnum::NOT_ACTIVE->value : StateCreditoEnum::ACTIVE->value;
+        $this->credito->update();
 
-        $message    =   $this->credito->estado == 0 ? 'Credito desactivado' : 'Credito Activado';
-
+        $message    =   $this->credito->estado === StateCreditoEnum::NOT_ACTIVE->value ? 'Credito desactivado' : 'Credito Activado';
 
         $this->emit('exito', $message);
 
