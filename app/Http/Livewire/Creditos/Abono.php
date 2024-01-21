@@ -4,10 +4,17 @@ namespace App\Http\Livewire\Creditos;
 
 use Livewire\Component;
 
+//Enums
+use App\Emuns\Credito\StateCreditoEnum;
+
+//Helpers
+use App\Helpers\CreditoHelpers;
+
+//Models
 use App\Models\TipoMovimientoCredito;
+use App\Models\CrtPlanPagoDet;
 use App\Models\CreditoDet;
 use App\Models\Credito;
-use App\Models\CrtPlanPagoDet;
 
 class Abono extends Component
 {
@@ -86,6 +93,12 @@ class Abono extends Component
             $this->addError('count', 'No es posible abonar');
         }
 
+        if (
+            CreditoHelpers::validateState($this->cuenta) === StateCreditoEnum::NOT_ACTIVE->value
+        ) {
+            $this->addError('cuenta', 'Credito finalizado');
+        }
+
         $this->validate();
 
         $abono = CreditoDet::create([
@@ -95,6 +108,7 @@ class Abono extends Component
             'monto'                         => $this->monto,
             'descripcion'                   => $this->descripcion
         ]);
+
 
         $this->cuenta_abonada = Credito::find($this->cuenta);
 

@@ -6,7 +6,7 @@
             @livewire('creditos.comentarios', ['credito' => $credito])
 
             @if (count($movimientos) == 1)
-            @livewire('creditos.editar', ['credito' => $credito])
+                @livewire('creditos.editar', ['credito' => $credito])
             @endif
         </div>
     </x-slot>
