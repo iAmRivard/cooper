@@ -32,7 +32,7 @@ class Index extends Component
                     });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.creditos.index', compact('creditos'));
     }

@@ -69,7 +69,7 @@ class Socios extends Component
             ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
             ->orWhere('numero_socio', 'like', '%' . $this->buscarSocio . '%')
             ->orderBy('id', 'desc') //Ordenamos de manera descendente
-            ->paginate(5);
+            ->paginate(10);
 
         return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
