@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Emuns\Credito;
+namespace App\Enums\Credito;
 
 enum StateCreditoEnum : int
 {
