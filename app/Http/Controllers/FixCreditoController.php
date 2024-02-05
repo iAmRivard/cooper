@@ -77,13 +77,16 @@ class FixCreditoController extends Controller
         //Eliminadmos
         $this->eliminarRegistros($credito->id);
 
-        CreditoDet::create([
-            'credito_id'                    => $credito->id,
-            'socio_id'                      => $credito->socio->id,
-            'tipo_movimiento_credito_id'    => 1, // APERTURA DE CREDITO
-            'monto'                         => $monto,
-            'descripcion'                   => 'APERTURA DE CRÉDITO'
-        ]);
+
+        if (CreditoDet::where('credito_id', $credito->id)->count() == 0) {
+            CreditoDet::create([
+                'credito_id'                    => $credito->id,
+                'socio_id'                      => $credito->socio->id,
+                'tipo_movimiento_credito_id'    => 1, // APERTURA DE CREDITO
+                'monto'                         => $monto,
+                'descripcion'                   => 'APERTURA DE CRÉDITO'
+            ]);
+        }
 
         $periodo = new CrcPeriodo();
         $periodo->valor = $periodoQuincenal;
@@ -134,10 +137,12 @@ class FixCreditoController extends Controller
 
     private function eliminarRegistros(string $credito_id)
     {
-        try {
-            CreditoDet::where('credito_id', $credito_id)->delete();
-        } catch (\Exception $e) {
-            Log::error("Error en eliminación de detalles de credito FixCreditoController linea 136 \n" . $e->getMessage());
+        if (CreditoDet::where('credito_id', $credito_id)->count() == 0) {
+            try {
+                CreditoDet::where('credito_id', $credito_id)->delete();
+            } catch (\Exception $e) {
+                Log::error("Error en eliminación de detalles de credito FixCreditoController linea 136 \n" . $e->getMessage());
+            }
         }
 
         try {
