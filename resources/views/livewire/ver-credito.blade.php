@@ -8,6 +8,12 @@
             @if (count($movimientos) == 1)
                 @livewire('creditos.editar', ['credito' => $credito])
             @endif
+
+            @if (Auth::user()->email === 'admin@admin.com')
+                <a href="{{ route('fix-credito', $credito) }}">
+                    Corregir Credito
+                </a>
+            @endif
         </div>
     </x-slot>
 

@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Creditos;
 use Livewire\Component;
 
 //Enums
-use App\Emuns\Credito\StateCreditoEnum;
+use App\Enums\Credito\StateCreditoEnum;
 
 //Helpers
 use App\Helpers\CreditoHelpers;

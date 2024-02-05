@@ -101,8 +101,6 @@ class Editar extends Component
             array_push($plan_pagos, $pago);
         }
 
-        // dd($plan_pagos);
-
         $this->credito->tipo_credito_id      =   $this->tipo_credito;
         $this->credito->monto                =   $this->monto;
         $this->credito->saldo_actual         =   $this->monto;

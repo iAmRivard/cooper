@@ -8,6 +8,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SociosController;
 use App\Http\Controllers\CuentasController;
+use App\Http\Controllers\FixCreditoController;
 use App\Http\Controllers\ReporteInteresPlazosController;
 use App\Http\Livewire\Cuentas\Cuentas;
 use App\Http\Livewire\Socios\Socios;
@@ -31,6 +32,8 @@ Route::middleware(['auth', 'rol'])->group(function () {
 
     // Ruta para creditos
     Route::get('/creditos', App\Http\Livewire\Creditos\Index::class)->name('creditos');
+
+    Route::get('/fix-credito/{credito}', [FixCreditoController::class, 'fix'])->name('fix-credito');
 
     //Ruta para ver el credito
     Route::get('/creditos/ver-credito/{credito}', App\Http\Livewire\VerCredito::class)->name('ver.credito');
