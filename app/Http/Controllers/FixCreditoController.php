@@ -29,7 +29,7 @@ class FixCreditoController extends Controller
         $credito->load('socio');
 
         $monto = $credito->monto;
-        $porcentajeQuincenal = $credito->porcentaje_interes;
+        $porcentajeQuincenal = $credito->porcentaje_interes / 24;
         $periodoQuincenal = $credito->cantidad_cuotas;
 
         $cuotaFija  = round(CreditoHelpers::calcularCuotaQuincenal($monto, $porcentajeQuincenal, $periodoQuincenal), 2);
