@@ -45,6 +45,10 @@ class CreditoHelpers
         float $tasaInteresQuincenal,
         int $numeroQuincenas
     ): float {
+        if ($tasaInteresQuincenal == 0) {
+            return $monto / $numeroQuincenas;
+        }
+
         $tasaInteresDecimal = $tasaInteresQuincenal / 100;
         $factorAmortizacion = (1 - pow(1 + $tasaInteresDecimal, -$numeroQuincenas)) / $tasaInteresDecimal;
 
@@ -66,7 +70,7 @@ class CreditoHelpers
         float $tasaInteresQuincenal,
         int $numeroQuincenas
     ): array {
-        $tasaInteresDecimal = $tasaInteresQuincenal / 100;
+        $tasaInteresDecimal = $tasaInteresQuincenal == 0 ? 0 : $tasaInteresQuincenal / 100;
         $saldo = $monto;
         $cuotaQuincenal = self::calcularCuotaQuincenal($monto, $tasaInteresQuincenal, $numeroQuincenas);
         $tablaAmortizacion = [];
