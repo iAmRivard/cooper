@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="stat">
-            <div class="text-sm text-gray-500">Interés Quincenal</div>
+            <div class="text-sm text-gray-500">Interés</div>
             <div class="text-xl font-bold text-rose-900">{{ $credito->porcentaje_interes}}%</div>
         </div>
         <div class="stat">

@@ -40,7 +40,7 @@ class Editar extends Component
         $this->monto        =   $credito->monto;
         $this->periodo      =   $credito->cantidad_cuotas;
         $this->porcentaje   =   $credito->porcentaje_interes;
-        $this->cuota_fija   =   $this->plan_pagos->cuota_fija;
+        $this->cuota_fija   =   $this->plan_pagos->cuota_fija ?? 00;
     }
 
     public function render()
