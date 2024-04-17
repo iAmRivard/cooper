@@ -164,7 +164,7 @@ class CrearCredito extends Component
         $nuevo_credito->tipo_credito_id = $this->tipo_cuenta;
         $nuevo_credito->monto = $this->monto;
         $nuevo_credito->saldo_actual = $this->monto;
-        $nuevo_credito->porcentaje_interes = $this->porcentaje;
+        $nuevo_credito->porcentaje_interes = ROUND((( $this->porcentaje*24)),2); //COVERTIMOS A INTERES MENSUAL
         $nuevo_credito->cantidad_cuotas = $this->periodo;
         $nuevo_credito->estado = 1;
         $nuevo_credito->de_baja = 0;

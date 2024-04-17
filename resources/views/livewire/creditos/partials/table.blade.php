@@ -10,6 +10,7 @@
                 <th>Monto</th>
                 <th>Saldo Actual</th>
                 <th># Cuotas</th>
+                <th>% Interes</th>
                 <th>Estado</th>
                 <th>&nbsp;</th>
             </tr>
@@ -27,6 +28,7 @@
                 <td>${{ $credito->monto }}</td>
                 <td>${{ $credito->saldo_actual }}</td>
                 <td class="font-bold"> {{ $credito->cuota_actual}}/{{ $credito->cantidad_cuotas}} </td>
+                <td class="font-bold"> {{ $credito->porcentaje_interes}} </td>
                 <td>{{ $credito->estado ? 'Activo' : 'Inactivo' }}</td>
                 <td>
                     <a href="{{ route('ver.credito', $credito->id) }}" class="a-link btn btn-sm btn-primary">

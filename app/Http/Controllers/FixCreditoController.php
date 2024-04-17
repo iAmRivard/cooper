@@ -33,7 +33,7 @@ class FixCreditoController extends Controller
         if ($credito->porcentaje_interes == 0) {
             $porcentajeQuincenal = $credito->porcentaje_interes;
         } else {
-            $porcentajeQuincenal = $credito->porcentaje_interes;
+            $porcentajeQuincenal = ROUND((( $credito->porcentaje_interes/24)),2); //CONVERTIMOS A INTERES QUINCENAL
         }
         $periodoQuincenal = $credito->cantidad_cuotas;
 
