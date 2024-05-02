@@ -13,12 +13,15 @@ use App\Models\CrtPlanPago;
 use App\Models\CreditoDet;
 use App\Models\CrcPeriodo;
 use App\Models\CrtPlanPagoDet;
+use Illuminate\Support\Facades\DB;
 
 class Editar extends Component
 {
     public $credito, $monto, $porcentaje, $periodo, $cuota_fija, $tipo_credito, $no_cuenta, $tipos_creditos, $plan_pagos, $cuotaFija;
 
     public $open;
+
+    public $startCredit;
 
     protected $rules = [
         'credito'   =>  'required',
@@ -164,6 +167,14 @@ class Editar extends Component
                 'fecha_programada'      =>  Carbon::now(),
                 'estado'                =>  1,
             ]);
+        }
+
+        if ($this->startCredit) {
+            DB::table('creditos')
+                ->where('id', $this->credito->id)
+                ->update([
+                    'created_at'    => Carbon::parse($this->startCredit)
+                ]);
         }
 
         $this->emitTo('ver-credito', 'render');

@@ -13,7 +13,7 @@
                 <div class="w-1/2 pr-4">
                     <x-jet-input-error for="tipo_credito" />
                     <x-jet-label>Selección del tipo de Credito</x-jet-label>
-                    <select class="select select-bordered w-full" wire:model="tipo_credito">
+                    <select class="w-full select select-bordered" wire:model="tipo_credito">
                         <option>Seleccionar tipo de Credito</option>
                         @foreach($tipos_creditos as $tipo_credito)
                             <option value="{{ $tipo_credito->id }}" @if ($credito->tipo_credito_id == $tipo_credito->id) selected @endif>{{ $tipo_credito->nombre }}</option>
@@ -28,7 +28,7 @@
                         type="text"
                         placeholder="Colocar número de credito"
                         wire:model="no_cuenta"
-                        class="input input-bordered w-full max-w-xs"
+                        class="w-full max-w-xs input input-bordered"
                     />
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         class="w-full"
                         wire:model="cuota_fija"
                         placeholder="$0.00"
-                        disabled 
+                        disabled
                     />
                 </div>
             </div>
@@ -81,6 +81,16 @@
                         placeholder="Cantidad de quincenas"
                     />
                 </div>
+            </div>
+
+            <div class="mb-4">
+                <x-jet-input-error for="startCredit" />
+                <x-jet-label value="Inicio de credito" />
+                <input
+                    type="date"
+                    class="w-full input input-bordered"
+                    wire:model="startCredit"
+                />
             </div>
         </x-slot>
 
