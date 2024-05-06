@@ -8,9 +8,9 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="max-w-full mx-auto sm:px-6 lg:px-8">
             <div class="py-8 overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                <div class="flex justify-center">
+                <div class="flex justify-center mb-8">
                     {{-- Input buscar --}}
                     <div class="w-1/2">
                         <x-jet-label value="{{ __('Buscar cuenta') }}" />
@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center m-8">
+                <div class="flex justify-center m-4">
                     @include('livewire.cuentas.partials.table')
                 </div>
 

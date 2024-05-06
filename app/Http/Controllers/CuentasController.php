@@ -48,17 +48,36 @@ class CuentasController extends Controller
 
     public function changeNumber(Request $request, $id)
     {
-        $validated = $request->validate([
-            'no_cuenta' => 'required|unique:ctr_cuentas',
-        ]);
 
         $cuenta = Ctr_cuenta::find($id);
 
-        $cuenta->no_cuenta  =   $request->no_cuenta;
+        $cuenta->no_cuenta = $request->no_cuenta;
+        $cuenta->fecha_inicio = $request->fecha_inicio;
+    
+        // Convertir quincenas a meses. Asumimos que cada 2 quincenas es 1 mes.
+        $meses = 0;
+        if($cuenta->crc_topo_cuenta_id == 4 || $cuenta->crc_topo_cuenta_id == 3){//SI ES NAVIDEÑO O PROGRAMADO
+            $meses = intdiv($cuenta->cantidad_quincenas, 2);
+        }else{
+            $meses = intdiv($cuenta->cantidad_quincenas, 1);
+        }
+        
+        
+        
+    
+        // Crear un objeto DateTime a partir de la fecha de inicio
+        $fechaFin = new \DateTime($request->fecha_inicio);
+        // Añadir los meses calculados a la fecha de inicio
+        $fechaFin->modify("+$meses month");
+    
+        // Guardar la nueva fecha de fin en la base de datos
+        $cuenta->fecha_fin = $fechaFin->format('Y-m-d');
+    
         $cuenta->save();
-
+    
         return back();
     }
+    
 
     public function updateDiscount(Request $request, $id)
     {

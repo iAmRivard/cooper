@@ -20,6 +20,15 @@
                         name="no_cuenta"
                     />
                 </div>
+                 <div class="w-full form-control">
+                    <label class="label">
+                        <span class="label-text">Fecha de Inicio</span>
+                    </label>
+                    <input
+                    type="date"
+                    class="w-full input input-bordered"
+                    name="fecha_inicio"/>
+                </div>
                 <div class="modal-action">
                     <label for="my-modal-6" class="btn">Cancelar</label>
                     <button class="btn btn-success" type="submit">

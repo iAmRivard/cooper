@@ -50,7 +50,12 @@
                     class="text-xl font-bold text-sky-900">
                     {{ $cuenta->quincena_actual }} @if($cuenta->quincena_actual != null)/ @else / @endif {{ $cuenta->cantidad_quincenas }}
                 </div>
-                <div class="text-xs">MESES</div>
+                @if ($cuenta->crc_topo_cuenta_id == 4 || $cuenta->crc_topo_cuenta_id == 3 ) <!-- NAVIDEÑO/PROGRAMADO-->
+                <div class="text-xs">QUINCENAS</div>    
+                @else
+                <div class="text-xs">MESES</div>    
+                @endif
+                
             </div>
         @endif
     </div>

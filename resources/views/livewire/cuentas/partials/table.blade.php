@@ -14,7 +14,8 @@
                 <th>Cuota Quincenal</th>
                 <th>Saldo</th>
                 <th>Proceso</th>
-                <th>Fecha</th>
+                <th>Fecha Creacion</th>
+                <th>Fecha Apertura</th>
                 <th>Estado</th>
                 <th>Acciones</th>
             </tr>
@@ -45,11 +46,12 @@
                         </span>
                     </td>
                     <td>{{ Carbon::parse($cuenta->created_at)->locale('es_ES')->format('d-m-Y') }}</td>
+                    <td>{{ Carbon::parse($cuenta->fecha_incio)->locale('es_ES')->format('d-m-Y') }}</td>
                     <td>{{ $cuenta->estado ? 'Activo' : 'Inactivo' }}</td>
 
                     <td>
                         <a href="{{ route('ver.cuenta', $cuenta->id) }}" class="text-sm btn btn-sm btn-primary">
-                            ver cuenta
+                        Ver
                         </a>
                     </td>
                 </tr>

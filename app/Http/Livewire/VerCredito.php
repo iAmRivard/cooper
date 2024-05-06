@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\CrtPlanPagoDet;
 use App\Models\CreditoDet;
 use App\Models\Credito;
+use Carbon\Carbon;
 
 class VerCredito extends Component
 {
