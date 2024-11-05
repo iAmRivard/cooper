@@ -8,6 +8,8 @@
                 <th>Fecha de Nacimiento</th>
                 <th>%</th>
                 <th>Dirección</th>
+                <th>Telefono</th>
+
                 <th></th>
             </tr>
         </thead>
@@ -31,6 +33,9 @@
                 </td>
                 <td>
                     {{ $item->direccion }}
+                </td>
+                      <td>
+                    {{ $item->numero_telefono }}
                 </td>
                 <td>
                     <x-jet-button wire:click="editar( {{$item}} )">

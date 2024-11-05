@@ -19,18 +19,18 @@ class AhorroHelper
         for ($quincena = 1; $quincena <= $plazo; $quincena++) {
 
             $interesQuincena = 0.00;
-            if ($tipoCUenta->aplica_monto == false && $quincena != 1) {
-
-                $capitalActual += $monto;
-
-                if ($quincena % 2 == 0) { // Si es par deberá calcular interes.
-                    $interesQuincena = $capitalActual * $tasaInteres;
+            if ($tipoCUenta->aplica_monto == false ) {
+                if( $quincena != 1){
+                    $capitalActual += $monto;
                 }
+                
+                $interesQuincena = $capitalActual * $tasaInteres;
+                
 
                 $capitalActual +=  $interesQuincena;
             }
 
-            if ($tipoCUenta->aplica_monto == true && $quincena != 1) {
+            if ($tipoCUenta->aplica_monto == true ) {
                 $interesQuincena = $monto * $tasaInteres;
                 $capitalActual += $interesQuincena;
             }

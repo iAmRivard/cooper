@@ -24,7 +24,7 @@ class Abono extends Component
 
     public $cuentas = [];
 
-    public $cuenta, $monto, $descripcion, $tipo, $cuenta_abonada, $cuota_cacelada;
+    public $cuenta, $monto, $descripcion, $tipo, $cuenta_abonada, $cuota_cacelada, $intereses;
 
     protected $rules = [
         'cuenta'        => 'required',
@@ -49,6 +49,7 @@ class Abono extends Component
             $this->monto            =   $cuota->cuota;
             $this->tipo             =   $tipo_abono->id ? $tipo_abono->id  : '';
             $this->descripcion      =   "ABONO CRÉDITO #$credito_select->no_cuenta POR $" . number_format($this->monto, 2) . ".\nINTERESES $" . $cuota->interes . "\nCAPITAL $" . $cuota->cuota_capital . "\nCUOTA #" . $cuota->nro_cuota;
+            $this->intereses        =   $cuota->intereses;
         }
     }
 
@@ -89,23 +90,44 @@ class Abono extends Component
 
         $this->cuenta_abonada = Credito::where('id', $this->cuenta)->first();
 
-        if ($this->monto > $this->cuenta_abonada->saldo_actual) {
-            $this->addError('count', 'No es posible abonar');
+        if ($this->monto > $this->cuenta_abonada->saldo_actual && !($this->cuota_cacelada)) {
+            $this->addError('count', 'No es posible abonar, debido a que el monto supera el saldo actual de la cuenta: $'. $this->cuenta_abonada->saldo_actual);
+            return;
         }
 
         if (
             CreditoHelpers::validateState($this->cuenta) === StateCreditoEnum::NOT_ACTIVE->value
         ) {
-            $this->addError('cuenta', 'Credito finalizado');
+            $this->addError('cuenta', 'Credito finalizado, el credito se encuentra finalizado.');
+            return;
         }
 
         $this->validate();
+
+        $montoAbonado = $this->monto;
+
+        if(($this->cuota_cacelada)){
+            //dd($this->cuota_cacelada->interes);
+            $montoAbonado = $this->monto - floatval($this->cuota_cacelada->intereses);
+
+            
+        $abonoIntereses = CreditoDet::create([
+            'credito_id'                    => $this->cuenta,
+            'socio_id'                      => $this->cuenta_abonada->socio->id,
+            'tipo_movimiento_credito_id'    => $this->tipo,
+            'monto'                         => floatval($this->cuota_cacelada->intereses),
+            'descripcion'                   => 'GENERACIÓN DE INTERESES: $' . ($this->cuota_cacelada->intereses)
+        ]);
+
+        }
+
+
 
         $abono = CreditoDet::create([
             'credito_id'                    => $this->cuenta,
             'socio_id'                      => $this->cuenta_abonada->socio->id,
             'tipo_movimiento_credito_id'    => $this->tipo,
-            'monto'                         => $this->monto,
+            'monto'                         => $montoAbonado,
             'descripcion'                   => $this->descripcion
         ]);
 

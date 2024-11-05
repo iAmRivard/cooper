@@ -17,6 +17,7 @@ class Socios extends Component
     public $buscarSocio, $socio;
 
     public $open_edit = false;
+    public $socioActivo = true;
 
     public $nueva_contrasena = false;
 
@@ -61,18 +62,23 @@ class Socios extends Component
     public function render()
     {
         $empresas = crm_empresas::all();
-
+    
         $socios = Crm_socios::with('empresa')
-            ->where('nombres', 'like', '%' . $this->buscarSocio . '%')
-            ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
-            ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
-            ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%')
-            ->orWhere('numero_socio', 'like', '%' . $this->buscarSocio . '%')
-            ->orderBy('id', 'desc') //Ordenamos de manera descendente
+            ->where(function ($query) {
+                $query->where('nombres', 'like', '%' . $this->buscarSocio . '%')
+                    ->orWhere('numero_socio', 'like', '%' . $this->buscarSocio . '%')
+                    ->orWhere('codigo_empleado', 'like', '%' . $this->buscarSocio . '%')
+                    ->orWhere('apellidos', 'like', '%' . $this->buscarSocio . '%')
+                    ->orWhere('dui', 'like', '%' . $this->buscarSocio . '%')
+                    ->orWhere('nit', 'like', '%' . $this->buscarSocio . '%');
+            })
+            ->where('estado', $this->socioActivo) // Aplica el filtro de socio activo
+            ->orderBy('id', 'desc')
             ->paginate(10);
-
+    
         return view('livewire.socios.socios', compact('socios', 'empresas'));
     }
+    
 
     public function editar(Crm_socios $socio): void
     {
@@ -95,5 +101,18 @@ class Socios extends Component
     {
         $this->socio = $socio;
         $this->nueva_contrasena = true;
+    }
+
+        /**
+     * Calcula la edad actual del socio según su fecha de nacimiento.
+     * 
+     * @return int|null Devuelve la edad en años o null si no se establece la fecha de nacimiento.
+     */
+    public function calcularEdad()
+    {
+        if ($this->socio->fecha_nacimiento) {
+            return Carbon::parse($this->socio->fecha_nacimiento)->age;
+        }
+        return null; // Retorna null si no hay fecha de nacimiento
     }
 }

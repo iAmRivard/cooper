@@ -49,6 +49,12 @@ class CrearCredito extends Component
         if ($data->count() > 0) {
             $this->porcentaje = ROUND((($data->first()->porcentaje_interes/24)),2);
         }
+
+        if($data->first()->id == 2){
+            $this->periodo = 2;
+        }else{
+            $this->periodo = null;
+        }
     }
 
     public function calcularAmortizacion()

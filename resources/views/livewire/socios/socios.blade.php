@@ -12,6 +12,10 @@
                         <x-jet-label value="{{ __('Buscar socio') }}" />
                         <x-jet-input placeholder="Buscar socio por: Nombre o DUI" class="block w-full mt-1" type="text" wire:model="buscarSocio" />
                     </div>
+                    <div class="flex items-center ml-4">
+                        <input type="checkbox" id="socioActivoCheckbox" class="mr-2" wire:model="socioActivo" checked>
+                        <label for="socioActivoCheckbox">{{ __('Solo Activos/Inactivos') }}</label>
+                    </div>
                 </div>
                 <div class="container flex justify-center py-8">
                     @if ($socios->count())

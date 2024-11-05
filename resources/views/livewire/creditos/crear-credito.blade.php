@@ -66,7 +66,8 @@
                 <div class="w-1/2 pl-4">
                     <x-jet-label value="Periodo" />
                     <x-jet-input type="number " class="w-full" wire:model="periodo"
-                        placeholder="Cantidad de quincenas" />
+                        placeholder="Cantidad de quincenas" 
+                        :disabled="$tipo_cuenta == '2'"/>
                 </div>
             </div>
             <div class="flex mb-4">

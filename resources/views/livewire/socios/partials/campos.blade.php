@@ -7,6 +7,7 @@
             class="w-full"
             wire:model.defer="nombres"
             placeholder="Nombres"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="nombres" />
     </div>
@@ -19,6 +20,7 @@
             class="w-full"
             wire:model.defer="apellidos"
             placeholder="Apellidos"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="apellidos" />
     </div>
@@ -109,6 +111,7 @@
         class="w-full"
         wire:model.defer="direccion"
         placeholder="Dirección de residencia del socio"
+        style="text-transform: uppercase;"
     />
     <x-jet-input-error for="direccion" />
 </div>
@@ -122,6 +125,7 @@
             class="w-full"
             wire:model="departamento"
             placeholder="Departamento"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="departamento" />
     </div>
@@ -134,6 +138,7 @@
             class="w-full"
             wire:model.defer="municipio"
             placeholder="Municipio"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="nit" />
     </div>
@@ -148,6 +153,7 @@
             class="w-full"
             wire:model.defer="cargo"
             placeholder="Cargo"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="cargo" />
     </div>
@@ -160,6 +166,7 @@
             type="text"
             class="w-full"
             wire:model="profesion_uficio"
+            style="text-transform: uppercase;"
         />
         <x-jet-input-error for="profesion_uficio" />
     </div>

@@ -44,3 +44,4 @@
 <div class="m-4">
     {{$movimientos->links()}}
 </div>
+
